@@ -1,21 +1,27 @@
-{% assign news_by_year = site.news | sort: "date" | reverse | slice: 0, include.limit | group_by_exp: "item", "item.date | date: '%Y'" -%}
-
-<div class="my-3 bg-white shadow-sm rounded-xl">
-    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-rss"></i> News</h6>
-    <div class="px-3 pb-1">
-        {% for year in news_by_year %}
-        <div class="media py-1 {% if not_first -%}border-top border-gray{%- endif %}">
-            {% assign not_first = true %}
-            <div class="mr-3 text-muted my-1">{{ year.name }}</div>
-            <div class="media-body">
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="card border-0 shadow-sm bg-white">
+      <div class="card-body p-4">
+        <h6 class="mb-3">News</h6>
+        <div class="scrollable-news-list">
+          {% assign news_by_year = site.news | sort: "date" | reverse | slice: 0, include.limit | group_by_exp: "item", "item.date | date: '%Y'" -%}
+          <ul class="list-unstyled">
+            {% for year in news_by_year %}
+            <li class="mb-4">
+              <h6 class="text-muted">{{ year.name }}</h6>
+              <ul class="list-unstyled pl-3 mb-0">
                 {% for item in year.items %}
-                <div class="my-1 d-flex">
-                    <div>{{ item.title }}</div>
-                    <div class="ml-auto mt-auto text-muted no-break"><i>{{ item.date | date: "%b %d" }}</i></div>
-                </div>
+                <li class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="font-weight-bold mr-2">{{ item.title }}</span>
+                  <em class="text-right text-muted no-break">{{ item.date | date: "%b %d" }}</em>
+                </li>
                 {% endfor %}
-            </div>
+              </ul>
+            </li>
+            {% endfor %}
+          </ul>
         </div>
-        {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
