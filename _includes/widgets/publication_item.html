@@ -1,95 +1,244 @@
+
+<style>
+.abstract-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.6rem;
+}
+
+.abstract-links a.btn {
+  flex: 0 0 auto;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.56rem;
+  padding: 0.3rem 0.75rem;      /* 更紧凑 */
+  border-radius: 999px;
+  background: #f7f7f8;          /* 微微柔和背景 */
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #1c2331;
+  font-size: 0.93rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.01);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 120ms ease;
+}
+
+.abstract-links a.btn:hover,
+.abstract-links a.btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06), 0 3px 6px rgba(0,0,0,0.03);
+  background: #eeeeee;
+  border-color: rgba(0,0,0,0.12);
+  outline: none;
+}
+
+.abstract-links a.btn:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+
+.abstract-links a.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.08), 0 4px 12px rgba(0,0,0,0.03);
+  border-color: rgba(37,99,235,0.16);
+}
+
+.abstract-links .btn-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16,24,40,0.02);
+  color: #4b5563;
+  box-shadow: inset 0 0 1px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.abstract-links a.btn:hover .btn-icon {
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 1px rgba(0,0,0,0.15), 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.abstract-links .btn-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.abstract-links .btn-label {
+  line-height: 1.1;
+  color: inherit;
+}
+
+.abstract-links .btn--paper .btn-icon { background: rgba(59,130,246,0.08); color: #2563eb; }
+.abstract-links .btn--code .btn-icon  { background: rgba(34,197,94,0.08);  color: #16a34a; }
+.abstract-links .btn--demo .btn-icon  { background: rgba(251,146,60,0.08); color: #ea580c; }
+.abstract-links .btn--arxiv .btn-icon { background: rgba(239,68,68,0.08);  color: #dc2626; }
+.abstract-links .btn--website .btn-icon{ background: rgba(249,115,22,0.08); color: #f97316; }
+.abstract-links .btn--default .btn-icon{ background: rgba(156,163,175,0.06); color: #6b7280; }
+
+@media (max-width:420px) {
+  .abstract-links a.btn { padding: 0.25rem 0.6rem; font-size: 0.88rem; }
+  .abstract-links .btn-icon { width: 28px; height: 28px; min-width: 28px; border-radius: 6px; }
+  .abstract-links .btn-icon svg { width: 14px; height: 14px; }
+}
+</style>
+
+
+
+<!-- ================== Jekyll / Liquid 模板（修正后） ================== -->
 {% assign item = include.item %}
+
 <div class="d-none d-md-block">
-    <div class="row no-gutters {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray">
-        <div class="col-md-5 col-xl-4 p-md-4">
-            {%- if item.cover -%}
-            <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}" class="lazy w-100 rounded-lg shadow-sm" src="{{ '/assets/images/empty_300x200.png' | relative_url }}">
-            {%- else -%}
-            <svg class="bubble-visual-hash lazy w-100 rounded-lg shadow-sm" data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 300 200"></svg>
-            {%- endif -%}
-        </div>
-        <div class="col-md-7 col-xl-8 p-4 pl-md-0 d-flex flex-column justify-content-center">
-            <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
-            <div class="text-sm text-gray-600 mb-1">{% include widgets/author_list.html authors=item.authors %}</div>
-            <div class="text-sm text-gray-500 mb-2">
-                {{item.pub_pre}}
-                <strong class="text-gray-700"><i>{{ item.pub }}</i></strong>
-                {{ item.pub_post }} 
-                {{ item.pub_date }} 
-                {{ item.pub_last }} 
-                <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span>
-            </div>
-            <div class="small text-muted mb-2">{{ item.abstract }}</div>
-            <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto flex flex-wrap">
-                {% for link in item.links %}
-                    {% if link[1].url %}
-                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">
-                        {%- if link[0] == "Paper" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                        {%- elsif link[0] == "Code" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                        {%- elsif link[0] == "Demo" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
-                        {%- else -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        {%- endif -%}
-                        {{ link[0] }}
-                    </a>
-                    {% else %}
-                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="_blank" href="{{ link[1] }}">
-                        {%- if link[0] == "Paper" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                        {%- elsif link[0] == "Code" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                        {%- elsif link[0] == "Demo" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
-                        {%- else -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        {%- endif -%}
-                        {{ link[0] }}
-                    </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+  <div class="row no-gutters {% unless include.hide_bottom_border %}border-b border-gray-200{% endunless %}">
+    <div class="col-md-5 col-xl-4 p-md-4">
+      {%- if item.cover -%}
+        <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}" class="lazy w-100 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100" src="{{ '/assets/images/empty_300x200.png' | relative_url }}" onload="this.classList.add('opacity-100')">
+      {%- else -%}
+        <svg class="bubble-visual-hash lazy w-100 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg" data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 300 200" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
+          <rect width="300" height="200" rx="16" fill="rgba(229,231,235,0.5)" stroke-width="2"/>
+        </svg>
+      {%- endif -%}
     </div>
+
+    <div class="col-md-7 col-xl-8 p-4 pl-md-0 d-flex flex-column justify-content-center">
+      <h5 class="mt-0 mb-3 text-xl font-bold text-gray-900">{{ item.title }}</h5>
+
+      <div class="text-sm text-gray-600 mb-2">{% include widgets/author_list.html authors=item.authors %}</div>
+
+      <div class="text-sm text-gray-500 mb-3">
+        {{ item.pub_pre }}
+        <strong class="text-gray-800"><i>{{ item.pub }}</i></strong>
+        {{ item.pub_post }}
+        {{ item.pub_date }}
+        {{ item.pub_last }}
+        <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}" class="text-gray-400"></span>
+      </div>
+
+      <div class="text-gray-600 text-base mb-4 leading-relaxed">{{ item.abstract }}</div>
+
+      <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto">
+        {% for link in item.links %}
+          {% assign label = link[0] %}
+          {% if link[1].url %}
+            {% assign target_url = link[1].url %}
+            {% assign target_attr = link[1]['target'] | default: "_blank" %}
+          {% else %}
+            {% assign target_url = link[1] %}
+            {% assign target_attr = "_blank" %}
+          {% endif %}
+
+          {% if target_url and target_url != "" %}
+            {% if label == "Paper" %}{% assign cls = "btn--paper" %}
+            {% elsif label == "Code" %}{% assign cls = "btn--code" %}
+            {% elsif label == "Demo" %}{% assign cls = "btn--demo" %}
+            {% elsif label == "Arxiv" or label == "arXiv" %}{% assign cls = "btn--arxiv" %}
+            {% elsif label == "Website" %}{% assign cls = "btn--website" %}
+            {% else %}{% assign cls = "btn--default" %}{% endif %}
+
+            <a class="btn {{ cls }}" href="{{ target_url }}" target="{{ target_attr }}" rel="noopener noreferrer" aria-label="{{ label }}">
+              <span class="btn-icon" aria-hidden="true">
+                {% if label == "Paper" %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 21h10a2 2 0 0 0 2-2V7l-5-5H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/>
+                    <path d="M9 12h6M9 16h6M9 8h4"/>
+                  </svg>
+                {% elsif label == "Code" %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/>
+                  </svg>
+                {% elsif label == "Demo" %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/>
+                  </svg>
+                {% elsif label == "Arxiv" or label == "arXiv" %}
+                  <svg viewBox="0 0 24 24" aria-hidden="true" role="img">
+                    <rect x="2" y="4" width="20" height="16" rx="3" fill="currentColor"/>
+                    <text x="12" y="16" font-family="Arial,Helvetica,sans-serif" font-size="10" text-anchor="middle" fill="#fff" font-weight="700">arXiv</text>
+                  </svg>
+                {% elsif label == "Website" %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 3 2.5 11 0 15"/>
+                  </svg>
+                {% else %}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 21H3V3"/>
+                  </svg>
+                {% endif %}
+              </span>
+              <span class="btn-label">{{ label }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="row no-gutters d-md-none {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %} {% if item.cover %}lazy{% endif %}" data-src="{{ item.cover | relative_url }}">
-    <div class="w-100 {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %}" style="background-color: rgba(255,255,255,0.9);">
-        <div class="d-flex align-items-start flex-column py-4 px-4">
-            <div class="mb-auto"></div>
-            <div>
-                <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
-                <div class="text-sm text-gray-600 mb-1">{% include widgets/author_list.html authors=item.authors %}</div>
-                <div class="text-sm text-gray-500 mb-2">
-                    {{item.pub_pre}}
-                    <strong class="text-gray-700"><i>{{ item.pub }}</i></strong>
-                    {{ item.pub_post }} 
-                    {{ item.pub_date }} 
-                    {{ item.pub_last }} 
-                    <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span>
-                </div>
-                <div class="small text-muted mb-2">{{ item.abstract }}</div>
-                <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto flex flex-wrap">
-                    {% for link in item.links %}
-                    {% if link[1].url %}
-                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">
-                        {%- if link[0] == "Paper" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                        {%- elsif link[0] == "Code" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                        {%- elsif link[0] == "Demo" -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
-                        {%- else -%}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                        {%- endif -%}
-                        {{ link[0] }}
-                    </a>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+<!-- ======= Mobile (与桌面样式一致) ======= -->
+<div class="row no-gutters d-md-none {% unless include.hide_bottom_border %}border-b border-gray-200{% endunless %} border-gray {% if include.first %}rounded-t-xl{% endif %} {% if include.last %}rounded-b-xl{% endif %} {% if item.cover %}lazy{% endif %}" data-src="{{ item.cover | relative_url }}">
+  <div class="w-100 {% if include.first %}rounded-t-xl{% endif %} {% if include.last %}rounded-b-xl{% endif %}" style="background-color: rgba(245,247,250,0.9);">
+    <div class="d-flex flex-col py-4 px-4">
+      <div class="mb-auto"></div>
+      <div>
+        <h5 class="mt-0 mb-3 text-xl font-bold text-gray-900">{{ item.title }}</h5>
+        <div class="text-sm text-gray-600 mb-2">{% include widgets/author_list.html authors=item.authors %}</div>
+        <div class="text-sm text-gray-500 mb-3">
+          {{ item.pub_pre }}
+          <strong class="text-gray-800"><i>{{ item.pub }}</i></strong>
+          {{ item.pub_post }}
+          {{ item.pub_date }}
+          {{ item.pub_last }}
+          <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}" class="text-gray-400"></span>
         </div>
+        <div class="text-gray-600 text-base mb-4 leading-relaxed">{{ item.abstract }}</div>
+
+        <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto">
+          {% for link in item.links %}
+            {% assign label = link[0] %}
+            {% if link[1].url %}
+              {% assign target_url = link[1].url %}
+              {% assign target_attr = link[1]['target'] | default: "_blank" %}
+            {% else %}
+              {% assign target_url = link[1] %}
+              {% assign target_attr = "_blank" %}
+            {% endif %}
+
+            {% if target_url and target_url != "" %}
+              {% if label == "Paper" %}{% assign cls = "btn--paper" %}
+              {% elsif label == "Code" %}{% assign cls = "btn--code" %}
+              {% elsif label == "Demo" %}{% assign cls = "btn--demo" %}
+              {% elsif label == "Arxiv" or label == "arXiv" %}{% assign cls = "btn--arxiv" %}
+              {% elsif label == "Website" %}{% assign cls = "btn--website" %}
+              {% else %}{% assign cls = "btn--default" %}{% endif %}
+
+              <a class="btn {{ cls }}" href="{{ target_url }}" target="{{ target_attr }}" rel="noopener noreferrer" aria-label="{{ label }}">
+                <span class="btn-icon" aria-hidden="true">
+                  {% if label == "Paper" %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10a2 2 0 0 0 2-2V7l-5-5H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/><path d="M9 12h6M9 16h6M9 8h4"/></svg>
+                  {% elsif label == "Code" %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+                  {% elsif label == "Demo" %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+                  {% elsif label == "Arxiv" or label == "arXiv" %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true" role="img"><rect x="2" y="4" width="20" height="16" rx="3" fill="currentColor"/><text x="12" y="16" font-family="Arial,Helvetica,sans-serif" font-size="10" text-anchor="middle" fill="#fff" font-weight="700">arXiv</text></svg>
+                  {% elsif label == "Website" %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 3 2.5 11 0 15"/></svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14L21 3"/><path d="M21 21H3V3"/></svg>
+                  {% endif %}
+                </span>
+                <span class="btn-label">{{ label }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
