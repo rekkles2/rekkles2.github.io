@@ -6,10 +6,10 @@
         <ul class="list-unstyled">
           {% for item in site.data.profile.education %}
           <li class="media mb-4">
-            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 42px; height: 42px;" class="mr-3">
+            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 56px; height: 56px;" class="mr-3">
             <div class="media-body">
               <h5 class="mt-0 mb-0 font-weight-bold">{{ item.name }}</h5>
-              <div class="text-muted">{{ item.dept }}</div>
+              <div class="mt-1 text-muted">{{ item.dept }}</div>
               <div class="mt-1 d-flex justify-content-between align-items-center">
                 <span class="small">{{ item.position }}</span>
                 <span class="small text-muted text-right">{{ item.date }}</span>
