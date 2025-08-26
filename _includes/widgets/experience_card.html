@@ -5,14 +5,14 @@
         <h6 class="mb-3">Education</h6>
         <ul class="list-unstyled">
           {% for item in site.data.profile.education %}
-          <li class="media mb-4">
-            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 28px; height: 28px;" class="mr-3">
+          <li class="media mb-3">
+            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" style="width: 36px; height: 36px;" class="mr-3">
             <div class="media-body">
-              <h5 class="mt-0 mb-0 font-weight-bold">{{ item.name }}</h5>
+              <h6 class="mt-0 mb-0 font-weight-bold">{{ item.name }}</h6>
               <div class="small text-muted">{{ item.dept }}</div>
               <div class="small mt-1 d-flex justify-content-between align-items-center">
                 <span>{{ item.position }}</span>
-                <em class="text-right">{{ item.date }}</em>
+                <span class="text-right">{{ item.date }}</span>
               </div>
             </div>
           </li>
