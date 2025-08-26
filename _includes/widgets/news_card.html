@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card border-0 shadow-sm bg-white">
       <div class="card-body p-4">
-        <h6 class="mb-3">News</h6>
+        <h6 class="mb-4 text-uppercase font-weight-bold">News</h6>
         <div class="scrollable-news-list">
           {% assign news_by_year = site.news | sort: "date" | reverse | slice: 0, include.limit | group_by_exp: "item", "item.date | date: '%Y'" -%}
           <ul class="list-unstyled">
@@ -11,9 +11,9 @@
               <h6 class="text-muted">{{ year.name }}</h6>
               <ul class="list-unstyled pl-3 mb-0">
                 {% for item in year.items %}
-                <li class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="font-weight-bold mr-2">{{ item.title }}</span>
-                  <em class="text-right text-muted no-break">{{ item.date | date: "%b %d" }}</em>
+                <li class="d-flex align-items-baseline mb-2">
+                  <span class="text-right text-muted text-nowrap mr-3" style="font-weight: 400;">{{ item.date | date: "%b %d" }}</span>
+                  <span class="flex-grow-1">{{ item.title }}</span>
                 </li>
                 {% endfor %}
               </ul>

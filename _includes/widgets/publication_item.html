@@ -1,50 +1,91 @@
 {% assign item = include.item %}
 <div class="d-none d-md-block">
     <div class="row no-gutters {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray">
-        {# Adjust col-md and col-xl to provide enough space for 450px image #}
-        {# A 450px image might roughly take up col-md-4 or col-md-5 depending on screen resolution and spacing #}
-        <div class="col-md-5 col-xl-4 mb-md-0 p-md-3"> {# Adjusted column width #}
+        <div class="col-md-5 col-xl-4 p-md-4">
             {%- if item.cover -%}
-            <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}" class="lazy rounded-sm" width="450" src="{{ '/assets/images/empty_300x200.png' | relative_url }}"> {# Removed w-100, added width="450" #}
+            <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}" class="lazy w-100 rounded-lg shadow-sm" src="{{ '/assets/images/empty_300x200.png' | relative_url }}">
             {%- else -%}
-            {# For SVG placeholder, we also need to adjust its intrinsic size if you want it to visually match #}
-            <svg class="bubble-visual-hash lazy rounded-sm" data-bubble-visual-hash="{{ item.id }}" width="450" viewBox="0 0 300 200"></svg> {# Added width="450" #}
+            <svg class="bubble-visual-hash lazy w-100 rounded-lg shadow-sm" data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 300 200"></svg>
             {%- endif -%}
         </div>
-        <div class="col-md-7 col-xl-8 p-3 pl-md-0 d-flex flex-column"> {# Adjusted column width #}
-            <h5 class="mt-0 mb-1 font-weight-bold">{{ item.title }}</h5>
-            <div class="small text-gray-700">{% include widgets/author_list.html authors=item.authors %}</div>
-            <div class="small mt-1 text-gray-700">{{item.pub_pre}}<i>{{ item.pub }}</i>{{ item.pub_post }} {{ item.pub_date }} {{ item.pub_last }} <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span></div>
-            <div class="small mt-1 text-muted">{{ item.abstract }}</div>
-            <div class="small mt-1 lh-125 text-gray-700 abstract-links mt-auto">
+        <div class="col-md-7 col-xl-8 p-4 pl-md-0 d-flex flex-column justify-content-center">
+            <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
+            <div class="text-sm text-gray-600 mb-1">{% include widgets/author_list.html authors=item.authors %}</div>
+            <div class="text-sm text-gray-500 mb-2">
+                {{item.pub_pre}}
+                <strong class="text-gray-700"><i>{{ item.pub }}</i></strong>
+                {{ item.pub_post }} 
+                {{ item.pub_date }} 
+                {{ item.pub_last }} 
+                <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span>
+            </div>
+            <div class="small text-muted mb-2">{{ item.abstract }}</div>
+            <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto flex flex-wrap">
                 {% for link in item.links %}
-                {% if link[1].url %}
-                <a class="text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-1" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
-                {% else %}
-                <a class="text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-1" target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
-                {% endif %}
+                    {% if link[1].url %}
+                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">
+                        {%- if link[0] == "Paper" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        {%- elsif link[0] == "Code" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        {%- elsif link[0] == "Demo" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
+                        {%- else -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        {%- endif -%}
+                        {{ link[0] }}
+                    </a>
+                    {% else %}
+                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="_blank" href="{{ link[1] }}">
+                        {%- if link[0] == "Paper" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        {%- elsif link[0] == "Code" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        {%- elsif link[0] == "Demo" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
+                        {%- else -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        {%- endif -%}
+                        {{ link[0] }}
+                    </a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
 
-{# The mobile version usually doesn't show a large cover image this way, so no changes needed there unless specified #}
 <div class="row no-gutters d-md-none {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %} {% if item.cover %}lazy{% endif %}" data-src="{{ item.cover | relative_url }}">
     <div class="w-100 {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %}" style="background-color: rgba(255,255,255,0.9);">
-        <div class="d-flex align-items-start flex-column py-3 px-4">
+        <div class="d-flex align-items-start flex-column py-4 px-4">
             <div class="mb-auto"></div>
             <div>
-                <h5 class="mt-0 mb-1 font-weight-bold">{{ item.title }}</h5>
-                <div class="small text-gray-700">{% include widgets/author_list.html authors=item.authors %}</div>
-                <div class="small mt-1 text-gray-700">{{item.pub_pre}}<i>{{ item.pub }}</i>{{ item.pub_post }} {{ item.pub_date }} {{ item.pub_last }} <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span></div>
-                <div class="small mt-1 text-muted">{{ item.abstract }}</div>
-                <div class="small mt-1 lh-125 text-gray-700 abstract-links">
+                <h5 class="mt-0 mb-2 font-weight-bold">{{ item.title }}</h5>
+                <div class="text-sm text-gray-600 mb-1">{% include widgets/author_list.html authors=item.authors %}</div>
+                <div class="text-sm text-gray-500 mb-2">
+                    {{item.pub_pre}}
+                    <strong class="text-gray-700"><i>{{ item.pub }}</i></strong>
+                    {{ item.pub_post }} 
+                    {{ item.pub_date }} 
+                    {{ item.pub_last }} 
+                    <span data-semantic-scholar-id="{{ item.semantic_scholar_id }}"></span>
+                </div>
+                <div class="small text-muted mb-2">{{ item.abstract }}</div>
+                <div class="text-sm lh-150 text-gray-700 abstract-links mt-auto flex flex-wrap">
                     {% for link in item.links %}
                     {% if link[1].url %}
-                    <a class="text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-1" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">[{{ link[0] }}]</a>
-                    {% else %}
-                    <a class="text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-1" target="_blank" href="{{ link[1] }}">[{{ link[0] }}]</a>
+                    <a class="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-2 mt-1 px-3 py-1 bg-gray-100 rounded-full hover:bg-gray-200" target="{{ link[1]['target'] }}" href="{{ link[1]['url'] }}">
+                        {%- if link[0] == "Paper" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        {%- elsif link[0] == "Code" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        {%- elsif link[0] == "Demo" -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.12a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752m1.752-.752a1 1 0 00-.752-.752m-1.752.752a1 1 0 00-.752-.752" /></svg>
+                        {%- else -%}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                        {%- endif -%}
+                        {{ link[0] }}
+                    </a>
                     {% endif %}
                     {% endfor %}
                 </div>

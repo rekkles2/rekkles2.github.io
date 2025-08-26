@@ -32,30 +32,26 @@
     {%- endif -%}
 
     {%- if info['bold'] == true -%}
-        {%- assign display_name = name | append: mark | prepend: "<strong class='text-gray-800 underline'>" | append: "</strong>" -%}
+        {%- comment -%} 突出显示本人的名字，加粗并保留下划线 {%- endcomment -%}
+        <strong class='text-gray-800 underline'>{{ name | strip }}{{ mark }}</strong>
     {%- else -%}
-        {%- assign display_name = name | append: mark | prepend: "<span class='text-gray-500'>" | append: "</span>" -%}
+        {%- comment -%} 淡化其他作者的名字，使用更浅的颜色 {%- endcomment -%}
+        <span class='text-gray-500'>{{ name | strip }}{{ mark }}</span>
     {%- endif -%}
 
-    {%- if info['url'] -%}
-        <a class="text-gray-700 hover:text-gray-900 transition-colors duration-200 mr-1" target="_blank" href="{{ info['url'] }}">{{ display_name | strip }}</a>{%- if forloop.index < authors.size -%}, {% endif -%}
-    {%- else -%}
-        <span class="text-gray-700 mr-1">
-            {{ display_name | strip }}{%- if forloop.index < authors.size -%}, {% endif -%}
-        </span>
-    {%- endif -%}
+    {%- if forloop.index < authors.size -%}, {% endif -%}
 
 {%- endfor -%}
 
 {%- if has_eq_contrib or has_corresponding %}
-<span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded inline-flex items-center">
+<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded inline-flex items-center ml-2">
     (
     {%- if has_eq_contrib -%}
-        * <i class="text-yellow-800">equal contribution</i>
+        * <i>equal contribution</i>
     {%- endif -%}
     {%- if has_corresponding -%}
         {%- if has_eq_contrib -%}, {% endif -%}
-        <sup>#</sup> <i class="text-yellow-800">corresponding author</i>
+        <sup>#</sup> <i>corresponding author</i>
     {%- endif -%}
     )
 </span>
