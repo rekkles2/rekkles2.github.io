@@ -90,3 +90,8 @@ div.lazy {
     font-family: Courier, monospace;
 }
 
+.scrollable-news-list {
+  max-height: 450px; /* 根据需要调整高度 */
+  overflow-y: auto;
+  padding-right: 15px;
+}
