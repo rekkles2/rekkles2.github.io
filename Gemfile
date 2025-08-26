@@ -1,38 +1,24 @@
-gem "base64"
-gem "csv"
-gem "bigdecimal"
+# Gemfile
 
+source 'https://rubygems.org'
 
-source "https://rubygems.org"
+# 使用 GitHub Pages 的官方构建环境
+gem 'github-pages', group: :jekyll_plugins
 
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-gem "jekyll", "~> 3.9"
-
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-# gem "minima", "~> 2.0"
-
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-# gem "github-pages", group: :jekyll_plugins
-
-# If you have any plugins, put them here!
+# 如果需要使用其他插件，可以在这里添加
 group :jekyll_plugins do
-  gem "jekyll-email-protect"
+  gem 'jekyll-email-protect'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Windows 环境下的时区数据支持
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# Performance-booster for watching directories on Windows
-# Version updated to 0.2: https://github.com/luost26/academic-homepage/issues/23
-gem "wdm", "~> 0.2" if Gem.win_platform?
+# Windows 环境下的文件监听支持
+gem 'wdm', '~> 0.2', platforms: :mswin if Gem.win_platform?
 
-gem "webrick", "~> 1.7"
-gem "kramdown-parser-gfm"
+# 其他可能需要的 gem
+gem 'base64'
+gem 'csv'
+gem 'bigdecimal'
+gem 'webrick', '~> 1.7'
+gem 'kramdown-parser-gfm'
