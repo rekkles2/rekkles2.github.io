@@ -1,3 +1,8 @@
+gem "base64"
+gem "csv"
+gem "bigdecimal"
+
+
 source "https://rubygems.org"
 
 # Hello! This is where you manage which Jekyll version is used to run.
