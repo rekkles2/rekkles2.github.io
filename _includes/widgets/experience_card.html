@@ -1,22 +1,22 @@
-<div class="row mt-4">
+<div class="row mt-6">
     <div class="col">
-        <div class="card border-0 shadow-md bg-white rounded-lg">
-            <div class="card-body p-5">
+        <div class="card border-0 shadow-lg bg-white rounded-xl">
+            <div class="card-body p-6">
                 <div class="row" data-masonry='{"percentPosition": true }'>
                     {% if site.data.profile.education %}
                     <div class="col-12">
-                        <div class="mx-3 my-2">
-                            <h6 class="text-gray-800 font-semibold">Education</h6>
-                            <ul class="list-unstyled mb-2 space-y-2">
+                        <div class="mx-4 my-3">
+                            <h6 class="text-gray-900 font-bold text-lg">Education</h6>
+                            <ul class="list-none mb-3 space-y-3">
                                 {% for item in site.data.profile.education %}
-                                <li class="media flex items-start mb-2 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-9 h-9 mr-3 mt-1 object-contain" />
-                                    <div class="media-body">
-                                        <div class="text-gray-800 font-medium">{{ item.name }}</div>
+                                <li class="flex items-start p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-sm">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-9 h-9 mr-4 mt-1 object-contain" />
+                                    <div class="flex-1">
+                                        <div class="text-gray-900 font-semibold">{{ item.name }}</div>
                                         <div class="text-gray-600 text-sm">{{ item.dept }}</div>
-                                        <div class="text-gray-600 text-sm flex">
+                                        <div class="text-gray-600 text-sm flex items-center">
                                             <div>{{ item.position }}</div>
-                                            <div class="ml-auto mt-auto no-break"><em class="text-gray-500">{{ item.date }}</em></div>
+                                            <div class="ml-auto text-gray-500 italic">{{ item.date }}</div>
                                         </div>
                                     </div>
                                 </li>
@@ -28,18 +28,18 @@
 
                     {% if site.data.profile.experience %}
                     <div class="col-12">
-                        <div class="mx-3 my-2">
-                            <h6 class="text-gray-800 font-semibold">Experience</h6>
-                            <ul class="list-unstyled mb-2 space-y-2">
+                        <div class="mx-4 my-3">
+                            <h6 class="text-gray-900 font-bold text-lg">Experience</h6>
+                            <ul class="list-none mb-3 space-y-3">
                                 {% for item in site.data.profile.experience %}
-                                <li class="media flex items-start mb-2 p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-9 h-9 mr-3 mt-1 object-contain" />
-                                    <div class="media-body">
-                                        <div class="text-gray-800 font-medium">{{ item.name }}</div>
+                                <li class="flex items-start p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-sm">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-9 h-9 mr-4 mt-1 object-contain" />
+                                    <div class="flex-1">
+                                        <div class="text-gray-900 font-semibold">{{ item.name }}</div>
                                         <div class="text-gray-600 text-sm">{{ item.dept }}</div>
-                                        <div class="text-gray-600 text-sm flex">
+                                        <div class="text-gray-600 text-sm flex items-center">
                                             <div>{{ item.position }}</div>
-                                            <div class="ml-auto mt-auto no-break"><em class="text-gray-500">{{ item.date }}</em></div>
+                                            <div class="ml-auto text-gray-500 italic">{{ item.date }}</div>
                                         </div>
                                     </div>
                                 </li>
@@ -51,13 +51,13 @@
 
                     {% if site.data.profile.awards %}
                     <div class="col-12">
-                        <div class="mx-3 my-2">
-                            <h6 class="text-gray-800 font-semibold">Honors & Awards</h6>
-                            <ul class="text-sm pl-4 mb-2 space-y-2">
+                        <div class="mx-4 my-3">
+                            <h6 class="text-gray-900 font-bold text-lg">Honors & Awards</h6>
+                            <ul class="text-sm pl-5 mb-3 space-y-3">
                                 {% for item in site.data.profile.awards %}
-                                <li class="flex items-start p-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                                    <div class="text-gray-800 font-medium">{{ item.name }}</div>
-                                    <div class="ml-auto mt-auto no-break"><em class="text-gray-500">{{ item.date }}</em></div>
+                                <li class="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-sm">
+                                    <div class="flex-1 text-gray-900 font-semibold">{{ item.name }}</div>
+                                    <div class="ml-auto text-gray-500 italic">{{ item.date }}</div>
                                 </li>
                                 {% endfor %}
                             </ul>
