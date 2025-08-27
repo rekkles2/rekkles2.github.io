@@ -1,20 +1,29 @@
-<div class="row mt-5">
+<div class="row mt-3">
   <div class="col-12">
-    <div class="card border-0 shadow-sm bg-white">
+    <div class="card border-0 shadow-sm bg-white rounded-xl">
       <div class="card-body p-4">
-        <h6 class="mb-4 text-uppercase font-weight-bold">News</h6>
-        <div class="scrollable-news-list">
-          {% assign news_by_year = site.news | sort: "date" | reverse | slice: 0, include.limit | group_by_exp: "item", "item.date | date: '%Y'" -%}
-          <ul class="list-unstyled">
+        <h6 class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700">
+          <i class="fas fa-rss mr-2 text-primary-600"></i>News
+        </h6>
+        <div class="scrollable-news-list" style="max-height: 400px; overflow-y: auto;">
+          {% assign news_by_year = site.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" -%}
+          <ul class="list-unstyled mb-0">
             {% for year in news_by_year %}
             <li class="mb-4">
-              <h6 class="text-muted">{{ year.name }}</h6>
-              <ul class="list-unstyled pl-3 mb-0">
+              <h6 class="text-muted border-bottom pb-2">{{ year.name }}</h6>
+              <ul class="list-unstyled">
                 {% for item in year.items %}
-                <li class="d-flex align-items-baseline mb-2">
-                  <span class="text-right text-muted text-nowrap mr-3" style="font-weight: 400;">{{ item.date | date: "%b %d" }}</span>
-                  <span class="flex-grow-1">{{ item.title }}</span>
-                </li>
+                <a href="{{ item.link }}" class="text-decoration-none text-dark">
+                  <li class="d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 hover:text-gray-900">
+                    <span class="text-gray-500 text-sm text-nowrap mr-3" style="min-width: 60px;">{{ item.date | date: "%b %d" }}</span>
+                    <span class="flex-grow-1 font-weight-medium">{{ item.title }}</span>
+                    {% if item.featured %}
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ml-2">
+                      Featured
+                    </span>
+                    {% endif %}
+                  </li>
+                </a>
                 {% endfor %}
               </ul>
             </li>
@@ -25,3 +34,19 @@
     </div>
   </div>
 </div>
+
+<style>
+.scrollable-news-list::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-news-list::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 4px;
+}
+.scrollable-news-list::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+.hover-bg-gray:hover {
+    background-color: #f8f9fa;
+}
+</style>
