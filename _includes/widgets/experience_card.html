@@ -1,22 +1,47 @@
-<div class="row mt-6">
+<div class="row mt-4">
   <div class="col-12">
     <div class="card border-0 shadow-sm bg-white rounded-xl">
       <div class="card-body p-4">
-        <h6 class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700">
-          <i class="fas fa-graduation-cap mr-2 text-primary-600"></i>Education
+        <h6 class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700 d-flex align-items-center">
+          <svg class="me-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="capGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
+              </linearGradient>
+              <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="black" flood-opacity="0.2"/>
+              </filter>
+            </defs>
+
+            <path d="M12 2.5L16.5 5H7.5L12 2.5Z" fill="url(#capGradient)" filter="url(#shadow)"/>
+            <path d="M12 2.5L16.5 5H7.5L12 2.5Z" stroke="#0369a1" stroke-width="0.8" stroke-linejoin="round"/>
+
+            <path d="M5.5 11.5L18.5 11.5L21.5 5H2.5L5.5 11.5Z" fill="url(#capGradient)" filter="url(#shadow)"/>
+            <path d="M5.5 11.5L18.5 11.5L21.5 5H2.5L5.5 11.5Z" stroke="#0369a1" stroke-width="0.8"/>
+
+            <path d="M7 9.5H17" stroke="white" stroke-width="1" stroke-linecap="round"/>
+
+            <path d="M12 11.5V17" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round"/>
+
+            <circle cx="12" cy="17.5" r="1.5" fill="#ef4444"/>
+            <circle cx="12" cy="17.5" r="1.5" fill="white" fill-opacity="0.2"/>
+            <path d="M5.5 11.5L18.5 11.5L21.5 5H2.5L5.5 11.5Z" fill="black" fill-opacity="0.1" transform="translate(0.5, 0.5)"/>
+          </svg>
+          Education
         </h6>
         <ul class="list-unstyled">
           {% for item in site.data.profile.education %}
-          <li class="d-flex mb-4">
+          <li class="d-flex mb-4 align-items-center">
             <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4" loading="lazy" style="filter: brightness(0.9);">
             <div class="flex-grow-1">
-              <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex justify-content-between align-items-start flex-wrap">
                 <div>
                   <h5 class="mt-0 mb-1 font-weight-bold text-gray-900">{{ item.name }}</h5>
                   <div class="text-gray-600 mt-1">{{ item.dept }}</div>
                   <div class="text-gray-700 mt-1 font-weight-medium">{{ item.position }}</div>
                 </div>
-                <div class="text-gray-500 text-sm text-nowrap ml-3 mt-1">{{ item.date }}</div>
+                <div class="text-gray-500 text-sm text-nowrap ml-3 mt-0">{{ item.date }}</div>
               </div>
             </div>
           </li>

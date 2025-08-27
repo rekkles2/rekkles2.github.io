@@ -1,0 +1,39 @@
+<div class="row mt-3">
+    <div class="col">
+        <div class="card border-0 shadow-sm bg-white rounded-xl">
+            <div class="card-body p-4">
+                <h5 class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700">
+                    Academic Services
+                </h5>
+
+                <!-- Conference Reviewer 部分 -->
+                <div class="mb-5">
+                    <h6 class="mb-3 font-weight-bold text-gray-900">
+                        Conference Reviewer
+                    </h6>
+                    <div class="row g-3">
+                        {% for item in site.data.profile.services.conference %}
+                        <div class="col-md-6">
+                            <div class="text-gray-700" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Journal Reviewer 部分 -->
+                <div>
+                    <h6 class="mb-3 font-weight-bold text-gray-900">
+                        Journal Reviewer
+                    </h6>
+                    <div class="row g-3">
+                        {% for item in site.data.profile.services.journal %}
+                        <div class="col-md-6">
+                            <div class="text-gray-700" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

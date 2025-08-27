@@ -14,9 +14,9 @@ body_attr: >-
             {% for year in pubs_by_year %}
             {% assign num_papers = year.items | size %}
             <h2 class="text-3xl font-semibold text-gray-800 pt-8 pb-4 border-b-2 border-gray-200" id="year-{{ year.name }}">{{ year.name }}</h2>
-            <div class="bg-white shadow-lg rounded-xl mt-4 mb-6 overflow-hidden">
+            <div class="space-y-6">
                 {% for item in year.items %}
-                <div class="publication-item p-6 {% unless forloop.last %}border-b border-gray-100{% endunless %} hover:bg-gray-50 transition-all duration-200 ease-in-out hover:shadow-md">
+                <div class="publication-item bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
                     {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
                 </div>
                 {% endfor %}
@@ -33,7 +33,63 @@ body_attr: >-
         </div>
     </div>
 </div>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<style>
+/* 优化出版物卡片样式 */
+.publication-item {
+    padding: 1.75rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.publication-item:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* 优化年份导航样式 */
+#navbar-year .nav-link.active {
+    background-color: #e0f2fe;
+    color: #0ea5e9;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* 优化整体布局比例 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .lg:w-3/4 {
+        width: 75%;
+    }
+
+    .lg:w-1/4 {
+        width: 25%;
+    }
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .publication-item {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .publication-item:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .publication-item:last-child {
+        margin-bottom: 0;
+    }
+}
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

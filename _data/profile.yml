@@ -3,21 +3,19 @@ secondary_name: ""
 navbar_name: "Your Name"
 
 positions:
-- logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
-  name: Position 1 with logo
 - name: Position 2 without logo
 
 
 email: "your@email.com"
-# cv_link: link-to-your-cv-file
+cv_link: /assets/images/badges/MIT_Social_circle.png
 gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
 github: your_github_id
-twitter: your_twitter_id  # Do not include the '@' symbol
-# wechat_qrcode: /assets/images/etc/wechat.jpg
-# wechat_prompt: >-
-#   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
-# linkedin: your-linked-in-id
-# orcid: 0000-0000-0000-0000
+#twitter: your_twitter_id  # Do not include the '@' symbol
+wechat_qrcode: /assets/images/badges/MIT_Social_circle.png
+wechat_prompt: >-
+  Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
+linkedin: your-linked-in-id
+orcid: 0000-0000-0000-0000
 
 short_bio_text_justify: false
 short_bio: >-
@@ -34,28 +32,131 @@ portrait_url: /assets/images/photos/portrait.jpg
 portrait_caption: >-
   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
+
+
+#################################
+#################################
+#################################
+
+
+
+
+
 education:
 - name: Massachusetts Institute of Technology
   logo: /assets/images/badges/MIT_Social_circle.png
   position: >- 
     Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
+    Ph.D. Student <br/>
+    Advisor: Prof. XXX
   date: Sep. 2024 - present
+
 - name: Peking University
   logo: /assets/images/badges/PKU_red.png
-  position: B.S. in Computer Science
+  position: >-
+    B.S. in Computer Science <br/>
+    Advisor: Prof. XXX
   date: Sep. 2019 - Jul. 2021
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
 
-# awards:
-# - name: Award Name 2
-#   date: 2024
-# - name: Award Name 1 
-#   date: 2021
-# - name: A quick brown fox jumps over the lazy dog and runs away award
-#   date: 2021
+
+
+#################################
+#################################
+#################################
+
+
+
+
+
+experience:
+- name: Peking University
+  logo: /assets/images/badges/PKU_red.png
+  position: Research Intern
+  advisor: Dr. XXX
+  date: Sep. 2019 - Jul. 2021
+- name: Peking University
+  logo: /assets/images/badges/PKU_red.png
+  position: Research Intern
+  advisor: Dr. XXX
+  date: Sep. 2019 - Jul. 2021
+- name: Peking University
+  logo: /assets/images/badges/PKU_red.png
+  position: Research Intern
+  advisor: Dr. XXX
+  date: Sep. 2019 - Jul. 2021
+- name: Peking University
+  logo: /assets/images/badges/PKU_red.png
+  position: Research Intern
+  advisor: Dr. XXX
+  date: Sep. 2019 - Jul. 2021
+
+
+
+#################################
+#################################
+#################################
+
+
+
+
+awards:
+- name: Award Name 2
+  date: Sep. 2024
+- name: Award Name 1
+  date: Jul. 2021
+- name: A quick brown fox jumps over the lazy dog and runs away award
+  date: Dec. 2021
+
+
+
+#################################
+#################################
+#################################
+
+
+
+
+talks:
+- name: "Invited talk @Flower Monthly Events (Flower labs) [https://flower.ai/events/] in University of Cambridge on \"Federated weakly supervised video anomaly detection\" dawd dwadwa dawdawda dawd ad wdad."
+  video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=237"
+  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
+  date: "Aug. 2025"
+- name: "Invited talk @Flower Monthly Events (Flower labs)[https://flower.ai/events/] in University of Cambridge on \"Federated weakly supervised video anomaly detection\"."
+  video: "https://www.bilibili.com/video/BV1a9ebzBE4g?t=228.6"
+  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
+  date: "Sep. 2025"
+- name: "Invited talk @Flower Monthly Events (Flower labs)[https://flower.ai/events/] in University of Cambridge on \"Federated weakly supervised video anomaly detection\"."
+  video: "https://www.bilibili.com/video/BV1a9ebzBE4g?t=228.6"
+  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
+  date: "Sep. 2025"
+- name: "Invited talk @Flower Monthly Events (Flower labs)[https://flower.ai/events/] in University of Cambridge on \"Federated weakly supervised video anomaly detection\"."
+  video: "https://www.bilibili.com/video/BV1a9ebzBE4g?t=228.6"
+  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
+  date: "Sep. 2025"
+
+
+#################################
+#################################
+#################################
+
+
+
+services:
+  conference:
+    - "Conference on Computer Vision and Pattern Recognition (CVPR), 2025"
+    - "European Conference on Computer Vision (ECCV), 2025"
+    - "European Conference on Computer Vision (ECCV), 2025"
+    - "European Conference on Computer Vision (ECCV), 2025"
+    - "European Conference on Computer Vision (ECCV), 2025"
+    - "PUT@ICML, 2025"
+
+  journal:
+    - "International Journal of Computer Vision (IJCV), 2023-2025"
+    - "International Journal of Computer Vision (IJCV), 2023-2025"
+    - "International Journal of Computer Vision (IJCV), 2023-2025"
+    - "International Journal of Computer Vision (IJCV), 2023-2025"
+
+
+
+
