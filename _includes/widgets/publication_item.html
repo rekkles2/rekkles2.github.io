@@ -85,14 +85,17 @@
   border-radius: 10.26px; /* 10.8px * 0.95 */
   overflow: hidden;
   box-shadow: 0 2.565px 10.26px rgba(0, 0, 0, 0.05);
-  transition: all 220ms ease;
+  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 优化过渡效果 */
   background: var(--gray-50);
   border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
+  transform-origin: center center; /* 确保从中心缩放 */
+  z-index: 1; /* 确保正常状态下在底层 */
 }
 
 .cover-container:hover {
-  box-shadow: 0 5.13px 15.39px rgba(0, 0, 0, 0.08);
-  transform: scale(1.00855); /* 1.009 * 0.95 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* 增强阴影效果 */
+  transform: scale(1.4); /* 放大40% */
+  z-index: 10; /* 确保悬停时在顶层 */
 }
 
 /* ========== 内容排版优化 ========== */
