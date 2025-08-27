@@ -48,7 +48,7 @@
 
                                     {% if has_video %}
                                     <div class="{{ col_class }}">
-                                        <div class="position-relative overflow-hidden rounded-lg border border-primary-200 shadow-sm bg-black">
+                                        <div class="position-relative overflow-hidden rounded-lg border-0 shadow-none bg-black">
                                             <div class="relative" style="height: 300px;">
                                                 {% if talk.video contains 'bilibili.com' %}
                                                     {% assign bvid = talk.video | split: '/video/BV' | last | split: '?' | first %}
@@ -73,8 +73,8 @@
                                                             loading="lazy"></iframe>
                                                 {% endif %}
                                             </div>
-                                            <div class="position-absolute top-2 right-2 bg-black text-primary-500 text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
-                                                <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <div class="position-absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
+                                                <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <polygon points="23 7 16 12 23 17 23 7"></polygon>
                                                     <line x1="1" y1="5" x2="1" y2="19"></line>
                                                 </svg>
@@ -86,7 +86,7 @@
 
                                     {% if has_slides %}
                                     <div class="{{ col_class }}">
-                                        <div class="position-relative overflow-hidden rounded-lg border border-primary-200 shadow-sm bg-black">
+                                        <div class="position-relative overflow-hidden rounded-lg border-0 shadow-none bg-black">
                                             <div class="relative" style="height: 300px;">
                                                 <iframe class="w-100 h-100"
                                                         src="{{ talk.slides | replace: '/edit?', '/preview?' }}"
@@ -95,8 +95,8 @@
                                                         style="border: 0;"
                                                         loading="lazy"></iframe>
                                             </div>
-                                            <div class="position-absolute top-2 right-2 bg-black text-primary-500 text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
-                                                <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <div class="position-absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
+                                                <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                                                 </svg>
                                                 Slides

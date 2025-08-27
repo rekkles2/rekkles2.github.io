@@ -41,7 +41,7 @@
 
 /* ========== 核心卡片设计 ========== */
 .paper-card {
-  border-radius: 14.4px; /* 16px * 0.9 */
+  border-radius: 13.68px; /* 14.4px * 0.95 */
   overflow: hidden;
   background: white;
   box-shadow: var(--card-shadow);
@@ -55,8 +55,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 14.4px; /* 16px * 0.9 */
-  padding: 0.9px; /* 1px * 0.9 */
+  border-radius: 13.68px; /* 14.4px * 0.95 */
+  padding: 0.855px; /* 0.9px * 0.95 */
   background: linear-gradient(to bottom right, rgba(14, 165, 233, 0.08), transparent);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -68,7 +68,7 @@
 
 .paper-card:hover {
   box-shadow: var(--card-hover-shadow);
-  transform: translateY(-1.8px); /* -2px * 0.9 */
+  transform: translateY(-1.71px); /* -1.8px * 0.95 */
 }
 
 .paper-card:hover::before {
@@ -76,33 +76,33 @@
 }
 
 .paper-content {
-  padding: 1.26rem; /* 1.4rem * 0.9 */
+  padding: 1.197rem; /* 1.26rem * 0.95 */
   position: relative;
   z-index: 1;
 }
 
 .cover-container {
-  border-radius: 10.8px; /* 12px * 0.9 */
+  border-radius: 10.26px; /* 10.8px * 0.95 */
   overflow: hidden;
-  box-shadow: 0 2.7px 10.8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2.565px 10.26px rgba(0, 0, 0, 0.05);
   transition: all 220ms ease;
   background: var(--gray-50);
-  border: 0.9px solid var(--gray-200); /* 1px * 0.9 */
+  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
 }
 
 .cover-container:hover {
-  box-shadow: 0 5.4px 16.2px rgba(0, 0, 0, 0.08);
-  transform: scale(1.009); /* 1.01 * 0.999 */
+  box-shadow: 0 5.13px 15.39px rgba(0, 0, 0, 0.08);
+  transform: scale(1.00855); /* 1.009 * 0.95 */
 }
 
 /* ========== 内容排版优化 ========== */
 .paper-title {
   margin-top: 0;
-  margin-bottom: 0.495rem; /* 0.55rem * 0.9 */
-  font-size: 1.152rem; /* 1.28rem * 0.9 */
+  margin-bottom: 0.47025rem; /* 0.495rem * 0.95 */
+  font-size: 1.0944rem; /* 1.152rem * 0.95 */
   font-weight: 750;
   color: var(--gray-900);
-  letter-spacing: -0.225px; /* -0.25px * 0.9 */
+  letter-spacing: -0.21375px; /* -0.225px * 0.95 */
   line-height: 1.28;
   transition: color 150ms ease;
 }
@@ -112,10 +112,10 @@
 }
 
 .paper-authors {
-  font-size: 0.918rem; /* 1.02rem * 0.9 */
+  font-size: 0.8721rem; /* 0.918rem * 0.95 */
   font-weight: 525;
   color: var(--gray-700);
-  margin-bottom: 0.36rem; /* 0.4rem * 0.9 */
+  margin-bottom: 0.342rem; /* 0.36rem * 0.95 */
   line-height: 1.38;
   transition: color 150ms ease;
 }
@@ -132,9 +132,9 @@
 }
 
 .paper-pub {
-  font-size: 0.882rem; /* 0.98rem * 0.9 */
+  font-size: 0.8379rem; /* 0.882rem * 0.95 */
   color: var(--gray-500);
-  margin-bottom: 0.81rem; /* 0.9rem * 0.9 */
+  margin-bottom: 0.7695rem; /* 0.81rem * 0.95 */
   line-height: 1.48;
   font-feature-settings: 'tnum';
 }
@@ -149,25 +149,25 @@
 .index-terms {
   display: flex;
   flex-direction: column;
-  gap: 0.36rem; /* 0.4rem * 0.9 */
+  gap: 0.342rem; /* 0.36rem * 0.95 */
   background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(252, 253, 255, 0.8));
-  border: 0.9px solid var(--gray-200); /* 1px * 0.9 */
-  padding: 0.45rem 0.54rem; /* 0.5rem 0.6rem * 0.9 */
-  border-radius: 9px; /* 10px * 0.9 */
-  margin-bottom: 0.99rem; /* 1.1rem * 0.9 */
-  box-shadow: 0 1.8px 5.4px rgba(0, 0, 0, 0.015);
+  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
+  padding: 0.4275rem 0.513rem; /* 0.45rem 0.54rem * 0.95 */
+  border-radius: 8.55px; /* 9px * 0.95 */
+  margin-bottom: 0.9405rem; /* 0.99rem * 0.95 */
+  box-shadow: 0 1.71px 5.13px rgba(0, 0, 0, 0.015);
   transition: all 200ms ease;
 }
 
 .paper-card:hover .index-terms {
   background: linear-gradient(180deg, rgba(240, 249, 255, 0.85), rgba(252, 253, 255, 0.9));
-  box-shadow: 0 2.7px 9px rgba(3, 105, 161, 0.05);
+  box-shadow: 0 2.565px 8.55px rgba(3, 105, 161, 0.05);
 }
 
 .index-terms .meta-row {
   display: flex;
   align-items: center;
-  gap: 0.45rem; /* 0.5rem * 0.9 */
+  gap: 0.4275rem; /* 0.45rem * 0.95 */
 }
 
 .index-terms .label {
@@ -175,44 +175,44 @@
   color: var(--primary-700);
   font-weight: 625;
   text-transform: uppercase;
-  font-size: 0.63rem; /* 0.7rem * 0.9 */
-  letter-spacing: 0.72px; /* 0.8px * 0.9 */
-  padding: 0.117rem 0.432rem; /* 0.13rem 0.48rem * 0.9 */
-  border-radius: 5.4px; /* 6px * 0.9 */
+  font-size: 0.5985rem; /* 0.63rem * 0.95 */
+  letter-spacing: 0.684px; /* 0.72px * 0.95 */
+  padding: 0.11115rem 0.4104rem; /* 0.117rem 0.432rem * 0.95 */
+  border-radius: 5.13px; /* 5.4px * 0.95 */
   background: var(--primary-50);
-  border: 0.9px solid var(--primary-100); /* 1px * 0.9 */
+  border: 0.855px solid var(--primary-100); /* 0.9px * 0.95 */
   font-feature-settings: 'pnum';
 }
 
 .index-terms .badges {
   display: flex;
-  gap: 0.45rem; /* 0.5rem * 0.9 */
+  gap: 0.4275rem; /* 0.45rem * 0.95 */
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 0.225rem; /* 0.25rem * 0.9 */
+  margin-top: 0.21375rem; /* 0.225rem * 0.95 */
 }
 
 .index-terms .term-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.252rem 0.54rem; /* 0.28rem 0.6rem * 0.9 */
-  font-size: 0.774rem; /* 0.86rem * 0.9 */
+  padding: 0.2394rem 0.513rem; /* 0.252rem 0.54rem * 0.95 */
+  font-size: 0.7353rem; /* 0.774rem * 0.95 */
   font-weight: 500;
   color: var(--gray-700);
   background: white;
-  border: 0.9px solid var(--gray-200); /* 1px * 0.9 */
-  border-radius: 18px; /* 20px * 0.9 */
+  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
+  border-radius: 17.1px; /* 18px * 0.95 */
   white-space: nowrap;
-  box-shadow: 0 1.35px 4.5px rgba(0, 0, 0, 0.025);
+  box-shadow: 0 1.2825px 4.275px rgba(0, 0, 0, 0.025);
   transition: all 200ms ease;
   cursor: default;
   user-select: none;
 }
 
 .index-terms .term-badge:hover {
-  transform: translateY(-1.35px); /* -1.5px * 0.9 */
-  box-shadow: 0 4.5px 12.6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1.2825px); /* -1.35px * 0.95 */
+  box-shadow: 0 4.275px 11.97px rgba(0, 0, 0, 0.05);
   background: white;
   border-color: var(--gray-300);
   color: var(--primary-700);
@@ -222,28 +222,28 @@
 .abstract-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.495rem; /* 0.55rem * 0.9 */
+  gap: 0.47025rem; /* 0.495rem * 0.95 */
   align-items: center;
-  margin-top: 0.765rem; /* 0.85rem * 0.9 */
+  margin-top: 0.72675rem; /* 0.765rem * 0.95 */
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 .abstract-links a.btn {
   display: inline-flex !important;
   align-items: center;
-  gap: 0.405rem; /* 0.45rem * 0.9 */
-  padding: 0.252rem 0.585rem; /* 0.28rem 0.65rem * 0.9 */
-  border-radius: 9px; /* 10px * 0.9 */
+  gap: 0.38475rem; /* 0.405rem * 0.95 */
+  padding: 0.2394rem 0.55575rem; /* 0.252rem 0.585rem * 0.95 */
+  border-radius: 8.55px; /* 9px * 0.95 */
   background: var(--gray-50);
-  border: 0.9px solid var(--gray-200); /* 1px * 0.9 */
+  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
   color: var(--gray-700);
-  font-size: 0.738rem; /* 0.82rem * 0.9 */
+  font-size: 0.7011rem; /* 0.738rem * 0.95 */
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  min-height: 25.2px; /* 28px * 0.9 */
+  min-height: 23.94px; /* 25.2px * 0.95 */
   transition: all 170ms cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0.9px 3.6px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 0.855px 3.42px rgba(0, 0, 0, 0.02);
   position: relative;
   overflow: hidden;
 }
@@ -264,28 +264,28 @@
 
 .abstract-links a.btn:hover,
 .abstract-links a.btn:focus {
-  transform: translateY(-0.9px); /* -1px * 0.9 */
+  transform: translateY(-0.855px); /* -0.9px * 0.95 */
   border-color: var(--gray-300);
-  box-shadow: 0 3.6px 9px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3.42px 8.55px rgba(0, 0, 0, 0.05);
   outline: none;
 }
 
 .abstract-links a.btn:active {
   transform: translateY(0);
-  box-shadow: inset 0 0.9px 1.35px rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 0.855px 1.2825px rgba(0, 0, 0, 0.02);
 }
 
 .abstract-links a.btn:focus-visible {
-  box-shadow: 0 0 0 2.7px rgba(14, 165, 233, 0.25); /* 3px * 0.9 */
+  box-shadow: 0 0 0 2.565px rgba(14, 165, 233, 0.25); /* 2.7px * 0.95 */
   border-color: var(--primary-500);
   outline: none;
 }
 
 .abstract-links .btn-icon {
-  width: 16.2px; /* 18px * 0.9 */
-  height: 16.2px; /* 18px * 0.9 */
-  min-width: 16.2px; /* 18px * 0.9 */
-  border-radius: 4.5px; /* 5px * 0.9 */
+  width: 15.39px; /* 16.2px * 0.95 */
+  height: 15.39px; /* 16.2px * 0.95 */
+  min-width: 15.39px; /* 16.2px * 0.95 */
+  border-radius: 4.275px; /* 4.5px * 0.95 */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -298,10 +298,10 @@
 .abstract-links .btn-label {
   color: var(--gray-700);
   font-weight: 500;
-  font-size: 0.738rem; /* 0.82rem * 0.9 */
+  font-size: 0.7011rem; /* 0.738rem * 0.95 */
   line-height: 1;
   display: inline-block;
-  padding-right: 0.9px; /* 1px * 0.9 */
+  padding-right: 0.855px; /* 0.9px * 0.95 */
 }
 
 /* 按钮类型样式 - 基于现代UI设计趋势 */
@@ -389,109 +389,109 @@
 
 @media (max-width: 768px) {
   .paper-content {
-    padding: 1.125rem; /* 1.25rem * 0.9 */
+    padding: 1.06875rem; /* 1.125rem * 0.95 */
   }
 
   .paper-title {
-    font-size: 1.062rem; /* 1.18rem * 0.9 */
+    font-size: 1.0089rem; /* 1.062rem * 0.95 */
     line-height: 1.32;
   }
 
   .paper-authors {
-    font-size: 0.882rem; /* 0.98rem * 0.9 */
+    font-size: 0.8379rem; /* 0.882rem * 0.95 */
   }
 
   .paper-pub {
-    font-size: 0.828rem; /* 0.92rem * 0.9 */
+    font-size: 0.7866rem; /* 0.828rem * 0.95 */
   }
 
   .index-terms {
-    padding: 0.405rem 0.45rem; /* 0.45rem 0.5rem * 0.9 */
-    border-radius: 8.1px; /* 9px * 0.9 */
+    padding: 0.38475rem 0.4275rem; /* 0.405rem 0.45rem * 0.95 */
+    border-radius: 7.695px; /* 8.1px * 0.95 */
   }
 
   .index-terms .term-badge {
-    font-size: 0.738rem; /* 0.82rem * 0.9 */
-    padding: 0.216rem 0.45rem; /* 0.24rem 0.5rem * 0.9 */
+    font-size: 0.7011rem; /* 0.738rem * 0.95 */
+    padding: 0.2052rem 0.4275rem; /* 0.216rem 0.45rem * 0.95 */
   }
 
   .abstract-links a.btn {
-    padding: 0.234rem 0.54rem; /* 0.26rem 0.6rem * 0.9 */
-    font-size: 0.702rem; /* 0.78rem * 0.9 */
-    min-height: 23.4px; /* 26px * 0.9 */
-    gap: 0.36rem; /* 0.4rem * 0.9 */
+    padding: 0.2223rem 0.513rem; /* 0.234rem 0.54rem * 0.95 */
+    font-size: 0.6669rem; /* 0.702rem * 0.95 */
+    min-height: 22.23px; /* 23.4px * 0.95 */
+    gap: 0.342rem; /* 0.36rem * 0.95 */
   }
 }
 
 @media (max-width: 480px) {
   .paper-content {
-    padding: 0.9rem; /* 1rem * 0.9 */
+    padding: 0.855rem; /* 0.9rem * 0.95 */
   }
 
   .paper-title {
-    font-size: 0.972rem; /* 1.08rem * 0.9 */
+    font-size: 0.9234rem; /* 0.972rem * 0.95 */
     line-height: 1.35;
   }
 
   .paper-authors {
-    font-size: 0.828rem; /* 0.92rem * 0.9 */
+    font-size: 0.7866rem; /* 0.828rem * 0.95 */
   }
 
   .paper-pub {
-    font-size: 0.774rem; /* 0.86rem * 0.9 */
+    font-size: 0.7353rem; /* 0.774rem * 0.95 */
   }
 
   .index-terms {
-    padding: 0.36rem 0.396rem; /* 0.4rem 0.44rem * 0.9 */
-    border-radius: 7.2px; /* 8px * 0.9 */
-    margin-bottom: 0.81rem; /* 0.9rem * 0.9 */
+    padding: 0.342rem 0.3762rem; /* 0.36rem 0.396rem * 0.95 */
+    border-radius: 6.84px; /* 7.2px * 0.95 */
+    margin-bottom: 0.7695rem; /* 0.81rem * 0.95 */
   }
 
   .index-terms .term-badge {
-    font-size: 0.702rem; /* 0.78rem * 0.9 */
-    padding: 0.18rem 0.378rem; /* 0.2rem 0.42rem * 0.9 */
-    border-radius: 16.2px; /* 18px * 0.9 */
+    font-size: 0.6669rem; /* 0.702rem * 0.95 */
+    padding: 0.171rem 0.3591rem; /* 0.18rem 0.378rem * 0.95 */
+    border-radius: 15.39px; /* 16.2px * 0.95 */
   }
 
   .abstract-links {
-    gap: 0.405rem; /* 0.45rem * 0.9 */
-    margin-top: 0.675rem; /* 0.75rem * 0.9 */
+    gap: 0.38475rem; /* 0.405rem * 0.95 */
+    margin-top: 0.64125rem; /* 0.675rem * 0.95 */
   }
 
   .abstract-links a.btn {
-    padding: 0.216rem 0.495rem; /* 0.24rem 0.55rem * 0.9 */
-    font-size: 0.666rem; /* 0.74rem * 0.9 */
-    min-height: 21.6px; /* 24px * 0.9 */
-    gap: 0.315rem; /* 0.35rem * 0.9 */
+    padding: 0.2052rem 0.47025rem; /* 0.216rem 0.495rem * 0.95 */
+    font-size: 0.6327rem; /* 0.666rem * 0.95 */
+    min-height: 20.52px; /* 21.6px * 0.95 */
+    gap: 0.29925rem; /* 0.315rem * 0.95 */
   }
 
   .abstract-links .btn-icon {
-    width: 14.4px; /* 16px * 0.9 */
-    height: 14.4px; /* 16px * 0.9 */
-    min-width: 14.4px; /* 16px * 0.9 */
-    border-radius: 3.6px; /* 4px * 0.9 */
+    width: 13.68px; /* 14.4px * 0.95 */
+    height: 13.68px; /* 14.4px * 0.95 */
+    min-width: 13.68px; /* 14.4px * 0.95 */
+    border-radius: 3.42px; /* 3.6px * 0.95 */
   }
 }
 
 /* ========== 移动端优化 ========== */
 @media (max-width: 576px) {
   .d-md-none .paper-content {
-    padding: 0.99rem; /* 1.1rem * 0.9 */
+    padding: 0.9405rem; /* 0.99rem * 0.95 */
   }
 
   .d-md-none .index-terms {
-    border-radius: 8.1px; /* 9px * 0.9 */
-    padding: 0.378rem 0.432rem; /* 0.42rem 0.48rem * 0.9 */
+    border-radius: 7.695px; /* 8.1px * 0.95 */
+    padding: 0.3591rem 0.4104rem; /* 0.378rem 0.432rem * 0.95 */
   }
 
   .d-md-none .index-terms .term-badge {
-    padding: 0.198rem 0.414rem; /* 0.22rem 0.46rem * 0.9 */
-    font-size: 0.72rem; /* 0.8rem * 0.9 */
+    padding: 0.1881rem 0.3933rem; /* 0.198rem 0.414rem * 0.95 */
+    font-size: 0.684rem; /* 0.72rem * 0.95 */
   }
 
   .d-md-none .abstract-links a.btn {
-    padding: 0.225rem 0.522rem; /* 0.25rem 0.58rem * 0.9 */
-    min-height: 23.4px; /* 26px * 0.9 */
+    padding: 0.21375rem 0.4959rem; /* 0.225rem 0.522rem * 0.95 */
+    min-height: 22.23px; /* 23.4px * 0.95 */
   }
 }
 </style>
@@ -504,12 +504,12 @@
       <div class="cover-container">
         {%- if item.cover -%}
           <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}"
-               class="lazy w-79 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+               class="lazy w-68 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                src="{{ '/assets/images/empty_300x200.png' | relative_url }}" onload="this.classList.add('opacity-100')">
         {%- else -%}
-          <svg class="bubble-visual-hash lazy w-79 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
-               data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 270 180" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
-            <rect width="270" height="180" rx="14.4" fill="rgba(229,231,235,0.5)" stroke-width="1.8"/>
+          <svg class="bubble-visual-hash lazy w-68 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
+               data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 230 153" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
+            <rect width="230" height="153" rx="13.68" fill="rgba(229,231,235,0.5)" stroke-width="1.71"/>
           </svg>
         {%- endif -%}
       </div>
@@ -572,7 +572,7 @@
             <a class="btn {{ cls }}" href="{{ target_url }}" target="{{ target_attr }}" rel="noopener noreferrer" aria-label="{{ label }}">
               <span class="btn-icon" aria-hidden="true">
                 {% if label == "Paper" %}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <path d="M14 2v6h6"/>
                     <path d="M16 13H8"/>
@@ -580,29 +580,29 @@
                     <path d="M10 9H8"/>
                   </svg>
                 {% elsif label == "Code" %}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
                   </svg>
                 {% elsif label == "Demo" %}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                   </svg>
                 {% elsif label == "Arxiv" or label == "arXIV" %}
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="none">
-                    <g transform="translate(1.8,1.8) scale(0.72)">
+                    <g transform="translate(1.71,1.71) scale(0.684)">
                       <path d="M10.5 1.5L2.5 15.5H8.5L16.5 1.5H10.5Z" fill="#d32525"/>
                       <path d="M19.5 15.5L11.5 1.5H17.5L25.5 15.5H19.5Z" fill="#b31b1b"/>
                     </g>
                   </svg>
                 {% elsif label == "Website" %}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="2" y1="12" x2="22" y2="12"></line>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                   </svg>
                 {% else %}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -621,7 +621,7 @@
 <!-- Mobile -->
 <div class="d-md-none paper-card {% unless include.hide_bottom_border %}border-b border-gray-200{% endunless %} border-gray {% if include.first %}rounded-t-xl{% endif %} {% if include.last %}rounded-b-xl{% endif %}" data-src="{{ item.cover | relative_url }}">
   <div class="w-100 {% if include.first %}rounded-t-xl{% endif %} {% if include.last %}rounded-b-xl{% endif %}">
-    <div class="d-flex flex-col py-3.6 px-3.6">
+    <div class="d-flex flex-col py-3.42 px-3.42">
       <div class="mb-auto"></div>
       <div>
         <h5 class="paper-title">{{ item.title }}</h5>
@@ -677,7 +677,7 @@
               <a class="btn {{ cls }}" href="{{ target_url }}" target="{{ target_attr }}" rel="noopener noreferrer" aria-label="{{ label }}">
                 <span class="btn-icon" aria-hidden="true">
                   {% if label == "Paper" %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                       <path d="M14 2v6h6"/>
                       <path d="M16 13H8"/>
@@ -685,29 +685,29 @@
                       <path d="M10 9H8"/>
                     </svg>
                   {% elsif label == "Code" %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="16 18 22 12 16 6"></polyline>
                       <polyline points="8 6 2 12 8 18"></polyline>
                     </svg>
                   {% elsif label == "Demo" %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round">
                       <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                   {% elsif label == "Arxiv" or label == "arXIV" %}
                     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="none">
-                      <g transform="translate(1.8,1.8) scale(0.72)">
+                      <g transform="translate(1.71,1.71) scale(0.684)">
                         <path d="M10.5 1.5L2.5 15.5H8.5L16.5 1.5H10.5Z" fill="#d32525"/>
                         <path d="M19.5 15.5L11.5 1.5H17.5L25.5 15.5H19.5Z" fill="#b31b1b"/>
                       </g>
                     </svg>
                   {% elsif label == "Website" %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="2" y1="12" x2="22" y2="12"></line>
                       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                     </svg>
                   {% else %}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.368" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                       <polyline points="15 3 21 3 21 9"></polyline>
                       <line x1="10" y1="14" x2="21" y2="3"></line>
