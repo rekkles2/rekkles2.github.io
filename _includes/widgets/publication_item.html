@@ -1,4 +1,8 @@
-<!-- ================== 最终美学优化版学术论文卡片模板（和谐版） ================== -->
+<!-- Single-file paper card template (merged + performance optimizations)
+     - 保持原有结构与功能
+     - 性能优化：事件委托、懒加载、will-change 仅在激活时、prefers-reduced-motion 支持
+     - 可直接替换原模板文件内容或嵌入页面
+-->
 
 <style>
 :root{
@@ -90,6 +94,7 @@
   border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
   transform-origin: center center; /* 确保从中心缩放 */
   z-index: 1; /* 确保正常状态下在底层 */
+  /* 仅在有 Hover 功能的设备上启用 will-change（减少持续 GPU 占用） */
 }
 
 .cover-container:hover {
@@ -386,7 +391,7 @@
 
   .cover-container,
   .abstract-links a.btn {
-    will-change: transform, box-shadow;
+    /* will-change 在激活时添加以减少总体开销（见 JS） */
   }
 }
 
@@ -497,73 +502,61 @@
     min-height: 22.23px; /* 23.4px * 0.95 */
   }
 }
-</style>
 
-<!-- ================= 增强：悬停时实心 + 遮蔽下层文字（追加代码） ================= -->
+/* ================== 增强块：悬停时实心遮罩 + 避免文字穿透（覆盖/性能优化） ================== */
 
-<style>
-/* 1) 确保 cover-container 具相对定位以支持伪元素遮罩 */
-.cover-container {
-  position: relative; /* 必需：伪元素与 img 层叠定位基准 */
-  -webkit-tap-highlight-color: transparent;
-}
+/* 基本定位（用于伪元素遮罩） */
+.cover-container { position: relative; -webkit-tap-highlight-color: transparent; }
 
-/* 2) 伪元素：在图片下方放一层“实心”白色背景，覆盖透明像素（并随 transform 一起缩放） */
-/*    通过 inset: -6% 给放大后的图片留出额外遮罩空间，防止缩放部分露出底下文字 */
+/* 伪元素遮罩：放在图片下方但高于卡片内容，默认隐藏 */
 .cover-container::before {
   content: "";
   position: absolute;
-  inset: -6%;                   /* 适度扩大遮罩，覆盖放大时的外溢区域 */
-  border-radius: inherit;       /* 与容器圆角一致 */
-  background: white;            /* 实心背景，若想用主题色可改为 var(--gray-50) 或其它 */
-  box-shadow: 0 0 0 rgba(0,0,0,0); /* 占位（无视觉） */
-  z-index: 1100;                /* 低于图片本身，但高于卡片内容 */
-  opacity: 0;                   /* 默认隐藏，悬停/JS 时显示 */
+  inset: -6%;
+  border-radius: inherit;
+  background: white;
+  z-index: 1100;
+  opacity: 0;
   transition: opacity 220ms ease;
   pointer-events: none;
 }
 
-/* 3) 确保图片 / svg 在遮罩之上，并且不会与底层混合 */
+/* 图片/占位 svg 顶层，带白底以覆盖透明像素 */
 .cover-container img,
 .cover-container svg {
   position: relative;
-  z-index: 1200;                /* 顶层：确保图片盖住遮罩并盖住下层文本 */
+  z-index: 1200;
   display: block;
   width: 100%;
   height: auto;
-  background-color: white;      /* 如果图片自带透明像素，这层会在非覆盖区域显示白底 */
-  mix-blend-mode: normal;       /* 防止 blend 导致透视 */
+  background-color: white;
+  mix-blend-mode: normal;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: transform 420ms cubic-bezier(0.16,1,0.3,1),
-              filter 320ms ease,
-              box-shadow 420ms ease;
-  will-change: transform, box-shadow;
+  transition: transform 420ms cubic-bezier(0.16,1,0.3,1), filter 320ms ease, box-shadow 420ms ease;
 }
 
-/* 4) JS 控制的悬停状态（优先级高于 :hover） */
-/*    - 显示伪元素（实心遮罩） - 显示起伏动画 - 放大到 1.4x - 抬升 z-index */
-.cover-container.is-hovered::before {
-  opacity: 1;
-}
+/* JS 优先控制的激活态（覆盖上面的 :hover） */
+.cover-container.is-hovered::before,
+.cover-container:hover::before { opacity: 1; }
 
 .cover-container.is-hovered {
-  transform: scale(1.4);           /* 放大 40% */
-  transform-origin: left center;   /* 从左侧放大以减少左边被裁切概率（可改为 center center） */
-  box-shadow: 0 14px 40px rgba(0,0,0,0.16);
-  z-index: 1200;                   /* 高于卡片内文本 */
+  transform: translateZ(0) scale(1.4);           /* GPU 合成 + 放大 */
+  transform-origin: left center;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.14);
+  z-index: 1200;
+  will-change: transform; /* 仅在激活时提示合成层 */
 }
 
-/* 5) 起伏动画：作用于图片元素，循环柔和起伏 */
+/* 起伏动画（仅使用 transform） */
 @keyframes cover-bob {
   0%   { transform: translateY(0)   rotate(0deg); }
-  20%  { transform: translateY(-8px) rotate(-0.8deg); }
-  50%  { transform: translateY(0)   rotate(0.2deg); }
-  80%  { transform: translateY(-4px) rotate(-0.4deg); }
+  20%  { transform: translateY(-8px) rotate(-0.6deg); }
+  50%  { transform: translateY(0)   rotate(0.12deg); }
+  80%  { transform: translateY(-4px) rotate(-0.3deg); }
   100% { transform: translateY(0)   rotate(0deg); }
 }
 
-/* 播放动画（JS 或 :hover 都会触发） */
 .cover-container.is-hovered img,
 .cover-container.is-hovered svg,
 .cover-container:hover img,
@@ -571,94 +564,124 @@
   animation: cover-bob 1200ms ease-in-out infinite;
 }
 
-/* 6) 当卡片在“打开遮罩”状态时（由 JS 在父元素上添加），放开 overflow 让图片可越界显示 */
-.paper-card.cover-open {
-  overflow: visible;   /* 允许图片越界显示 */
-  z-index: 60;         /* 将整张卡片抬高，避免被外部内容覆盖 */
+/* 当父卡片被设置为打开遮罩时，允许图片越界显示 */
+.paper-card.cover-open { overflow: visible; z-index: 60; }
+
+/* 明确文本层级，避免覆盖图片 */
+.paper-card .paper-content { position: relative; z-index: 1; }
+
+/* 在用户偏好减少动画时停用动画和起伏 */
+@media (prefers-reduced-motion: reduce) {
+  .cover-container.is-hovered img,
+  .cover-container.is-hovered svg,
+  .cover-container:hover img,
+  .cover-container:hover svg { animation: none !important; }
+  .cover-container.is-hovered { transition: transform 240ms ease; }
 }
 
-/* 7) 确保卡片文本（右侧）在正常情况下层级较低，避免覆盖图片 */
-.paper-card .paper-content {
-  position: relative;
-  z-index: 1; /* 明确为低层 */
-}
-
-/* 8) 兼容降级：如果用户禁用 JS，仅用 :hover 也可触发放大与遮罩（可能在某些布局下仍被裁切） */
-.cover-container:hover::before { opacity: 1; }
-.cover-container:hover { transform: scale(1.4); transform-origin: left center; box-shadow: 0 12px 36px rgba(0,0,0,0.12); z-index: 1200; }
-
-/* 9) 小屏幕适配：针对窄视口保守处理（避免过度遮挡 UI） */
+/* 移动端保守处理 */
 @media (max-width: 768px) {
-  .cover-container.is-hovered,
-  .cover-container:hover {
-    transform: scale(1.15);       /* 移动端缩小放大比例 */
-    transform-origin: center center;
-  }
-  .cover-container::before { inset: -10%; } /* 额外扩展遮罩，兼容触控偏移 */
+  .cover-container.is-hovered, .cover-container:hover { transform: scale(1.15); transform-origin: center center; }
+  .cover-container::before { inset: -10%; }
 }
 </style>
 
+<!-- 优化后的 JS：事件委托 + 最小 DOM 操作 + passive touch 监听 + will-change 管理 -->
 <script>
-/* ================= JS 控制：添加/移除类（建议放在 </body> 前） =================
-   功能：
-   - pointerenter/pointerleave + focus/blur（键盘辅助）控制 .is-hovered 与父 .cover-open
-   - touch 支持：触控时触发，点外部收起
-   - ESC 键可以立刻取消（无副作用）
-*/
-document.addEventListener('DOMContentLoaded', function () {
-  const covers = document.querySelectorAll('.cover-container');
+(function () {
+  // 轻量防抖：避免快速频繁切换导致 class 持续触发（可选）
+  const activeMap = new WeakMap();
+  let activeCover = null;
 
-  covers.forEach(function (c) {
-    // 允许键盘聚焦（不改结构，仅添加 tabindex 便于无障碍）
-    if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
+  function enterCover(c) {
+    if (!c || activeCover === c) return;
+    // 先关闭之前的
+    if (activeCover && activeCover !== c) leaveCover(activeCover);
 
+    activeCover = c;
+    c.classList.add('is-hovered');
     const card = c.closest('.paper-card');
+    if (card) card.classList.add('cover-open');
+    // mark will-change (inline style) — 浏览器会在后续 transitionend 中移除
+    c.style.willChange = 'transform';
+  }
 
-    // handlers
-    const enter = function () {
-      c.classList.add('is-hovered');
-      if (card) card.classList.add('cover-open');
+  function leaveCover(c) {
+    if (!c) return;
+    c.classList.remove('is-hovered');
+    const card = c.closest('.paper-card');
+    if (card) card.classList.remove('cover-open');
+    // 在 transition end 后移除 will-change，避免长期 GPU 占用
+    const onEnd = function (ev) {
+      if (ev.propertyName && ev.propertyName.indexOf('transform') === -1) return;
+      c.style.willChange = '';
+      c.removeEventListener('transitionend', onEnd);
     };
-    const leave = function () {
-      c.classList.remove('is-hovered');
-      if (card) card.classList.remove('cover-open');
-    };
+    c.addEventListener('transitionend', onEnd);
+    if (activeCover === c) activeCover = null;
+  }
 
-    // pointer events（同时兼容鼠标与触控 pointer）
-    c.addEventListener('pointerenter', enter);
-    c.addEventListener('pointerleave', leave);
+  // pointerover/out 代理（覆盖 mouse + touch pointer）
+  document.addEventListener('pointerover', function (e) {
+    const c = e.target.closest && e.target.closest('.cover-container');
+    if (c) enterCover(c);
+  }, { passive: true });
 
-    // keyboard focus/blur for accessibility
-    c.addEventListener('focus', enter);
-    c.addEventListener('blur', leave);
+  document.addEventListener('pointerout', function (e) {
+    const left = e.target.closest && e.target.closest('.cover-container');
+    // 当 relatedTarget 不存在或不在同一 container 内，认为离开
+    const related = e.relatedTarget;
+    if (left && (!related || !left.contains(related))) {
+      leaveCover(left);
+    }
+  }, { passive: true });
 
-    // touch: 点中图片显示，点到外部消失
-    let touchActive = false;
-    c.addEventListener('touchstart', function (ev) {
-      touchActive = true;
-      enter();
-    }, { passive: true });
+  // focusin/focusout 用于键盘无障碍（会冒泡）
+  document.addEventListener('focusin', function (e) {
+    const c = e.target.closest && e.target.closest('.cover-container');
+    if (c) enterCover(c);
+  });
+  document.addEventListener('focusout', function (e) {
+    const c = e.target.closest && e.target.closest('.cover-container');
+    if (c) leaveCover(c);
+  });
 
-    document.addEventListener('touchstart', function (ev) {
-      if (!touchActive) return;
-      // 如果触摸目标不在当前 cover 内，则关闭
-      if (!c.contains(ev.target)) {
-        touchActive = false;
-        leave();
-      }
-    }, { passive: true });
+  // touchstart: 点击图片时激活；点击页面其它位置关闭
+  let touchActiveFor = null;
+  document.addEventListener('touchstart', function (e) {
+    const c = e.target.closest && e.target.closest('.cover-container');
+    if (c) {
+      touchActiveFor = c;
+      enterCover(c);
+    } else if (touchActiveFor) {
+      leaveCover(touchActiveFor);
+      touchActiveFor = null;
+    }
+  }, { passive: true });
 
-    // 快捷键：Esc 取消（提高可控性）
-    c.addEventListener('keydown', function (ev) {
-      if (ev.key === 'Escape' || ev.key === 'Esc') {
-        leave();
-        c.blur && c.blur();
+  // ESC 快捷键取消
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Escape' || e.key === 'Esc') && activeCover) {
+      leaveCover(activeCover);
+    }
+  });
+
+  // 页面就绪后给所有封面提供可聚焦支持（不修改 DOM 结构视感，仅属性）
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.cover-container').forEach(function (c) {
+      if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
+      // 如果图片元素存在，启用解码与懒加载提高加载性能
+      const img = c.querySelector('img');
+      if (img) {
+        try {
+          img.loading = img.loading || 'lazy';
+        } catch (e) { /* ignore */ }
+        try { img.decoding = 'async'; } catch(e) {}
       }
     });
   });
-});
+})();
 </script>
-
 
 {% assign item = include.item %}
 
@@ -669,6 +692,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {%- if item.cover -%}
           <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}"
                class="lazy w-58 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+               loading="lazy" decoding="async"
                src="{{ '/assets/images/empty_300x200.png' | relative_url }}" onload="this.classList.add('opacity-100')">
         {%- else -%}
           <svg class="bubble-visual-hash lazy w-58 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
