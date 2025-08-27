@@ -500,22 +500,22 @@
 
 <div class="d-none d-md-block">
   <div class="row no-gutters paper-card {% unless include.hide_bottom_border %}border-b border-gray-200{% endunless %}">
-    <div class="col-md-5 col-xl-4 p-md-3">
+    <div class="col-md-4 col-xl-3 p-md-3">
       <div class="cover-container">
         {%- if item.cover -%}
           <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}"
-               class="lazy w-68 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+               class="lazy w-58 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                src="{{ '/assets/images/empty_300x200.png' | relative_url }}" onload="this.classList.add('opacity-100')">
         {%- else -%}
-          <svg class="bubble-visual-hash lazy w-68 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
-               data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 230 153" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
-            <rect width="230" height="153" rx="13.68" fill="rgba(229,231,235,0.5)" stroke-width="1.71"/>
+          <svg class="bubble-visual-hash lazy w-58 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
+               data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 196 130" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
+            <rect width="196" height="130" rx="11.628" fill="rgba(229,231,235,0.5)" stroke-width="1.462"/>
           </svg>
         {%- endif -%}
       </div>
     </div>
 
-    <div class="col-md-7 col-xl-8 paper-content d-flex flex-column justify-content-center">
+    <div class="col-md-8 col-xl-9 paper-content d-flex flex-column justify-content-center">
       <h5 class="paper-title">{{ item.title }}</h5>
 
       <div class="paper-authors">
