@@ -62,30 +62,21 @@
                                                             style="border: 0;"
                                                             loading="lazy"></iframe>
                                                 {% elsif talk.video contains 'youtube.com' or talk.video contains 'youtu.be' %}
-                                                    {% comment %}
-                                                        Final YouTube fix:
-                                                        1. Remove text-uppercase class from date element for proper capitalization
-                                                        2. Fix YouTube URL generation (remove extra spaces)
-                                                        3. Add proper error handling for missing video IDs
-                                                    {% endcomment %}
                                                     {% assign video_id = "" %}
                                                     {% assign start_time = "" %}
 
-                                                    {% comment %} Extract video ID {% endcomment %}
                                                     {% if talk.video contains 'youtu.be/' %}
                                                         {% assign video_id = talk.video | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first %}
                                                     {% elsif talk.video contains 'v=' %}
                                                         {% assign video_id = talk.video | split: 'v=' | last | split: '&' | first | split: '#' | first %}
                                                     {% endif %}
 
-                                                    {% comment %} Extract timestamp parameter {% endcomment %}
                                                     {% if talk.video contains '?t=' %}
                                                         {% assign start_time = talk.video | split: '?t=' | last | split: '&' | first | replace: 's', '' %}
                                                     {% elsif talk.video contains '&t=' %}
                                                         {% assign start_time = talk.video | split: '&t=' | last | split: '&' | first | replace: 's', '' %}
                                                     {% endif %}
 
-                                                    {% comment %} Build proper embed URL {% endcomment %}
                                                     {% if video_id != empty %}
                                                         {% assign youtube_src = "https://www.youtube.com/embed/" | append: video_id %}
                                                         {% if start_time != empty %}
@@ -123,6 +114,15 @@
                                                             loading="lazy"></iframe>
                                                 {% endif %}
                                             </div>
+                                            <!-- 将"View Full"按钮放在左上角 -->
+                                            <a href="{{ talk.video }}" target="_blank" class="position-absolute top-2 left-2 bg-white text-primary-700 text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center hover:bg-gray-100 transition-colors duration-200">
+                                                <svg class="me-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                                </svg>
+                                                View Full
+                                            </a>
                                             <div class="position-absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
                                                 <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <polygon points="23 7 16 12 23 17 23 7"></polygon>
@@ -145,6 +145,15 @@
                                                         style="border: 0;"
                                                         loading="lazy"></iframe>
                                             </div>
+                                            <!-- 将"View Full"按钮放在左上角 -->
+                                            <a href="{{ talk.slides }}" target="_blank" class="position-absolute top-2 left-2 bg-white text-primary-700 text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center hover:bg-gray-100 transition-colors duration-200">
+                                                <svg class="me-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                                </svg>
+                                                View Full
+                                            </a>
                                             <div class="position-absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm d-flex align-items-center">
                                                 <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
