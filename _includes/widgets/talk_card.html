@@ -12,8 +12,8 @@
                         {% for talk in sorted_talks %}
                         <div class="col-md-12">
                             <div class="d-flex flex-column" style="line-height: 1.5; font-size: 0.92rem; word-break: break-word;">
-                                <div class="text-primary-700 mb-2 font-weight-bold text-uppercase tracking-wider" style="letter-spacing: 1px; font-size: 0.85rem;">
-                                    {{ talk.date }}
+                                <div class="text-primary-700 mb-2 font-weight-bold tracking-wider" style="letter-spacing: 1px; font-size: 0.85rem;">
+                                    {{ talk.date | date: "%b. %d, %Y" }}
                                 </div>
 
                                 <div class="font-weight-bold text-gray-900 mb-3" style="font-size: 1.05rem;">
@@ -51,20 +51,70 @@
                                         <div class="position-relative overflow-hidden rounded-lg border-0 shadow-none bg-black">
                                             <div class="relative" style="height: 300px;">
                                                 {% if talk.video contains 'bilibili.com' %}
-                                                    {% assign bvid = talk.video | split: '/video/BV' | last | split: '?' | first %}
+                                                    {% assign video_parts = talk.video | split: '?' %}
+                                                    {% assign base_url = video_parts[0] %}
+                                                    {% assign params = video_parts[1] %}
+                                                    {% assign bvid = base_url | split: '/video/BV' | last %}
                                                     <iframe class="w-100 h-100"
-                                                            src="https://player.bilibili.com/player.html?bvid=BV{{ bvid }}&page=1&as_wide=1&high_quality=1&danmaku=0"
+                                                            src="https://player.bilibili.com/player.html?bvid=BV{{ bvid }}{% if params %}&{{ params }}{% endif %}&page=1&as_wide=1&high_quality=1&danmaku=0"
                                                             allowfullscreen
                                                             sandbox="allow-same-origin allow-scripts allow-popups"
                                                             style="border: 0;"
                                                             loading="lazy"></iframe>
                                                 {% elsif talk.video contains 'youtube.com' or talk.video contains 'youtu.be' %}
-                                                    <iframe class="w-100 h-100"
-                                                            src="{{ talk.video | replace: 'youtu.be/', 'www.youtube-nocookie.com/embed/' | replace: 'watch?v=', 'embed/' }}?rel=0&modestbranding=1"
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                            allowfullscreen
-                                                            style="border: 0;"
-                                                            loading="lazy"></iframe>
+                                                    {% comment %}
+                                                        Final YouTube fix:
+                                                        1. Remove text-uppercase class from date element for proper capitalization
+                                                        2. Fix YouTube URL generation (remove extra spaces)
+                                                        3. Add proper error handling for missing video IDs
+                                                    {% endcomment %}
+                                                    {% assign video_id = "" %}
+                                                    {% assign start_time = "" %}
+
+                                                    {% comment %} Extract video ID {% endcomment %}
+                                                    {% if talk.video contains 'youtu.be/' %}
+                                                        {% assign video_id = talk.video | split: 'youtu.be/' | last | split: '?' | first | split: '&' | first %}
+                                                    {% elsif talk.video contains 'v=' %}
+                                                        {% assign video_id = talk.video | split: 'v=' | last | split: '&' | first | split: '#' | first %}
+                                                    {% endif %}
+
+                                                    {% comment %} Extract timestamp parameter {% endcomment %}
+                                                    {% if talk.video contains '?t=' %}
+                                                        {% assign start_time = talk.video | split: '?t=' | last | split: '&' | first | replace: 's', '' %}
+                                                    {% elsif talk.video contains '&t=' %}
+                                                        {% assign start_time = talk.video | split: '&t=' | last | split: '&' | first | replace: 's', '' %}
+                                                    {% endif %}
+
+                                                    {% comment %} Build proper embed URL {% endcomment %}
+                                                    {% if video_id != empty %}
+                                                        {% assign youtube_src = "https://www.youtube.com/embed/" | append: video_id %}
+                                                        {% if start_time != empty %}
+                                                            {% assign youtube_src = youtube_src | append: "?start=" | append: start_time %}
+                                                        {% else %}
+                                                            {% assign youtube_src = youtube_src | append: "?rel=0&modestbranding=1" %}
+                                                        {% endif %}
+
+                                                        <iframe class="w-100 h-100"
+                                                                src="{{ youtube_src }}"
+                                                                title="Embedded YouTube Video"
+                                                                frameborder="0"
+                                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                                referrerpolicy="strict-origin-when-cross-origin"
+                                                                allowfullscreen
+                                                                style="border: 0;"
+                                                                loading="lazy"></iframe>
+                                                    {% else %}
+                                                        <div class="d-flex align-items-center justify-content-center h-100 bg-dark text-white">
+                                                            <div class="text-center">
+                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2">
+                                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                                                </svg>
+                                                                <p class="mb-0">Video ID not found</p>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
                                                 {% else %}
                                                     <iframe class="w-100 h-100"
                                                             src="{{ talk.video }}"
@@ -137,6 +187,15 @@
 
                     .talks-scroll-container::-webkit-scrollbar-thumb:hover {
                         background-color: #94a3b8;
+                    }
+
+                    /* Added subtle hover effect for better UX */
+                    .card {
+                        transition: transform 0.2s ease;
+                    }
+
+                    .card:hover {
+                        transform: translateY(-2px);
                     }
                 </style>
             </div>
