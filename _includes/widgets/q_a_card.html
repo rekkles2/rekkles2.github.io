@@ -1,0 +1,275 @@
+<!--
+Plan (深度思考与修改要点)：
+1. 不改变 DOM 结构、属性、ARIA 与脚本逻辑，仅通过样式微调来完成美学优化。
+2. 使用 CSS 变量统一配色与间距，方便全局调整；增强可访问性（focus-visible）和触觉反馈（hover/active）。
+3. 用伪元素在 Q 标签后追加冒号（“Q1:”）以满足用户要求，保持模板与数据绑定不变。
+4. 优化字体排版（系统/可替代字体栈）、行高与字重，提升中英文混排效果；保持原 JS 交互与行为不变。
+5. 精致化滚动条、卡片阴影、展开态高亮与过渡，让视觉语义更明确。
+
+变更说明（不含代码）：
+- 将样式封装为主题变量（--primary 等），便于后续统一调整。
+- 使用 .q-num::after 注入冒号，保证输出为 "Q1:" 且不改动 Liquid 模板。
+- 增强聚焦可见性（focus-visible）与无障碍动画偏好支持（prefers-reduced-motion）。
+- 为 Card 增加锚点 id="#fast-qa"（同时添加 tabindex="-1"），并提供示例链接片段，保证锚点可聚焦且可用于页面内跳转。
+-->
+
+<!-- 示例：在另一个卡片中使用（请将该片段放到你要链接的文本处） -->
+<!-- <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> -->
+
+<div class="row mt-3">
+  <div class="col">
+    <!-- 在 card 上设置 id 与 tabindex 以便成为可聚焦的锚点目标 -->
+    <div id="fast-qa" class="card qna-card border-0 shadow-sm bg-white rounded-xl overflow-hidden" tabindex="-1" aria-labelledby="fast-qa-title">
+      <div class="card-body p-4">
+        <!-- 标题 -->
+        <h5 id="fast-qa-title" class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700"> Fast Q&A </h5>
+
+        <!-- 可滚动容器（只纵向） -->
+        <div class="qna-scroll-container" aria-label="Q&A list" role="region">
+          <div class="faq-container">
+            {% if site.data.faqs and site.data.faqs.size > 0 %}
+              {% assign faqs = site.data.faqs %}
+              {% for faq in faqs %}
+                <div class="faq-item" data-qa-index="{{ forloop.index0 }}">
+                  <button type="button" class="faq-question w-100 text-left p-3 rounded-lg bg-gray-50 border border-gray-200" aria-expanded="false" aria-controls="faq-panel-{{ forloop.index0 }}" id="faq-btn-{{ forloop.index0 }}">
+                    <div class="d-flex align-items-start">
+                      <span class="q-num text-primary-700 font-weight-bold me-2" style="font-size:0.85rem; letter-spacing:1px; flex-shrink:0;"> Q{{ forloop.index }} </span>
+                      <span class="q-title text-gray-900 flex-grow-1" style="font-size:1.05rem; line-height:1.45;"> {{ faq.question }} </span>
+                      <svg class="faq-toggle-icon ms-2" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </button>
+
+                  <div id="faq-panel-{{ forloop.index0 }}" class="faq-answer-container" role="region" aria-labelledby="faq-btn-{{ forloop.index0 }}" aria-hidden="true">
+                    <div class="faq-answer p-3 mt-2 bg-white rounded-lg border border-gray-200" style="line-height:1.6;">
+                      <div class="d-flex align-items-start">
+                        <span class="a-num text-primary-700 font-weight-bold me-2" style="font-size:0.85rem; letter-spacing:1px; flex-shrink:0;"> A{{ forloop.index }} </span>
+                        <span class="a-body text-gray-900 flex-grow-1" style="font-size:0.92rem; line-height:1.5; word-break:break-word;"> {{ faq.answer }} </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div class="alert alert-warning p-3 rounded-lg bg-yellow-50 text-yellow-800 border border-yellow-200"> No FAQs found. Please check your <code>_data/faqs.yml</code>. </div>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ========== 视觉 & 可访问性 & 性能（统一主题变量） ========== */
+  :root {
+    --primary: #0369a1; /* 主色调（可全局替换） */
+    --primary-600: #0ea5e9;
+    --muted: #64748b;
+    --text-900: #0f172a;
+    --bg-soft: #fbfdff;
+    --card-bg: #ffffff;
+    --border-weak: rgba(15,23,42,0.06);
+
+    --faq-item-min-height: 92px;
+    --faq-gap: 0.75rem;
+    --qna-radius: 12px;
+    --qna-max-height: 400px;
+    --focus-ring: 3px;
+    --header-offset: 72px; /* 若有固定顶部导航，可根据实际高度调整 */
+  }
+
+  /* 基础排版（不中断原有内联样式的优先级） */
+  .qna-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,250,251,0.75));
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(8,15,22,0.06);
+    overflow: hidden;
+    scroll-margin-top: var(--header-offset); /* 避免锚点被固定 header 遮挡 */
+  }
+
+  .card-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; color: var(--text-900); }
+
+  /* 滚动容器：仅纵向 */
+  .qna-scroll-container {
+    max-height: var(--qna-max-height);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--qna-radius);
+    padding-right: 6px;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  /* 列表样式 */
+  .faq-container { display: flex; flex-direction: column; gap: var(--faq-gap); }
+
+  /* 单条 */
+  .faq-item { box-sizing: border-box; width: 100%; min-height: var(--faq-item-min-height); }
+
+  /* 问题按钮（保留原有语义结构） */
+  .faq-question {
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid var(--border-weak);
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 160ms ease, border-color 160ms ease;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .faq-question:focus { outline: none; }
+  .faq-question:focus-visible {
+    box-shadow: 0 8px 20px rgba(3,105,161,0.08);
+    border-color: rgba(3,105,161,0.16);
+    transform: translateY(-1px);
+  }
+
+  .faq-question:hover { background: #f1f5f9; border-color: #e6edf6; transform: translateY(-1px); }
+  .faq-question[aria-expanded="true"] { background: #f0fbff; border-color: var(--primary-600); box-shadow: 0 6px 18px rgba(14,165,233,0.06); }
+
+  /* 箭头图标 */
+  .faq-toggle-icon { min-width: 16px; transition: transform 260ms cubic-bezier(.2,.9,.2,1); color: var(--muted); }
+  .faq-question[aria-expanded="true"] .faq-toggle-icon { transform: rotate(180deg); color: var(--primary); }
+
+  /* Q 标签样式（加入冒号 via pseudo-element） */
+  .q-num {
+    font-feature-settings: "tnum" 1;
+    color: var(--primary);
+    font-weight: 700;
+    display: inline-block;
+    min-width: 44px; /* 统一对齐 */
+    text-align: left;
+    margin-right: 0.35rem;
+    flex-shrink: 0;
+  }
+  .q-num::after { content: ':'; margin-left: 0.22rem; color: var(--primary-600); font-weight: 700; }
+
+  .q-title { font-weight: 600; }
+
+  /* 答案容器 */
+  .faq-answer-container { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 320ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease; }
+  .faq-question[aria-expanded="true"] + .faq-answer-container { max-height: 2000px; opacity: 1; transition: max-height 320ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease; }
+
+  /* 答案内容 */
+  .faq-answer { width: 100%; box-sizing: border-box; border-color: #e2e8f0; }
+
+  /* 子标签 A */
+  .a-num { color: var(--primary); font-weight: 700; min-width: 44px; margin-right: 0.35rem; flex-shrink: 0; }
+
+  /* 防止横向滚动 */
+  .faq-question, .faq-answer { word-break: break-word; hyphens: auto; }
+
+  /* 快速链接样式（用于页面其他地方的跳转链接） */
+  .fast-qa-link { color: var(--primary); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; }
+  .fast-qa-link:focus { outline: none; box-shadow: 0 6px 14px rgba(3,105,161,0.12); }
+
+  /* :target 可视化提示（可选） */
+  :target { box-shadow: 0 10px 30px rgba(3,105,161,0.06); border-radius: 10px; }
+
+  /* 自定义滚动条（美学优化） */
+  .qna-scroll-container { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .qna-scroll-container::-webkit-scrollbar { width: 8px; height: 8px; }
+  .qna-scroll-container::-webkit-scrollbar-track { background: transparent; border-radius: 6px; }
+  .qna-scroll-container::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #cbd5e1, #94a3b8); border-radius: 6px; border: 2px solid rgba(255,255,255,0.0); }
+  .qna-scroll-container::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+  /* 响应式优化 */
+  @media (max-width: 768px) {
+    .qna-scroll-container { max-height: 350px; }
+    .faq-question { padding: 0.8rem; }
+    .q-num, .a-num { min-width: 40px; font-size: 0.82rem; }
+    .q-title { font-size: 1rem; }
+  }
+
+  /* 可访问性：减少动画 */
+  @media (prefers-reduced-motion: reduce) { .faq-question, .faq-toggle-icon, .faq-answer-container { transition: none !important; } }
+
+  /* 轻微视觉分隔（每条下方） */
+  .faq-item + .faq-item { margin-top: 0.18rem; }
+  .faq-answer { box-shadow: 0 2px 8px rgba(10,20,30,0.02); }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    const faqPanels = document.querySelectorAll('.faq-answer-container');
+    const scrollContainer = document.querySelector('.qna-scroll-container');
+
+    // 确保所有答案初始为折叠状态
+    faqPanels.forEach(panel => {
+      panel.style.maxHeight = '0';
+      panel.style.opacity = '0';
+    });
+
+    // 点击处理函数
+    function toggleFAQ(questionBtn) {
+      const isExpanded = questionBtn.getAttribute('aria-expanded') === 'true';
+
+      // 移除焦点以消除蓝色高亮
+      if (document.activeElement === questionBtn) { questionBtn.blur(); }
+
+      if (isExpanded) {
+        // 折叠
+        questionBtn.setAttribute('aria-expanded', 'false');
+        const panel = questionBtn.nextElementSibling;
+        panel.style.maxHeight = '0';
+        panel.style.opacity = '0';
+      } else {
+        // 展开
+        questionBtn.setAttribute('aria-expanded', 'true');
+        const panel = questionBtn.nextElementSibling;
+        // 强制重排，确保过渡效果
+        void panel.offsetHeight;
+        // 动态计算内容高度
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.opacity = '1';
+      }
+    }
+
+    // 为每个问题按钮添加事件监听器
+    faqQuestions.forEach(btn => {
+      // 点击事件
+      btn.addEventListener('click', function() { toggleFAQ(this); });
+      // 键盘支持
+      btn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFAQ(this); }
+      });
+    });
+
+    // 性能优化：防抖处理滚动事件
+    function debounce(func, wait) { let timeout; return function() { const context = this, args = arguments; clearTimeout(timeout); timeout = setTimeout(() => func.apply(context, args), wait); }; }
+
+    // 滚动性能监控
+    let isScrolling = false;
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', debounce(function() { isScrolling = true; setTimeout(() => { isScrolling = false; }, 100); }, 50));
+    }
+
+    // 当页面通过 fragment (#fast-qa) 跳转时，让目标可聚焦并获得键盘焦点——提高可访问性体验
+    function focusHashTarget() {
+      try {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const el = document.querySelector(hash);
+        if (el) {
+          // 只有当目标可聚焦时才 focus
+          if (typeof el.focus === 'function') {
+            el.focus({ preventScroll: true });
+          }
+          // 若目标在页面顶部被遮挡，scroll-margin-top 会帮忙调整显示位置
+          setTimeout(() => { if (!document.activeElement || document.activeElement !== el) { el.scrollIntoView(); } }, 10);
+        }
+      } catch (e) { /* 容错 */ }
+    }
+
+    // 支持初次加载时 hash 的跳转与后续的 hashchange
+    if (window.location.hash) { focusHashTarget(); }
+    window.addEventListener('hashchange', focusHashTarget);
+  });
+</script>

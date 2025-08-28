@@ -5,6 +5,7 @@ homepage:
   show_experience_award: true
   show_service: true
   talk: true
+  show_q_a: true
   num_news: 12
 
 # Feel free to replace the footer text if you would like to, but I will greatly appreciate it 

@@ -11,19 +11,86 @@
                             </h6>
                             <ul class="list-unstyled">
                                 {% for item in site.data.profile.experience %}
-                                <li class="d-flex mb-4 align-items-center">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4" loading="lazy" style="filter: brightness(0.9);">
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap w-100">
-                                            <div class="flex-grow-1 min-w-0">
-                                                <h5 class="mt-0 mb-1 font-weight-bold text-gray-900">{{ item.name }}</h5>
-                                                <div class="text-gray-600 mt-1">{{ item.dept }}</div>
-                                                <div class="text-gray-700 mt-1 font-weight-medium">{{ item.position }}</div>
-                                                {% if item.advisor %}
-                                                <div class="text-gray-500 mt-1">Advisor: {{ item.advisor }}</div>
+                                <li class="d-flex mb-4 align-items-start">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg" loading="lazy" style="filter: brightness(0.9);">
+                                    <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                                        <div class="d-flex w-100">
+                                            <div class="flex-grow-1 min-w-0 pr-3">
+                                                <h5 class="mt-0 mb-1 font-weight-bold text-gray-800">
+                                                    {% if item.url %}
+                                                        <a href="{{ item.url | strip }}" class="experience-link">{{ item.name }}</a>
+                                                    {% else %}
+                                                        {{ item.name }}
+                                                    {% endif %}
+                                                </h5>
+
+                                                {% comment %} 位置和实验室信息合并为单一容器 {% endcomment %}
+                                                <div class="text-gray-700 font-weight-medium mt-1" style="word-break: break-word; overflow-wrap: break-word; max-width: 150%;">
+                                                    {{ item.position }}
+
+                                                    {% comment %} 实验室信息 {% endcomment %}
+                                                    {% if item.lab %}
+                                                        {% if item.lab.name %}
+                                                            {% assign lab_name = item.lab.name %}
+                                                            {% assign lab_url = item.lab.url | default: "" %}
+                                                        {% else %}
+                                                            {% assign lab_name = item.lab %}
+                                                            {% assign lab_url = "" %}
+                                                        {% endif %}
+
+                                                        {% if lab_name != empty and lab_name != "none" %}
+                                                            {% if lab_url != empty and lab_url != "none" %}
+                                                                <a href="{{ lab_url | strip }}" class="experience-link">{{ lab_name | strip }}</a>
+                                                            {% else %}
+                                                                {{ lab_name | strip }}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+
+                                                {% comment %} 导师信息 {% endcomment %}
+                                                {% if item.advisor and item.advisor.size > 0 %}
+                                                    <div class="text-gray-500 mt-1">
+                                                        Advisor:
+                                                        {% comment %} 检查是否是数组格式的advisor {% endcomment %}
+                                                        {% if item.advisor[0].name %}
+                                                            {% for advisor in item.advisor %}
+                                                                {% if forloop.first == false %}, {% endif %}
+                                                                {% if advisor.url and advisor.url != "none" and advisor.url != empty %}
+                                                                    <a href="{{ advisor.url | strip }}" class="experience-link">{{ advisor.name }}</a>
+                                                                {% else %}
+                                                                    {{ advisor.name }}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {% comment %} 处理交替name/url的格式 {% endcomment %}
+                                                            {% assign is_name = true %}
+                                                            {% assign advisors = "" | split: '' %}
+                                                            {% for advisor in item.advisor %}
+                                                                {% if is_name and advisor.name %}
+                                                                    {% assign current_name = advisor.name %}
+                                                                    {% assign is_name = false %}
+                                                                {% elsif advisor.url and advisor.url != "none" and advisor.url != empty %}
+                                                                    {% assign advisor_html = '<a href="' | append: advisor.url | strip | append: '" class="experience-link">' | append: current_name | append: '</a>' %}
+                                                                    {% assign advisors = advisors | push: advisor_html %}
+                                                                    {% assign is_name = true %}
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                            {% comment %} 正确显示所有导师，只在中间添加逗号 {% endcomment %}
+                                                            {% for i in (0..advisors.size) %}
+                                                                {% if i < advisors.size %}
+                                                                    {{ advisors[i] }}
+                                                                    {% if i < advisors.size | minus: 1 %}, {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </div>
                                                 {% endif %}
                                             </div>
-                                            <div class="text-gray-500 text-sm text-nowrap ml-3 mt-0">{{ item.date }}</div>
+                                            <div class="text-gray-500 text-sm text-nowrap align-self-start" style="flex-shrink: 0;">
+                                                <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -43,17 +110,17 @@
                                 <li class="d-flex mb-4 align-items-start">
                                     <div class="flex-grow-1 min-w-0">
                                         <div class="d-flex justify-content-between align-items-start flex-wrap w-100">
-                                            <div class="font-weight-bold text-gray-900 min-w-0"
+                                            <div class="font-weight-medium text-gray-900 min-w-0"
                                                  style="flex: 1 1 0%; max-width: calc(100% - 9rem); word-break: break-word;">
                                                 {{ item.name }}
                                             </div>
                                             <div class="text-gray-500 text-sm text-nowrap mr-auto ml-4"
                                                  style="flex-shrink: 0; white-space: nowrap;">
-                                                {{ item.date }}
+                                                <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
                                             </div>
                                         </div>
                                         {% if item.description %}
-                                        <div class="text-gray-600 mt-1">{{ item.description }}</div>
+                                        <div class="text-gray-600 mt-1" style="font-size: 0.92rem; line-height: 1.5;">{{ item.description }}</div>
                                         {% endif %}
                                     </div>
                                 </li>
@@ -66,3 +133,50 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* 统一链接样式 - 与网站其他部分保持一致 */
+    .experience-link {
+        color: var(--primary, #0369a1);
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 2px;
+        transition: all 180ms ease;
+    }
+
+    .experience-link:hover {
+        color: var(--primary-600, #0284c7);
+        text-decoration-color: var(--primary-600, #0284c7);
+    }
+
+    .experience-link:focus {
+        outline: none;
+        box-shadow: 0 6px 14px rgba(3, 105, 161, 0.12);
+    }
+
+    /* 避免长文本导致布局错乱 */
+    .min-w-0 {
+        min-width: 0;
+    }
+
+    /* 调整奖项描述字体大小和行高 */
+    .text-gray-600 {
+        font-size: 0.92rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* 确保内容区域正确对齐 */
+    .pr-3 {
+        padding-right: 1rem;
+    }
+
+    /* 增强logo的视觉效果 */
+    .card-body img {
+        transition: all 180ms ease;
+    }
+
+    .card-body img:hover {
+        transform: scale(1.05);
+    }
+</style>

@@ -10,7 +10,7 @@ navbar_title: Home
 {% include widgets/debug_url.html %}
 
 {% if site.data.display.homepage.show_experience %}
-    {% include widgets/experience_card.html %}
+    {% include widgets/education_card.html %}
 {% endif %}
 
 {% if site.data.display.homepage.show_news %}
@@ -31,6 +31,10 @@ navbar_title: Home
 
 {% if site.data.display.homepage.show_experience_award %}
     {% include widgets/experience_award_card.html %}
+{% endif %}
+
+{% if site.data.display.homepage.show_q_a %}
+    {% include widgets/q_a_card.html %}
 {% endif %}
 
 {% if site.data.display.homepage.talk %}

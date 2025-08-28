@@ -26,7 +26,7 @@
                                     {% assign rest_of_text = url_parts[1] %}
 
                                     {% if event_url contains '://' %}
-                                    <a href="{{ event_url }}" class="text-primary-700 text-decoration-none hover:text-primary-800 hover:underline">
+                                    <a href="{{ event_url }}" class="talk-link">
                                         {{ event_name }}
                                     </a>
                                     {% else %}
@@ -196,6 +196,26 @@
 
                     .card:hover {
                         transform: translateY(-2px);
+                    }
+
+                    /* 优化的链接样式 - 解决下划线问题 */
+                    .talk-link {
+                        color: var(--primary, #0369a1);
+                        font-weight: 600;
+                        text-decoration: underline;
+                        text-decoration-thickness: 1.5px;
+                        text-underline-offset: 3px; /* 关键：增加下划线偏移量 */
+                        transition: all 180ms ease;
+                    }
+
+                    .talk-link:hover {
+                        color: var(--primary-600, #0284c7);
+                        text-decoration-color: var(--primary-600, #0284c7);
+                    }
+
+                    .talk-link:focus {
+                        outline: none;
+                        box-shadow: 0 6px 14px rgba(3, 105, 161, 0.12);
                     }
                 </style>
             </div>

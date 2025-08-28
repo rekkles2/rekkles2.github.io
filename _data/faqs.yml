@@ -1,0 +1,14 @@
+- question: "What is your background and professional experience?"
+  answer: "I am a software engineer with 5+ years of experience in web development, specializing in frontend technologies and Jekyll static sites. I have worked with various clients to create responsive, accessible websites with a focus on user experience and performance optimization."
+
+- question: "What are your main technical skills and areas of expertise?"
+  answer: "My core expertise includes HTML, CSS, JavaScript, and Jekyll templating. I'm proficient with modern CSS frameworks like Tailwind, responsive design principles, and accessibility standards. I also have experience with data visualization and creating interactive web components while maintaining clean, maintainable code."
+
+- question: "What are your hobbies and interests outside of work?"
+  answer: "I enjoy hiking, reading tech blogs, and contributing to open-source projects. I also love playing with my bicolor cat named Socks! When I have free time, I explore new web technologies and experiment with creative coding projects."
+
+- question: "How do you approach problem-solving and learning new technologies?"
+  answer: "I believe in a structured approach to problem-solving: understanding the problem thoroughly, researching potential solutions, prototyping, and iterating. For learning new technologies, I combine official documentation with hands-on practice, often building small projects to solidify my understanding before applying them to larger projects."
+
+- question: "How did you approach problem-solving and learning new technologies?"
+  answer: "I believe in a structured approach to problem-solving: understanding the problem thoroughly, researching potential solutions, prototyping, and iterating. For learning new technologies, I combine official documentation with hands-on practice, often building small projects to solidify my understanding before applying them to larger projects."
