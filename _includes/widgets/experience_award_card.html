@@ -24,11 +24,9 @@
                                                     {% endif %}
                                                 </h5>
 
-                                                {% comment %} 位置和实验室信息合并为单一容器 {% endcomment %}
-                                                <div class="text-gray-700 font-weight-medium mt-1" style="word-break: break-word; overflow-wrap: break-word; max-width: 150%;">
+                                                <!-- 位置和实验室信息合并为单一容器 -->
+                                                <div class="text-gray-700 font-weight-medium mt-1" style="word-break: break-word; overflow-wrap: break-word; max-width: 100%; white-space: normal;">
                                                     {{ item.position }}
-
-                                                    {% comment %} 实验室信息 {% endcomment %}
                                                     {% if item.lab %}
                                                         {% if item.lab.name %}
                                                             {% assign lab_name = item.lab.name %}
@@ -48,11 +46,10 @@
                                                     {% endif %}
                                                 </div>
 
-                                                {% comment %} 导师信息 {% endcomment %}
+                                                <!-- 导师信息 -->
                                                 {% if item.advisor and item.advisor.size > 0 %}
                                                     <div class="text-gray-500 mt-1">
                                                         Advisor:
-                                                        {% comment %} 检查是否是数组格式的advisor {% endcomment %}
                                                         {% if item.advisor[0].name %}
                                                             {% for advisor in item.advisor %}
                                                                 {% if forloop.first == false %}, {% endif %}
@@ -63,7 +60,6 @@
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% else %}
-                                                            {% comment %} 处理交替name/url的格式 {% endcomment %}
                                                             {% assign is_name = true %}
                                                             {% assign advisors = "" | split: '' %}
                                                             {% for advisor in item.advisor %}
@@ -77,7 +73,6 @@
                                                                 {% endif %}
                                                             {% endfor %}
 
-                                                            {% comment %} 正确显示所有导师，只在中间添加逗号 {% endcomment %}
                                                             {% for i in (0..advisors.size) %}
                                                                 {% if i < advisors.size %}
                                                                     {{ advisors[i] }}
