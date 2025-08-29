@@ -10,7 +10,7 @@
                     <div class="row g-4">
                         {% assign sorted_talks = site.data.profile.talks | sort: 'date' | reverse %}
                         {% for talk in sorted_talks %}
-                        <div class="col-md-12">
+                        <div class="col-md-12" {% if talk.label %}id="label-{{ talk.label }}"{% endif %}>
                             <div class="d-flex flex-column" style="line-height: 1.5; font-size: 0.92rem; word-break: break-word;">
                                 <div class="text-primary-700 mb-2 font-weight-bold tracking-wider" style="letter-spacing: 1px; font-size: 0.85rem;">
                                     {{ talk.date | date: "%b. %d, %Y" }}

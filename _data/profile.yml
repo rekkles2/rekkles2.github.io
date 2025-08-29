@@ -27,8 +27,17 @@ short_bio: >-
     and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
     as well as being common in domestic longhair and domestic shorthair cats.
   </p>
-    📢 <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;">If you want to know more, please see <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> -->.</span>
+    📢 <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;">If you want to know more, please see <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> ->>.</span>
   </p>
+
+#跳转到某个卡片使用
+#<!-- 示例：在另一个卡片中使用（请将该片段放到你要链接的文本处） -->
+#锚点
+#<div id="fast-qa" class="card qna-card border-0 shadow-sm bg-white rounded-xl overflow-hidden" tabindex="-1" aria-labelledby="fast-qa-title">
+#链接
+#<!-- <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> -->
+
+
 
 portrait_url: /assets/images/photos/portrait.jpg
 portrait_caption: >-
@@ -158,18 +167,25 @@ awards:
 
 talks:
 - name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
+  label: "talk-1"
   video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
   date: "2025-08-04"
+
 - name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
+  label: "talk-2"
   video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
   date: "2025-08-11"
+
 - name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
+  label: "talk-3"
   video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
   date: "2025-11-12"
-- name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
+
+- name: "XXX @xxx (xxx labs) [https://www.media.mit.edu/] in XXX of xxx on \"xxx\" ."
+  label: "talk-4"
   video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
   date: "2025-12-23"

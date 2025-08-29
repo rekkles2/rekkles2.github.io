@@ -7,21 +7,23 @@
     {%- assign last_2chars = _key | slice: -2, 2 -%}
     {%- if last_2chars == "*#" or last_2chars == "#*" -%}
         {%- assign key = _key | replace: "#*", "" | replace: "*#", "" -%}
-        {%- assign mark = "*<sup>#</sup>" -%}
+        {%- assign mark = "<span class='text-sm text-blue-800'>*<sup class='text-sm text-blue-800'>&dagger;</sup></span>" -%}
         {%- assign has_eq_contrib = true -%}
         {%- assign has_corresponding = true -%}
     {%- elsif last_char == "*" -%}
         {%- assign key = _key | split: "*" | first -%}
-        {%- assign mark = "*" -%}
+        {%- assign mark = "<span class='text-sm text-blue-800'>*</span>" -%}
         {%- assign has_eq_contrib = true -%}
     {%- elsif last_char == "#" -%}
         {%- assign key = _key | split: "#" | first -%}
-        {%- assign mark = '<sup>#</sup>' -%}
+        {%- assign mark = "<sup class='text-sm text-blue-800'>&dagger;</sup>" -%}
         {%- assign has_corresponding = true -%}
     {%- else -%}
         {%- assign key = _key -%}
         {%- assign mark = "" -%}
     {%- endif -%}
+
+    {%- assign key = key | strip -%}
 
     {%- assign info = site.data.authors[key] -%}
 
@@ -32,26 +34,24 @@
     {%- endif -%}
 
     {%- if info['bold'] == true -%}
-        {%- comment -%} 突出显示本人的名字，加粗并保留下划线 {%- endcomment -%}
-        <strong class='text-gray-800 underline'>{{ name | strip }}{{ mark }}</strong>
+        <strong class='text-base text-gray-1500 underline font-semibold'>{{ name | strip }}{{ mark }}</strong>
     {%- else -%}
-        {%- comment -%} 淡化其他作者的名字，使用更浅的颜色 {%- endcomment -%}
-        <span class='text-gray-500'>{{ name | strip }}{{ mark }}</span>
+        <span class='text-base text-gray-400 hover:text-gray-900 transition-colors duration-150'>{{ name | strip }}{{ mark }}</span>
     {%- endif -%}
 
     {%- if forloop.index < authors.size -%}, {% endif -%}
 
 {%- endfor -%}
 
-{%- if has_eq_contrib or has_corresponding %}
-<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded inline-flex items-center ml-2">
+{%- if has_eq_contrib or has_corresponding -%}
+<span class="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.2 rounded inline-flex items-center ml-1.5">
     (
     {%- if has_eq_contrib -%}
-        * <i>equal contribution</i>
+        <span class='text-xl text-blue-800'>*</span> <i class="text-gray-700 text-xs text-blue-800">equal contribution</i>
     {%- endif -%}
     {%- if has_corresponding -%}
         {%- if has_eq_contrib -%}, {% endif -%}
-        <sup>#</sup> <i>corresponding author</i>
+        <sup class='text-xs text-blue-800'>&dagger;</sup> <i class="text-gray-700 text-xs text-blue-800">corresponding author</i>
     {%- endif -%}
     )
 </span>

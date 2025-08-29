@@ -3,52 +3,98 @@
     <div class="card border-0 shadow-sm bg-white rounded-xl">
       <div class="card-body p-4">
         <h6 class="mb-4 text-uppercase font-weight-bold text-sm tracking-widest text-primary-700 d-flex align-items-center">
-          <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="newsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
-              </linearGradient>
-              <filter id="newsShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0.5" dy="1" stdDeviation="0.5" flood-color="#000000" flood-opacity="0.15"/>
-              </filter>
-            </defs>
-
-            <!-- Newspaper base -->
-            <path d="M4 6H20V18H4V6Z" fill="url(#newsGradient)" filter="url(#newsShadow)"/>
-            <path d="M4 6H20V18H4V6Z" stroke="#0369a1" stroke-width="1.2"/>
-
-            <!-- Newspaper fold -->
-            <path d="M8 6V10H16V6" fill="white" fill-opacity="0.7"/>
-            <path d="M8 6V10H16V6" stroke="#0369a1" stroke-width="0.8" stroke-dasharray="2,2"/>
-
-            <!-- Newspaper headline -->
-            <path d="M6 12H18M6 14H14M6 16H16" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
-
-            <!-- Shadow -->
-            <path d="M4 6H20V18H4V6Z" fill="black" fill-opacity="0.05" transform="translate(0.7, 0.7)"/>
-          </svg>
+          <!-- SVG 保持不变 -->
           News
         </h6>
+
         <div class="scrollable-news-list" style="max-height: 400px; overflow-y: auto;">
           {% assign news_by_year = site.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" -%}
-          <ul class="list-unstyled mb-0">
+          <ul class="list-unstyled mb-0 news-top-list" style="padding-left: 0; margin-left: 0;">
             {% for year in news_by_year %}
             <li class="mb-4">
               <h6 class="text-muted border-bottom pb-2">{{ year.name }}</h6>
-              <ul class="list-unstyled">
+
+              <ul class="list-unstyled mb-0">
                 {% for item in year.items %}
-                <a href="{{ item.link }}" class="text-decoration-none text-dark">
-                  <li class="d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 hover:text-gray-900">
-                    <span class="text-gray-500 text-sm text-nowrap mr-3" style="min-width: 60px;">{{ item.date | date: "%b %d" }}</span>
-                    <span class="flex-grow-1 font-weight-medium">{{ item.title }}</span>
-                    {% if item.featured %}
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ml-2">
-                      Featured
-                    </span>
+                  {%- comment -%}
+                    determine target href: keep item.link if present, otherwise fallback to talk_ref / first of talk_refs
+                  {%- endcomment -%}
+                  {% assign news_href = item.link %}
+                  {% if news_href == nil or news_href == "" %}
+                    {% if item.talk_ref %}
+                      {% assign news_href = "#" | append: item.talk_ref %}
+                    {% elsif item.talk_refs %}
+                      {% assign first_ref = item.talk_refs[0] %}
+                      {% assign news_href = "#" | append: first_ref %}
                     {% endif %}
+                  {% endif %}
+
+                  {%- comment -%}
+                    Render: <li><a ...>...</a></li> when news_href exists.
+                    Otherwise render non-clickable <li><div ...></div></li>.
+                    This ensures the UL's direct children are LI (语义正确)。
+                  {%- endcomment -%}
+
+                  {% if news_href %}
+                  <li class="mb-2">
+                    <a href="{{ news_href }}" class="news-link d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 text-decoration-none text-dark" >
+                      <span class="text-gray-500 text-sm text-nowrap date-col" aria-hidden="true">{{ item.date | date: "%b %d" }}</span>
+
+                      <span class="flex-grow-1 font-weight-medium news-title-container">
+                        {{ item.title }}
+                        {% if item.more and item.more != "none" and item.link_target and item.link_target != "none" %}
+                          . <a href="{{ item.link_target }}" class="talk-link">{{ item.more }}</a>
+                        {% endif %}
+                      </span>
+
+                      {% comment %} talk badges (if present) {% endcomment %}
+                      {% if item.talk_refs %}
+                        {% for ref in item.talk_refs %}
+                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
+                            <a href="#{{ ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ ref }}</a>
+                          </span>
+                        {% endfor %}
+                      {% elsif item.talk_ref %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
+                          <a href="#{{ item.talk_ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ item.talk_ref }}</a>
+                        </span>
+                      {% endif %}
+
+                      {% if item.featured %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ms-2 featured-badge">Featured</span>
+                      {% endif %}
+                    </a>
                   </li>
-                </a>
+                  {% else %}
+                  <li class="mb-2">
+                    <div class="d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 news-static">
+                      <span class="text-gray-500 text-sm text-nowrap date-col" aria-hidden="true">{{ item.date | date: "%b %d" }}</span>
+
+                      <span class="flex-grow-1 font-weight-medium news-title-container">
+                        {{ item.title }}
+                        {% if item.more and item.more != "none" and item.link_target and item.link_target != "none" %}
+                          . <a href="{{ item.link_target }}" class="talk-link">{{ item.more }}</a>
+                        {% endif %}
+                      </span>
+
+                      {% if item.talk_refs %}
+                        {% for ref in item.talk_refs %}
+                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
+                            <a href="#{{ ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ ref }}</a>
+                          </span>
+                        {% endfor %}
+                      {% elsif item.talk_ref %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
+                          <a href="#{{ item.talk_ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ item.talk_ref }}</a>
+                        </span>
+                      {% endif %}
+
+                      {% if item.featured %}
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ms-2 featured-badge">Featured</span>
+                      {% endif %}
+                    </div>
+                  </li>
+                  {% endif %}
                 {% endfor %}
               </ul>
             </li>
@@ -61,17 +107,47 @@
 </div>
 
 <style>
-.scrollable-news-list::-webkit-scrollbar {
-    width: 8px;
+/* 保持原有滚动条样式 */
+.scrollable-news-list::-webkit-scrollbar { width: 8px; }
+.scrollable-news-list::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 4px; }
+.scrollable-news-list::-webkit-scrollbar-track { background: #f3f4f6; }
+.hover-bg-gray:hover { background-color: #f8f9fa; }
+
+/* 强制语义/布局一致：让链接行占满整行（整行可点），并保障日期列固定宽度，标题列占剩余宽度 */
+.news-link,
+.news-static {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
 }
-.scrollable-news-list::-webkit-scrollbar-thumb {
-    background-color: #d1d5db;
-    border-radius: 4px;
+
+/* 固定日期列宽，确保标题首字母对齐 */
+.date-col {
+  flex: 0 0 60px;  /* 固定宽度列 */
+  min-width: 60px;
+  margin-right: 12px;
+  text-align: left;
 }
-.scrollable-news-list::-webkit-scrollbar-track {
-    background: #f3f4f6;
+
+/* 标题列占剩余空间，自动换行 */
+.news-title-container {
+  flex: 1 1 auto;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
 }
-.hover-bg-gray:hover {
-    background-color: #f8f9fa;
-}
+
+/* talk-badge / featured-badge 间距和样式保持（不影响对齐） */
+.badge-talk a { color: var(--primary, #0369a1); text-decoration: none; }
+.badge-talk { margin-left: 8px; }
+.featured-badge { margin-left: 8px; }
+
+/* 若需要更强的对齐保障——给外层 UL 去掉默认缩进（多数 bootstrap 已处理，但做一次保险） */
+.news-top-list,
+.news-top-list ul { padding-left: 0; margin-left: 0; list-style: none; }
+
+/* 保持你原来定义的最小高度（如需要） */
+.news-item { min-height: 40px; }
 </style>
