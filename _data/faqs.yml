@@ -1,14 +1,40 @@
-- question: "What is your background and professional experience?"
-  answer: "I am a software engineer with 5+ years of experience in web development, specializing in frontend technologies and Jekyll static sites. I have worked with various clients to create responsive, accessible websites with a focus on user experience and performance optimization."
+- question: "How do you handle project timelines and communication?"
+  answer: >-
+    <p>
+    Transparent workflow:
+    <ol>
+      <li>📅 <strong>Planning:</strong> 2-day discovery phase with timeline estimate</li>
+      <li>💬 <strong>Communication:</strong> Daily updates via preferred channel</li>
+      <li>🔄 <strong>Iteration:</strong> Weekly demos for early feedback</li>
+      <li>✅ <strong>Delivery:</strong> Comprehensive handoff documentation</li>
+    </ol>
+    <br>
+    I use <em>GitHub Projects</em> for visibility and provide 
+    <a href='#contact' class='inline-link'>real-time progress tracking</a>. 
+    All projects include 30 days of post-launch support.
+    <p>
 
-- question: "What are your main technical skills and areas of expertise?"
-  answer: "My core expertise includes HTML, CSS, JavaScript, and Jekyll templating. I'm proficient with modern CSS frameworks like Tailwind, responsive design principles, and accessibility standards. I also have experience with data visualization and creating interactive web components while maintaining clean, maintainable code."
-
-- question: "What are your hobbies and interests outside of work?"
-  answer: "I enjoy hiking, reading tech blogs, and contributing to open-source projects. I also love playing with my bicolor cat named Socks! When I have free time, I explore new web technologies and experiment with creative coding projects."
-
-- question: "How do you approach problem-solving and learning new technologies?"
-  answer: "I believe in a structured approach to problem-solving: understanding the problem thoroughly, researching potential solutions, prototyping, and iterating. For learning new technologies, I combine official documentation with hands-on practice, often building small projects to solidify my understanding before applying them to larger projects."
-
-- question: "How did you approach problem-solving and learning new technologies?"
-  answer: "I believe in a structured approach to problem-solving: understanding the problem thoroughly, researching potential solutions, prototyping, and iterating. For learning new technologies, I combine official documentation with hands-on practice, often building small projects to solidify my understanding before applying them to larger projects."
+- question: "Can you help optimize my existing Jekyll site?"
+  answer: >-
+    <p>
+    Absolutely! I specialize in Jekyll optimization:
+    <ul>
+      <li>⚡ <strong>Performance:</strong> Reduce load times via asset optimization</li>
+      <li>♿ <strong>Accessibility:</strong> Implement semantic HTML &amp; ARIA</li>
+      <li>📱 <strong>Responsiveness:</strong> Refine mobile UX with Tailwind</li>
+      <li>🔍 <strong>SEO:</strong> Improve metadata &amp; structured data</li>
+    </ul>
+    <br>
+    Recent project: Transformed a 4.2s LCP site to <strong>0.8s</strong> 
+    using <code>jekyll-assets</code> and critical CSS techniques.
+    <p>
+#<strong> 加粗文本 </strong>
+#<em> 斜体文本 </em>
+#<a> 链接（自动应用样式）</a>
+#<code> 代码片段 </code>
+#列表:
+#  <ul>
+#    <li>
+#    <li>
+#    <li>
+#  <ul>
