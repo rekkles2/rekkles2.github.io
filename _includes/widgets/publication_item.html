@@ -45,7 +45,7 @@
 
 /* ========== 核心卡片设计 ========== */
 .paper-card {
-  border-radius: 13.68px; /* 14.4px * 0.95 */
+  border-radius: 13.68px;
   overflow: hidden;
   background: white;
   box-shadow: var(--card-shadow);
@@ -59,8 +59,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 13.68px; /* 14.4px * 0.95 */
-  padding: 0.855px; /* 0.9px * 0.95 */
+  border-radius: 13.68px;
+  padding: 0.855px;
   background: linear-gradient(to bottom right, rgba(14, 165, 233, 0.08), transparent);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -72,7 +72,7 @@
 
 .paper-card:hover {
   box-shadow: var(--card-hover-shadow);
-  transform: translateY(-1.71px); /* -1.8px * 0.95 */
+  transform: translateY(-1.71px);
 }
 
 .paper-card:hover::before {
@@ -80,37 +80,36 @@
 }
 
 .paper-content {
-  padding: 1.197rem; /* 1.26rem * 0.95 */
+  padding: 1.197rem;
   position: relative;
   z-index: 1;
 }
 
 .cover-container {
-  border-radius: 10.26px; /* 10.8px * 0.95 */
+  border-radius: 10.26px;
   overflow: hidden;
   box-shadow: 0 2.565px 10.26px rgba(0, 0, 0, 0.05);
-  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 优化过渡效果 */
+  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   background: var(--gray-50);
-  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
-  transform-origin: center center; /* 确保从中心缩放 */
-  z-index: 1; /* 确保正常状态下在底层 */
-  /* 仅在有 Hover 功能的设备上启用 will-change（减少持续 GPU 占用） */
+  border: 0.855px solid var(--gray-200);
+  transform-origin: center center;
+  z-index: 1;
 }
 
 .cover-container:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* 增强阴影效果 */
-  transform: scale(1.4); /* 放大40% */
-  z-index: 10; /* 确保悬停时在顶层 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: scale(1.4);
+  z-index: 10;
 }
 
 /* ========== 内容排版优化 ========== */
 .paper-title {
   margin-top: 0;
-  margin-bottom: 0.47025rem; /* 0.495rem * 0.95 */
-  font-size: 1.0944rem; /* 1.152rem * 0.95 */
+  margin-bottom: 0.47025rem;
+  font-size: 1.0944rem;
   font-weight: 750;
   color: var(--gray-900);
-  letter-spacing: -0.21375px; /* -0.225px * 0.95 */
+  letter-spacing: -0.21375px;
   line-height: 1.28;
   transition: color 150ms ease;
 }
@@ -120,10 +119,10 @@
 }
 
 .paper-authors {
-  font-size: 0.8721rem; /* 0.918rem * 0.95 */
+  font-size: 0.8721rem;
   font-weight: 525;
   color: var(--gray-700);
-  margin-bottom: 0.342rem; /* 0.36rem * 0.95 */
+  margin-bottom: 0.342rem;
   line-height: 1.38;
   transition: color 150ms ease;
 }
@@ -140,9 +139,9 @@
 }
 
 .paper-pub {
-  font-size: 0.8379rem; /* 0.882rem * 0.95 */
+  font-size: 0.8379rem;
   color: var(--gray-500);
-  margin-bottom: 0.7695rem; /* 0.81rem * 0.95 */
+  margin-bottom: 0.7695rem;
   line-height: 1.48;
   font-feature-settings: 'tnum';
 }
@@ -157,12 +156,12 @@
 .index-terms {
   display: flex;
   flex-direction: column;
-  gap: 0.342rem; /* 0.36rem * 0.95 */
+  gap: 0.342rem;
   background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(252, 253, 255, 0.8));
-  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
-  padding: 0.4275rem 0.513rem; /* 0.45rem 0.54rem * 0.95 */
-  border-radius: 8.55px; /* 9px * 0.95 */
-  margin-bottom: 0.9405rem; /* 0.99rem * 0.95 */
+  border: 0.855px solid var(--gray-200);
+  padding: 0.4275rem 0.513rem;
+  border-radius: 8.55px;
+  margin-bottom: 0.9405rem;
   box-shadow: 0 1.71px 5.13px rgba(0, 0, 0, 0.015);
   transition: all 200ms ease;
 }
@@ -175,7 +174,7 @@
 .index-terms .meta-row {
   display: flex;
   align-items: center;
-  gap: 0.4275rem; /* 0.45rem * 0.95 */
+  gap: 0.4275rem;
 }
 
 .index-terms .label {
@@ -183,34 +182,34 @@
   color: var(--primary-700);
   font-weight: 625;
   text-transform: uppercase;
-  font-size: 0.5985rem; /* 0.63rem * 0.95 */
-  letter-spacing: 0.684px; /* 0.72px * 0.95 */
-  padding: 0.11115rem 0.4104rem; /* 0.117rem 0.432rem * 0.95 */
-  border-radius: 5.13px; /* 5.4px * 0.95 */
+  font-size: 0.5985rem;
+  letter-spacing: 0.684px;
+  padding: 0.11115rem 0.4104rem;
+  border-radius: 5.13px;
   background: var(--primary-50);
-  border: 0.855px solid var(--primary-100); /* 0.9px * 0.95 */
+  border: 0.855px solid var(--primary-100);
   font-feature-settings: 'pnum';
 }
 
 .index-terms .badges {
   display: flex;
-  gap: 0.4275rem; /* 0.45rem * 0.95 */
+  gap: 0.4275rem;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 0.21375rem; /* 0.225rem * 0.95 */
+  margin-top: 0.21375rem;
 }
 
 .index-terms .term-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.2394rem 0.513rem; /* 0.252rem 0.54rem * 0.95 */
-  font-size: 0.7353rem; /* 0.774rem * 0.95 */
+  padding: 0.2394rem 0.513rem;
+  font-size: 0.7353rem;
   font-weight: 500;
   color: var(--gray-700);
   background: white;
-  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
-  border-radius: 17.1px; /* 18px * 0.95 */
+  border: 0.855px solid var(--gray-200);
+  border-radius: 17.1px;
   white-space: nowrap;
   box-shadow: 0 1.2825px 4.275px rgba(0, 0, 0, 0.025);
   transition: all 200ms ease;
@@ -219,7 +218,7 @@
 }
 
 .index-terms .term-badge:hover {
-  transform: translateY(-1.2825px); /* -1.35px * 0.95 */
+  transform: translateY(-1.2825px);
   box-shadow: 0 4.275px 11.97px rgba(0, 0, 0, 0.05);
   background: white;
   border-color: var(--gray-300);
@@ -230,26 +229,26 @@
 .abstract-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.47025rem; /* 0.495rem * 0.95 */
+  gap: 0.47025rem;
   align-items: center;
-  margin-top: 0.72675rem; /* 0.765rem * 0.95 */
+  margin-top: 0.72675rem;
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 .abstract-links a.btn {
   display: inline-flex !important;
   align-items: center;
-  gap: 0.38475rem; /* 0.405rem * 0.95 */
-  padding: 0.2394rem 0.55575rem; /* 0.252rem 0.585rem * 0.95 */
-  border-radius: 8.55px; /* 9px * 0.95 */
+  gap: 0.38475rem;
+  padding: 0.2394rem 0.55575rem;
+  border-radius: 8.55px;
   background: var(--gray-50);
-  border: 0.855px solid var(--gray-200); /* 0.9px * 0.95 */
+  border: 0.855px solid var(--gray-200);
   color: var(--gray-700);
-  font-size: 0.7011rem; /* 0.738rem * 0.95 */
+  font-size: 0.7011rem;
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  min-height: 23.94px; /* 25.2px * 0.95 */
+  min-height: 23.94px;
   transition: all 170ms cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 0.855px 3.42px rgba(0, 0, 0, 0.02);
   position: relative;
@@ -272,7 +271,7 @@
 
 .abstract-links a.btn:hover,
 .abstract-links a.btn:focus {
-  transform: translateY(-0.855px); /* -0.9px * 0.95 */
+  transform: translateY(-0.855px);
   border-color: var(--gray-300);
   box-shadow: 0 3.42px 8.55px rgba(0, 0, 0, 0.05);
   outline: none;
@@ -284,16 +283,16 @@
 }
 
 .abstract-links a.btn:focus-visible {
-  box-shadow: 0 0 0 2.565px rgba(14, 165, 233, 0.25); /* 2.7px * 0.95 */
+  box-shadow: 0 0 0 2.565px rgba(14, 165, 233, 0.25);
   border-color: var(--primary-500);
   outline: none;
 }
 
 .abstract-links .btn-icon {
-  width: 15.39px; /* 16.2px * 0.95 */
-  height: 15.39px; /* 16.2px * 0.95 */
-  min-width: 15.39px; /* 16.2px * 0.95 */
-  border-radius: 4.275px; /* 4.5px * 0.95 */
+  width: 15.39px;
+  height: 15.39px;
+  min-width: 15.39px;
+  border-radius: 4.275px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -306,10 +305,10 @@
 .abstract-links .btn-label {
   color: var(--gray-700);
   font-weight: 500;
-  font-size: 0.7011rem; /* 0.738rem * 0.95 */
+  font-size: 0.7011rem;
   line-height: 1;
   display: inline-block;
-  padding-right: 0.855px; /* 0.9px * 0.95 */
+  padding-right: 0.855px;
 }
 
 /* 按钮类型样式 - 基于现代UI设计趋势 */
@@ -388,127 +387,100 @@
   .paper-card {
     will-change: transform, box-shadow;
   }
-
-  .cover-container,
-  .abstract-links a.btn {
-    /* will-change 在激活时添加以减少总体开销（见 JS） */
-  }
 }
 
 @media (max-width: 768px) {
   .paper-content {
-    padding: 1.06875rem; /* 1.125rem * 0.95 */
+    padding: 1.06875rem;
   }
 
   .paper-title {
-    font-size: 1.0089rem; /* 1.062rem * 0.95 */
+    font-size: 1.0089rem;
     line-height: 1.32;
   }
 
   .paper-authors {
-    font-size: 0.8379rem; /* 0.882rem * 0.95 */
+    font-size: 0.8379rem;
   }
 
   .paper-pub {
-    font-size: 0.7866rem; /* 0.828rem * 0.95 */
+    font-size: 0.7866rem;
   }
 
   .index-terms {
-    padding: 0.38475rem 0.4275rem; /* 0.405rem 0.45rem * 0.95 */
-    border-radius: 7.695px; /* 8.1px * 0.95 */
+    padding: 0.38475rem 0.4275rem;
+    border-radius: 7.695px;
   }
 
   .index-terms .term-badge {
-    font-size: 0.7011rem; /* 0.738rem * 0.95 */
-    padding: 0.2052rem 0.4275rem; /* 0.216rem 0.45rem * 0.95 */
+    font-size: 0.7011rem;
+    padding: 0.2052rem 0.4275rem;
   }
 
   .abstract-links a.btn {
-    padding: 0.2223rem 0.513rem; /* 0.234rem 0.54rem * 0.95 */
-    font-size: 0.6669rem; /* 0.702rem * 0.95 */
-    min-height: 22.23px; /* 23.4px * 0.95 */
-    gap: 0.342rem; /* 0.36rem * 0.95 */
+    padding: 0.2223rem 0.513rem;
+    font-size: 0.6669rem;
+    min-height: 22.23px;
+    gap: 0.342rem;
   }
 }
 
 @media (max-width: 480px) {
   .paper-content {
-    padding: 0.855rem; /* 0.9rem * 0.95 */
+    padding: 0.855rem;
   }
 
   .paper-title {
-    font-size: 0.9234rem; /* 0.972rem * 0.95 */
+    font-size: 0.9234rem;
     line-height: 1.35;
   }
 
   .paper-authors {
-    font-size: 0.7866rem; /* 0.828rem * 0.95 */
+    font-size: 0.7866rem;
   }
 
   .paper-pub {
-    font-size: 0.7353rem; /* 0.774rem * 0.95 */
+    font-size: 0.7353rem;
   }
 
   .index-terms {
-    padding: 0.342rem 0.3762rem; /* 0.36rem 0.396rem * 0.95 */
-    border-radius: 6.84px; /* 7.2px * 0.95 */
-    margin-bottom: 0.7695rem; /* 0.81rem * 0.95 */
+    padding: 0.342rem 0.3762rem;
+    border-radius: 6.84px;
+    margin-bottom: 0.7695rem;
   }
 
   .index-terms .term-badge {
-    font-size: 0.6669rem; /* 0.702rem * 0.95 */
-    padding: 0.171rem 0.3591rem; /* 0.18rem 0.378rem * 0.95 */
-    border-radius: 15.39px; /* 16.2px * 0.95 */
+    font-size: 0.6669rem;
+    padding: 0.171rem 0.3591rem;
+    border-radius: 15.39px;
   }
 
   .abstract-links {
-    gap: 0.38475rem; /* 0.405rem * 0.95 */
-    margin-top: 0.64125rem; /* 0.675rem * 0.95 */
+    gap: 0.38475rem;
+    margin-top: 0.64125rem;
   }
 
   .abstract-links a.btn {
-    padding: 0.2052rem 0.47025rem; /* 0.216rem 0.495rem * 0.95 */
-    font-size: 0.6327rem; /* 0.666rem * 0.95 */
-    min-height: 20.52px; /* 21.6px * 0.95 */
-    gap: 0.29925rem; /* 0.315rem * 0.95 */
+    padding: 0.2052rem 0.47025rem;
+    font-size: 0.6327rem;
+    min-height: 20.52px;
+    gap: 0.29925rem;
   }
 
   .abstract-links .btn-icon {
-    width: 13.68px; /* 14.4px * 0.95 */
-    height: 13.68px; /* 14.4px * 0.95 */
-    min-width: 13.68px; /* 14.4px * 0.95 */
-    border-radius: 3.42px; /* 3.6px * 0.95 */
-  }
-}
-
-/* ========== 移动端优化 ========== */
-@media (max-width: 576px) {
-  .d-md-none .paper-content {
-    padding: 0.9405rem; /* 0.99rem * 0.95 */
-  }
-
-  .d-md-none .index-terms {
-    border-radius: 7.695px; /* 8.1px * 0.95 */
-    padding: 0.3591rem 0.4104rem; /* 0.378rem 0.432rem * 0.95 */
-  }
-
-  .d-md-none .index-terms .term-badge {
-    padding: 0.1881rem 0.3933rem; /* 0.198rem 0.414rem * 0.95 */
-    font-size: 0.684rem; /* 0.72rem * 0.95 */
-  }
-
-  .d-md-none .abstract-links a.btn {
-    padding: 0.21375rem 0.4959rem; /* 0.225rem 0.522rem * 0.95 */
-    min-height: 22.23px; /* 23.4px * 0.95 */
+    width: 13.68px;
+    height: 13.68px;
+    min-width: 13.68px;
+    border-radius: 3.42px;
   }
 }
 
 /* ================== 增强块：悬停时实心遮罩 + 避免文字穿透（覆盖/性能优化） ================== */
+.cover-container { 
+  position: relative; 
+  -webkit-tap-highlight-color: transparent; 
+}
 
-/* 基本定位（用于伪元素遮罩） */
-.cover-container { position: relative; -webkit-tap-highlight-color: transparent; }
-
-/* 伪元素遮罩：放在图片下方但高于卡片内容，默认隐藏 */
 .cover-container::before {
   content: "";
   position: absolute;
@@ -521,7 +493,6 @@
   pointer-events: none;
 }
 
-/* 图片/占位 svg 顶层，带白底以覆盖透明像素 */
 .cover-container img,
 .cover-container svg {
   position: relative;
@@ -536,19 +507,19 @@
   transition: transform 420ms cubic-bezier(0.16,1,0.3,1), filter 320ms ease, box-shadow 420ms ease;
 }
 
-/* JS 优先控制的激活态（覆盖上面的 :hover） */
 .cover-container.is-hovered::before,
-.cover-container:hover::before { opacity: 1; }
+.cover-container:hover::before { 
+  opacity: 1; 
+}
 
 .cover-container.is-hovered {
-  transform: translateZ(0) scale(1.4);           /* GPU 合成 + 放大 */
+  transform: translateZ(0) scale(1.4);
   transform-origin: left center;
   box-shadow: 0 12px 36px rgba(0,0,0,0.14);
   z-index: 1200;
-  will-change: transform; /* 仅在激活时提示合成层 */
+  will-change: transform;
 }
 
-/* 起伏动画（仅使用 transform） */
 @keyframes cover-bob {
   0%   { transform: translateY(0)   rotate(0deg); }
   20%  { transform: translateY(-8px) rotate(-0.6deg); }
@@ -564,37 +535,48 @@
   animation: cover-bob 1200ms ease-in-out infinite;
 }
 
-/* 当父卡片被设置为打开遮罩时，允许图片越界显示 */
-.paper-card.cover-open { overflow: visible; z-index: 60; }
+.paper-card.cover-open { 
+  overflow: visible; 
+  z-index: 60; 
+}
 
-/* 明确文本层级，避免覆盖图片 */
-.paper-card .paper-content { position: relative; z-index: 1; }
+.paper-card .paper-content { 
+  position: relative; 
+  z-index: 1; 
+}
 
-/* 在用户偏好减少动画时停用动画和起伏 */
 @media (prefers-reduced-motion: reduce) {
   .cover-container.is-hovered img,
   .cover-container.is-hovered svg,
   .cover-container:hover img,
-  .cover-container:hover svg { animation: none !important; }
-  .cover-container.is-hovered { transition: transform 240ms ease; }
+  .cover-container:hover svg { 
+    animation: none !important; 
+  }
+  .cover-container.is-hovered { 
+    transition: transform 240ms ease; 
+  }
 }
 
-/* 移动端保守处理 */
 @media (max-width: 768px) {
-  .cover-container.is-hovered, .cover-container:hover { transform: scale(1.15); transform-origin: center center; }
-  .cover-container::before { inset: -10%; }
+  .cover-container.is-hovered, 
+  .cover-container:hover { 
+    transform: scale(1.15); 
+    transform-origin: center center; 
+  }
+  .cover-container::before { 
+    inset: -10%; 
+  }
 }
 </style>
 
-<!-- 优化后的 JS：事件委托 + 最小 DOM 操作 + passive touch 监听 + will-change 管理 -->
 <script>
 (function () {
-  // 轻量防抖：避免快速频繁切换导致 class 持续触发（可选）
   const activeMap = new WeakMap();
   let activeCover = null;
 
   function enterCover(c) {
     if (!c || activeCover === c) return;
+    
     // 先关闭之前的
     if (activeCover && activeCover !== c) leaveCover(activeCover);
 
@@ -602,33 +584,37 @@
     c.classList.add('is-hovered');
     const card = c.closest('.paper-card');
     if (card) card.classList.add('cover-open');
+    
     // mark will-change (inline style) — 浏览器会在后续 transitionend 中移除
     c.style.willChange = 'transform';
   }
 
   function leaveCover(c) {
     if (!c) return;
+    
     c.classList.remove('is-hovered');
     const card = c.closest('.paper-card');
     if (card) card.classList.remove('cover-open');
+    
     // 在 transition end 后移除 will-change，避免长期 GPU 占用
     const onEnd = function (ev) {
       if (ev.propertyName && ev.propertyName.indexOf('transform') === -1) return;
       c.style.willChange = '';
       c.removeEventListener('transitionend', onEnd);
     };
+    
     c.addEventListener('transitionend', onEnd);
     if (activeCover === c) activeCover = null;
   }
 
   // pointerover/out 代理（覆盖 mouse + touch pointer）
   document.addEventListener('pointerover', function (e) {
-    const c = e.target.closest && e.target.closest('.cover-container');
+    const c = e.target.closest('.cover-container');
     if (c) enterCover(c);
   }, { passive: true });
 
   document.addEventListener('pointerout', function (e) {
-    const left = e.target.closest && e.target.closest('.cover-container');
+    const left = e.target.closest('.cover-container');
     // 当 relatedTarget 不存在或不在同一 container 内，认为离开
     const related = e.relatedTarget;
     if (left && (!related || !left.contains(related))) {
@@ -636,20 +622,10 @@
     }
   }, { passive: true });
 
-  // focusin/focusout 用于键盘无障碍（会冒泡）
-  document.addEventListener('focusin', function (e) {
-    const c = e.target.closest && e.target.closest('.cover-container');
-    if (c) enterCover(c);
-  });
-  document.addEventListener('focusout', function (e) {
-    const c = e.target.closest && e.target.closest('.cover-container');
-    if (c) leaveCover(c);
-  });
-
   // touchstart: 点击图片时激活；点击页面其它位置关闭
   let touchActiveFor = null;
   document.addEventListener('touchstart', function (e) {
-    const c = e.target.closest && e.target.closest('.cover-container');
+    const c = e.target.closest('.cover-container');
     if (c) {
       touchActiveFor = c;
       enterCover(c);
@@ -666,17 +642,20 @@
     }
   });
 
-  // 页面就绪后给所有封面提供可聚焦支持（不修改 DOM 结构视感，仅属性）
+  // 页面就绪后给所有封面提供可聚焦支持
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.cover-container').forEach(function (c) {
       if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
+      
       // 如果图片元素存在，启用解码与懒加载提高加载性能
       const img = c.querySelector('img');
       if (img) {
         try {
           img.loading = img.loading || 'lazy';
         } catch (e) { /* ignore */ }
-        try { img.decoding = 'async'; } catch(e) {}
+        try { 
+          img.decoding = 'async'; 
+        } catch(e) {}
       }
     });
   });
@@ -753,7 +732,7 @@
             {% if label == "Paper" %}{% assign cls = "btn--paper" %}
             {% elsif label == "Code" %}{% assign cls = "btn--code" %}
             {% elsif label == "Demo" %}{% assign cls = "btn--demo" %}
-            {% elsif label == "Arxiv" or label == "arXiv" %}{% assign cls = "btn--arxiv" %}
+            {% elsif label == "Arxiv" or label == "arXIV" %}{% assign cls = "btn--arxiv" %}
             {% elsif label == "Website" %}{% assign cls = "btn--website" %}
             {% else %}{% assign cls = "btn--default" %}{% endif %}
 
