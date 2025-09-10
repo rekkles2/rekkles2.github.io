@@ -1,12 +1,14 @@
-primary_name: "Your Name"
+primary_name: "Jiahang Li"
 secondary_name: ""
-navbar_name: "Your Name"
+navbar_name: "🎙️Jiahang Li"
 
 positions:
 - name: Position 2 without logo
 
 
-email: "your@email.com"
+
+
+email: "lijiahang041119[at]gmail.com"
 cv_link: /assets/images/badges/MIT_Social_circle.png
 gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
 github: your_github_id
@@ -17,19 +19,41 @@ wechat_prompt: >-
 linkedin: your-linked-in-id
 orcid: 0000-0000-0000-0000
 
-short_bio_text_justify: false
+
+
+
+short_bio_text_justify: true
 short_bio: >-
   <p>
     A <a href="https://en.wikipedia.org/wiki/Bicolor_cat" target="_blank">bicolor cat</a> is a cat with white fur combined with fur of some other colour, for example solid black, tabby, or colourpointed.
   </p>
-  <p>
+  
+  </p>
     There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
     and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
+    as well as being common in domestic longhair and domestic shorthair cats. There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
+    and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
     as well as being common in domestic longhair and domestic shorthair cats.
+  <p>
+  
+  <p>
+    <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;"> 📢I am actively seeking 2026 Fall MPhil/PhD positions, please don’t hesitate to contact me if you think I might be a good fit! 
+  <p>
+  
+  <p>
+    <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;"> If you want to know more, please see <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> ->></span>
   </p>
-    📢 <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;">If you want to know more, please see <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> ->>.</span>
-  </p>
-
+  
+  <p>
+    There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
+        and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
+        as well as being common in domestic longhair and domestic shorthair cats. There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
+        and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
+        as well as being common in domestic longhair and domestic shorthair cats.
+  <p>
+quote: >-
+  Stay Hungry. Stay Foolish.
+  — Steve Jobs, Stanford Commencement Speech (2005)
 #跳转到某个卡片使用
 #<!-- 示例：在另一个卡片中使用（请将该片段放到你要链接的文本处） -->
 #锚点
@@ -153,7 +177,7 @@ awards:
   date: Sep. 2024
 - name: Award Name 1
   date: Jul. 2021
-- name: A quick brown fox jumps over the lazy dog and runs away award
+- name: A quick brown fox jumps over the lazy dog and runs <strong> away award </strong>
   date: Dec. 2021
 
 

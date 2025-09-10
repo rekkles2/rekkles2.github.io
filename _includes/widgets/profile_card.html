@@ -2,43 +2,66 @@
     <div class="col">
         <div class="card border-0 shadow-sm bg-white rounded-3 overflow-hidden">
             <div class="card-body p-5">
-                <div class="row align-items-start">
-                    <div class="col-md-8">
+                <!-- Main Flow Layout: image placed before text so text can wrap around it on md+ -->
+                <div class="profile-grid">
+                    {% if site.data.profile.portrait_url %}
+                    <div class="profile-grid-image d-none d-md-block" aria-hidden="false">
+                        <div class="profile-grid-image-inner">
+                            <img src="{{ site.data.profile.portrait_url | relative_url }}"
+                                 class="img-fluid rounded-3 profile-portrait"
+                                 alt="{{ site.data.profile.portrait_caption }}"
+                                 title="{{ site.data.profile.portrait_caption }}">
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Left column for text content -->
+                    <div class="profile-grid-text">
                         <div class="d-flex flex-column flex-md-row align-items-start mb-4">
-                            <h1 class="h2 font-weight-bold mb-0 me-md-4">
+                            <h1 class="h2 profile-name mb-0 me-md-4">
                                 {{ site.data.profile.primary_name }}
-                                <span class="text-muted fw-normal fs-5">{{ site.data.profile.secondary_name }}</span>
+                                <span class="text-muted fw-normal fs-5 profile-secondary-name">{{ site.data.profile.secondary_name }}</span>
                             </h1>
                             {% if site.data.profile.portrait_url %}
                             <div class="mt-3 mt-md-0 d-md-none w-100">
                                 <div class="d-flex justify-content-end">
-                                    <img src="{{ site.data.profile.portrait_url | relative_url }}" class="rounded-circle border border-2" style="height: 80px; width: 80px; object-fit: cover;" alt="Portrait">
+                                    <img src="{{ site.data.profile.portrait_url | relative_url }}" class="rounded-circle border border-2" style="height: 65px; width: 65px; object-fit: cover;" alt="Portrait">
                                 </div>
                             </div>
                             {% endif %}
                         </div>
+
                         <div class="text-profile-position mb-3">
                             {% for position in site.data.profile.positions %}
                             <div class="d-flex align-items-center mb-2">
                                 {% if position.logo -%}
-                                <img src="{{ position.logo | relative_url }}" alt="Logo" class="me-2" style="height: 24px; width: 24px; object-fit: contain;">
+                                <img src="{{ position.logo | relative_url }}" alt="Logo" class="me-2 position-logo" style="height: 24px; width: 24px; object-fit: contain;">
                                 {%- endif %}
-                                <span class="fw-medium">{{ position.name }}</span>
+                                <span class="fw-medium position-name">{{ position.name }}</span>
                             </div>
                             {% endfor %}
                         </div>
+
                         <div class="text-profile-bio mb-4" {% if site.data.profile.short_bio_text_justify %}style="text-align: justify;"{% endif %}>
                             {{ site.data.profile.short_bio }}
                         </div>
+
+                        <!-- Quote section -->
+                        {% if site.data.profile.quote %}
+                          {% assign quote_parts = site.data.profile.quote | split: "—" %}
+                          <div class="quote-container mt-4">
+                            <blockquote class="custom-quote">
+                              <p class="quote-text">{{ quote_parts[0] | strip }}</p>
+                              {% if quote_parts[1] %}
+                                <footer class="quote-author">— {{ quote_parts[1] | strip }}</footer>
+                              {% endif %}
+                            </blockquote>
+                          </div>
+                        {% endif %}
                     </div>
-                    {% if site.data.profile.portrait_url %}
-                    <div class="col-md-4 d-none d-md-block">
-                        <div class="position-relative">
-                            <img src="{{ site.data.profile.portrait_url | relative_url }}" class="img-fluid rounded-3" style="max-height: 280px; object-fit: cover; width: 100%;" alt="{{ site.data.profile.portrait_caption }}" title="{{ site.data.profile.portrait_caption }}">
-                        </div>
-                    </div>
-                    {% endif %}
                 </div>
+                <!-- End Main Flow Layout -->
+
                 <hr class="my-4">
                 <div class="row">
                     <div class="col">
@@ -114,104 +137,154 @@
     </div>
 </div>
 
-<!-- STYLES -->
+<!-- Visual & Layout Styles (微调与优化) -->
 <style>
-    /* --- Base Button System --- */
-    .profile-btn {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        background-color: #f1f5f9; /* A softer, modern light gray */
-        color: #334155; /* A softer black for text */
-        border: 1px solid transparent;
-        border-radius: 0.5rem; /* A slightly larger radius */
-        font-weight: 500;
-        font-size: 0.9rem;
-        text-decoration: none;
-        transition: all 0.2s ease-in-out;
-        cursor: pointer;
+  :root{
+    --accent: #c1123c;
+    --muted: #64748b;
+    --card-bg: #ffffff;
+    --btn-bg: #f1f5f9;
+    --text-color: #0f1724; /* slightly darker for contrast */
+    --soft-text: #334155;
+    --shadow-1: 0 6px 18px rgba(12, 14, 20, 0.06);
+  }
+
+  /* Typography improvements */
+  .profile-name { line-height: 1.0; letter-spacing: -0.6px; color: var(--text-color); }
+  .profile-secondary-name { display: block; margin-top: .125rem; color: #6b7280; font-weight: 500; }
+  .text-profile-bio { color: var(--soft-text); font-size: 1.02rem; line-height: 1.5; -webkit-font-smoothing:antialiased; }
+  .position-name { color: var(--soft-text); }
+
+  /* Quote styling (subtle refinement) */
+  .custom-quote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1.25rem 0;
+    font-style: italic;
+    color: #374151;
+    background: linear-gradient(180deg, rgba(193,18,60,0.02), transparent 50%);
+    border-radius: 6px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+  .quote-text { margin: 0 0 0.35rem 0; line-height:1.4; color: #25405a; }
+  .quote-author { font-style: normal; color: var(--muted); font-weight: 500; font-size: .95rem; }
+
+  /* Buttons: consistent sizing and nicer hover */
+  .profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    padding: 0.45rem 0.9rem;
+    background-color: var(--btn-bg);
+    color: var(--soft-text);
+    border: 1px solid rgba(15,23,36,0.04);
+    border-radius: 0.6rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .profile-btn:hover,
+  .profile-btn:focus {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-1);
+    color: #fff;
+  }
+
+  .profile-btn > i,
+  .profile-btn > svg { width: 18px; height: 18px; font-size: 18px; opacity: 0.95; transition: color .18s ease, transform .18s ease; }
+
+  /* Individual hover accents retained but slightly softened */
+  .btn-email:hover, .btn-cv:hover { background-color: #5b46f3; border-color: #5b46f3; }
+  .btn-email > i, .btn-cv > i { color: #4f46e5; }
+  .btn-email:hover > i, .btn-cv:hover > i { color: #fff; }
+
+  .btn-gscholar { background-color: #eaf1fb; color: #4285F4; }
+  .btn-gscholar:hover { background-color: #2f6fd6; border-color: #2f6fd6; }
+  .btn-gscholar > svg { fill: #4285F4; }
+  .btn-gscholar:hover > svg { fill: #fff; }
+
+  .btn-github:hover { background-color: #24292e; border-color: #24292e; }
+  .btn-github > i { color: #24292e; }
+  .btn-github:hover > i { color: #fff; }
+
+  .btn-twitter:hover { background-color: #1DA1F2; border-color: #1DA1F2; }
+  .btn-twitter > i { color: #1DA1F2; }
+  .btn-twitter:hover > i { color: #fff; }
+
+  .btn-linkedin:hover { background-color: #0A66C2; border-color: #0A66C2; }
+  .btn-linkedin > i { color: #0A66C2; }
+  .btn-linkedin:hover > i { color: #fff; }
+
+  .btn-orcid:hover { background-color: #A6CE39; border-color: #A6CE39; }
+  .btn-orcid > i { color: #A6CE39; }
+  .btn-orcid:hover > i { color: #fff; }
+
+  .btn-wechat:hover { background-color: #07C160; border-color: #07C160; }
+  .btn-wechat > i { color: #07C160; }
+  .btn-wechat:hover > i { color: #fff; }
+
+  /* Layout: mobile-first then desktop float-based wrap for md+ */
+  .profile-grid { position: relative; }
+
+  @media (min-width: 768px) {
+    /* float the image to the right so text wraps and can fill any empty space under the image */
+    .profile-grid-image {
+      float: right;
+      width: clamp(150px, 25%, 260px); /* responsive width: min 150, ideal 25%, max 260 */
+      max-width: 260px;
+      margin-left: 2rem; /* larger gap for breathing room */
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      overflow: hidden;
+      /* Make text wrap follow the rounded shape (where supported) */
+      -webkit-shape-outside: inset(0 round 12px);
+      shape-outside: inset(0 round 12px);
+      /* small subtle lift */
+      filter: drop-shadow(0 6px 18px rgba(12, 14, 20, 0.04));
     }
 
-    .profile-btn:hover,
-    .profile-btn:focus {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        color: #fff; /* White text on hover for all buttons */
-        text-decoration: none;
+    /* Inner wrapper ensures consistent height/width for shape-outside behavior */
+    .profile-grid-image-inner { display:block; width:100%; height:100%; }
+
+    .profile-portrait {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 300px;    /* a slightly larger comfortable max */
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease;
+      box-shadow: 0 10px 30px rgba(12,14,20,0.06);
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    .profile-portrait:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(12,14,20,0.08);
     }
 
-    /* Icon Styling */
-    .profile-btn > i,
-    .profile-btn > svg {
-        margin-right: 0.6rem;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        font-size: 1.1rem;
-        transition: all 0.2s ease-in-out;
+    /* clear fix to ensure card layout contains the float */
+    .profile-grid::after {
+      content: "";
+      display: table;
+      clear: both;
     }
 
-    /* Email specific style */
-    .email-text {
-        font-size: 0.95rem;
-        word-break: break-all;
-        line-height: 1.5;
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        letter-spacing: -0.1px;
-    }
+    /* ensure hr and following elements sit below floats */
+    .profile-grid + hr { clear: both; }
 
-    /* --- Brand Color Theming on Hover --- */
+    /* tighten spacing so text flows nicely next to the image */
+    .profile-grid-text .mb-4 { margin-bottom: 0 !important; }
+  }
 
-    /* Generic Buttons (Email, CV) */
-    .btn-email:hover,
-    .btn-cv:hover {
-        background-color: #4f46e5; /* A nice indigo */
-        border-color: #4f46e5;
-    }
-    .btn-email > i, .btn-cv > i { color: #4f46e5; }
-    .btn-email:hover > i, .btn-cv:hover > i { color: #fff; }
-
-    /* Google Scholar - The "Google Blue" Button */
-    .btn-gscholar {
-        background-color: #eaf1fb; /* Lighter Google Blue shade */
-        color: #4285F4;
-    }
-    .btn-gscholar:hover {
-        background-color: #4285F4;
-        border-color: #4285F4;
-    }
-    .btn-gscholar > svg {
-        fill: #4285F4;
-    }
-    .btn-gscholar:hover > svg {
-        fill: #fff;
-    }
-
-    /* GitHub */
-    .btn-github:hover { background-color: #24292e; border-color: #24292e; }
-    .btn-github > i { color: #24292e; }
-    .btn-github:hover > i { color: #fff; }
-
-    /* Twitter */
-    .btn-twitter:hover { background-color: #1DA1F2; border-color: #1DA1F2; }
-    .btn-twitter > i { color: #1DA1F2; }
-    .btn-twitter:hover > i { color: #fff; }
-
-    /* LinkedIn */
-    .btn-linkedin:hover { background-color: #0A66C2; border-color: #0A66C2; }
-    .btn-linkedin > i { color: #0A66C2; }
-    .btn-linkedin:hover > i { color: #fff; }
-
-    /* ORCID */
-    .btn-orcid:hover { background-color: #A6CE39; border-color: #A6CE39; }
-    .btn-orcid > i { color: #A6CE39; }
-    .btn-orcid:hover > i { color: #fff; }
-
-    /* WeChat */
-    .btn-wechat:hover { background-color: #07C160; border-color: #07C160; }
-    .btn-wechat > i { color: #07C160; }
-    .btn-wechat:hover > i { color: #fff; }
-
+  /* Small accessibility & niceties */
+  .position-logo { opacity: 0.95; }
+  .email-text { word-break: break-all; line-height: 1.45; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
 </style>
 
 {% if site.data.profile.wechat_qrcode %}
@@ -219,7 +292,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content rounded-3">
             <div class="modal-body p-0 text-center">
-                <img src="{{ site.data.profile.wechat_qrcode | relative_url }}" class="img-fluid rounded-3">
+                <img src="{{ site.data.profile.wechat_qrcode | relative_url }}" class="img-fluid rounded-3" alt="WeChat QR code">
             </div>
             {% if site.data.profile.wechat_prompt %}
             <div class="modal-body p-3 bg-light rounded-bottom-3">
