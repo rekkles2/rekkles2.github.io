@@ -173,40 +173,43 @@ h1,h2,h3,h4,h5,h6{font-weight:700;color:var(--ink);}
   border-color:#b7c0d0; transform:translateY(-1px);
 }
 
-/* ===== Bilibili视频：铺满 80% 屏宽（16:9，严格 80vw，自适应高度） ===== */
-.joyvoice-video-80vw{
-  width: 80vw;              /* 严格 80% 屏幕宽度 */
-  max-width: 100%;          /* 防止越出父级极端布局 */
-  margin: 0 auto;
+/* === Responsive Bilibili embed: 限宽 + 自适应比例 === */
+.joyvoice-project-video{           /* 放在卡片里的最外层容器 */
+  display: block;                  /* 避免父层 flex 样式干扰 */
+  overflow: visible;
 }
 
-.jv-embed-ratio{
+/* 可调：--jv-max 控制最大像素宽度；--jv-w 控制视口占比 */
+.jv-embed{
+  width: min(var(--jv-w, 80vw), var(--jv-max, 1080px)); /* 既不超过 80vw，也不超过 1080px */
+  max-width: 100%;                 /* 若父容器比上面更窄，则以父容器宽度为准 */
+  margin-inline: auto;
+  flex: 0 0 auto;                  /* 禁止在 flex 布局中被收缩 */
+}
+
+/* 16:9 比例容器（现代浏览器） */
+.jv-embed--16x9{
   position: relative;
+  aspect-ratio: 16 / 9;            /* 现代方案：用 CSS aspect-ratio 锁定比例 */
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
-  /* 现代浏览器优先：用 aspect-ratio 锁 16:9 */
-  aspect-ratio: 16 / 9;
+  background:#000;
 }
 
-/* 兼容性回退：不支持 aspect-ratio 时，用 padding 百分比创建 16:9 盒子 */
-@supports not (aspect-ratio: 16 / 9) {
-  .jv-embed-ratio{ height: 0; padding-top: 56.25%; }
+/* 旧浏览器回退（无 aspect-ratio 时启用 padding 盒） */
+@supports not (aspect-ratio: 1) {
+  .jv-embed--16x9 { height: 0; padding-top: 56.25%; }   /* 9 / 16 = 0.5625 */
+  .jv-embed--16x9 > iframe { position: absolute; inset: 0; }
 }
 
-.jv-embed-ratio iframe{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+/* 统一把 iframe 绝对填满比例盒；提高优先级以覆盖主题的全局规则 */
+.jv-embed--16x9 > iframe{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
   border: 0;
   display: block;
-}
-
-/* 置于项目卡片中的容器：让 80vw 居中且不挤压其它元素 */
-.joyvoice-project-video{
-  display: flex;
-  justify-content: center;
 }
 
 /* 语言按钮 */
