@@ -1,0 +1,127 @@
+{% assign info = site.data.joyvoice.info %}
+{% assign studio = info.studio %}
+<section class="joyvoice-welcome py-5">
+  <div class="container px-0">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm bg-white h-100">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="text-center text-lg-start mb-4">
+              {% if studio.logo %}
+                <div class="joyvoice-logo-wrapper mb-3">
+                  <img src="{{ studio.logo | relative_url }}" alt="{{ studio.name | default: 'JoyVoice Studio' }} logo" class="joyvoice-logo img-fluid">
+                </div>
+              {% endif %}
+              <h1 class="h3 mb-1">{{ studio.name | default: 'JoyVoice Studio' }}</h1>
+              {% if studio.subtitle %}
+                <p class="text-muted mb-0">{{ studio.subtitle }}</p>
+              {% endif %}
+            </div>
+            {% if studio.description %}
+              <div class="joyvoice-description text-muted small mb-4">
+                {% for paragraph in studio.description %}
+                  <p class="mb-2">{{ paragraph }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if studio.highlights %}
+              <div class="joyvoice-highlights mt-auto">
+                <ul class="list-unstyled mb-0">
+                  {% for item in studio.highlights %}
+                    <li class="d-flex align-items-center py-1 joyvoice-highlight-item">
+                      <span class="joyvoice-highlight-label text-muted">{{ item.label }}</span>
+                      <span class="joyvoice-highlight-separator mx-2">·</span>
+                      <span class="joyvoice-highlight-value">{{ item.value }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm bg-white h-100">
+          <div class="card-body p-4 p-lg-5 d-flex flex-column">
+            <div class="joyvoice-section-header d-flex align-items-center mb-4">
+              <div>
+                <h2 class="h4 mb-1">{{ studio.introduction.title | default: '工作室介绍' }}</h2>
+                {% if studio.subtitle %}
+                  <p class="text-muted mb-0">{{ studio.subtitle }}</p>
+                {% endif %}
+              </div>
+            </div>
+            {% if studio.introduction.paragraphs %}
+              <div class="joyvoice-introduction text-muted">
+                {% for paragraph in studio.introduction.paragraphs %}
+                  <p class="mb-3">{{ paragraph }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 mt-1">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm bg-white h-100">
+          <div class="card-body p-4 p-lg-5">
+            <h2 class="h4 mb-3">{{ studio.team.title | default: '人员构成' }}</h2>
+            {% if studio.team.description %}
+              <p class="text-muted mb-4">{{ studio.team.description }}</p>
+            {% endif %}
+            {% if studio.team.groups %}
+              <div class="joyvoice-team-groups">
+                {% for group in studio.team.groups %}
+                  <div class="joyvoice-team-group mb-4">
+                    <div class="d-flex flex-column flex-lg-row align-items-lg-center mb-2">
+                      <h3 class="h6 mb-1 mb-lg-0">{{ group.name }}</h3>
+                      {% if group.summary %}
+                        <span class="text-muted small ms-lg-3">{{ group.summary }}</span>
+                      {% endif %}
+                    </div>
+                    {% if group.members %}
+                      <ul class="list-unstyled mb-0 joyvoice-team-members">
+                        {% for member in group.members %}
+                          <li class="joyvoice-team-member py-2">
+                            <div class="fw-semibold">{{ member.name }}</div>
+                            {% if member.role %}
+                              <div class="text-muted small">{{ member.role }}</div>
+                            {% endif %}
+                            {% if member.bio %}
+                              <p class="text-muted small mb-0">{{ member.bio }}</p>
+                            {% endif %}
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm bg-white h-100">
+          <div class="card-body p-4 p-lg-5 d-flex flex-column">
+            <h2 class="h4 mb-3">{{ studio.goals.title | default: '工作目标' }}</h2>
+            {% if studio.goals.description %}
+              <p class="text-muted">{{ studio.goals.description }}</p>
+            {% endif %}
+            {% if studio.goals.items %}
+              <ol class="joyvoice-goals list-unstyled mt-3 mb-0">
+                {% for item in studio.goals.items %}
+                  <li class="joyvoice-goal-item d-flex align-items-start mb-3">
+                    <span class="joyvoice-goal-index me-3">{{ forloop.index }}</span>
+                    <span class="joyvoice-goal-text">{{ item }}</span>
+                  </li>
+                {% endfor %}
+              </ol>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

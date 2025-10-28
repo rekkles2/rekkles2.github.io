@@ -91,8 +91,134 @@ div.lazy {
 }
 
 .scrollable-news-list {
-  max-height: 450px; /* 根据需要调整高度 */
-  overflow-y: auto;
-  padding-right: 15px;
+    max-height: 450px; /* 根据需要调整高度 */
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+
+/* JoyVoice Studio showcase styles */
+.joyvoice-welcome .card,
+.joyvoice-portfolio .card {
+    border-radius: 1rem !important;
+}
+
+.joyvoice-logo-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: #f5f6fa;
+    border-radius: 0.75rem;
+}
+
+.joyvoice-logo {
+    max-height: 90px;
+    width: auto;
+}
+
+.joyvoice-description p:last-child {
+    margin-bottom: 0;
+}
+
+.joyvoice-highlight-item {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.joyvoice-highlight-item:last-child {
+    border-bottom: none;
+}
+
+.joyvoice-highlight-label {
+    min-width: 4.5rem;
+}
+
+.joyvoice-highlight-value {
+    font-weight: 600;
+}
+
+.joyvoice-team-member + .joyvoice-team-member {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.joyvoice-goal-item {
+    background: #f8f9fc;
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+}
+
+.joyvoice-goal-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 700;
+    background-color: #3758f9;
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+.joyvoice-goal-text {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.joyvoice-project-card .card-body {
+    background: #fff;
+}
+
+.joyvoice-project-cover {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.joyvoice-project-cover::before {
+    content: "";
+    display: block;
+    padding-top: 56.25%;
+}
+
+.joyvoice-project-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.joyvoice-project-credits dt {
+    font-weight: 600;
+}
+
+.joyvoice-project-credits dd {
+    margin-bottom: 0;
+}
+
+.joyvoice-badge {
+    background-color: rgba(55, 88, 249, 0.1);
+    color: #3758f9;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.joyvoice-portfolio-section + .joyvoice-portfolio-section {
+    margin-top: 3rem;
+}
+
+@media (max-width: 767.98px) {
+  .joyvoice-goal-item {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+    .joyvoice-goal-index {
+    align-self: flex-start;
+  }
 }
 
