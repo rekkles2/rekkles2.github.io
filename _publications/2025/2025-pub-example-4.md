@@ -23,4 +23,18 @@ authors:
 links:
   Paper: https://ieeexplore.ieee.org/document/11036561
   Code: https://github.com/rekkles2/Fed_WSVAD
+  Website: https://rekkles2.github.io/Fed_WSVAD/#README.md
 ---
+
+
+[//]: # (  Paper:)
+
+[//]: # (  Code: )
+
+[//]: # (  Arxiv: )
+
+[//]: # (Dataset)
+
+[//]: # (  Website: )
+
+[//]: # (  Demo: )

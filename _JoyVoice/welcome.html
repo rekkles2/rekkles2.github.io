@@ -1,135 +1,419 @@
 {% assign info = site.data.joyvoice.info %}
 {% if info %}
-  <!-- 三合一欢迎卡片 START -->
-  <div class="card border-0 shadow-sm bg-white rounded-xl overflow-hidden mb-5">
-    <!-- 头部区域：logo和简介 -->
-    <div class="p-4 p-lg-5 border-bottom bg-light">
-      <div class="row align-items-center">
-        {% if info.studio.logo %}
-        <div class="col-md-auto mb-3 mb-md-0">
-          <div class="joyvoice-logo-wrapper">
-            <img src="{{ info.studio.logo | relative_url }}" alt="{{ info.studio.name | default: 'JoyVoice Studio' }} logo" class="joyvoice-logo">
+<div class="container">
+
+  <!-- 顶部名片 -->
+  <div class="card border-0 shadow-sm bg-white rounded-xl mb-4 position-relative">
+    <button id="joyvoice-lang-toggle"
+            class="btn btn-sm d-flex align-items-center shadow-sm position-absolute top-0 end-0 m-3"
+            type="button" aria-label="Toggle language" aria-pressed="false">
+      <i class="bi bi-translate me-1" aria-hidden="true"></i>
+      <span id="lang-toggle-text" class="joyvoice-lang-text">[English/中文]</span>
+    </button>
+
+    <div class="card-body p-4 p-lg-5">
+      <div class="row align-items-center g-5">
+        <!-- 左：Logo -->
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <div class="joyvoice-logo-container">
+            <div class="joyvoice-logo-wrapper">
+              <img src="{{ info.studio.logo | relative_url }}" alt="{{ info.studio.name }}"
+                   class="joyvoice-logo" loading="lazy" decoding="async">
+            </div>
           </div>
         </div>
-        {% endif %}
 
-        <div class="col">
-          <h2 class="text-gray-900 mb-1 display-6 fw-bold">{{ info.studio.name | default: 'JoyVoice Studio' }}</h2>
-          {% if info.studio.subtitle %}
-          <p class="text-primary-700 fw-semibold mb-2 fs-5">{{ info.studio.subtitle }}</p>
-          {% endif %}
+        <!-- 右：标题（英文逐字静态渐变）与简介 -->
+        <div class="col-lg-7">
+          <h1 class="joyvoice-hero-title mb-2">
+            <!-- 中文：普通渐变标题 -->
+            <span class="joyvoice-title-text joyvoice-lang" data-lang="zh">{{ info.studio.name }}</span>
+            <!-- 英文：每个字固定配色 -->
+            <span class="d-none joyvoice-lang" data-lang="en">
+              <span class="jv-title-colored" aria-label="{{ info.studio.name_en }}">
+                <span class="jv-letter jv-g1">J</span><span class="jv-letter jv-g2">o</span><span class="jv-letter jv-g3">y</span><span class="jv-letter jv-g4">V</span><span class="jv-letter jv-g5">o</span><span class="jv-letter jv-g6">i</span><span class="jv-letter jv-g7">c</span><span class="jv-letter jv-g8">e</span><span class="jv-space">&nbsp;</span><span class="jv-letter jv-g9">S</span><span class="jv-letter jv-g10">t</span><span class="jv-letter jv-g11">u</span><span class="jv-letter jv-g12">d</span><span class="jv-letter jv-g13">i</span><span class="jv-letter jv-g14">o</span>
+              </span>
+            </span>
+          </h1>
 
-          {% if info.studio.description %}
-          <div class="joyvoice-description text-gray-700 mb-3">
-            {% for paragraph in info.studio.description %}
-            <p class="mb-2">{{ paragraph }}</p>
+          <p class="joyvoice-hero-subtitle mb-3">
+            <span class="joyvoice-lang" data-lang="zh">{{ info.studio.subtitle }}</span>
+            <span class="d-none joyvoice-lang" data-lang="en">{{ info.studio.subtitle_en }}</span>
+          </p>
+
+          <div class="joyvoice-hero-description mb-3">
+            {% for p in info.studio.description %}
+              <p class="joyvoice-lead joyvoice-lang" data-lang="zh">{{ p }}</p>
+            {% endfor %}
+            {% for p in info.studio.description_en %}
+              <p class="joyvoice-lead d-none joyvoice-lang" data-lang="en">{{ p }}</p>
             {% endfor %}
           </div>
-          {% endif %}
 
-          <!-- 信息卡片行 -->
-          {% if info.studio.highlights %}
-          <div class="row g-3 mt-3">
-            {% for highlight in info.studio.highlights %}
-            <div class="col-sm-6 col-lg-4">
-              <div class="joyvoice-highlight-item p-3 rounded-xl bg-white border hover-effect">
-                <div class="d-flex align-items-center">
-                  <span class="joyvoice-highlight-label text-muted small fw-semibold me-2">{{ highlight.label }}</span>
-                  <span class="joyvoice-highlight-value fw-medium">{{ highlight.value }}</span>
+          <div class="joyvoice-highlight-grid">
+            {% for h in info.studio.highlights %}
+              <div class="joyvoice-highlight-item">
+                <span class="joyvoice-highlight-label joyvoice-lang" data-lang="zh">{{ h.label }}</span>
+                <span class="joyvoice-highlight-label d-none joyvoice-lang" data-lang="en">{{ h.label_en }}</span>
+                <span class="joyvoice-highlight-value joyvoice-lang" data-lang="zh">{{ h.value }}</span>
+                <span class="joyvoice-highlight-value d-none joyvoice-lang" data-lang="en">{{ h.value_en }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="joyvoice-divider my-4"></div>
+
+      <!-- 目标（显眼列表） -->
+      <section>
+        <h2 class="joyvoice-section-h">
+          <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ info.goals.title }}</span>
+          <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ info.goals.title_en }}</span>
+        </h2>
+
+        <p class="text-muted mb-3 joyvoice-lang" data-lang="zh">{{ info.goals.description }}</p>
+        <p class="text-muted mb-3 d-none joyvoice-lang" data-lang="en">{{ info.goals.description_en }}</p>
+
+        <ol class="joyvoice-ol joyvoice-ol-strong mb-0 joyvoice-lang" data-lang="zh">
+          {% for g in info.goals.items %}<li>{{ g }}</li>{% endfor %}
+        </ol>
+        <ol class="joyvoice-ol joyvoice-ol-strong mb-0 d-none joyvoice-lang" data-lang="en">
+          {% for g in info.goals.items_en %}<li>{{ g }}</li>{% endfor %}
+        </ol>
+      </section>
+
+      <!-- 团队 -->
+      <section class="mt-4">
+        <h2 class="joyvoice-section-h">
+          <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ info.team.title }}</span>
+          <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ info.team.title_en }}</span>
+        </h2>
+        <p class="joyvoice-team-desc joyvoice-lang" data-lang="zh">{{ info.team.description }}</p>
+        <p class="joyvoice-team-desc d-none joyvoice-lang" data-lang="en">{{ info.team.description_en }}</p>
+
+        <div class="joyvoice-team-group">
+          <h3 class="joyvoice-group-h joyvoice-lang" data-lang="zh">创始人</h3>
+          <h3 class="joyvoice-group-h d-none joyvoice-lang" data-lang="en">Founders</h3>
+          <div class="joyvoice-team-name joyvoice-lang" data-lang="zh">{{ info.team.founders }}</div>
+          <div class="joyvoice-team-name d-none joyvoice-lang" data-lang="en">{{ info.team.founders_en }}</div>
+        </div>
+
+        <div class="joyvoice-team-group mt-3">
+          <h3 class="joyvoice-group-h joyvoice-lang" data-lang="zh">核心团队</h3>
+          <h3 class="joyvoice-group-h d-none joyvoice-lang" data-lang="en">Core Team</h3>
+          <div class="joyvoice-team-name joyvoice-lang" data-lang="zh">{{ info.team.staff }}</div>
+          <div class="joyvoice-team-name d-none joyvoice-lang" data-lang="en">{{ info.team.staff_en }}</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== 广播剧 ===== -->
+  {% assign drama_section = info.portfolio.drama %}
+  {% if drama_section and drama_section.projects %}
+  <section aria-label="Portfolio - Drama">
+    <h2 class="joyvoice-section-h">
+      <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ drama_section.title }}</span>
+      <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ drama_section.title_en }}</span>
+    </h2>
+    <p class="joyvoice-section-text mb-2 joyvoice-lang" data-lang="zh">{{ drama_section.description }}</p>
+    <p class="joyvoice-section-text mb-2 d-none joyvoice-lang" data-lang="en">{{ drama_section.description_en }}</p>
+    <div class="joyvoice-divider"></div>
+
+    <div class="row g-4">
+      {% for project in drama_section.projects %}
+      <div class="col-12 mb-5">
+        <article class="joyvoice-showcase-card" aria-labelledby="drama-{{ forloop.index }}-title">
+          <div class="row g-0 align-items-stretch">
+            <!-- 左：封面（横向滑动轮播） -->
+            <div class="col-lg-5">
+              {% assign has_covers = project.covers %}
+              <div class="joyvoice-cover-stack">
+                {% if has_covers and project.covers.size > 1 %}
+                  <section class="joyvoice-carousel" role="region" aria-roledescription="carousel" aria-label="{{ project.title }}" data-autoplay="true">
+                    <div class="joyvoice-carousel-viewport">
+                      {% for img in project.covers %}
+                      <div class="joyvoice-slide">
+                        <img class="joyvoice-cover-img" src="{{ img | relative_url }}" alt="{{ project.title }} cover {{ forloop.index }}" loading="lazy" decoding="async">
+                      </div>
+                      {% endfor %}
+                    </div>
+                    <button class="joyvoice-prev" type="button" aria-label="Previous slide"></button>
+                    <button class="joyvoice-next" type="button" aria-label="Next slide"></button>
+                    <div class="joyvoice-dots" role="tablist" aria-label="Select slide">
+                      {% for img in project.covers %}
+                      <button class="joyvoice-dot{% if forloop.first %} is-active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+                      {% endfor %}
+                    </div>
+                  </section>
+                {% else %}
+                  <div class="joyvoice-cover-single">
+                    <img src="{{ project.cover | default: project.covers | relative_url }}" alt="{{ project.title }}" loading="lazy" decoding="async" class="joyvoice-cover-img">
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- 右：文案 -->
+            <div class="col-lg-7">
+              <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
+                <div>
+                  <h3 id="drama-{{ forloop.index }}-title" class="joyvoice-showcase-title mb-1">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.title }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.title_en }}</span>
+                  </h3>
+
+                  {% if project.tagline %}
+                  <p class="joyvoice-showcase-tagline mb-2">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.tagline }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.tagline_en }}</span>
+                  </p>
+                  {% endif %}
+
+                  {% if project.summary %}
+                  <p class="joyvoice-section-text mb-3">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.summary }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.summary_en }}</span>
+                  </p>
+                  {% endif %}
+
+                  {% if project.details %}
+                  <div class="joyvoice-project-details mb-3">
+                    <h4 class="joyvoice-block-h joyvoice-lang" data-lang="zh">剧集介绍</h4>
+                    <h4 class="joyvoice-block-h d-none joyvoice-lang" data-lang="en">Synopsis</h4>
+                    <p class="joyvoice-section-text mb-0">
+                      <span class="joyvoice-lang" data-lang="zh">{{ project.details }}</span>
+                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.details_en }}</span>
+                    </p>
+                  </div>
+                  {% endif %}
+
+                  <div class="joyvoice-meta small text-muted mb-3">
+                    <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }} 次</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
+                  </div>
+
+                  {% if project.pv_links %}
+                  <div class="joyvoice-project-links d-flex flex-wrap gap-2 mb-3">
+                    {% for link in project.pv_links %}
+                      <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
+                        <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                        <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
+                        <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
+                      </a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+
+                  {% if project.credits or project.cast %}
+                  <div class="joyvoice-project-credits">
+                    {% if project.credits %}
+                    <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">主要制作人员</h5>
+                    <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Production Team</h5>
+                    <ul class="joyvoice-ul mb-3">
+                      {% for c in project.credits %}<li class="joyvoice-lang" data-lang="zh">{{ c }}</li>{% endfor %}
+                      {% for c in project.credits_en %}<li class="d-none joyvoice-lang" data-lang="en">{{ c }}</li>{% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if project.cast %}
+                    <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">主要参演人员</h5>
+                    <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Cast</h5>
+                    <ul class="joyvoice-ul mb-0">
+                      {% for a in project.cast %}<li class="joyvoice-lang" data-lang="zh">{{ a }}</li>{% endfor %}
+                      {% for a in project.cast_en %}<li class="d-none joyvoice-lang" data-lang="en">{{ a }}</li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="mt-auto">
+                  {% if project.tags %}
+                  <div class="joyvoice-project-tags d-flex flex-wrap gap-1 mt-3">
+                    {% for tag in project.tags %}
+                      <span class="badge">
+                        <span class="joyvoice-lang" data-lang="zh">{{ tag }}</span>
+                        <span class="joyvoice-lang d-none" data-lang="en">{{ project.tags_en[forloop.index0] }}</span>
+                      </span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
                 </div>
               </div>
             </div>
-            {% endfor %}
+
           </div>
-          {% endif %}
-        </div>
+        </article>
       </div>
+      {% endfor %}
     </div>
-
-    <!-- 内容区域：介绍和目标 -->
-    <div class="p-4 p-lg-5">
-      <div class="row g-5">
-        <!-- 工作室介绍 -->
-        <div class="col-lg-6">
-          {% if info.introduction %}
-          <div class="mb-4">
-            <h4 class="text-gray-900 mb-3 fs-4 fw-bold">{{ info.introduction.title | default: '工作室介绍' }}</h4>
-            {% for paragraph in info.introduction.paragraphs %}
-            <p class="text-gray-700 mb-3">{{ paragraph }}</p>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-
-        <!-- 工作目标 -->
-        <div class="col-lg-6">
-          {% if info.goals %}
-          <div>
-            <h4 class="text-gray-900 mb-4 fs-4 fw-bold">{{ info.goals.title | default: '工作目标' }}</h4>
-            {% if info.goals.description %}
-            <p class="text-gray-700 mb-4">{{ info.goals.description }}</p>
-            {% endif %}
-            {% if info.goals.items %}
-            <div class="d-grid gap-3">
-              {% for goal in info.goals.items %}
-              <div class="joyvoice-goal-item d-flex align-items-start p-3 rounded-xl bg-light">
-                <span class="joyvoice-goal-index me-3 mt-1">•</span>
-                <span class="joyvoice-goal-text flex-grow-1">{{ goal }}</span>
-              </div>
-              {% endfor %}
-            </div>
-            {% endif %}
-          </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 三合一欢迎卡片 END -->
-
-  {% assign team = info.team %}
-  {% if team %}
-    <div class="row mt-3">
-      <div class="col">
-        <div class="card border-0 shadow-sm bg-white rounded-xl">
-          <div class="card-body p-4 p-lg-5">
-            <h4 class="text-gray-900 mb-4 fs-4 fw-bold">{{ team.title | default: '人员构成' }}</h4>
-            {% if team.description %}
-            <p class="text-gray-700 mb-4 fs-5">{{ team.description }}</p>
-            {% endif %}
-
-            {% if team.groups %}
-              <div class="row g-4">
-                {% for group in team.groups %}
-                  <div class="col-12 col-lg-6">
-                    <div class="joyvoice-team-group h-100 p-4 border rounded-xl hover-effect">
-                      <h5 class="text-gray-900 mb-3 fw-bold">{{ group.name }}</h5>
-                      {% if group.summary %}
-                        <p class="text-gray-700 mb-3">{{ group.summary }}</p>
-                      {% endif %}
-                      {% if group.members %}
-                        <div class="joyvoice-team-members">
-                          {% for member in group.members %}
-                            <div class="{% unless forloop.last %}mb-4 pb-4 border-bottom{% else %}mb-0{% endunless %} pt-2">
-                              <div class="fw-bold text-gray-900 fs-5">{{ member.name }}</div>
-                              {% if member.role %}
-                                <div class="text-primary-700 fw-medium mt-1">{{ member.role }}</div>
-                              {% endif %}
-                              {% if member.bio %}
-                                <p class="text-gray-700 mb-0 mt-2">{{ member.bio }}</p>
-                              {% endif %}
-                            </div>
-                          {% endfor %}
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
+  </section>
   {% endif %}
+
+  <!-- ===== 音乐 ===== -->
+  {% assign music_section = info.portfolio.music %}
+  {% if music_section and music_section.projects %}
+  <section aria-label="Portfolio - Music">
+    <h2 class="joyvoice-section-h">
+      <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ music_section.title }}</span>
+      <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ music_section.title_en }}</span>
+    </h2>
+    <p class="joyvoice-section-text mb-2 joyvoice-lang" data-lang="zh">{{ music_section.description }}</p>
+    <p class="joyvoice-section-text mb-2 d-none joyvoice-lang" data-lang="en">{{ music_section.description_en }}</p>
+    <div class="joyvoice-divider"></div>
+
+    <div class="row g-4">
+      {% for project in music_section.projects %}
+      <div class="col-12 mb-5">
+        <article class="joyvoice-showcase-card">
+          <div class="row g-0">
+            <div class="col-12">
+              <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
+                <div>
+                  <h3 class="joyvoice-showcase-title mb-1">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.title }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.title_en }}</span>
+                  </h3>
+
+                  {% if project.tagline %}
+                  <p class="joyvoice-showcase-tagline mb-2">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.tagline }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.tagline_en }}</span>
+                  </p>
+                  {% endif %}
+
+                  {% if project.summary %}
+                  <p class="joyvoice-section-text mb-3">
+                    <span class="joyvoice-lang" data-lang="zh">{{ project.summary }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.summary_en }}</span>
+                  </p>
+                  {% endif %}
+
+                  <div class="joyvoice-meta small text-muted mb-3">
+                    <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }} 次</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
+                  </div>
+
+                  {% if project.staff %}
+                  <div class="joyvoice-project-staff mb-3">
+                    <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">制作团队</h5>
+                    <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Production Team</h5>
+                    <p class="joyvoice-section-text mb-0">
+                      <span class="joyvoice-lang" data-lang="zh">{{ project.staff }}</span>
+                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.staff_en }}</span>
+                    </p>
+                  </div>
+                  {% endif %}
+
+                  {% if project.video_embed %}
+                  <div class="joyvoice-project-video mb-3">
+                    {{ project.video_embed }}
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="mt-auto">
+                  {% if project.links %}
+                  <div class="joyvoice-project-links d-flex flex-wrap gap-2 mt-3">
+                    {% for link in project.links %}
+                    <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
+                      <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                      <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
+                      <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
+                    </a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+
+                  {% if project.tags %}
+                  <div class="joyvoice-project-tags d-flex flex-wrap gap-1 mt-3">
+                    {% for tag in project.tags %}
+                    <span class="badge">
+                      <span class="joyvoice-lang" data-lang="zh">{{ tag }}</span>
+                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.tags_en[forloop.index0] }}</span>
+                    </span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>
 {% endif %}
+
+<!-- 统一脚本：语言切换 + 5s滑动轮播（横向 translateX） -->
+<script>
+if (!window.joyvoiceBootLoaded) {
+  window.joyvoiceBootLoaded = true;
+
+  function setLanguage(lang) {
+    const other = (lang === 'zh') ? 'en' : 'zh';
+    document.querySelectorAll('.joyvoice-lang[data-lang="'+lang+'"]').forEach(el=>el.classList.remove('d-none'));
+    document.querySelectorAll('.joyvoice-lang[data-lang="'+other+'"]').forEach(el=>el.classList.add('d-none'));
+    localStorage.setItem('joyvoice-lang', lang);
+    document.body.classList.toggle('joyvoice-lang-en', lang === 'en');
+    document.body.classList.toggle('joyvoice-lang-zh', lang === 'zh');
+    const btnTxt = document.getElementById('lang-toggle-text');
+    if (btnTxt) btnTxt.textContent = (lang === 'zh') ? 'English' : '中文';
+    const btn = document.getElementById('joyvoice-lang-toggle');
+    if (btn) btn.setAttribute('aria-pressed', (lang === 'en').toString());
+  }
+
+  function initCarousels(){
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.joyvoice-carousel').forEach((root)=>{
+      const viewport = root.querySelector('.joyvoice-carousel-viewport');
+      const slides = Array.from(root.querySelectorAll('.joyvoice-slide'));
+      const dots = Array.from(root.querySelectorAll('.joyvoice-dot'));
+      const prev = root.querySelector('.joyvoice-prev');
+      const next = root.querySelector('.joyvoice-next');
+      let index = 0, timer = null;
+
+      // 核心：translateX 横向滑动（banner）
+      const update = ()=>{
+        const x = -index * 100;
+        viewport.style.transform = 'translateX(' + x + '%)';
+        dots.forEach((d,k)=>{ d.classList.toggle('is-active',k===index); d.setAttribute('aria-selected',k===index?'true':'false'); });
+      };
+      const go = (dir)=>{ index=(index+dir+slides.length)%slides.length; update(); };
+
+      const start=()=>{ if (reduceMotion) return; if(!timer) timer=setInterval(()=>go(1),5000); };
+      const stop =()=>{ if(timer){clearInterval(timer); timer=null;} };
+
+      prev && prev.addEventListener('click',()=>{ go(-1); start(); });
+      next && next.addEventListener('click',()=>{ go(1); start(); });
+      dots.forEach((d,k)=>d.addEventListener('click',()=>{ index=k; update(); start(); }));
+
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      root.setAttribute('tabindex','0');
+      root.addEventListener('keydown',(e)=>{ if(e.key==='ArrowLeft'){go(-1);start();} if(e.key==='ArrowRight'){go(1);start();} });
+
+      // 触摸滑动
+      let x0=null;
+      viewport.addEventListener('touchstart',(e)=>{ x0=e.touches[0].clientX; stop(); },{passive:true});
+      viewport.addEventListener('touchend',(e)=>{ if(x0==null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) go(dx>0?-1:1); x0=null; start(); },{passive:true});
+
+      update(); start();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    setLanguage(localStorage.getItem('joyvoice-lang') || 'zh');
+    const toggle=document.getElementById('joyvoice-lang-toggle');
+    if (toggle) toggle.addEventListener('click',()=> setLanguage( (localStorage.getItem('joyvoice-lang')==='zh') ? 'en' : 'zh' ));
+    initCarousels();
+  });
+}
+</script>
