@@ -3,21 +3,21 @@ secondary_name: ""
 navbar_name: "Jiahang Li"
 
 positions:
-- name: Position 2 without logo
+- name: B.Eng. in Intelligent Science and Technology
 
 
 
 
-email: "lijiahang041119[at]gmail.com"
+email: "lijiahang041119[At]gmail.com"
 cv_link: /assets/images/badges/MIT_Social_circle.png
-gscholar: xFmQpf4AAAAJ  # This is an example, replace it with your own Google Scholar ID
-github: your_github_id
+gscholar: BqDQDlIAAAAJ&hl  # This is an example, replace it with your own Google Scholar ID
+github: rekkles2
 #twitter: your_twitter_id  # Do not include the '@' symbol
-wechat_qrcode: /assets/images/badges/MIT_Social_circle.png
+wechat_qrcode: /assets/images/badges/wechat.png
 wechat_prompt: >-
   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
-linkedin: your-linked-in-id
-orcid: 0000-0000-0000-0000
+linkedin: 22-JHLI
+orcid: https://orcid.org/0009-0002-3403-5589
 
 
 
@@ -25,32 +25,39 @@ orcid: 0000-0000-0000-0000
 short_bio_text_justify: true
 short_bio: >-
   <p>
-    A <a href="https://en.wikipedia.org/wiki/Bicolor_cat" target="_blank">bicolor cat</a> is a cat with white fur combined with fur of some other colour, for example solid black, tabby, or colourpointed.
+    Hi, I'm Jiahang! I'm a fourth-year undergraduate at Tianjin Normal University, 
+    advised by Lect. Yong Su at the Tianjin Key Laboratory of Wireless Mobile 
+    Communications and Power Transmission. Previously, my research mainly focused 
+    on developing robust, privacy-preserving video anomaly detection methods for 
+    distributed intelligent surveillance systems, 
+    particularly under weak supervision and heterogeneous scene conditions.
   </p>
   
-  </p>
-    There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-    and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-    as well as being common in domestic longhair and domestic shorthair cats. There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-    and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-    as well as being common in domestic longhair and domestic shorthair cats.
   <p>
+    I'm also the co-founder of 
+    <strong>JoyVoice Studio</strong> 
+    (<em>noncommercial creative studio</em>) producing 
+    voice dubbing, original audio dramas, and original songs. 
+    I aim to leverage my experience in 
+    <span style="color:#8BC48A; font-weight:500;">voice dubbing</span> and 
+    <span style="color:#F7BFC3; font-weight:500;">sound design</span> 
+    to strengthen multimodal understanding and content creation.
+  </p>
+
+
+  
+  <p>  
+    I'm always excited to discuss new ideas and potential collaborations — feel free to reach out if you'd like to discuss ideas or potential collaborations!☺️
+  </p>
   
   <p>
     <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;"> 📢I am actively seeking 2026 Fall MPhil/PhD positions, please don’t hesitate to contact me if you think I might be a good fit! 
-  <p>
+  </p>
   
   <p>
     <span style="color: #c1121f; font-weight: 600; letter-spacing: 0.2px;"> If you want to know more, please see <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A"> FAQ & Insights</a> ->></span>
   </p>
-  
-  <p>
-    There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-        and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-        as well as being common in domestic longhair and domestic shorthair cats. There are various patterns of a bicolour cat. These range from the Van-patterned (colour on the crown of the head 
-        and the tail only) to a solid colour with a throat locket or medallion. Bicolour coats are found in many cat breeds, 
-        as well as being common in domestic longhair and domestic shorthair cats.
-  <p>
+
 quote: >-
   Stay Hungry. Stay Foolish.
   — Steve Jobs, Stanford Commencement Speech (2005)
@@ -63,9 +70,9 @@ quote: >-
 
 
 
-portrait_url: /assets/images/photos/portrait.jpg
+portrait_url: /assets/images/photos/picture.jpg
 portrait_caption: >-
-  Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
+  Photographed at my home for the Flower Monthly event.
 
 
 
@@ -78,32 +85,32 @@ portrait_caption: >-
 
 
 education:
-- name: "Massachusetts Institute of Technology"
-  logo: "/assets/images/badges/MIT_Social_circle.png"
-  lab:
-    name: "@Media lab"
-    url: "https://www.media.mit.edu/"
-  position: >- 
-    Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
-  advisor:
-    - name: "Dr. XXX"
-      url:  "https://www.media.mit.edu/"
-  date: "Sep. 2024 - present"
-
-- name: "Peking University"
-  logo: "/assets/images/badges/PKU_red.png"
+#- name: "Tianjin Normal University"
+#  logo: "/assets/images/badges/tjnu.png"
 #  lab:
-#    name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
-#    url: none
+#    name: "@Media lab"
+#    url: "https://www.media.mit.edu/"
+#  position: >-
+#    Department of Electrical Engineering and Computer Science <br/>
+#    Ph.D. Student
+#  advisor:
+#    - name: "Dr. XXX"
+#      url:  "https://www.media.mit.edu/"
+#  date: "Sep. 2024 - present"
+
+- name: "Tianjin Normal University"
+  logo: "/assets/images/badges/tjnu.png"
+  lab:
+    name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
+    url: none
   position: >- 
-    B.S. in Computer Science
+    B.Eng. in Intelligent Science and Technology <br/>
   advisor:
-    - name: "Dr. XXX"
-      url: "https://www.media.mit.edu/"
-    - name: "Dr. YYY"
-      url: "https://www.media.mit.edu/"
-  date: "Sep. 2019 - Jul. 2021"
+    - name: "Lect. Yong Su"
+#      url: "https://www.media.mit.edu/"
+#    - name: "Dr. YYY"
+#      url: "https://www.media.mit.edu/"
+  date: "Sep. 2022 – Jul. 2026"
 
 
 
@@ -117,51 +124,19 @@ education:
 
 
 experience:
-- name: Massachusetts Institute of Technology
-  logo: /assets/images/badges/PKU_red.png
+- name: Tianjin Normal University
+  logo: /assets/images/badges/tjnu.png
   position: Research Intern
   lab:
     name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
-    url: "https://www.media.mit.edu/"
+    url: none
   advisor:
-    - name: "Dr. XXX"
-      url: "https://www.media.mit.edu/"
-    - name: "Dr. YYY"
-      url: "https://www.media.mit.edu/"
-  date: Sep. 2019 - Jul. 2021
+    - name: "Lect. Yong Su"
+      url: none
+#    - name: "Dr. YYY"
+#      url: "https://www.media.mit.edu/"
+  date: Sep. 2023 – Jul. 2025
 
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: Research Intern
-  lab:
-    name: "@Media lab"
-    url: "https://www.media.mit.edu/"
-  advisor:
-    - name: "Dr. XXX"
-      url:  "https://www.media.mit.edu/"
-  date: Sep. 2019 - Jul. 2021
-
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: Research Intern
-  lab:
-    name: "@Media lab"
-    url: "https://www.media.mit.edu/"
-  advisor:
-    - name: "Dr. XXX"
-      url:  "https://www.media.mit.edu/"
-  date: Sep. 2019 - Jul. 2021
-
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: Research Intern
-  lab:
-    name: "@Media lab"
-    url: "https://www.media.mit.edu/"
-  advisor:
-    - name: "Dr. XXX"
-      url:  "https://www.media.mit.edu/"
-  date: Sep. 2019 - Jul. 2021
 
 
 
@@ -173,12 +148,12 @@ experience:
 
 
 awards:
-- name: Award Name 2
-  date: Sep. 2024
-- name: Award Name 1
-  date: Jul. 2021
-- name: A quick brown fox jumps over the lazy dog and runs <strong> away award </strong>
-  date: Dec. 2021
+- name: Tianjin Municipal Government Scholarship (¥8,000, Top ≤ 1%)
+  date: Dec. 2025
+- name: Jiannanchun Science and Technology Innovation Scholarship (¥2,000, Top ≤ 1%)
+  date: Nov. 2025
+- name: Contemporary Undergraduate Mathematical Contest in Modeling (National Second Prize, Top 2%)
+  date: Nov. 2023
 
 
 
@@ -190,29 +165,12 @@ awards:
 
 
 talks:
-- name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
+- name: "Invited talk @Flower labs [https://flower.ai/events/flower-monthly/] on \"Federated Weakly Supervised Video Anomaly Detection\" ."
   label: "talk-1"
-  video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
+  video: "https://youtu.be/wiu0yP-5Jdc?t=1417"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
-  date: "2025-08-04"
+  date: "2025-10-01"
 
-- name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
-  label: "talk-2"
-  video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
-  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
-  date: "2025-08-11"
-
-- name: "Invited talk @xxx (xxx labs) [https://www.media.mit.edu/] in University of xxx on \"xxx\" ."
-  label: "talk-3"
-  video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
-  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
-  date: "2025-11-12"
-
-- name: "XXX @xxx (xxx labs) [https://www.media.mit.edu/] in XXX of xxx on \"xxx\" ."
-  label: "talk-4"
-  video: "https://youtu.be/3e9YHHwGSnc?list=RD3e9YHHwGSnc&t=178"
-  slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
-  date: "2025-12-23"
 
 
 #################################
@@ -223,18 +181,16 @@ talks:
 
 services:
   conference:
-    - "Conference on Computer Vision and Pattern Recognition (CVPR), 2025"
-    - "European Conference on Computer Vision (ECCV), 2025"
-    - "European Conference on Computer Vision (ECCV), 2025"
-    - "European Conference on Computer Vision (ECCV), 2025"
-    - "European Conference on Computer Vision (ECCV), 2025"
+    - "British Machine Vision Conference (BMVC), 2025"
+    - "Annual Meeting of the Cognitive Science Society (CogSci), 2025"
+    - "IEEE International Joint Conference on Neural Networks (IJCNN), 2025"
     - "PUT@ICML, 2025"
+    - "WCUA@ICML 2025"
+    - "SVU@ICCV 2025"
 
   journal:
-    - "International Journal of Computer Vision (IJCV), 2023-2025"
-    - "International Journal of Computer Vision (IJCV), 2023-2025"
-    - "International Journal of Computer Vision (IJCV), 2023-2025"
-    - "International Journal of Computer Vision (IJCV), 2023-2025"
+    - "Engineering Applications of Artificial Intelligence (EAAI), 2025"
+    - "Ad Hoc Networks  (Ad Hoc Netw ), 2025"
 
 
 
