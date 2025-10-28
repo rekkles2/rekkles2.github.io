@@ -100,14 +100,17 @@ portfolio:
         staff_en: "Liu Xia (Comp), Wang Jing (Lyric), Chen Yang (Arr), Zhou Wei (Mix)"
         video_embed: |
           <div class="joyvoice-video-80vw">
-            <iframe
-              src="//player.bilibili.com/player.html?isOutside=true&aid=115430114990065&bvid=BV1htspzfEmm&cid=33365098579&p=1&autoplay=0"
-              scrolling="no"
-              frameborder="0"
-              allowfullscreen="true">
-            </iframe>
+            <div class="jv-embed-ratio">
+              <iframe
+                src="//player.bilibili.com/player.html?isOutside=true&aid=115430114990065&bvid=BV1htspzfEmm&cid=33365098579&p=1&autoplay=0"
+                title="Bilibili player"
+                loading="lazy"
+                allow="fullscreen; picture-in-picture; accelerometer; clipboard-write"
+                referrerpolicy="no-referrer-when-downgrade"
+                frameborder="0">
+              </iframe>
+            </div>
           </div>
-
         release_date: "2025-08-01"
         release_date_en: "Aug 1, 2025"
         plays: "56,120"

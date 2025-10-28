@@ -173,9 +173,41 @@ h1,h2,h3,h4,h5,h6{font-weight:700;color:var(--ink);}
   border-color:#b7c0d0; transform:translateY(-1px);
 }
 
-/* ===== Bilibili视频：铺满 80% 屏宽 ===== */
-.joyvoice-video-80vw{ width:min(80vw, 1600px); margin:0 auto; position:relative; aspect-ratio:16 / 9; border-radius:12px; overflow:hidden; background:#000; }
-.joyvoice-video-80vw iframe{ position:absolute; inset:0; width:100%; height:100%; }
+/* ===== Bilibili视频：铺满 80% 屏宽（16:9，严格 80vw，自适应高度） ===== */
+.joyvoice-video-80vw{
+  width: 80vw;              /* 严格 80% 屏幕宽度 */
+  max-width: 100%;          /* 防止越出父级极端布局 */
+  margin: 0 auto;
+}
+
+.jv-embed-ratio{
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  /* 现代浏览器优先：用 aspect-ratio 锁 16:9 */
+  aspect-ratio: 16 / 9;
+}
+
+/* 兼容性回退：不支持 aspect-ratio 时，用 padding 百分比创建 16:9 盒子 */
+@supports not (aspect-ratio: 16 / 9) {
+  .jv-embed-ratio{ height: 0; padding-top: 56.25%; }
+}
+
+.jv-embed-ratio iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* 置于项目卡片中的容器：让 80vw 居中且不挤压其它元素 */
+.joyvoice-project-video{
+  display: flex;
+  justify-content: center;
+}
 
 /* 语言按钮 */
 #joyvoice-lang-toggle{
