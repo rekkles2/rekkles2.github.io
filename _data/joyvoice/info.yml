@@ -1,0 +1,101 @@
+# _data/joyvoice/info.yml
+studio:
+  name: "JoyVoice Studio"
+  subtitle: "专业声音创作工坊"
+  logo: "/assets/images/covers/joyvoice.png"
+  description:
+    - "JoyVoice Studio 是一支专注于声音艺术创作的专业团队，致力于打造高品质的广播剧与原创音乐作品。"
+    - "我们以声音为媒介，讲述打动人心的故事，传递情感与温度。"
+  highlights:
+    - label: "成立时间"
+      value: "2018年"
+    - label: "邮箱"
+      value: "contact@joyvoice.studio"
+
+introduction:
+  title: "工作室介绍"
+  paragraphs:
+    - "JoyVoice Studio 成立于2018年，由一群热爱声音艺术的创作者组成。我们专注于广播剧制作、原创音乐创作及声音设计，致力于用声音构建沉浸式体验。"
+    - "团队成员均来自专业院校，拥有丰富的行业经验，作品曾多次获得业内奖项认可。我们相信，声音不仅是听觉的享受，更是情感的载体与故事的灵魂。"
+
+team:
+  title: "人员构成"
+  description: "我们的团队由专业配音演员、编剧、导演、作曲家和后期制作人员组成，各司其职又紧密协作。"
+  groups:
+    - name: "创作团队"
+      summary: "负责剧本创作、角色设定与内容策划。"
+      members:
+        - name: "林墨"
+          role: "创意总监/编剧"
+          bio: "10年广播剧编剧经验，代表作《时光回声》获2022年最佳原创剧本奖。"
+        - name: "苏雨"
+          role: "编剧/策划"
+          bio: "擅长情感类题材，作品《城市夜话》系列播放量突破500万。"
+    - name: "制作团队"
+      summary: "负责配音指导、音乐制作与后期处理。"
+      members:
+        - name: "陈阳"
+          role: "声音导演"
+          bio: "前国家级电台主持人，指导过30+部广播剧作品。"
+        - name: "周薇"
+          role: "音乐制作人"
+          bio: "古典音乐专业背景，为多部广播剧创作原创配乐。"
+
+goals:
+  title: "工作目标"
+  description: "我们致力于成为声音艺术领域的创新引领者，不断突破声音表达的边界。"
+  items:
+    - "2024年完成5部高质量广播剧制作，并上线主流音频平台"
+    - "打造原创音乐品牌，发布3张主题音乐专辑"
+    - "与更多优质IP合作，拓展声音艺术的应用场景"
+
+portfolio:
+  drama:
+    title: "广播剧项目"
+    description: "我们精心制作的广播剧作品，以声音讲述动人故事。"
+    projects:
+      - title: "时光回声"
+        cover: "/assets/images/drama-cover.png"
+        tagline: "穿越时空的情感对话"
+        summary: "讲述一对母女跨越二十年的情感故事，通过声音展现时光流逝中的爱与遗憾。"
+        credits:
+          - label: "出品"
+            value: "JoyVoice Studio"
+          - label: "CV"
+            value: "林墨、苏雨、陈阳、周薇"
+        tags: ["情感","现代"]
+      - title: "星海迷航"
+        cover: "/assets/images/drama-cover-2.png"
+        tagline: "宇宙深处的神秘旅程"
+        summary: "科幻题材广播剧，讲述宇航员在深空探索中发现的神秘信号与未知文明。"
+        credits:
+          - label: "导演"
+            value: "陈阳"
+          - label: "后期"
+            value: "周薇"
+        tags: ["科幻","冒险"]
+
+  music:
+    title: "音乐项目"
+    description: "我们的原创音乐作品，用旋律传递情感与故事。"
+    projects:
+      - title: "城市夜话"
+        cover: "/assets/images/music-cover.png"
+        tagline: "都市人的情感独白"
+        summary: "以城市夜晚为背景的音乐专辑，收录8首原创歌曲，展现都市人的孤独与希望。"
+        credits:
+          - label: "演唱"
+            value: "苏雨"
+          - label: "作曲"
+            value: "周薇"
+        tags: ["原创","都市"]
+      - title: "时光回声 配乐集"
+        cover: "/assets/images/music-cover-2.png"
+        tagline: "广播剧《时光回声》原声大碟"
+        summary: "为同名广播剧创作的配乐专辑，包含15首原创配乐，完美呈现剧情的情感层次。"
+        credits:
+          - label: "编曲"
+            value: "周薇"
+          - label: "混音"
+            value: "陈阳"
+        tags: ["影视原声","抒情"]

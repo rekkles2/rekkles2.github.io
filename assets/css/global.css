@@ -12,6 +12,8 @@ h1, h2, h3, h4, h5, h6,
 
 .card {
     border-radius: 0.8rem!important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 .card-img-overlay {
@@ -32,6 +34,15 @@ h1, h2, h3, h4, h5, h6,
     border-top-right-radius: 0.8rem !important;
 }
 
+/* 交互效果 */
+.hover-effect {
+    transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
 
 .text-profile-position {
     font-weight: 400;
@@ -96,90 +107,78 @@ div.lazy {
     padding-right: 15px;
 }
 
-
-/* JoyVoice Studio showcase styles */
-.joyvoice-welcome .card,
-.joyvoice-portfolio .card {
-    border-radius: 1rem !important;
-}
-
+/* JoyVoice Studio showcase styles - 优化版 */
 .joyvoice-logo-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
-    background-color: #f5f6fa;
-    border-radius: 0.75rem;
+    padding: 1.2rem;
+    background-color: #f8fafc;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .joyvoice-logo {
-    max-height: 90px;
+    max-height: 110px;
     width: auto;
+    transition: all 0.3s ease;
 }
 
-.joyvoice-description p:last-child {
-    margin-bottom: 0;
+.joyvoice-logo-wrapper:hover .joyvoice-logo {
+    transform: scale(1.05);
 }
 
 .joyvoice-highlight-item {
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
 }
 
-.joyvoice-highlight-item:last-child {
-    border-bottom: none;
-}
-
-.joyvoice-highlight-label {
-    min-width: 4.5rem;
-}
-
-.joyvoice-highlight-value {
-    font-weight: 600;
-}
-
-.joyvoice-team-member + .joyvoice-team-member {
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+.joyvoice-highlight-item:hover {
+    background: #f0f7ff;
+    border-color: #bae6fd;
 }
 
 .joyvoice-goal-item {
-    background: #f8f9fc;
+    background: #f8fafc;
     border-radius: 0.75rem;
-    padding: 0.85rem 1rem;
+    padding: 1rem;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.joyvoice-goal-item:hover {
+    background: #f0f7ff;
+    border-color: #bae6fd;
 }
 
 .joyvoice-goal-index {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     font-weight: 700;
-    background-color: #3758f9;
+    background-color: #4338ca;
     color: #fff;
     font-size: 0.875rem;
+    line-height: 1;
 }
 
-.joyvoice-goal-text {
-    flex: 1;
-    font-size: 0.95rem;
-}
-
-.joyvoice-project-card .card-body {
-    background: #fff;
-}
-
+/* 项目卡片样式 */
 .joyvoice-project-cover {
     position: relative;
     overflow: hidden;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 0.8rem;
+    border-top-right-radius: 0.8rem;
 }
 
 .joyvoice-project-cover::before {
     content: "";
     display: block;
-    padding-top: 56.25%;
+    padding-top: 56.25%; /* 16:9 比例 */
 }
 
 .joyvoice-project-cover img {
@@ -188,37 +187,51 @@ div.lazy {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.hover-effect:hover .joyvoice-project-cover img {
+    transform: scale(1.03);
 }
 
 .joyvoice-project-credits dt {
     font-weight: 600;
+    color: #4a5568;
 }
 
-.joyvoice-project-credits dd {
-    margin-bottom: 0;
+.joyvoice-team-group {
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
 }
 
-.joyvoice-badge {
-    background-color: rgba(55, 88, 249, 0.1);
-    color: #3758f9;
-    font-weight: 600;
-    border-radius: 999px;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.75rem;
+.joyvoice-team-group:hover {
+    border-color: #4338ca;
+    box-shadow: 0 4px 6px -1px rgba(67, 56, 202, 0.1);
 }
 
-.joyvoice-portfolio-section + .joyvoice-portfolio-section {
-    margin-top: 3rem;
-}
-
+/* 响应式优化 */
 @media (max-width: 767.98px) {
-  .joyvoice-goal-item {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+    .joyvoice-logo {
+        max-height: 90px;
+    }
+
+    .joyvoice-project-cover::before {
+        padding-top: 75%; /* 4:3 比例 */
+    }
+
+    .joyvoice-logo-wrapper {
+        padding: 1rem;
+    }
+
+    .joyvoice-highlight-item {
+        margin-bottom: 0.75rem;
+    }
+
+    .joyvoice-highlight-item:last-child {
+        margin-bottom: 0;
+    }
 
     .joyvoice-goal-index {
-    align-self: flex-start;
-  }
+        margin-top: 0.25rem;
+    }
 }
-

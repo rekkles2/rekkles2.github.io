@@ -1,33 +1,135 @@
-<div class="row mt-3">
-  <div class="col">
-    <div class="card border-0 shadow-sm bg-white rounded-xl">
-      <div class="card-body p-4 p-lg-5">
-        <h5 class="text-gray-900 mb-3">工作室介绍</h5>
-        <div class="text-gray-700">
-          {{ site.data.info.intro }}
+{% assign info = site.data.joyvoice.info %}
+{% if info %}
+  <!-- 三合一欢迎卡片 START -->
+  <div class="card border-0 shadow-sm bg-white rounded-xl overflow-hidden mb-5">
+    <!-- 头部区域：logo和简介 -->
+    <div class="p-4 p-lg-5 border-bottom bg-light">
+      <div class="row align-items-center">
+        {% if info.studio.logo %}
+        <div class="col-md-auto mb-3 mb-md-0">
+          <div class="joyvoice-logo-wrapper">
+            <img src="{{ info.studio.logo | relative_url }}" alt="{{ info.studio.name | default: 'JoyVoice Studio' }} logo" class="joyvoice-logo">
+          </div>
         </div>
-        {% if site.data.info.members %}
-          <h5 class="text-gray-900 mt-4 mb-3">人员构成</h5>
-          <ul class="list-unstyled mb-0">
-            {% for member in site.data.info.members %}
-              <li class="mb-2">
-                <span class="fw-semibold text-gray-900">{{ member.name }}</span>
-                {% if member.title %}
-                  <span class="text-muted"> — {{ member.title }}</span>
-                {% endif %}
-              </li>
-            {% endfor %}
-          </ul>
         {% endif %}
-        {% if site.data.info.goals %}
-          <h5 class="text-gray-900 mt-4 mb-3">工作目标</h5>
-          <ul class="list-unstyled mb-0">
-            {% for goal in site.data.info.goals %}
-              <li class="mb-2 text-gray-700">{{ goal }}</li>
+
+        <div class="col">
+          <h2 class="text-gray-900 mb-1 display-6 fw-bold">{{ info.studio.name | default: 'JoyVoice Studio' }}</h2>
+          {% if info.studio.subtitle %}
+          <p class="text-primary-700 fw-semibold mb-2 fs-5">{{ info.studio.subtitle }}</p>
+          {% endif %}
+
+          {% if info.studio.description %}
+          <div class="joyvoice-description text-gray-700 mb-3">
+            {% for paragraph in info.studio.description %}
+            <p class="mb-2">{{ paragraph }}</p>
             {% endfor %}
-          </ul>
-        {% endif %}
+          </div>
+          {% endif %}
+
+          <!-- 信息卡片行 -->
+          {% if info.studio.highlights %}
+          <div class="row g-3 mt-3">
+            {% for highlight in info.studio.highlights %}
+            <div class="col-sm-6 col-lg-4">
+              <div class="joyvoice-highlight-item p-3 rounded-xl bg-white border hover-effect">
+                <div class="d-flex align-items-center">
+                  <span class="joyvoice-highlight-label text-muted small fw-semibold me-2">{{ highlight.label }}</span>
+                  <span class="joyvoice-highlight-value fw-medium">{{ highlight.value }}</span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- 内容区域：介绍和目标 -->
+    <div class="p-4 p-lg-5">
+      <div class="row g-5">
+        <!-- 工作室介绍 -->
+        <div class="col-lg-6">
+          {% if info.introduction %}
+          <div class="mb-4">
+            <h4 class="text-gray-900 mb-3 fs-4 fw-bold">{{ info.introduction.title | default: '工作室介绍' }}</h4>
+            {% for paragraph in info.introduction.paragraphs %}
+            <p class="text-gray-700 mb-3">{{ paragraph }}</p>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- 工作目标 -->
+        <div class="col-lg-6">
+          {% if info.goals %}
+          <div>
+            <h4 class="text-gray-900 mb-4 fs-4 fw-bold">{{ info.goals.title | default: '工作目标' }}</h4>
+            {% if info.goals.description %}
+            <p class="text-gray-700 mb-4">{{ info.goals.description }}</p>
+            {% endif %}
+            {% if info.goals.items %}
+            <div class="d-grid gap-3">
+              {% for goal in info.goals.items %}
+              <div class="joyvoice-goal-item d-flex align-items-start p-3 rounded-xl bg-light">
+                <span class="joyvoice-goal-index me-3 mt-1">•</span>
+                <span class="joyvoice-goal-text flex-grow-1">{{ goal }}</span>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- 三合一欢迎卡片 END -->
+
+  {% assign team = info.team %}
+  {% if team %}
+    <div class="row mt-3">
+      <div class="col">
+        <div class="card border-0 shadow-sm bg-white rounded-xl">
+          <div class="card-body p-4 p-lg-5">
+            <h4 class="text-gray-900 mb-4 fs-4 fw-bold">{{ team.title | default: '人员构成' }}</h4>
+            {% if team.description %}
+            <p class="text-gray-700 mb-4 fs-5">{{ team.description }}</p>
+            {% endif %}
+
+            {% if team.groups %}
+              <div class="row g-4">
+                {% for group in team.groups %}
+                  <div class="col-12 col-lg-6">
+                    <div class="joyvoice-team-group h-100 p-4 border rounded-xl hover-effect">
+                      <h5 class="text-gray-900 mb-3 fw-bold">{{ group.name }}</h5>
+                      {% if group.summary %}
+                        <p class="text-gray-700 mb-3">{{ group.summary }}</p>
+                      {% endif %}
+                      {% if group.members %}
+                        <div class="joyvoice-team-members">
+                          {% for member in group.members %}
+                            <div class="{% unless forloop.last %}mb-4 pb-4 border-bottom{% else %}mb-0{% endunless %} pt-2">
+                              <div class="fw-bold text-gray-900 fs-5">{{ member.name }}</div>
+                              {% if member.role %}
+                                <div class="text-primary-700 fw-medium mt-1">{{ member.role }}</div>
+                              {% endif %}
+                              {% if member.bio %}
+                                <p class="text-gray-700 mb-0 mt-2">{{ member.bio }}</p>
+                              {% endif %}
+                            </div>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
