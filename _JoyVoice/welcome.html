@@ -1,0 +1,33 @@
+<div class="row mt-3">
+  <div class="col">
+    <div class="card border-0 shadow-sm bg-white rounded-xl">
+      <div class="card-body p-4 p-lg-5">
+        <h5 class="text-gray-900 mb-3">工作室介绍</h5>
+        <div class="text-gray-700">
+          {{ site.data.info.intro }}
+        </div>
+        {% if site.data.info.members %}
+          <h5 class="text-gray-900 mt-4 mb-3">人员构成</h5>
+          <ul class="list-unstyled mb-0">
+            {% for member in site.data.info.members %}
+              <li class="mb-2">
+                <span class="fw-semibold text-gray-900">{{ member.name }}</span>
+                {% if member.title %}
+                  <span class="text-muted"> — {{ member.title }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if site.data.info.goals %}
+          <h5 class="text-gray-900 mt-4 mb-3">工作目标</h5>
+          <ul class="list-unstyled mb-0">
+            {% for goal in site.data.info.goals %}
+              <li class="mb-2 text-gray-700">{{ goal }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
