@@ -6,7 +6,7 @@ homepage:
   show_service: true
   talk: true
   show_q_a: true
-  num_news: 6
+  num_news: 5
 
 # Feel free to replace the footer text if you would like to, but I will greatly appreciate it 
 # if you keep the link to the template so that more people can benefit from it. Thanks!
