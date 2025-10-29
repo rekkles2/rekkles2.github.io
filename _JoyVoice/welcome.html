@@ -23,12 +23,10 @@
           </div>
         </div>
 
-        <!-- 右：标题（英文逐字静态渐变）与简介 -->
+        <!-- 右：标题与简介 -->
         <div class="col-lg-7">
           <h1 class="joyvoice-hero-title mb-2">
-            <!-- 中文：普通渐变标题 -->
             <span class="joyvoice-title-text joyvoice-lang" data-lang="zh">{{ info.studio.name }}</span>
-            <!-- 英文：每个字固定配色 -->
             <span class="d-none joyvoice-lang" data-lang="en">
               <span class="jv-title-colored" aria-label="{{ info.studio.name_en }}">
                 <span class="jv-letter jv-g1">J</span><span class="jv-letter jv-g2">o</span><span class="jv-letter jv-g3">y</span><span class="jv-letter jv-g4">V</span><span class="jv-letter jv-g5">o</span><span class="jv-letter jv-g6">i</span><span class="jv-letter jv-g7">c</span><span class="jv-letter jv-g8">e</span><span class="jv-space">&nbsp;</span><span class="jv-letter jv-g9">S</span><span class="jv-letter jv-g10">t</span><span class="jv-letter jv-g11">u</span><span class="jv-letter jv-g12">d</span><span class="jv-letter jv-g13">i</span><span class="jv-letter jv-g14">o</span>
@@ -50,13 +48,67 @@
             {% endfor %}
           </div>
 
-          <div class="joyvoice-highlight-grid">
+          <!-- 高亮信息（健壮解析 + 多行值 + 左列齐头对齐） -->
+          <div class="joyvoice-highlight-grid joyvoice-highlight-grid--2col">
             {% for h in info.studio.highlights %}
+              {%- comment -%}
+              组装 zh_lines / en_lines：
+              - 优先 value_lines / value_en_lines（数组）
+              - 否则兼容 value / value_en：
+                * 若是 '["a","b"]' 形式的字符串：去括号去引号后按逗号切
+                * 若含 <br/>：按 <br/> 切
+                * 其他：单行
+              {%- endcomment -%}
+              {% assign zh_lines = h.value_lines %}
+              {% if zh_lines == nil %}
+                {% assign zh_raw = h.value %}
+                {% if zh_raw %}
+                  {% if zh_raw contains '[' and zh_raw contains ']' %}
+                    {% assign zh_tmp = zh_raw | remove: '[' | remove: ']' | replace: '"', '' %}
+                    {% assign zh_lines = zh_tmp | split: ',' %}
+                  {% elsif zh_raw contains '<br/>' %}
+                    {% assign zh_lines = zh_raw | split: '<br/>' %}
+                  {% else %}
+                    {% assign zh_lines = zh_raw | split: '||__single__||' %}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+
+              {% assign en_lines = h.value_en_lines %}
+              {% if en_lines == nil %}
+                {% assign en_raw = h.value_en %}
+                {% if en_raw %}
+                  {% if en_raw contains '[' and en_raw contains ']' %}
+                    {% assign en_tmp = en_raw | remove: '[' | remove: ']' | replace: '"', '' %}
+                    {% assign en_lines = en_tmp | split: ',' %}
+                  {% elsif en_raw contains '<br/>' %}
+                    {% assign en_lines = en_raw | split: '<br/>' %}
+                  {% else %}
+                    {% assign en_lines = en_raw | split: '||__single__||' %}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+
               <div class="joyvoice-highlight-item">
                 <span class="joyvoice-highlight-label joyvoice-lang" data-lang="zh">{{ h.label }}</span>
                 <span class="joyvoice-highlight-label d-none joyvoice-lang" data-lang="en">{{ h.label_en }}</span>
-                <span class="joyvoice-highlight-value joyvoice-lang" data-lang="zh">{{ h.value }}</span>
-                <span class="joyvoice-highlight-value d-none joyvoice-lang" data-lang="en">{{ h.value_en }}</span>
+
+                <div class="joyvoice-highlight-values">
+                  <div class="joyvoice-lang" data-lang="zh">
+                    {% if zh_lines %}
+                      {% for L in zh_lines %}
+                        <div class="joyvoice-highlight-value">{{ L | strip }}</div>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  <div class="d-none joyvoice-lang" data-lang="en">
+                    {% if en_lines %}
+                      {% for L in en_lines %}
+                        <div class="joyvoice-highlight-value">{{ L | strip }}</div>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
               </div>
             {% endfor %}
           </div>
@@ -65,7 +117,7 @@
 
       <div class="joyvoice-divider my-4"></div>
 
-      <!-- 目标（显眼列表） -->
+      <!-- 目标（编号胶囊） -->
       <section>
         <h2 class="joyvoice-section-h">
           <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ info.goals.title }}</span>
@@ -75,11 +127,11 @@
         <p class="text-muted mb-3 joyvoice-lang" data-lang="zh">{{ info.goals.description }}</p>
         <p class="text-muted mb-3 d-none joyvoice-lang" data-lang="en">{{ info.goals.description_en }}</p>
 
-        <ol class="joyvoice-ol joyvoice-ol-strong mb-0 joyvoice-lang" data-lang="zh">
-          {% for g in info.goals.items %}<li>{{ g }}</li>{% endfor %}
+        <ol class="joyvoice-ol-capsule joyvoice-lang" data-lang="zh">
+          {% for g in info.goals.items %}<li><span class="jv-cap-idx"></span><span class="jv-cap-text">{{ g }}</span></li>{% endfor %}
         </ol>
-        <ol class="joyvoice-ol joyvoice-ol-strong mb-0 d-none joyvoice-lang" data-lang="en">
-          {% for g in info.goals.items_en %}<li>{{ g }}</li>{% endfor %}
+        <ol class="joyvoice-ol-capsule d-none joyvoice-lang" data-lang="en">
+          {% for g in info.goals.items_en %}<li><span class="jv-cap-idx"></span><span class="jv-cap-text">{{ g }}</span></li>{% endfor %}
         </ol>
       </section>
 
@@ -102,14 +154,23 @@
         <div class="joyvoice-team-group mt-3">
           <h3 class="joyvoice-group-h joyvoice-lang" data-lang="zh">核心团队</h3>
           <h3 class="joyvoice-group-h d-none joyvoice-lang" data-lang="en">Core Team</h3>
-          <div class="joyvoice-team-name joyvoice-lang" data-lang="zh">{{ info.team.staff }}</div>
-          <div class="joyvoice-team-name d-none joyvoice-lang" data-lang="en">{{ info.team.staff_en }}</div>
+
+          {% if info.team.staff %}
+            <ul class="joyvoice-ul mb-0">
+              {% for r in info.team.staff %}
+                <li class="joyvoice-lang" data-lang="zh">{{ r }}</li>
+              {% endfor %}
+              {% for r in info.team.staff_en %}
+                <li class="d-none joyvoice-lang" data-lang="en">{{ r }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
         </div>
       </section>
     </div>
   </div>
 
-  <!-- ===== 广播剧 ===== -->
+  <!-- ===== 原创广播剧 ===== -->
   {% assign drama_section = info.portfolio.drama %}
   {% if drama_section and drama_section.projects %}
   <section aria-label="Portfolio - Drama">
@@ -125,17 +186,20 @@
       {% for project in drama_section.projects %}
       <div class="col-12 mb-5">
         <article class="joyvoice-showcase-card" aria-labelledby="drama-{{ forloop.index }}-title">
-          <div class="row g-0 align-items-stretch">
-            <!-- 左：封面（横向滑动轮播） -->
+          <!-- 顶线对齐：左右列都取消顶部外边距/额外内边距 -->
+          <div class="row g-0 align-items-start">
+            <!-- 左：封面（轮播）+ 按钮 -->
             <div class="col-lg-5">
               {% assign has_covers = project.covers %}
               <div class="joyvoice-cover-stack">
                 {% if has_covers and project.covers.size > 1 %}
-                  <section class="joyvoice-carousel" role="region" aria-roledescription="carousel" aria-label="{{ project.title }}" data-autoplay="true">
+                  <section class="joyvoice-carousel" role="region" aria-roledescription="carousel"
+                           aria-label="{{ project.title }}" data-autoplay="true">
                     <div class="joyvoice-carousel-viewport">
                       {% for img in project.covers %}
                       <div class="joyvoice-slide">
-                        <img class="joyvoice-cover-img" src="{{ img | relative_url }}" alt="{{ project.title }} cover {{ forloop.index }}" loading="lazy" decoding="async">
+                        <img class="joyvoice-cover-img" src="{{ img | relative_url }}"
+                             alt="{{ project.title }} cover {{ forloop.index }}" loading="lazy" decoding="async">
                       </div>
                       {% endfor %}
                     </div>
@@ -149,10 +213,23 @@
                   </section>
                 {% else %}
                   <div class="joyvoice-cover-single">
-                    <img src="{{ project.cover | default: project.covers | relative_url }}" alt="{{ project.title }}" loading="lazy" decoding="async" class="joyvoice-cover-img">
+                    <img src="{{ project.cover | default: project.covers | relative_url }}"
+                         alt="{{ project.title }}" loading="lazy" decoding="async" class="joyvoice-cover-img">
                   </div>
                 {% endif %}
               </div>
+
+              {% if project.pv_links %}
+              <div class="jv-under-cover-buttons">
+                {% for link in project.pv_links %}
+                  <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
+                    <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                    <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
+                    <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
+                  </a>
+                {% endfor %}
+              </div>
+              {% endif %}
             </div>
 
             <!-- 右：文案 -->
@@ -178,13 +255,19 @@
                   </p>
                   {% endif %}
 
-                  {% if project.details %}
+                  {% if project.details_s or project.details or project.details_en_s or project.details_en %}
                   <div class="joyvoice-project-details mb-3">
                     <h4 class="joyvoice-block-h joyvoice-lang" data-lang="zh">剧集介绍</h4>
                     <h4 class="joyvoice-block-h d-none joyvoice-lang" data-lang="en">Synopsis</h4>
                     <p class="joyvoice-section-text mb-0">
-                      <span class="joyvoice-lang" data-lang="zh">{{ project.details }}</span>
-                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.details_en }}</span>
+                      {% if project.details_s %}
+                        <span class="joyvoice-lang jv-details" data-lang="zh"
+                              data-full="{{ project.details | escape }}">{{ project.details_s }}</span>
+                      {% endif %}
+                      {% if project.details_en_s %}
+                        <span class="joyvoice-lang d-none jv-details" data-lang="en"
+                              data-full="{{ project.details_en | escape }}">{{ project.details_en_s }}</span>
+                      {% endif %}
                     </p>
                   </div>
                   {% endif %}
@@ -194,20 +277,8 @@
                     <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
                   </div>
 
-                  {% if project.pv_links %}
-                  <div class="joyvoice-project-links d-flex flex-wrap gap-2 mb-3">
-                    {% for link in project.pv_links %}
-                      <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
-                        <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
-                        <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
-                        <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
-                      </a>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
-
                   {% if project.credits or project.cast %}
-                  <div class="joyvoice-project-credits">
+                  <div class="joyvoice-project-credits mt-n2">
                     {% if project.credits %}
                     <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">主要制作人员</h5>
                     <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Production Team</h5>
@@ -252,7 +323,7 @@
   </section>
   {% endif %}
 
-  <!-- ===== 音乐 ===== -->
+  <!-- ===== 原创音乐 ===== -->
   {% assign music_section = info.portfolio.music %}
   {% if music_section and music_section.projects %}
   <section aria-label="Portfolio - Music">
@@ -352,7 +423,7 @@
 </div>
 {% endif %}
 
-<!-- 统一脚本：语言切换 + 5s滑动轮播（横向 translateX） -->
+<!-- 语言切换 + 轮播 -->
 <script>
 if (!window.joyvoiceBootLoaded) {
   window.joyvoiceBootLoaded = true;
@@ -380,7 +451,6 @@ if (!window.joyvoiceBootLoaded) {
       const next = root.querySelector('.joyvoice-next');
       let index = 0, timer = null;
 
-      // 核心：translateX 横向滑动（banner）
       const update = ()=>{
         const x = -index * 100;
         viewport.style.transform = 'translateX(' + x + '%)';
