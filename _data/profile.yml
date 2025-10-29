@@ -9,7 +9,7 @@ positions:
 
 
 email: "lijiahang041119[At]gmail.com"
-cv_link: /assets/images/badges/MIT_Social_circle.png
+cv_link: /assets/images/badges/Jiahang_Li_Resume.pdf
 gscholar: BqDQDlIAAAAJ&hl  # This is an example, replace it with your own Google Scholar ID
 github: rekkles2
 #twitter: your_twitter_id  # Do not include the '@' symbol
@@ -17,7 +17,7 @@ wechat_qrcode: /assets/images/badges/wechat.png
 wechat_prompt: >-
   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
 linkedin: 22-JHLI
-orcid: https://orcid.org/0009-0002-3403-5589
+orcid: 0009-0002-3403-5589
 
 
 
@@ -35,7 +35,31 @@ short_bio: >-
   
   <p>
     I'm also the co-founder of 
-    <strong>JoyVoice Studio</strong> 
+      <a href="https://rekkles2.github.io/JoyVoice" target="_blank" rel="noopener"
+         style="
+           text-decoration:none;
+           /* 渐变下划线 */
+           background-image: linear-gradient(90deg,#2D7DFB,#5EA1FF,#6F7CFF 50%,#FFC38D 75%,#F57C00);
+           background-repeat: no-repeat;
+           background-position: 0 100%;
+           background-size: 100% 2px;  /* 下划线厚度 */
+           padding-bottom: 2px;         /* 与字距 */
+           transition: background-size .18s ease;
+         "
+         onmouseover="this.style.backgroundSize='100% 3px'"
+         onmouseout="this.style.backgroundSize='100% 2px'">
+        <strong style="font-weight:700;">
+          <span style="background:linear-gradient(90deg,#2D7DFB,#5EA1FF,#6F7CFF);
+                       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
+            JoyVoice
+          </span>
+          <span> </span>
+          <span style="background:linear-gradient(90deg,#FFC38D,#F57C00);
+                       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
+            Studio
+          </span>
+        </strong>
+      </a>
     (<em>noncommercial creative studio</em>) producing 
     voice dubbing, original audio dramas, and original songs. 
     I aim to leverage my experience in 

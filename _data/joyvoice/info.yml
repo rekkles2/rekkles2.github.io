@@ -5,11 +5,11 @@ studio:
   subtitle_en: "Joy in every voice, voice in every joy"
   logo: "/assets/images/covers/joyvoice.png"
   description:
-    - "JoyVoice Studio 是一支专注于声音艺术创作的专业团队，致力于打造高品质的广播剧与原创音乐作品。"
-    - "我们以声音为媒介，讲述打动人心的故事，传递情感与温度。"
+    - "愉声工作室（JoyVoice Studio）是一支专注于声音艺术创作的专业团队，致力于制作高品质的广播剧与原创音乐。"
+    - "我们以声音为媒介，讲述动人故事，传递真挚的情感与温度。"
   description_en:
-    - "JoyVoice Studio is a professional team dedicated to sound-art creation, committed to producing high-quality radio dramas and original music."
-    - "Using voice as our medium, we tell emotionally resonant stories and convey warmth."
+    - "JoyVoice Studio is a professional creative studio specializing in sound art. We produce high-quality audio dramas and original music."
+    - "We use sound as our medium to tell moving stories, conveying heartfelt emotion and warmth."
 
   # 高亮信息（支持多行值）
   highlights:
@@ -36,96 +36,104 @@ studio:
 goals:
   title: "工作目标"
   title_en: "Goals"
-  description: "我们致力于成为声音艺术领域的创新引领者，不断突破声音表达的边界同时探索技术的可能性。"
-  description_en: "We aim to lead innovation in voice art and keep pushing the boundaries of sonic expression."
+  description: "我们致力于成为声音艺术领域的创新引领者，不断突破声音表达的边界，同时探索技术带来的新可能。"
+  description_en: "We are committed to becoming an innovation leader in the field of sound art, continually pushing the boundaries of sonic expression while exploring new technological possibilities."
   items:
-    - "完成高质量广播剧制作，并上线主流音频平台"
-    - "打造原创音乐品牌，发布主题音乐专辑"
-    - "拓展声音艺术的应用场景与合作生态"
+    - "制作高质量的广播剧，并在主流音频平台上线发布。"
+    - "打造原创音乐品牌，策划并发行主题音乐专辑。"
+    - "拓展声音艺术的应用场景，建立跨领域合作生态。"
+    - "未来目标是开发用于配音与声音设计的 AI 工具，以辅助内容创作与制作流程。"
   items_en:
-    - "Deliver high-quality audio dramas on major platforms"
-    - "Build an original music brand and publish themed albums"
-    - "Expand application scenarios via partnerships"
+    - "Produce high-quality audio dramas and release them on major audio platforms."
+    - "Build an original-music brand and produce themed music albums."
+    - "Expand applications of sound art and establish a cross-disciplinary collaboration ecosystem."
+    - "Our future goal is to develop AI tools for dubbing and sound design to assist content creation and production workflows."
 
 team:
   title: "人员构成"
-  title_en: "Team"
-  description: "概述团队结构，例如策划、编剧、导演、后期、配音、作词、作曲、编曲、美工等。"
-  description_en: "Overview of roles such as planning, writing, directing, post, voice, lyrics, composition, arrangement, art."
+  title_en: "Team composition"
+  description: "我们的团队由策划、编剧、导演、后期制作、配音、作词、作曲、编曲、美术／视觉设计等岗位组成，规模仍在持续扩大。"
+  description_en: "Our team includes Creative Producers, Scriptwriters, Directors, Post-production (editing & sound design), Voice Actors, Lyricists, Composers, Arrangers, and Visual/Graphic Designers, and we are continuing to expand."
   founders: "李嘉航（co-founder） 周逸（co-founder）"
   founders_en: "Jiahang Li (co-founder), Yi Zhou (co-founder)"
   # 你可自由增删该列表
   staff:
-    - "策划"
-    - "编剧"
-    - "导演"
-    - "后期"
-    - "配音"
-    - "作词 / 作曲 / 编曲"
-    - "美工"
+    - "策划：周逸、李嘉航、路漓"
+    - "编剧：路漓、周逸"
+    - "导演：周逸"
+    - "后期：吴玄溪、周逸"
+    - "配音：扶苏、函鑫、李嘉航、周逸"
+    - "作词：路漓"
+    - "作曲：周逸"
+    - "编曲：周逸"
+    - "美工：扶苏"
+
   staff_en:
-    - "Planning"
-    - "Writing"
-    - "Directing"
-    - "Post-production"
-    - "Voice Acting"
-    - "Lyrics / Composition / Arrangement"
-    - "Art & Design"
+    - "Production Planners: Yi Zhou, Jiahang Li, Li Lu"
+    - "Scriptwriters: Li Lu, Yi Zhou"
+    - "Director: Yi Zhou"
+    - "Post-production (Audio/Editing): Xuanxi Wu, Yi Zhou"
+    - "Voice Actors / Dubbing Artists: Fusu, Hanxin, Jiahang Li, Yi Zhou"
+    - "Lyricist: Li Lu"
+    - "Composer: Yi Zhou"
+    - "Arranger: Yi Zhou"
+    - "Graphic Designer / Visual Artist: Su Fu"
+
 
 portfolio:
   drama:
     title: "原创广播剧"
-    title_en: "Audio Drama Projects"
-    description: "用声音讲述故事"
-    description_en: "Representative audio-drama works."
+    title_en: "Original audio drama"
+    description: "广播剧是一种纯音频的戏剧性表演形式，我们以对白、音效与旋律为媒，传递情感与故事，在听众心中构建鲜活的场景与人物"
+    description_en: "An audio drama is a purely audio dramatic form; we use dialogue, sound effects, and melody to convey emotion and story, building vivid scenes and characters in the listener’s imagination"
     projects:
       - title: "他在"
         title_en: "Still Here"
         covers:
           - "/assets/images/covers/tazai1.jpg"
           - "/assets/images/covers/tazai2.png"
-        tagline: "一段跨越二十年的陪伴。"
-        tagline_en: "A story spanning two decades."
+        tagline: "一段跨越二十年的陪伴"
+        tagline_en: "A companionship spanning twenty years"
         summary: "行过诸多风雨起落，无论何时何地，他永远都在。"
-        summary_en: "Love and warmth through the passage of time."
-        details_s: "军人曼清因出任任务而经常受伤，好友梁枫安担心其身体…… "
-        details_en_s: "A soldier repeatedly wounded on duty"
-        details: "军人曼清因出任任务而经常受伤，好友梁枫安担心其身体……大大大大阿达文打分阿方法啊"
-        details_en: "A soldier repeatedly wounded on duty, and a friend's constant care…"
-        credits: ["监制：李嘉航","策编导：周逸","后期：方旭"]
-        credits_en: ["Producer: Jiahang Li","Director/Script: Yi Zhou","Post: Fang Xu"]
+        summary_en: "Having weathered countless storms and vicissitudes, he remains ever-present — no matter when or where."
+        details_s: "军人晏清因执行任务频繁受伤，好友梁枕安为他的健康深感担忧…… "
+        details_en_s: "Yan Qing, a soldier, is repeatedly wounded on duty; his friend Liang Zhen’an grows ever more worried about his condition......"
+        details: "军人晏清因执行任务频繁受伤，好友梁枕安为他的健康深感担忧。长期的工作压力让梁枕安出现严重失眠并求诊心理医生；在与医生交谈的过程中，他不断在现实与记忆之间往返，回溯与晏清自幼相识的过往。随着回忆与对话逐步揭开真相，梁枕安才被迫面对一个残酷事实——晏清在一次最后的任务中牺牲，这些日子里他所见到的晏清不过是自己心中痛苦的幻影。"
+        details_en: "Yan Qing, a soldier, is repeatedly wounded on duty; his friend Liang Zhen’an grows ever more worried about his condition. Burdened by work stress, Liang develops severe insomnia and consults a psychotherapist. During their sessions—interwoven with memories of a friendship that began in childhood—Liang seeks the root of his sleeplessness. Piece by piece, the conversations and recollections force him to confront a devastating truth: Yan Qing died on his final mission, and the presence Liang has been experiencing is a projection of his own grief."
+        credits: ["监制：李嘉航","策划/编导：周逸","后期：方旭"]
+        credits_en: ["Executive Producer: Jiahang Li","Production Planners/Director: Yi Zhou","Post-production: Xu Fang"]
         cast: ["晏清：承锦","梁枕安：卡修","小晏清：沉葉","小梁枕安：楠湫"]
-        cast_en: ["Manqing: Cheng Jin","Liang Fengan: Kaxiu","Young Manqing: Chen Ye","Young Liang: Nan Qiu"]
+        cast_en: ["Yan Qing: Jin Cheng","Liang Zhen'an: Ka Xiu","Young Yan Qing: Chen Ye","Young Liang Zhen'an: Nan Qiu"]
         release_date: "2025-10-25"
         release_date_en: "Oct 25, 2025"
-        plays: "134,215"
+        plays: "1,850"
         plays_as_of: "2025-10-29"
         pv_links:
-          - title: "收听入口（漫播）"
+          - title: "收听：漫播"
             title_en: "Listen (Manbo)"
-            url: "https://music.163.com/"
+            url: "https://kilamanbo.com/manbo/pc/detail?_specific_parameter=bd0Lp3YOobyzJklJ7O0PBa_F3dkN5-BGUI1JXbvZjS1IJGLkZhU4u8Cr5SnpNS8Sw-uhiqgYuypG3oqpMDaB0NeSBxt1tICQKcJDS0Qbk8VwhKIKO4ual2YxA7LWQxdU"
             icon: "bi-headphones"
           - title: "PV（B站）"
             title_en: "PV (Bilibili)"
-            url: "https://www.bilibili.com/"
+            url: "https://www.bilibili.com/video/BV1htspzfEmm/?spm_id_from=888.80997.embed_other.whitelist&t=11&bvid=BV1htspzfEmm&vd_source=d88b3de7594009d36be3941d1c2e4e70"
             icon: "bi-youtube"
         tags: ["原创","现代","成长","全年龄","悬疑"]
-        tags_en: ["Original","Contemporary","Growth","All Ages","Suspense"]
+        tags_en: ["Original","Contemporary","Growth","All-ages","Mystery"]
 
   music:
     title: "原创音乐"
-    title_en: "Music Projects"
-    description: "用旋律传递情感与故事。"
-    description_en: "Emotions and stories through melodies."
+    title_en: "Original music"
+    description: "用旋律传递情感与故事"
+    description_en: "Conveying emotion and story through melody."
     projects:
       - title: "他在"
         title_en: "Still Here"
         tagline: "我会拥抱你，直到你安睡"
-        tagline_en: "An urban monologue in sound"
+        tagline_en: "I will hold you until you fall asleep"
         summary: "行过诸多风雨起落，无论何时何地，他永远都在。"
-        summary_en: "An album set against city nights."
-        staff: "路漓（作词）周逸（作编曲、混音）梦话（演唱）冰茶（演唱）吴玄溪（视频）"
-        staff_en: "Lyrics: Luli; Composition/Arrangement/Mix: Yi Zhou; Vocals: Menghua, Bingcha; Video: Wu Xuanxi"
+        summary_en: "Having weathered countless storms and vicissitudes, he remains ever-present — no matter when or where."
+        staff: "路漓（作词）周逸（作/编曲、混音）梦话（演唱）冰茶（演唱）吴玄溪（视频后期）"
+        staff_en: "Li Lu (Lyricist); Yi Zhou (Composer / Arranger & Mixing); Meng Hua (Vocals); Bing Cha (Vocals); Wu Xuanxi (Video Post-production)"
         video_embed: |
           <div class="joyvoice-project-video">
             <div class="jv-embed jv-embed--16x9" style="--jv-w:80vw; --jv-max:1080px;">
@@ -139,14 +147,14 @@ portfolio:
               </iframe>
             </div>
           </div>
-        release_date: "2025-08-01"
-        release_date_en: "Aug 1, 2025"
-        plays: "56,120"
+        release_date: "2025-10-25"
+        release_date_en: "Oct 25, 2025"
+        plays: "1,120"
         plays_as_of: "2025-10-29"
         links:
           - title: "网易云音乐"
             title_en: "NetEase Cloud Music"
-            url: "https://music.163.com/"
+            url: "https://163cn.tv/MygqiRm"
             icon: "bi-music-note"
-        tags: ["原创","流行","情感"]
+        tags: ["原创","流行","伤感"]
         tags_en: ["Original","Pop","Emotional"]
