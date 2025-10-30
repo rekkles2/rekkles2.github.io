@@ -1,40 +1,85 @@
-- question: "How do you handle project timelines and communication?"
+- question: "Why do you want to do research?"
   answer: >-
     <p>
-    Transparent workflow:
-    <ol>
-      <li>📅 <strong>Planning:</strong> 2-day discovery phase with timeline estimate</li>
-      <li>💬 <strong>Communication:</strong> Daily updates via preferred channel</li>
-      <li>🔄 <strong>Iteration:</strong> Weekly demos for early feedback</li>
-      <li>✅ <strong>Delivery:</strong> Comprehensive handoff documentation</li>
-    </ol>
-    <br>
-    I use <em>GitHub Projects</em> for visibility and provide 
-    <a href='#contact' class='inline-link'>real-time progress tracking</a>. 
-    All projects include 30 days of post-launch support.
-    <p>
+    Doing research allows me to develop techniques that can be used to help people.
+    It gives me a strong sense of achievement and deep enjoyment, 
+    particularly when combined with my other interests and creative skills.
+    </p>
 
-- question: "Can you help optimize my existing Jekyll site?"
+- question: "What difficulties did you previously encounter?"
   answer: >-
     <p>
-    Absolutely! I specialize in Jekyll optimization:
-    <ul>
-      <li>⚡ <strong>Performance:</strong> Reduce load times via asset optimization</li>
-      <li>♿ <strong>Accessibility:</strong> Implement semantic HTML &amp; ARIA</li>
-      <li>📱 <strong>Responsiveness:</strong> Refine mobile UX with Tailwind</li>
-      <li>🔍 <strong>SEO:</strong> Improve metadata &amp; structured data</li>
-    </ul>
-    <br>
-    Recent project: Transformed a 4.2s LCP site to <strong>0.8s</strong> 
-    using <code>jekyll-assets</code> and critical CSS techniques.
+    Two years ago, during my first research project, 
+    our group began exploring federated-learning applications. 
+    I was tasked with deploying a video anomaly detection (VAD) model 
+    on an NVIDIA Jetson AGX Xavier and training it via federated learning.
+    </p>
+    
     <p>
+    The main difficulties came from running on an ARM-based edge platform: 
+    missing aarch64 prebuilt packages, recurring version conflicts across 
+    JetPack/CUDA/cuDNN/PyTorch, and limited support for certain communication stacks on Jetson. 
+    I evaluated multiple federated-learning frameworks but 
+    repeatedly ran into dependency and protocol hurdles.
+    </p>
+    
+    <p>
+    Through persistent debugging, careful version pinning, 
+    and adopting the Flower framework for its flexibility, 
+    I achieved a stable end-to-end deployment.
+    I also open-sourced a detailed 
+    <a href='https://github.com/rekkles2/Fed_WSVAD/blob/main/Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md' class='inline-link'>Jetson AGX Xavier Deployment Guide for Federated Learning via Flower Framework</a>. 
+    To the best of my knowledge, these results were among the first Fed-VAD 
+    deployments on edge devices.
+    </p>
+    
+    
+    
+
+- question: "Why do you plan to shift your research field?"
+  answer: >-
+    <p>
+    I am broadly interested in multimodal foundation models, 
+    spanning representation learning and generative modeling for content creation. 
+    My undergraduate studies on video anomaly detection and federated learning 
+    applications are just the starting point.
+    </p>
+    
+    <p>
+    My motivation is both curiosity-driven. And I believe that in life we should 
+    find something we are truly adept at.
+    Finding a unique strength that only we can do well. Building on this mindset,
+    So I aim to leverage my experience in voice dubbing and sound design to strengthen
+    multimodal understanding and advance human–AI collaboration.
+    </p>
+    
+    
+
+- question: "Are you willing to collaborate with others?"
+  answer: >-
+    <p>
+    I welcome discussions on new ideas and collaborations. 
+    </p>
+    <p>
+    In the past,
+    </p>
+    <ol>
+      <li> I mentored a master's student, Jiawen Jiang (<a href="mailto:231612093@sust.edu.cn" class="inline-link">231612093@sust.edu.cn</a>), who published his first paper at IJCNN 2025.</li>
+      <li> I also mentored an undergraduate student, 
+      Xiaomei Li (<a href="mailto:li_xiaomei0804@163.com" class="inline-link">li_xiaomei0804@163.com</a>), 
+      who published her first paper at a domestic conference; 
+      I further provided mock-interview simulations and technical mentoring to support her postgraduate recommendation to Beijing University of Technology (BJUT), a <a href="https://en.wikipedia.org/wiki/Project_211" class="inline-link">Project 211</a> university.</li>
+    </ol>
+
+    
+
 #<strong> 加粗文本 </strong>
 #<em> 斜体文本 </em>
-#<a> 链接（自动应用样式）</a>
+#<a href='#contact' class='inline-link'>real-time progress tracking</a>.  链接（自动应用样式）</a>
 #<code> 代码片段 </code>
 #列表:
 #  <ul>
-#    <li>
-#    <li>
-#    <li>
+#    <li> </li>
+#    <li> </li>
+#    <li> </li>
 #  <ul>
