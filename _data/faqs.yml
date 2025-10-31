@@ -9,10 +9,12 @@
 - question: "What difficulties did you previously encounter?"
   answer: >-
     <p>
-    Two years ago, during my first research project, 
-    our group began exploring federated-learning applications. 
-    I was tasked with deploying a video anomaly detection (VAD) model 
-    on an NVIDIA Jetson AGX Xavier and training it via federated learning.
+    Two years ago, during my first research project, our group began exploring 
+    applications of federated learning (FL). 
+    I was tasked with deploying a video anomaly detection (VAD) 
+    model on an NVIDIA Jetson AGX Xavier and training it via federated learning. 
+    Because our team lacked prior research experience, I proceeded via independent, 
+    self-guided exploration.
     </p>
     
     <p>
