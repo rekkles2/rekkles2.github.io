@@ -9,7 +9,7 @@ positions:
 
 
 email: "lijiahang041119[At]gmail.com"
-cv_link: /assets/images/badges/Jiahang_Li_Resume.pdf
+cv_link: https://www.overleaf.com/read/vwhdpzssvcmr#e69ffc
 gscholar: BqDQDlIAAAAJ&hl  # This is an example, replace it with your own Google Scholar ID
 github: rekkles2
 #twitter: your_twitter_id  # Do not include the '@' symbol
@@ -172,6 +172,8 @@ experience:
 
 
 awards:
+- name: Outstanding Reviewer Award, British Machine Vision Conference (BMVC)
+  date: Dec. 2025
 - name: Tianjin Municipal Government Scholarship (¥8,000, Top ≤ 1%)
   date: Dec. 2025
 - name: Jiannanchun Science and Technology Innovation Scholarship (¥2,000, Top ≤ 1%)
