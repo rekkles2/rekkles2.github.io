@@ -18,7 +18,7 @@ authors:
   - Jiahang Li
   - Jin Lu
 links:
-  Paper: https://github.com/rekkles2/rekkles2.github.io/blob/main/assets/images/paper/IJCNN2025.pdf
+  Paper: https://ieeexplore.ieee.org/document/11228875
   Code: https://github.com/jiangjiawen321/VRAS
 
 ---
