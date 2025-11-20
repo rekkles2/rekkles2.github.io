@@ -13,7 +13,7 @@ pub_date:       "2025"
 [//]: # (semantic_scholar_id: 204e3073870fae3d05bcbc2f6a8e263d9b72e776  # use this to retrieve citation count)
 abstract: >-
   Adaptive dynamic recursive mapping; Adaptive local aggregation; Federated; Video anomaly detection; Weakly-supervised
-cover:          /assets/images/etc/ADRM.jpeg
+cover:          /assets/images/etc/ADRM.svg
 authors:
   - Yong Su*
   - Jiahang Li*

@@ -1,9 +1,3 @@
-<!-- Single-file paper card template (merged + performance optimizations)
-     - 保持原有结构与功能
-     - 性能优化：事件委托、懒加载、will-change 仅在激活时、prefers-reduced-motion 支持
-     - 可直接替换原模板文件内容或嵌入页面
--->
-
 <style>
 :root{
   /* 优化后的色彩系统 - 基于WCAG 2.1 AA标准 */
@@ -89,16 +83,20 @@
   border-radius: 10.26px;
   overflow: hidden;
   box-shadow: 0 2.565px 10.26px rgba(0, 0, 0, 0.05);
-  transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* 动画优化：更顺滑的缓动 + 统一 360ms */
+  transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 260ms ease;
   background: var(--gray-50);
   border: 0.855px solid var(--gray-200);
   transform-origin: center center;
   z-index: 1;
 }
 
+/* 放大倍数：桌面端 1.7 */
 .cover-container:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: scale(1.4);
+  transform: scale(1.7);
   z-index: 10;
 }
 
@@ -136,6 +134,25 @@
 .paper-authors a:hover {
   color: var(--primary-800);
   text-decoration: underline;
+}
+
+/* 优化作者标记样式 - 美学增强 */
+.author-mark {
+  display: inline-block;
+  margin-left: 0.171rem;
+  font-size: 0.7695rem;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.author-mark--equal {
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.author-mark--corresponding {
+  color: var(--success-600);
+  font-weight: 600;
 }
 
 .paper-pub {
@@ -311,7 +328,7 @@
   padding-right: 0.855px;
 }
 
-/* 按钮类型样式 - 基于现代UI设计趋势 */
+/* 按钮类型样式 */
 .btn--paper {
   background: var(--primary-50);
   border-color: var(--primary-100);
@@ -475,10 +492,10 @@
   }
 }
 
-/* ================== 增强块：悬停时实心遮罩 + 避免文字穿透（覆盖/性能优化） ================== */
-.cover-container { 
-  position: relative; 
-  -webkit-tap-highlight-color: transparent; 
+/* ================== 增强块：悬停时实心遮罩 + 避免文字穿透 ================== */
+.cover-container {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cover-container::before {
@@ -504,16 +521,19 @@
   mix-blend-mode: normal;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: transform 420ms cubic-bezier(0.16,1,0.3,1), filter 320ms ease, box-shadow 420ms ease;
+  transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 320ms ease;
 }
 
 .cover-container.is-hovered::before,
-.cover-container:hover::before { 
-  opacity: 1; 
+.cover-container:hover::before {
+  opacity: 1;
 }
 
+/* 放大倍数：与 hover 一致 1.7，动画更顺滑 */
 .cover-container.is-hovered {
-  transform: translateZ(0) scale(1.4);
+  transform: translateZ(0) scale(1.7);
   transform-origin: left center;
   box-shadow: 0 12px 36px rgba(0,0,0,0.14);
   z-index: 1200;
@@ -528,43 +548,46 @@
   100% { transform: translateY(0)   rotate(0deg); }
 }
 
+/* 关键：图片本身不再晃动，避免“模糊感”，只保持清晰放大 */
 .cover-container.is-hovered img,
 .cover-container.is-hovered svg,
 .cover-container:hover img,
 .cover-container:hover svg {
-  animation: cover-bob 1200ms ease-in-out infinite;
+  animation: none;
+  transform: translateZ(0);
 }
 
-.paper-card.cover-open { 
-  overflow: visible; 
-  z-index: 60; 
+.paper-card.cover-open {
+  overflow: visible;
+  z-index: 60;
 }
 
-.paper-card .paper-content { 
-  position: relative; 
-  z-index: 1; 
+.paper-card .paper-content {
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cover-container.is-hovered img,
   .cover-container.is-hovered svg,
   .cover-container:hover img,
-  .cover-container:hover svg { 
-    animation: none !important; 
+  .cover-container:hover svg {
+    animation: none !important;
   }
-  .cover-container.is-hovered { 
-    transition: transform 240ms ease; 
+  .cover-container.is-hovered {
+    transition: transform 240ms ease;
   }
 }
 
+/* 移动端放大倍数略小，避免溢出：1.25 */
 @media (max-width: 768px) {
-  .cover-container.is-hovered, 
-  .cover-container:hover { 
-    transform: scale(1.15); 
-    transform-origin: center center; 
+  .cover-container.is-hovered,
+  .cover-container:hover {
+    transform: scale(1.25);
+    transform-origin: center center;
   }
-  .cover-container::before { 
-    inset: -10%; 
+  .cover-container::before {
+    inset: -10%;
   }
 }
 </style>
@@ -576,38 +599,34 @@
 
   function enterCover(c) {
     if (!c || activeCover === c) return;
-    
-    // 先关闭之前的
+
     if (activeCover && activeCover !== c) leaveCover(activeCover);
 
     activeCover = c;
     c.classList.add('is-hovered');
     const card = c.closest('.paper-card');
     if (card) card.classList.add('cover-open');
-    
-    // mark will-change (inline style) — 浏览器会在后续 transitionend 中移除
+
     c.style.willChange = 'transform';
   }
 
   function leaveCover(c) {
     if (!c) return;
-    
+
     c.classList.remove('is-hovered');
     const card = c.closest('.paper-card');
     if (card) card.classList.remove('cover-open');
-    
-    // 在 transition end 后移除 will-change，避免长期 GPU 占用
+
     const onEnd = function (ev) {
       if (ev.propertyName && ev.propertyName.indexOf('transform') === -1) return;
       c.style.willChange = '';
       c.removeEventListener('transitionend', onEnd);
     };
-    
+
     c.addEventListener('transitionend', onEnd);
     if (activeCover === c) activeCover = null;
   }
 
-  // pointerover/out 代理（覆盖 mouse + touch pointer）
   document.addEventListener('pointerover', function (e) {
     const c = e.target.closest('.cover-container');
     if (c) enterCover(c);
@@ -615,14 +634,12 @@
 
   document.addEventListener('pointerout', function (e) {
     const left = e.target.closest('.cover-container');
-    // 当 relatedTarget 不存在或不在同一 container 内，认为离开
     const related = e.relatedTarget;
     if (left && (!related || !left.contains(related))) {
       leaveCover(left);
     }
   }, { passive: true });
 
-  // touchstart: 点击图片时激活；点击页面其它位置关闭
   let touchActiveFor = null;
   document.addEventListener('touchstart', function (e) {
     const c = e.target.closest('.cover-container');
@@ -635,26 +652,23 @@
     }
   }, { passive: true });
 
-  // ESC 快捷键取消
   document.addEventListener('keydown', function (e) {
     if ((e.key === 'Escape' || e.key === 'Esc') && activeCover) {
       leaveCover(activeCover);
     }
   });
 
-  // 页面就绪后给所有封面提供可聚焦支持
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.cover-container').forEach(function (c) {
       if (!c.hasAttribute('tabindex')) c.setAttribute('tabindex', '0');
-      
-      // 如果图片元素存在，启用解码与懒加载提高加载性能
+
       const img = c.querySelector('img');
       if (img) {
         try {
           img.loading = img.loading || 'lazy';
-        } catch (e) { /* ignore */ }
-        try { 
-          img.decoding = 'async'; 
+        } catch (e) {}
+        try {
+          img.decoding = 'async';
         } catch(e) {}
       }
     });
@@ -666,15 +680,16 @@
 
 <div class="d-none d-md-block">
   <div class="row no-gutters paper-card {% unless include.hide_bottom_border %}border-b border-gray-200{% endunless %}">
-    <div class="col-md-4 col-xl-3 p-md-3">
+    <!-- 图片宽度增加，高度自适应 -->
+    <div class="col-md-5 col-xl-4 p-md-3">
       <div class="cover-container">
         {%- if item.cover -%}
           <img data-src="{{ item.cover | relative_url }}" alt="{{ item.title }}"
-               class="lazy w-58 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+               class="lazy w-100 rounded-xl shadow-md transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                loading="lazy" decoding="async"
                src="{{ '/assets/images/empty_300x200.png' | relative_url }}" onload="this.classList.add('opacity-100')">
         {%- else -%}
-          <svg class="bubble-visual-hash lazy w-58 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
+          <svg class="bubble-visual-hash lazy w-100 rounded-xl shadow-md transition-all duration-300 group-hover:shadow-lg"
                data-bubble-visual-hash="{{ item.id }}" viewBox="0 0 196 130" fill="none" stroke="currentColor" role="img" aria-label="placeholder">
             <rect width="196" height="130" rx="11.628" fill="rgba(229,231,235,0.5)" stroke-width="1.462"/>
           </svg>
@@ -682,7 +697,7 @@
       </div>
     </div>
 
-    <div class="col-md-8 col-xl-9 paper-content d-flex flex-column justify-content-center">
+    <div class="col-md-7 col-xl-8 paper-content d-flex flex-column justify-content-center">
       <h5 class="paper-title">{{ item.title }}</h5>
 
       <div class="paper-authors">

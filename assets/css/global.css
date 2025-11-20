@@ -184,7 +184,7 @@ body.joyvoice-lang-en{ --hl-label-w:7.6em; }
 }
 .joyvoice-highlight-values>div{display:flex;flex-direction:column;gap:.25rem;}
 .joyvoice-highlight-values .joyvoice-highlight-value{word-break:break-all;}
-body.joyvoice-lang-zh .joyvoice-highlight-label::after{content:"：";margin-left:.125rem;}
+body.joyvoice-lang-zh .joyvoice-highlight-label::after{content:"；";margin-left:.125rem;}
 body.joyvoice-lang-en .joyvoice-highlight-label::after{content:":";margin-left:.125rem;}
 
 /* ===== Showcase card ===== */
@@ -346,6 +346,32 @@ div.lazy{
   background-position: center;
   background-size: clamp(40px,6vw,72px) clamp(40px,6vw,72px);
   background-color:#f3f6ff;
+}
+
+/* ✅ Publications page: wider cards + larger imagery to match publication_card */
+@media (min-width: 1024px){
+  body .publication-item{
+    max-width: 1480px;
+    margin-inline:auto;
+    width:100%;
+  }
+
+  body .publication-item .pub-image-container{
+    width:50%;
+    margin-right:2rem;
+  }
+
+  body .publication-item .pub-content{ width:50%; }
+
+  body .publication-item .pub-image-container img{
+    width:100%;
+    max-width:560px;
+  }
+}
+
+@media (min-width: 1440px){
+  body .publication-item{ max-width: 1600px; }
+  body .publication-item .pub-image-container img{ max-width: 620px; }
 }
 
 /* Language toggle button */
