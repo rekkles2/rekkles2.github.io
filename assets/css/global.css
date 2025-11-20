@@ -348,6 +348,32 @@ div.lazy{
   background-color:#f3f6ff;
 }
 
+/* ✅ Publications page: wider cards + larger imagery to match publication_card */
+@media (min-width: 1024px){
+  body .publication-item{
+    max-width: 1480px;
+    margin-inline:auto;
+    width:100%;
+  }
+
+  body .publication-item .pub-image-container{
+    width:50%;
+    margin-right:2rem;
+  }
+
+  body .publication-item .pub-content{ width:50%; }
+
+  body .publication-item .pub-image-container img{
+    width:100%;
+    max-width:560px;
+  }
+}
+
+@media (min-width: 1440px){
+  body .publication-item{ max-width: 1600px; }
+  body .publication-item .pub-image-container img{ max-width: 620px; }
+}
+
 /* Language toggle button */
 #joyvoice-lang-toggle{
   background:#fff;border:1px solid var(--line);border-radius:50px;padding:.35rem .75rem;
