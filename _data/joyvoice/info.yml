@@ -57,27 +57,51 @@ team:
   founders: "李嘉航（co-founder） 周逸（co-founder）"
   founders_en: "Jiahang Li (co-founder), Yi Zhou (co-founder)"
   # 你可自由增删该列表
+# info.yml (节选) —— team.staff / team.staff_en
   staff:
-    - "策划：周逸、李嘉航、路漓"
-    - "编剧：路漓、周逸"
-    - "导演：周逸"
-    - "后期：吴玄溪、周逸"
-    - "配音：扶苏、函鑫、李嘉航、周逸"
-    - "作词：路漓"
-    - "作曲：周逸"
-    - "编曲：周逸"
-    - "美工：扶苏"
+    # ❈ 剧组 ❈
+    - "剧策/编剧：周逸、烽火、李嘉航"
+    - "配音导演：周逸"
+    - "剧后：幽灵、乔西、云岚"
+    - "配音演员：酸菜、我是一块小甜糕、李嘉航"
+
+    # ❈ 歌组 ❈
+    - "歌策：慕臆柠、周逸"
+    - "作/编曲：萧冷、未来路、周逸"
+    - "词作：飒露紫、丛昀晞、梦之、路漓"
+    - "混音：绿豆糕、初宁、司听黎宛、周逸"
+    - "唱见：轩凌拾弋、三根儿、欣与欣愿"
+    - "PV：吴玄溪"
+
+    # ❈ 美宣组 ❈
+    - "题字：空心菜、挽袖流离"
+    - "美工：张小喵萌君、扶苏"
+    - "画师：萝卜糕"
+    - "字幕：卿忆"
 
   staff_en:
-    - "Production Planners: Yi Zhou, Jiahang Li, Li Lu"
-    - "Scriptwriters: Li Lu, Yi Zhou"
-    - "Director: Yi Zhou"
-    - "Post-production (Audio/Editing): Xuanxi Wu, Yi Zhou"
-    - "Voice Actors / Dubbing Artists: Fusu, Hanxin, Jiahang Li, Yi Zhou"
-    - "Lyricist: Li Lu"
-    - "Composer: Yi Zhou"
-    - "Arranger: Yi Zhou"
-    - "Graphic Designer / Visual Artist: Su Fu"
+    # ❈ Drama Crew ❈
+    - "Producer/Scriptwriter: Yi Zhou, Fenghuo, Jiahang Li"
+    - "Voice Director: Yi Zhou"
+    - "Post-production: Youling, Qiaoxi, Yunlan"
+    - "Voice Actors: Suancai, Xiao Tiangao, Jiahang Li"
+
+    # ❈ Music Crew ❈
+    - "Music Producer: Yining Mu, Yi Zhou"
+    - "Composition/Arrangement: Leng Xiao, Weilai Lu, Yi Zhou"
+    - "Lyrics: Luzi Sa, Yunxi Cong, Mengzhi, Li Lu"
+    - "Mixing: Dougao Lv, Ning Chu, Siting Liwan, Yi Zhou"
+    - "Vocalists: Xuanling Shiyi, Sangen, Xinyu Xinyuan"
+    - "PV (Promotional Video) : Xuanxi Wu"
+
+    # ❈ Visual/Promo Crew ❈
+    - "Inscription: Kongxincai, Wanxiu Liuli"
+    - "Graphic Design: Mengjun Xiaomiao Zhang, Fusu"
+    - "Illustration: Luobogao"
+    - "Subtitles: Qingyi"
+
+
+
 
 
 portfolio:
@@ -106,12 +130,12 @@ portfolio:
         cast_en: ["Yan Qing: Jin Cheng","Liang Zhen'an: Ka Xiu","Young Yan Qing: Chen Ye","Young Liang Zhen'an: Nan Qiu"]
         release_date: "2025-10-25"
         release_date_en: "Oct 25, 2025"
-        plays: "1.1w"
-        plays_as_of: "2025-12-15"
+        plays: "1.7w"
+        plays_as_of: "2025-01-05"
         pv_links:
           - title: "收听：漫播"
             title_en: "Listen (Manbo)"
-            url: "https://kilamanbo.com/manbo/pc/detail?_specific_parameter=bd0Lp3YOobyzJklJ7O0PBa_F3dkN5-BGUI1JXbvZjS1IJGLkZhU4u8Cr5SnpNS8Sw-uhiqgYuypG3oqpMDaB0NeSBxt1tICQKcJDS0Qbk8VwhKIKO4ual2YxA7LWQxdU"
+            url: "https://kilamanbo.com/manbo/pc/detail?_specific_parameter=bd0Lp3YOobyzJklJ7O0PBRJzOUEyZxFQ3BETFyxn-pS4Byu0Ub6dznYYL_EQw8ZATi_mJc6EsygYtEqnGnpd81AjHj8BiTzdYuSgj8vyGx5bwNkZ2fALKub0FnfO0BBv"
             icon: "bi-headphones"
           - title: "PV（B站）"
             title_en: "PV (Bilibili)"

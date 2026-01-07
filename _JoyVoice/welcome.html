@@ -51,14 +51,6 @@
           <!-- 高亮信息（健壮解析 + 多行值 + 左列齐头对齐） -->
           <div class="joyvoice-highlight-grid joyvoice-highlight-grid--2col">
             {% for h in info.studio.highlights %}
-              {%- comment -%}
-              组装 zh_lines / en_lines：
-              - 优先 value_lines / value_en_lines（数组）
-              - 否则兼容 value / value_en：
-                * 若是 '["a","b"]' 形式的字符串：去括号去引号后按逗号切
-                * 若含 <br/>：按 <br/> 切
-                * 其他：单行
-              {%- endcomment -%}
               {% assign zh_lines = h.value_lines %}
               {% if zh_lines == nil %}
                 {% assign zh_raw = h.value %}
@@ -151,21 +143,167 @@
           <div class="joyvoice-team-name d-none joyvoice-lang" data-lang="en">{{ info.team.founders_en }}</div>
         </div>
 
+        <!-- ===================== 核心团队（角色换行版） ===================== -->
         <div class="joyvoice-team-group mt-3">
           <h3 class="joyvoice-group-h joyvoice-lang" data-lang="zh">核心团队</h3>
           <h3 class="joyvoice-group-h d-none joyvoice-lang" data-lang="en">Core Team</h3>
 
           {% if info.team.staff %}
-            <ul class="joyvoice-ul mb-0">
-              {% for r in info.team.staff %}
-                <li class="joyvoice-lang" data-lang="zh">{{ r }}</li>
-              {% endfor %}
-              {% for r in info.team.staff_en %}
-                <li class="d-none joyvoice-lang" data-lang="en">{{ r }}</li>
-              {% endfor %}
-            </ul>
+            {% assign drama_roles_zh = "剧策/编剧,剧策,策划,编剧,导演,配音导演,剧后,后期,配音,配音演员,CV" | split: "," %}
+            {% assign music_roles_zh = "歌策,作/编曲,作曲,编曲,作词,词作,混音,唱见,PV" | split: "," %}
+            {% assign visual_roles_zh = "美宣,题字,美工,画师,字幕" | split: "," %}
+
+            <div class="jv-core-team">
+
+              <!-- ❈ 剧组 ❈ -->
+              <div class="jv-team-subgroup" data-jv-group="drama">
+                <div class="jv-team-subgroup-title">
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-camera-reels"></i></span>
+                  <span class="joyvoice-lang" data-lang="zh">❈ 剧组 ❈</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">❈ Drama Crew ❈</span>
+                </div>
+
+                <div class="joyvoice-lang" data-lang="zh">
+                  {% for r in info.team.staff %}
+                    {% assign parts = r | split: '：' %}
+                    {% assign role = parts[0] | strip %}
+                    {% assign names = parts[1] | strip %}
+                    {% if drama_roles_zh contains role %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role }}：</div>
+                        <div class="jv-team-names">
+                          {% assign name_list = names | split: '、' %}
+                          {% for nm in name_list %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="d-none joyvoice-lang" data-lang="en">
+                  {% for r in info.team.staff_en %}
+                    {% assign parts = r | split: ':' %}
+                    {% assign role_en = parts[0] | strip %}
+                    {% assign names_en = parts[1] | strip %}
+                    {% assign role_en_l = role_en | downcase %}
+                    {% if role_en_l contains "planner" or role_en_l contains "script" or role_en_l contains "director" or role_en_l contains "post" or role_en_l contains "voice" %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role_en }}:</div>
+                        <div class="jv-team-names">
+                          {% assign name_list_en = names_en | split: ',' %}
+                          {% for nm in name_list_en %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- ❈ 歌组 ❈ -->
+              <div class="jv-team-subgroup" data-jv-group="music">
+                <div class="jv-team-subgroup-title">
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-music-note-beamed"></i></span>
+                  <span class="joyvoice-lang" data-lang="zh">❈ 歌组 ❈</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">❈ Music Crew ❈</span>
+                </div>
+
+                <div class="joyvoice-lang" data-lang="zh">
+                  {% for r in info.team.staff %}
+                    {% assign parts = r | split: '：' %}
+                    {% assign role = parts[0] | strip %}
+                    {% assign names = parts[1] | strip %}
+                    {% if music_roles_zh contains role %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role }}：</div>
+                        <div class="jv-team-names">
+                          {% assign name_list = names | split: '、' %}
+                          {% for nm in name_list %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="d-none joyvoice-lang" data-lang="en">
+                  {% for r in info.team.staff_en %}
+                    {% assign parts = r | split: ':' %}
+                    {% assign role_en = parts[0] | strip %}
+                    {% assign names_en = parts[1] | strip %}
+                    {% assign role_en_l = role_en | downcase %}
+                    {% if role_en_l contains "music" or role_en_l contains "composition" or role_en_l contains "arrangement" or role_en_l contains "lyric" or role_en_l contains "mix" or role_en_l contains "vocal" or role_en_l contains "pv" %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role_en }}:</div>
+                        <div class="jv-team-names">
+                          {% assign name_list_en = names_en | split: ',' %}
+                          {% for nm in name_list_en %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- ❈ 美宣组 ❈ -->
+              <div class="jv-team-subgroup" data-jv-group="visual">
+                <div class="jv-team-subgroup-title">
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-palette"></i></span>
+                  <span class="joyvoice-lang" data-lang="zh">❈ 美宣组 ❈</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">❈ Visual/Promo Crew ❈</span>
+                </div>
+
+                <div class="joyvoice-lang" data-lang="zh">
+                  {% for r in info.team.staff %}
+                    {% assign parts = r | split: '：' %}
+                    {% assign role = parts[0] | strip %}
+                    {% assign names = parts[1] | strip %}
+                    {% if visual_roles_zh contains role %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role }}：</div>
+                        <div class="jv-team-names">
+                          {% assign name_list = names | split: '、' %}
+                          {% for nm in name_list %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="d-none joyvoice-lang" data-lang="en">
+                  {% for r in info.team.staff_en %}
+                    {% assign parts = r | split: ':' %}
+                    {% assign role_en = parts[0] | strip %}
+                    {% assign names_en = parts[1] | strip %}
+                    {% assign role_en_l = role_en | downcase %}
+                    {% if role_en_l contains "letter" or role_en_l contains "design" or role_en_l contains "graphic" or role_en_l contains "visual" or role_en_l contains "illustration" or role_en_l contains "subtitle" %}
+                      <div class="jv-team-line">
+                        <div class="jv-team-role">{{ role_en }}:</div>
+                        <div class="jv-team-names">
+                          {% assign name_list_en = names_en | split: ',' %}
+                          {% for nm in name_list_en %}
+                            <span class="jv-name-pill">{{ nm | strip }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+            </div>
           {% endif %}
         </div>
+        <!-- ===================== /核心团队 ===================== -->
+
       </section>
     </div>
   </div>
@@ -186,9 +324,7 @@
       {% for project in drama_section.projects %}
       <div class="col-12 mb-5">
         <article class="joyvoice-showcase-card" aria-labelledby="drama-{{ forloop.index }}-title">
-          <!-- 顶线对齐：左右列都取消顶部外边距/额外内边距 -->
           <div class="row g-0 align-items-start">
-            <!-- 左：封面（轮播）+ 按钮 -->
             <div class="col-lg-5">
               {% assign has_covers = project.covers %}
               <div class="joyvoice-cover-stack">
@@ -232,7 +368,6 @@
               {% endif %}
             </div>
 
-            <!-- 右：文案 -->
             <div class="col-lg-7">
               <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
                 <div>
@@ -470,7 +605,6 @@ if (!window.joyvoiceBootLoaded) {
       root.setAttribute('tabindex','0');
       root.addEventListener('keydown',(e)=>{ if(e.key==='ArrowLeft'){go(-1);start();} if(e.key==='ArrowRight'){go(1);start();} });
 
-      // 触摸滑动
       let x0=null;
       viewport.addEventListener('touchstart',(e)=>{ x0=e.touches[0].clientX; stop(); },{passive:true});
       viewport.addEventListener('touchend',(e)=>{ if(x0==null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) go(dx>0?-1:1); x0=null; start(); },{passive:true});
@@ -487,3 +621,151 @@ if (!window.joyvoiceBootLoaded) {
   });
 }
 </script>
+
+<!-- 核心团队：浅色 + “角色换行”排版 -->
+<style>
+.jv-core-team{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:16px;
+  margin-top:12px;
+  align-items:stretch;
+}
+
+.jv-team-subgroup{
+  color-scheme: light;
+  --jv-ink: rgba(17,24,39,.92);
+  --jv-ink-2: rgba(17,24,39,.70);
+  --jv-border: rgba(17,24,39,.10);
+
+  position:relative;
+  border:1px solid var(--jv-border);
+  border-radius:18px;
+  padding:14px 16px 16px;
+  background:
+    radial-gradient(680px 140px at 18px 18px, rgba(var(--jv-accent-rgb, 219,232,253), .26), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,1), rgba(248,250,252,1));
+  box-shadow:0 12px 30px rgba(17,24,39,.08);
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.jv-team-subgroup:hover{
+  transform: translateY(-2px);
+  box-shadow:0 16px 38px rgba(17,24,39,.10);
+  border-color: rgba(17,24,39,.14);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .jv-team-subgroup{ transition:none; }
+  .jv-team-subgroup:hover{ transform:none; }
+}
+
+/* Accent bar */
+.jv-team-subgroup::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  top:14px;
+  bottom:14px;
+  width:4px;
+  border-radius:999px;
+  background: linear-gradient(180deg,
+    rgba(var(--jv-accent-rgb, 219,232,253), 1),
+    rgba(var(--jv-accent-rgb, 219,232,253), .55)
+  );
+}
+
+/* Group accents */
+.jv-team-subgroup[data-jv-group="drama"]{ --jv-accent-rgb:219,232,253; } /* #DBE8FD */
+.jv-team-subgroup[data-jv-group="music"]{ --jv-accent-rgb:250,216,173; } /* #FAD8AD */
+.jv-team-subgroup[data-jv-group="visual"]{ --jv-accent-rgb:207,206,227; } /* #CFCEE3 */
+
+/* Title */
+.jv-team-subgroup-title{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 12px 10px;
+  padding:8px 12px 8px 10px;
+  border-radius:999px;
+  background: rgba(17,24,39,.04);
+  border: 1px solid rgba(17,24,39,.08);
+  color: var(--jv-ink);
+  font-weight: 850;
+  letter-spacing: .02em;
+}
+
+.jv-team-subgroup-icon{
+  width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background: rgba(var(--jv-accent-rgb, 219,232,253), .32);
+  border: 1px solid rgba(var(--jv-accent-rgb, 219,232,253), .55);
+  box-shadow: 0 10px 20px rgba(17,24,39,.06);
+}
+.jv-team-subgroup-icon .bi{
+  font-size: 1.02rem;
+  color: rgba(17,24,39,.72);
+}
+
+/* IMPORTANT: role newline layout */
+.jv-team-line{
+  margin-left:10px;              /* align after accent bar */
+  padding:10px 0;
+  line-height:1.55;
+}
+
+.jv-team-line + .jv-team-line{
+  border-top:1px dashed rgba(17,24,39,.10);
+}
+
+/* role label on its own line */
+.jv-team-role{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  width: fit-content;
+  max-width: 100%;
+  color: var(--jv-ink-2);
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(17,24,39,.03);
+  border: 1px solid rgba(17,24,39,.06);
+  white-space: nowrap;
+  margin-bottom:8px;             /* this forces the “换行” visual rhythm */
+}
+
+/* names on the next line */
+.jv-team-names{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-content:flex-start;
+  justify-content:flex-start;
+}
+
+/* name pill */
+.jv-name-pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(var(--jv-accent-rgb, 219,232,253), .14);
+  border: 1px solid rgba(var(--jv-accent-rgb, 219,232,253), .36);
+  color: var(--jv-ink);
+  font-size: .92em;
+  white-space: nowrap;
+}
+
+/* keyboard focus */
+.jv-team-subgroup a:focus-visible,
+.jv-team-subgroup button:focus-visible{
+  outline:3px solid rgba(var(--jv-accent-rgb, 219,232,253), .60);
+  outline-offset:3px;
+  border-radius:12px;
+}
+</style>
