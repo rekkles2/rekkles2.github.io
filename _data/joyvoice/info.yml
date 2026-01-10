@@ -60,16 +60,16 @@ team:
 # info.yml (节选) —— team.staff / team.staff_en
   staff:
     # ❈ 剧组 ❈
-    - "剧策/编剧：周逸、烽火、李嘉航"
+    - "剧策/编剧：周逸、烽火、李嘉航、路漓"
     - "配音导演：周逸"
     - "剧后：幽灵、乔西、云岚"
-    - "配音演员：酸菜、我是一块小甜糕、李嘉航"
+    - "配音演员：酸菜、我是一块小甜糕、李嘉航、神秘香蕉派"
 
     # ❈ 歌组 ❈
     - "歌策：慕臆柠、周逸"
     - "作/编曲：萧冷、未来路、周逸"
     - "词作：飒露紫、丛昀晞、梦之、路漓"
-    - "混音：绿豆糕、初宁、司听黎宛、周逸"
+    - "混音：绿豆糕、初宁、司听黎宛"
     - "唱见：轩凌拾弋、三根儿、欣与欣愿"
     - "PV：吴玄溪"
 
@@ -81,16 +81,16 @@ team:
 
   staff_en:
     # ❈ Drama Crew ❈
-    - "Producer/Scriptwriter: Yi Zhou, Fenghuo, Jiahang Li"
+    - "Producer/Scriptwriter: Yi Zhou, Fenghuo, Jiahang Li, Li Lu"
     - "Voice Director: Yi Zhou"
     - "Post-production: Youling, Qiaoxi, Yunlan"
-    - "Voice Actors: Suancai, Xiao Tiangao, Jiahang Li"
+    - "Voice Actors: Suancai, Xiao Tiangao, Jiahang Li, Xiang Jiaopai"
 
     # ❈ Music Crew ❈
     - "Music Producer: Yining Mu, Yi Zhou"
     - "Composition/Arrangement: Leng Xiao, Weilai Lu, Yi Zhou"
     - "Lyrics: Luzi Sa, Yunxi Cong, Mengzhi, Li Lu"
-    - "Mixing: Dougao Lv, Ning Chu, Siting Liwan, Yi Zhou"
+    - "Mixing: Dougao Lv, Ning Chu, Siting Liwan"
     - "Vocalists: Xuanling Shiyi, Sangen, Xinyu Xinyuan"
     - "PV (Promotional Video) : Xuanxi Wu"
 
@@ -130,8 +130,8 @@ portfolio:
         cast_en: ["Yan Qing: Jin Cheng","Liang Zhen'an: Ka Xiu","Young Yan Qing: Chen Ye","Young Liang Zhen'an: Nan Qiu"]
         release_date: "2025-10-25"
         release_date_en: "Oct 25, 2025"
-        plays: "1.7w"
-        plays_as_of: "2025-01-05"
+        plays: "1.8w"
+        plays_as_of: "2025-01-10"
         pv_links:
           - title: "收听：漫播"
             title_en: "Listen (Manbo)"
