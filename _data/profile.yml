@@ -149,7 +149,7 @@ education:
 
 experience:
 - name: JoyVoice Studio
-  logo: /assets/images/badges/joyvoice.svg
+  logo: /assets/images/badges/joyvoice.png
   position: Co-founder
   lab:
     name: "@JoyVoice Studio"
