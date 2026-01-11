@@ -161,6 +161,19 @@ experience:
 #      url: "https://www.media.mit.edu/"
   date: Sep. 2023 – Jul. 2025
 
+- name: JoyVoice Studio
+  logo: /assets/images/badges/joyvoice.svg
+  position: Co-founder
+  lab:
+    name: "JoyVoice Studio"
+    url: https://rekkles2.github.io/JoyVoice
+  advisor:
+    - name: none
+      url: none
+#    - name: "Dr. YYY"
+#      url: "https://www.media.mit.edu/"
+  date: Aug. 2025 – present
+
 
 
 
