@@ -60,46 +60,45 @@ team:
 # info.yml (节选) —— team.staff / team.staff_en
   staff:
     # ❈ 剧组 ❈
-    - "剧策/编剧：周逸、烽火、李嘉航、路漓"
+    - "剧策/编剧：周逸、烽火、李嘉航、路漓、阿斯德修狗"
     - "配音导演：周逸"
     - "剧后：幽灵、乔西、云岚"
-    - "配音演员：酸菜、我是一块小甜糕、李嘉航、神秘香蕉派"
+    - "配音演员：酸菜、我是一块小甜糕、李嘉航、神秘香蕉派、纸盒子、函鑫、轩凌拾弋"
 
     # ❈ 歌组 ❈
     - "歌策：慕臆柠、周逸"
     - "作/编曲：萧冷、未来路、周逸"
     - "词作：飒露紫、丛昀晞、梦之、路漓"
     - "混音：绿豆糕、初宁、司听黎宛"
-    - "唱见：轩凌拾弋、三根儿、欣与欣愿"
+    - "唱见：轩凌拾弋、三根儿、欣与欣愿、Floats风千、又四日、景序"
     - "PV：吴玄溪"
 
     # ❈ 美宣组 ❈
     - "题字：空心菜、挽袖流离"
     - "美工：张小喵萌君、扶苏"
     - "画师：萝卜糕"
-    - "字幕：卿忆"
+    - "字幕：卿忆、小熊"
 
   staff_en:
     # ❈ Drama Crew ❈
-    - "Producer/Scriptwriter: Yi Zhou, Fenghuo, Jiahang Li, Li Lu"
+    - "Producer/Scriptwriter: Yi Zhou, Fenghuo, Jiahang Li, Li Lu, Asde Xiugou"
     - "Voice Director: Yi Zhou"
     - "Post-production: Youling, Qiaoxi, Yunlan"
-    - "Voice Actors: Suancai, Xiao Tiangao, Jiahang Li, Xiang Jiaopai"
+    - "Voice Actors: Suancai, Xiao Tiangao, Jiahang Li, Xiang Jiaopai, Zhi Hezi, Han Xin, Xuanling Shiyi"
 
     # ❈ Music Crew ❈
     - "Music Producer: Yining Mu, Yi Zhou"
     - "Composition/Arrangement: Leng Xiao, Weilai Lu, Yi Zhou"
     - "Lyrics: Luzi Sa, Yunxi Cong, Mengzhi, Li Lu"
     - "Mixing: Dougao Lv, Ning Chu, Siting Liwan"
-    - "Vocalists: Xuanling Shiyi, Sangen, Xinyu Xinyuan"
+    - "Vocalists: Xuanling Shiyi, Sangen, Xinyu Xinyuan, Floats Fengqian, You Siri, Jing Xu"
     - "PV (Promotional Video) : Xuanxi Wu"
 
     # ❈ Visual/Promo Crew ❈
     - "Inscription: Kongxincai, Wanxiu Liuli"
     - "Graphic Design: Mengjun Xiaomiao Zhang, Fusu"
     - "Illustration: Luobogao"
-    - "Subtitles: Qingyi"
-
+    - "Subtitles: Qingyi, Xiao Xiong"
 
 
 
@@ -130,8 +129,8 @@ portfolio:
         cast_en: ["Yan Qing: Jin Cheng","Liang Zhen'an: Ka Xiu","Young Yan Qing: Chen Ye","Young Liang Zhen'an: Nan Qiu"]
         release_date: "2025-10-25"
         release_date_en: "Oct 25, 2025"
-        plays: "3.4w"
-        plays_as_of: "2025-02-01"
+        plays: "4.5w"
+        plays_as_of: "2026-02-20"
         pv_links:
           - title: "收听：漫播"
             title_en: "Listen (Manbo)"
@@ -143,6 +142,39 @@ portfolio:
             icon: "bi-youtube"
         tags: ["原创","现代","成长","全年龄","悬疑"]
         tags_en: ["Original","Contemporary","Growth","All-ages","Mystery"]
+
+      - title: "有星星相伴"
+        title_en: "With Starlight Beside Me"
+        covers:
+          - "/assets/images/covers/xing1.png"
+          - "/assets/images/covers/xing2.png"
+        tagline: "往事谈论只于此生为句点"
+        tagline_en: "Let all talk of the past end in this lifetime."
+        summary: "我想和......想和星星在一起"
+        summary_en: "I want to... I want to be with the stars."
+        details_s: "全一期原创现代贺岁广播剧《有星星相伴》……"
+        details_en_s: "A complete, one-episode, original contemporary Lunar New Year audio drama, “With Starlight Beside Me.”……"
+        details: "泗水原著，愉声工作室制作出品，漫播APP独播，全 一期原创现代贺岁广播剧《有星星相伴》，欢迎收听。"
+        details_en: "Based on the original work by Si Shui, produced by JoyVoice Studio, and released exclusively on the Manbo app, it is a complete, one-episode, original contemporary Lunar New Year audio drama, “With Starlight Beside Me.” Welcome to listen."
+        credits: [ "监制：李嘉航","策划/编导：周逸","协策：柒若风","后期：方旭","题字：走走","美工：扶苏","字幕：卿忆" ]
+        credits_en: [ "Executive Producer: Jiahang Li","Producer/Director: Yi Zhou","Co-producer: Qi Ruofeng","Post-production: Xu Fang","Inscription: Zouzou","Graphic Design: Fusu","Subtitles: Qing Yi" ]
+        cast: [ "程邵：江笙","小程邵：楠湫","安年：暮芝","小安年：雨露兮儿"]
+        cast_en: [ "Cheng Shao: Jiang Sheng","Young Cheng Shao: Nan Qiu","An Nian: Mu Zhi","Young An Nian: Yulu Xi'er" ]
+        release_date: "2026-02-16"
+        release_date_en: "Feb 16, 2026"
+        plays: "380"
+        plays_as_of: "2026-02-22"
+        pv_links:
+          - title: "收听：漫播"
+            title_en: "Listen (Manbo)"
+            url: "https://www.kilamanbo.com/manbo/pc/detail?_specific_parameter=AnPhAnV6D2Fk4OX3gh1kmCYOddA_LSW8Lx6vqZ2pa6Ger7yxka3y2UWOaVunX6K5FYIbfHd3TQRc5oCtzSZaOGYaktserk8owA9dxqox6D2GXSBr_pYVjDS6fLz0_3TY"
+            icon: "bi-headphones"
+          - title: "PV（B站）"
+            title_en: "PV (Bilibili)"
+            url: "https://www.bilibili.com/video/BV17Gc7zwE2N/?share_source=copy_web&vd_source=c452b3d8ca676b229aa0ef0dc689804c"
+            icon: "bi-youtube"
+        tags: [ "全一期","现代","原创","全年龄","治愈" ]
+        tags_en: [ "One-shot","Contemporary","Original","All-ages","Healing" ]
 
   music:
     title: "原创音乐"
@@ -182,3 +214,36 @@ portfolio:
             icon: "bi-music-note"
         tags: ["原创","流行","伤感"]
         tags_en: ["Original","Pop","Emotional"]
+
+      - title: "有星星相伴"
+        title_en: "With Starlight Beside Me"
+        tagline: "往事谈论只于此生为句点"
+        tagline_en: "Let all talk of the past end in this lifetime."
+        summary: "我想和......想和星星在一起"
+        summary_en: "I want to... I want to be with the stars."
+        staff: "李嘉航（监制）周逸（策划、作曲、混音）柒若风（协策）路漓（作词）未来路（编曲）走走（题字）扶苏（美工）吴玄溪（PV）三根儿、轩凌拾弋（唱见）"
+        staff_en: "Jiahang Li (Executive Producer) Yi Zhou (Producer, Composition, Mixing) Qi Ruofeng (Co-producer) Li Lu (Lyrics) Weilai Lu (Arrangement) Zouzou (Inscription) Fusu (Graphic Design) Xuanxi Wu (PV (Promotional Video)) Sangen, Xuanling Shiyi (Vocalists)"
+        video_embed: |
+          <div class="joyvoice-project-video">
+            <div class="jv-embed jv-embed--16x9" style="--jv-w:80vw; --jv-max:1080px;">
+              <iframe
+                src="//player.bilibili.com/player.html?isOutside=true&aid=116061928168784&bvid=BV17Gc7zwE2N&cid=36030121025&p=1&autoplay=0"
+                title="Bilibili player"
+                loading="lazy"
+                allow="fullscreen; picture-in-picture; accelerometer; clipboard-write"
+                referrerpolicy="no-referrer-when-downgrade"
+                frameborder="0">
+              </iframe>
+            </div>
+          </div>
+        release_date: "2026-02-16"
+        release_date_en: "Feb 16, 2026"
+        plays: "57"
+        plays_as_of: "2026-02-22"
+        links:
+          - title: "收听：漫播"
+            title_en: "Listen (Manbo)"
+            url: "https://www.kilamanbo.com/manbo/pc/detail?_specific_parameter=rQfBQodo8-9C_NL8tyDisf_gIcWTMmYmZccmq9eSMDp3OcBrB-dTfEkf92MW1-fwVJUF0_gTxUa6f48bkTLD8K6UOl86Fih16zL0fFj8wf3pMF-zF0RNSqRLKujO73ZE"
+            icon: "bi-music-note"
+        tags: [ "原创","流行","治愈" ]
+        tags_en: [ "Original","Pop","Healing" ]

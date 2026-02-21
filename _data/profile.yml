@@ -180,7 +180,19 @@ experience:
 
 
 awards:
-- name: Outstanding Reviewer Award, British Machine Vision Conference (BMVC)
+- name: <a href="https://bmvc2025.bmva.org/people/reviewers/"
+        target="_blank" rel="noopener"
+        style="
+          color:#0369a1;
+          font-weight:600;
+          text-decoration-line:underline;
+          text-decoration-color:currentColor;
+          text-decoration-thickness:2px;
+          text-underline-offset:1px;
+          text-decoration-skip-ink:none;
+        ">
+        Outstanding Reviewer Award, British Machine Vision Conference (BMVC 2025)
+        </a>
   date: Dec. 2025
 - name: Tianjin Municipal Government Scholarship (¥8,000, Top ≤ 1%)
   date: Dec. 2025
@@ -223,7 +235,7 @@ services:
     - "SVU@ICCV 2025"
 
   journal:
-    - "Engineering Applications of Artificial Intelligence (EAAI), 2025"
+    - "Engineering Applications of Artificial Intelligence (EAAI), 2025-2026"
     - "Ad Hoc Networks  (Ad Hoc Netw), 2025"
 
 

@@ -7,3 +7,11 @@ container_class: container-xl
 
 <div class="joyvoice-top-spacer"></div>
 {% include_relative _JoyVoice/welcome.html %}
+<!-- ========================= [MOD] Projects cards spacing ========================= -->
+<!-- Paste this block near the end of the file (right before </body> is safest). -->
+<style>
+  section[aria-label^="Portfolio"] .col-12.mb-5{
+    margin-bottom: 4px !important; /* [MOD] */
+  }
+</style>
+<!-- ======================= [MOD END] Projects cards spacing ======================= -->
