@@ -236,6 +236,7 @@ services:
 
   journal:
     - "Engineering Applications of Artificial Intelligence (EAAI), 2025-2026"
+    - "IEEE Internet of Things Journal (IEEE IoT-J), 2026"
     - "Ad Hoc Networks  (Ad Hoc Netw), 2025"
 
 
