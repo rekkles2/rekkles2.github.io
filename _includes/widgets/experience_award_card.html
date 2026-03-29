@@ -11,8 +11,8 @@
                             </h6>
                             <ul class="list-unstyled">
                                 {% for item in site.data.profile.experience %}
-                                <li class="d-flex mb-4 align-items-start">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg" loading="lazy" style="filter: brightness(0.9);">
+                                <li class="d-flex mb-4 align-items-start experience-entry">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg entry-logo" loading="lazy" style="filter: brightness(0.9);">
                                     <div class="flex-grow-1 d-flex flex-column justify-content-between">
                                         <div class="d-flex w-100">
                                             <div class="flex-grow-1 min-w-0 pr-3">
@@ -83,7 +83,7 @@
                                                     </div>
                                                 {% endif %}
                                             </div>
-                                            <div class="text-gray-500 text-sm text-nowrap align-self-start" style="flex-shrink: 0;">
+                                            <div class="text-gray-500 text-sm text-nowrap align-self-start entry-date-pill" style="flex-shrink: 0;">
                                                 <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
                                             </div>
                                         </div>
@@ -102,14 +102,14 @@
                             </h6>
                             <ul class="list-unstyled">
                                 {% for item in site.data.profile.awards %}
-                                <li class="d-flex mb-4 align-items-start">
+                                <li class="d-flex mb-4 align-items-start award-entry">
                                     <div class="flex-grow-1 min-w-0">
                                         <div class="d-flex justify-content-between align-items-start flex-wrap w-100">
-                                            <div class="font-weight-medium text-gray-900 min-w-0"
+                                            <div class="font-weight-medium text-gray-900 min-w-0 award-title"
                                                  style="flex: 1 1 0%; max-width: calc(100% - 9rem); word-break: break-word;">
                                                 {{ item.name }}
                                             </div>
-                                            <div class="text-gray-500 text-sm text-nowrap mr-auto ml-4"
+                                            <div class="text-gray-500 text-sm text-nowrap mr-auto ml-4 entry-date-pill"
                                                  style="flex-shrink: 0; white-space: nowrap;">
                                                 <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
                                             </div>
@@ -148,6 +148,43 @@
     .experience-link:focus {
         outline: none;
         box-shadow: 0 6px 14px rgba(3, 105, 161, 0.12);
+    }
+
+    .experience-entry,
+    .award-entry {
+        padding: 1rem 1.05rem;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(248,250,255,0.98), rgba(244,247,252,0.94));
+        border: 1px solid rgba(47,87,200,0.06);
+        box-shadow: 0 4px 12px rgba(15,23,42,0.035);
+    }
+
+    .experience-entry:last-child,
+    .award-entry:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    .entry-logo {
+        flex-shrink: 0;
+        padding: 0.22rem;
+        background: rgba(248,250,255,0.96);
+        box-shadow: 0 4px 12px rgba(15,23,42,0.045);
+    }
+
+    .entry-date-pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 0.8rem;
+        border-radius: 999px;
+        background: rgba(239,244,255,0.92);
+        border: 1px solid rgba(47,87,200,0.08);
+        color: #607089 !important;
+        font-weight: 600;
+    }
+
+    .award-title {
+        line-height: 1.55;
     }
 
     /* 避免长文本导致布局错乱 */

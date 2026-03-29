@@ -7,16 +7,16 @@
     {%- assign last_2chars = _key | slice: -2, 2 -%}
     {%- if last_2chars == "*#" or last_2chars == "#*" -%}
         {%- assign key = _key | replace: "#*", "" | replace: "*#", "" -%}
-        {%- assign mark = "<span class='text-sm text-blue-800'>*<sup class='text-sm text-blue-800'>&dagger;</sup></span>" -%}
+        {%- capture mark -%}<span class="author-mark author-mark--equal" aria-label="equal contribution">*</span><span class="author-mark author-mark--corresponding" aria-label="corresponding author">&dagger;</span>{%- endcapture -%}
         {%- assign has_eq_contrib = true -%}
         {%- assign has_corresponding = true -%}
     {%- elsif last_char == "*" -%}
         {%- assign key = _key | split: "*" | first -%}
-        {%- assign mark = "<span class='text-sm text-blue-800'>*</span>" -%}
+        {%- capture mark -%}<span class="author-mark author-mark--equal" aria-label="equal contribution">*</span>{%- endcapture -%}
         {%- assign has_eq_contrib = true -%}
     {%- elsif last_char == "#" -%}
         {%- assign key = _key | split: "#" | first -%}
-        {%- assign mark = "<sup class='text-sm text-blue-800'>&dagger;</sup>" -%}
+        {%- capture mark -%}<span class="author-mark author-mark--corresponding" aria-label="corresponding author">&dagger;</span>{%- endcapture -%}
         {%- assign has_corresponding = true -%}
     {%- else -%}
         {%- assign key = _key -%}
@@ -44,15 +44,18 @@
 {%- endfor -%}
 
 {%- if has_eq_contrib or has_corresponding -%}
-<span class="bg-blue-100 text-blue-800 text-xs px-1.5 py-0.2 rounded inline-flex items-center ml-1.5">
-    (
+<span class="author-legend" aria-label="Author markers legend">
     {%- if has_eq_contrib -%}
-        <span class='text-xl text-blue-800'>*</span> <i class="text-gray-700 text-xs text-blue-800">equal contribution</i>
+        <span class="author-legend__item">
+            <span class="author-mark author-mark--equal" aria-hidden="true">*</span>
+            <span class="author-legend__label">equal contribution</span>
+        </span>
     {%- endif -%}
     {%- if has_corresponding -%}
-        {%- if has_eq_contrib -%}, {% endif -%}
-        <sup class='text-xs text-blue-800'>&dagger;</sup> <i class="text-gray-700 text-xs text-blue-800">corresponding author</i>
+        <span class="author-legend__item">
+            <span class="author-mark author-mark--corresponding" aria-hidden="true">&dagger;</span>
+            <span class="author-legend__label">corresponding author</span>
+        </span>
     {%- endif -%}
-    )
 </span>
 {%- endif -%}

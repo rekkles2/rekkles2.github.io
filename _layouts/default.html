@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
 </head>
 
-<body class="bg-light" {{ page.body_attr }}>
+<body class="bg-light{% if page.body_class %} {{ page.body_class }}{% endif %}" {{ page.body_attr }}>
     {% include navbar.html %}
     <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
         {{content}}

@@ -7,8 +7,8 @@
         </h6>
         <ul class="list-unstyled">
           {% for item in site.data.profile.education %}
-          <li class="d-flex mb-4 align-items-center">
-            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4" loading="lazy" style="filter: brightness(0.9);">
+          <li class="d-flex mb-4 align-items-start education-entry">
+            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg education-logo" loading="lazy" style="filter: brightness(0.9);">
             <div class="flex-grow-1">
               <div class="d-flex justify-content-between align-items-start flex-wrap">
                 <div>
@@ -94,7 +94,7 @@
                     </div>
                   {% endif %}
                 </div>
-                <div class="text-gray-500 text-sm text-nowrap ml-3 mt-0">{{ item.date }}</div>
+                <div class="text-gray-500 text-sm text-nowrap ml-3 mt-0 education-date-pill">{{ item.date }}</div>
               </div>
             </div>
           </li>
@@ -124,6 +124,37 @@
   .education-link:focus {
     outline: none;
     box-shadow: 0 6px 14px rgba(3, 105, 161, 0.12);
+  }
+
+  .education-entry {
+    padding: 1rem 1.05rem;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(248,250,255,0.98), rgba(244,247,252,0.94));
+    border: 1px solid rgba(47,87,200,0.06);
+    box-shadow: 0 4px 12px rgba(15,23,42,0.035);
+  }
+
+  .education-entry:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .education-logo {
+    flex-shrink: 0;
+    padding: 0.22rem;
+    background: rgba(248,250,255,0.96);
+    box-shadow: 0 4px 12px rgba(15,23,42,0.045);
+  }
+
+  .education-date-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 0.8rem;
+    border-radius: 999px;
+    background: rgba(239,244,255,0.92);
+    border: 1px solid rgba(47,87,200,0.08);
+    color: #607089 !important;
+    font-weight: 600;
   }
 
   /* Match the publication section heading style */

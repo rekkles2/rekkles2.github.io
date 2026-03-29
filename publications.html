@@ -8,7 +8,7 @@ body_attr: >-
 
 {% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 
-<div class="container mx-auto px-4 py-8 bg-gray-50">
+<div class="container mx-auto px-4 py-8 publications-shell">
     <div class="flex flex-col lg:flex-row gap-8">
         <!-- 主内容区域，保持加宽 -->
         <div class="w-full lg:w-19/20">
@@ -43,16 +43,21 @@ body_attr: >-
 .publication-item {
     padding: 2rem;
     border-radius: 14px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    background-color: rgba(247, 249, 253, 0.94);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(15, 23, 42, 0.05);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
 }
 .publication-item:hover {
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
     transform: translateY(-3px);
+}
+
+.publications-shell {
+    background: transparent;
 }
 
 /* 图片与文本区域（保持你上次比例逻辑） */
@@ -84,7 +89,7 @@ body_attr: >-
 /* 外壳卡片：白底 + 轻描边 + 轻阴影，作为时间轴容器 */
 .year-card-shell {
     position: relative;                 /* 让伪元素定位基于容器 */
-    background-color: #ffffff;
+    background-color: rgba(248, 250, 255, 0.96);
     border-radius: 12px;
     border: 1px solid rgba(0,0,0,0.06);
     box-shadow:

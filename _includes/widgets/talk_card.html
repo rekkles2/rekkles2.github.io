@@ -17,26 +17,45 @@
                                 </div>
 
                                 <div class="font-weight-bold text-gray-900 mb-3" style="font-size: 1.05rem;">
-                                    {% assign name_parts = talk.name | split: '@' %}
-                                    {{ name_parts[0] }}@
-                                    {% assign event_parts = name_parts[1] | split: '[' %}
-                                    {% assign event_name = event_parts[0] | strip %}
-                                    {% assign url_parts = event_parts[1] | split: ']' %}
-                                    {% assign event_url = url_parts[0] | strip %}
-                                    {% assign rest_of_text = url_parts[1] %}
+                                    {% if talk.name contains '@' and talk.name contains '[' and talk.name contains ']' %}
+                                        {% assign name_parts = talk.name | split: '@' %}
+                                        {{ name_parts[0] }}@
+                                        {% assign event_parts = name_parts[1] | split: '[' %}
+                                        {% assign event_name = event_parts[0] | strip %}
+                                        {% assign url_parts = event_parts[1] | split: ']' %}
+                                        {% assign event_url = url_parts[0] | strip %}
+                                        {% assign rest_of_text = url_parts[1] %}
 
-                                    {% if event_url contains '://' %}
-                                    <a href="{{ event_url }}" class="talk-link">
+                                        {% if event_url contains '://' %}
+                                        <a href="{{ event_url }}" class="talk-link">
+                                            {{ event_name }}
+                                        </a>
+                                        {% else %}
                                         {{ event_name }}
-                                    </a>
+                                        {% endif %}
+                                        {{ rest_of_text }}
                                     {% else %}
-                                    {{ event_name }}
+                                        {{ talk.name }}
                                     {% endif %}
-                                    {{ rest_of_text }}
                                 </div>
 
                                 {% assign has_video = talk.video != "none" and talk.video != empty %}
                                 {% assign has_slides = talk.slides != "none" and talk.slides != empty %}
+
+                                {% if has_video or has_slides %}
+                                <div class="d-flex flex-wrap gap-2 mb-3 talk-action-row">
+                                    {% if has_video %}
+                                    <a href="{{ talk.video }}" target="_blank" rel="noopener noreferrer" class="talk-action-pill">
+                                        Open Video
+                                    </a>
+                                    {% endif %}
+                                    {% if has_slides %}
+                                    <a href="{{ talk.slides }}" target="_blank" rel="noopener noreferrer" class="talk-action-pill">
+                                        Open Slides
+                                    </a>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
 
                                 {% if has_video or has_slides %}
                                 <div class="row g-4">
@@ -115,7 +134,7 @@
                                                 {% endif %}
                                             </div>
                                             <!-- 将"View Full"按钮放在左上角 -->
-                                            <a href="{{ talk.video }}" target="_blank" class="position-absolute top-3 left-3 bg-white text-primary-700 text-xs px-3 py-1.5 rounded-full font-medium shadow-lg d-flex align-items-center hover:bg-gray-100 transition-all duration-200 hover:shadow-xl">
+                                            <a href="{{ talk.video }}" target="_blank" rel="noopener noreferrer" class="position-absolute top-3 left-3 bg-white text-primary-700 text-xs px-3 py-1.5 rounded-full font-medium shadow-lg d-flex align-items-center hover:bg-gray-100 transition-all duration-200 hover:shadow-xl talk-media-overlay-pill">
                                                 <svg class="me-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -123,7 +142,7 @@
                                                 </svg>
                                                 View Full
                                             </a>
-                                            <div class="position-absolute top-3 right-3 bg-black text-white text-xs px-3 py-1.5 rounded-full font-medium shadow-sm d-flex align-items-center">
+                                            <div class="position-absolute top-3 right-3 bg-black text-white text-xs px-3 py-1.5 rounded-full font-medium shadow-sm d-flex align-items-center talk-media-overlay-pill">
                                                 <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <polygon points="23 7 16 12 23 17 23 7"></polygon>
                                                     <line x1="1" y1="5" x2="1" y2="19"></line>
@@ -146,7 +165,7 @@
                                                         loading="lazy"></iframe>
                                             </div>
                                             <!-- 将"View Full"按钮放在左上角 -->
-                                            <a href="{{ talk.slides }}" target="_blank" class="position-absolute top-3 left-3 bg-white text-primary-700 text-xs px-3 py-1.5 rounded-full font-medium shadow-lg d-flex align-items-center hover:bg-gray-100 transition-all duration-200 hover:shadow-xl">
+                                            <a href="{{ talk.slides }}" target="_blank" rel="noopener noreferrer" class="position-absolute top-3 left-3 bg-white text-primary-700 text-xs px-3 py-1.5 rounded-full font-medium shadow-lg d-flex align-items-center hover:bg-gray-100 transition-all duration-200 hover:shadow-xl talk-media-overlay-pill">
                                                 <svg class="me-1" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -154,7 +173,7 @@
                                                 </svg>
                                                 View Full
                                             </a>
-                                            <div class="position-absolute top-3 right-3 bg-black text-white text-xs px-3 py-1.5 rounded-full font-medium shadow-sm d-flex align-items-center">
+                                            <div class="position-absolute top-3 right-3 bg-black text-white text-xs px-3 py-1.5 rounded-full font-medium shadow-sm d-flex align-items-center talk-media-overlay-pill">
                                                 <svg class="me-1" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                                                 </svg>
@@ -239,6 +258,39 @@
                         outline: none;
                         box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.15);
                         border-radius: 4px;
+                    }
+
+                    .talk-action-row {
+                        margin-top: -0.15rem;
+                    }
+
+                    .talk-action-pill {
+                        display: inline-flex;
+                        align-items: center;
+                        min-height: 34px;
+                        padding: 0 0.85rem;
+                        border-radius: 999px;
+                        background: rgba(239,244,255,0.92);
+                        border: 1px solid rgba(47,87,200,0.08);
+                        color: #35557a;
+                        font-weight: 600;
+                        text-decoration: none;
+                        box-shadow: 0 3px 10px rgba(15,23,42,0.04);
+                        transition: background-color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+                    }
+
+                    .talk-action-pill:hover,
+                    .talk-action-pill:focus {
+                        color: #1f3a8a;
+                        text-decoration: none;
+                        background: rgba(243,247,255,0.98);
+                        border-color: rgba(47,87,200,0.14);
+                        box-shadow: 0 8px 18px rgba(15,23,42,0.06);
+                        transform: translateY(-1px);
+                    }
+
+                    .talk-media-overlay-pill {
+                        z-index: 5;
                     }
 
                     /* 标题样式与出版物一致 */

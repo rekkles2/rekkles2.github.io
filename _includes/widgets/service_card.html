@@ -8,13 +8,13 @@
 
                 <!-- Conference Reviewer 部分 -->
                 <div class="mb-5">
-                    <h6 class="mb-3 font-weight-bold text-gray-900">
+                    <h6 class="mb-3 font-weight-bold text-gray-900 service-group-title">
                         Conference Reviewer
                     </h6>
                     <div class="row g-3">
                         {% for item in site.data.profile.services.conference %}
                         <div class="col-md-6">
-                            <div class="text-gray-700" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
+                            <div class="text-gray-700 service-item-pill" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
                         </div>
                         {% endfor %}
                     </div>
@@ -22,13 +22,13 @@
 
                 <!-- Journal Reviewer 部分 -->
                 <div>
-                    <h6 class="mb-3 font-weight-bold text-gray-900">
+                    <h6 class="mb-3 font-weight-bold text-gray-900 service-group-title">
                         Journal Reviewer
                     </h6>
                     <div class="row g-3">
                         {% for item in site.data.profile.services.journal %}
                         <div class="col-md-6">
-                            <div class="text-gray-700" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
+                            <div class="text-gray-700 service-item-pill" style="line-height: 1.5; font-size: 0.95rem; word-break: break-word;">{{ item }}</div>
                         </div>
                         {% endfor %}
                     </div>
@@ -37,3 +37,23 @@
         </div>
     </div>
 </div>
+
+<style>
+    .service-group-title {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 0.9rem;
+        border-radius: 999px;
+        background: rgba(239,244,255,0.86);
+        border: 1px solid rgba(47,87,200,0.08);
+    }
+
+    .service-item-pill {
+        padding: 0.9rem 1rem;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(248,250,255,0.98), rgba(244,247,252,0.94));
+        border: 1px solid rgba(47,87,200,0.06);
+        box-shadow: 0 4px 12px rgba(15,23,42,0.035);
+    }
+</style>

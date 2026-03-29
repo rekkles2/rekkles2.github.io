@@ -5,12 +5,6 @@ navbar_title: Home
 ---
 {% include widgets/profile_card.html %}
 
-{% include widgets/debug_repo_name.html %}
-
-{% include widgets/debug_url.html %}
-
-
-
 {% if site.data.display.homepage.show_news %}
     {% assign count_news = site.news | size %}
     {% if count_news > 0 %}
@@ -50,4 +44,3 @@ navbar_title: Home
     <!-- Start Background Animation -->
     <script src="{{ '/assets/js/background_animation.js' | relative_url }}"></script>
 {% endif %}
-

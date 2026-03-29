@@ -140,13 +140,13 @@
 <!-- Visual & Layout Styles (微调与优化) -->
 <style>
   :root{
-    --accent: #c1123c;
+    --accent: #2f57c8;
     --muted: #64748b;
     --card-bg: #ffffff;
-    --btn-bg: #f1f5f9;
+    --btn-bg: rgba(248, 250, 255, 0.96);
     --text-color: #0f1724; /* slightly darker for contrast */
     --soft-text: #334155;
-    --shadow-1: 0 6px 18px rgba(12, 14, 20, 0.06);
+    --shadow-1: 0 8px 18px rgba(15, 23, 42, 0.06);
   }
 
   /* Typography improvements */
@@ -162,8 +162,8 @@
     margin: 1.25rem 0;
     font-style: italic;
     color: #374151;
-    background: linear-gradient(180deg, rgba(193,18,60,0.02), transparent 50%);
-    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(47,87,200,0.045), transparent 55%);
+    border-radius: 10px;
     padding-top: .5rem;
     padding-bottom: .5rem;
   }
@@ -175,58 +175,80 @@
     display: inline-flex;
     align-items: center;
     gap: .55rem;
-    padding: 0.45rem 0.9rem;
+    padding: 0.5rem 0.92rem;
     background-color: var(--btn-bg);
     color: var(--soft-text);
-    border: 1px solid rgba(15,23,36,0.04);
-    border-radius: 0.6rem;
+    border: 1px solid rgba(47,87,200,0.08);
+    border-radius: 999px;
     font-weight: 600;
     font-size: 0.92rem;
     text-decoration: none;
-    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
     cursor: pointer;
     white-space: nowrap;
   }
 
   .profile-btn:hover,
   .profile-btn:focus {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
     box-shadow: var(--shadow-1);
-    color: #fff;
+    color: var(--soft-text);
+    background-color: rgba(239, 244, 255, 0.96);
+    border-color: rgba(47,87,200,0.14);
   }
 
   .profile-btn > i,
-  .profile-btn > svg { width: 18px; height: 18px; font-size: 18px; opacity: 0.95; transition: color .18s ease, transform .18s ease; }
+  .profile-btn > svg {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    max-width: 18px;
+    font-size: 18px;
+    opacity: 0.95;
+    transition: color .18s ease, transform .18s ease;
+    flex: 0 0 18px;
+  }
 
-  /* Individual hover accents retained but slightly softened */
-  .btn-email:hover, .btn-cv:hover { background-color: #5b46f3; border-color: #5b46f3; }
+  .gscholar-icon-svg {
+    display: block;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
+    overflow: hidden;
+  }
+
+  /* Individual accents stay subtle and icon-led */
+  .btn-email:hover, .btn-cv:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(79,70,229,0.16); }
   .btn-email > i, .btn-cv > i { color: #4f46e5; }
-  .btn-email:hover > i, .btn-cv:hover > i { color: #fff; }
+  .btn-email:hover > i, .btn-cv:hover > i { color: #4f46e5; }
 
-  .btn-gscholar { background-color: #eaf1fb; color: #4285F4; }
-  .btn-gscholar:hover { background-color: #2f6fd6; border-color: #2f6fd6; }
+  .btn-gscholar { background-color: rgba(248, 250, 255, 0.96); color: #4285F4; }
+  .btn-gscholar:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(66,133,244,0.18); }
   .btn-gscholar > svg { fill: #4285F4; }
-  .btn-gscholar:hover > svg { fill: #fff; }
+  .btn-gscholar:hover > svg { fill: #4285F4; }
 
-  .btn-github:hover { background-color: #24292e; border-color: #24292e; }
+  .btn-github:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(36,41,46,0.16); }
   .btn-github > i { color: #24292e; }
-  .btn-github:hover > i { color: #fff; }
+  .btn-github:hover > i { color: #24292e; }
 
-  .btn-twitter:hover { background-color: #1DA1F2; border-color: #1DA1F2; }
+  .btn-twitter:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(29,161,242,0.16); }
   .btn-twitter > i { color: #1DA1F2; }
-  .btn-twitter:hover > i { color: #fff; }
+  .btn-twitter:hover > i { color: #1DA1F2; }
 
-  .btn-linkedin:hover { background-color: #0A66C2; border-color: #0A66C2; }
+  .btn-linkedin:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(10,102,194,0.16); }
   .btn-linkedin > i { color: #0A66C2; }
-  .btn-linkedin:hover > i { color: #fff; }
+  .btn-linkedin:hover > i { color: #0A66C2; }
 
-  .btn-orcid:hover { background-color: #A6CE39; border-color: #A6CE39; }
+  .btn-orcid:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(166,206,57,0.2); }
   .btn-orcid > i { color: #A6CE39; }
-  .btn-orcid:hover > i { color: #fff; }
+  .btn-orcid:hover > i { color: #7ea823; }
 
-  .btn-wechat:hover { background-color: #07C160; border-color: #07C160; }
+  .btn-wechat:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(7,193,96,0.16); }
   .btn-wechat > i { color: #07C160; }
-  .btn-wechat:hover > i { color: #fff; }
+  .btn-wechat:hover > i { color: #07C160; }
 
   /* Layout: mobile-first then desktop float-based wrap for md+ */
   .profile-grid { position: relative; }

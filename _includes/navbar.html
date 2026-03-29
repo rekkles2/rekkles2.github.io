@@ -1,8 +1,12 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top mb-5 shadow-sm">
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top shadow-sm site-navbar">
     <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <a class="navbar-brand d-flex align-items-center" href="{{ '/' | relative_url }}">
-            <!-- 麦克风装饰图标 -->
-            <img src="{{ '/assets/images/covers/joyvoice_logo.png' | relative_url }}" alt="Microphone Icon" style="height: 40px; margin-right: 5px;">
+        <a class="navbar-brand d-flex align-items-center site-navbar-brand" href="{{ '/' | relative_url }}">
+            <img
+                src="{{ '/assets/images/covers/joyvoice_logo.png' | relative_url }}"
+                alt="Microphone Icon"
+                class="site-navbar-logo"
+                width="123"
+                height="40">
             <strong>{{site.data.profile.navbar_name}}</strong>
         </a>
         <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +17,7 @@
             <ul class="navbar-nav ml-auto">
                 {% for item in site.data.navigation.pages %}
                 <li class="nav-item {% if item.name == page.navbar_title %}active{% endif %}">
-                    <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+                    <a class="nav-link site-nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
                 </li>
                 {% endfor %}
             </ul>
