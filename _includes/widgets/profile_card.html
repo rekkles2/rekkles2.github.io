@@ -48,12 +48,12 @@
 
                         <!-- Quote section -->
                         {% if site.data.profile.quote %}
-                          {% assign quote_parts = site.data.profile.quote | split: "—" %}
+                          {% assign quote_parts = site.data.profile.quote | split: "--" %}
                           <div class="quote-container mt-4">
                             <blockquote class="custom-quote">
                               <p class="quote-text">{{ quote_parts[0] | strip }}</p>
                               {% if quote_parts[1] %}
-                                <footer class="quote-author">— {{ quote_parts[1] | strip }}</footer>
+                                <footer class="quote-author">-- {{ quote_parts[1] | strip }}</footer>
                               {% endif %}
                             </blockquote>
                           </div>

@@ -5,34 +5,28 @@ navbar_name: "Jiahang Li"
 positions:
 - name: B.Eng. in Intelligent Science and Technology
 
-
-
-
 email: "lijiahang041119[At]gmail.com"
 cv_link: https://www.overleaf.com/read/vwhdpzssvcmr#e69ffc
-gscholar: BqDQDlIAAAAJ&hl  # This is an example, replace it with your own Google Scholar ID
+gscholar: BqDQDlIAAAAJ&hl
 github: rekkles2
-#twitter: your_twitter_id  # Do not include the '@' symbol
+#twitter: your_twitter_id
 wechat_qrcode: /assets/images/badges/wechat.png
 wechat_prompt: >-
   Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
 linkedin: 22-JHLI
 orcid: 0009-0002-3403-5589
 
-
-
-
 short_bio_text_justify: true
 short_bio: >-
   <p>
-    Hi, I'm Jiahang! I'm a fourth-year undergraduate at Tianjin Normal University, 
-    advised by Lect. Yong Su at the Tianjin Key Laboratory of Wireless Mobile 
-    Communications and Power Transmission. Previously, my research mainly focused 
-    on developing robust, privacy-preserving video anomaly detection methods for 
-    distributed intelligent surveillance systems, 
-    particularly under weak supervision and heterogeneous scene conditions.
+    Hi, I'm Jiahang. I'm a fourth-year undergraduate at Tianjin Normal University,
+    advised by Lect. Yong Su at the Tianjin Key Laboratory of Wireless Mobile
+    Communications and Power Transmission. My recent work has focused on robust
+    and privacy-preserving video anomaly detection for distributed intelligent
+    surveillance systems, especially under weak supervision and heterogeneous
+    scene conditions.
   </p>
-  
+
   <p>
     I'm also the co-founder of 
       <a href="https://rekkles2.github.io/JoyVoice" target="_blank" rel="noopener"
@@ -68,162 +62,86 @@ short_bio: >-
     to strengthen multimodal understanding and content creation.
   </p>
 
-
-  
   <p>  
     📢 I'm always excited to discuss new ideas and potential collaborations — feel free to reach out if you'd like to discuss ideas or potential collaborations!☺️
   </p>
-  
-
 
 quote: >-
   Stay Hungry. Stay Foolish.
-  — Steve Jobs, Stanford Commencement Speech (2005)
-#跳转到某个卡片使用
-#<!-- 示例：在另一个卡片中使用（请将该片段放到你要链接的文本处） -->
-#锚点
-#<div id="fast-qa" class="card qna-card border-0 shadow-sm bg-white rounded-xl overflow-hidden" tabindex="-1" aria-labelledby="fast-qa-title">
-#链接
-#<!-- <a href="#fast-qa" class="fast-qa-link" aria-label="Jump to Fast Q&A">Fast Q&A</a> -->
-
-
+  -- Steve Jobs, Stanford Commencement Speech (2005)
 
 portrait_url: /assets/images/photos/picture.jpg
 portrait_caption: >-
   Photographed at my home for the Flower Monthly event.
 
-
-
-#################################
-#################################
-#################################
-
-
-
-
-
 education:
-#- name: "Tianjin Normal University"
-#  logo: "/assets/images/badges/tjnu.png"
-#  lab:
-#    name: "@Media lab"
-#    url: "https://www.media.mit.edu/"
-#  position: >-
-#    Department of Electrical Engineering and Computer Science <br/>
-#    Ph.D. Student
-#  advisor:
-#    - name: "Dr. XXX"
-#      url:  "https://www.media.mit.edu/"
-#  date: "Sep. 2024 - present"
-
 - name: "Tianjin Normal University"
   logo: "/assets/images/badges/tjnu.png"
   lab:
     name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
     url: none
-  position: >- 
+  position: >-
     B.Eng. in Intelligent Science and Technology <br/>
   advisor:
     - name: "Lect. Yong Su"
-#      url: "https://www.media.mit.edu/"
-#    - name: "Dr. YYY"
-#      url: "https://www.media.mit.edu/"
-  date: "Sep. 2022 – Jul. 2026"
-
-
-
-
-#################################
-#################################
-#################################
-
-
-
-
+  date: "Sep. 2022 - Jul. 2026"
 
 experience:
-- name: JoyVoice Studio
+- name: "University of Electronic Science and Technology of China"
+  logo: /assets/images/badges/UESTC.png
+  position: "Research Assistant"
+  advisor:
+    - name: "Prof. Chaoning Zhang"
+      url: "https://scholar.google.com/citations?user=lvhxhyQAAAAJ&hl=en"
+  date: "Feb. 2026 - Jul. 2026"
+
+- name: "JoyVoice Studio"
   logo: /assets/images/badges/joyvoice.png
-  position: Co-founder
+  position: "Co-founder"
   lab:
     name: "@JoyVoice Studio"
     url: https://rekkles2.github.io/JoyVoice
-#  advisor:
-#    - name: none
-#      url: none
-#    - name: "Dr. YYY"
-#      url: "https://www.media.mit.edu/"
-  date: Aug. 2025 – Present
+  date: "Aug. 2025 - Present"
 
-- name: Tianjin Normal University
+- name: "Tianjin Normal University"
   logo: /assets/images/badges/tjnu.png
-  position: Research Intern
+  position: "Research Intern"
   lab:
     name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
     url: none
   advisor:
     - name: "Lect. Yong Su"
       url: none
-#    - name: "Dr. YYY"
-#      url: "https://www.media.mit.edu/"
-  date: Sep. 2023 – Jul. 2025
-
-
-
-
-
-#################################
-#################################
-#################################
-
-
-
+  date: "Sep. 2023 - Jul. 2025"
 
 awards:
 - name: <a href="https://bmvc2025.bmva.org/people/reviewers/"
         target="_blank" rel="noopener"
         style="
-          color:#0369a1;
+          color:#3f628d;
           font-weight:600;
           text-decoration-line:underline;
           text-decoration-color:currentColor;
-          text-decoration-thickness:2px;
-          text-underline-offset:1px;
+          text-decoration-thickness:1.5px;
+          text-underline-offset:2px;
           text-decoration-skip-ink:none;
         ">
         Outstanding Reviewer Award, British Machine Vision Conference (BMVC 2025)
         </a>
-  date: Dec. 2025
-- name: Tianjin Municipal Government Scholarship (¥8,000, Top ≤ 1%)
-  date: Dec. 2025
-- name: Jiannanchun Science and Technology Innovation Scholarship (¥2,000, Top ≤ 1%)
-  date: Nov. 2025
-- name: Contemporary Undergraduate Mathematical Contest in Modeling (National Second Prize, Top 2%)
-  date: Nov. 2023
-
-
-
-#################################
-#################################
-#################################
-
-
-
+  date: "Dec. 2025"
+- name: "Tianjin Municipal Government Scholarship (CNY 8,000, Top <= 1%)"
+  date: "Dec. 2025"
+- name: "Jiannanchun Science and Technology Innovation Scholarship (CNY 2,000, Top <= 1%)"
+  date: "Nov. 2025"
+- name: "Contemporary Undergraduate Mathematical Contest in Modeling (National Second Prize, Top 2%)"
+  date: "Nov. 2023"
 
 talks:
-- name: "Invited talk @Flower labs [https://flower.ai/events/flower-monthly/] on \"Federated Weakly Supervised Video Anomaly Detection\" ."
+- name: "Invited talk at Flower Labs on \"Federated Weakly Supervised Video Anomaly Detection\"."
   label: "talk-1"
   video: "https://www.youtube.com/watch?v=1xDmvYsTMqY&list=PLNG4feLHqCWkfnUlpSD511MQgi1EE2FNx&index=5"
   slides: "https://docs.google.com/presentation/d/1s7BDSqbkc-xicZkwZBLSNv2YdkhY1jEC/edit?usp=sharing&ouid=104042843785639255324&rtpof=true&sd=true"
   date: "2025-10-01"
-
-
-
-#################################
-#################################
-#################################
-
-
 
 services:
   conference:
@@ -237,8 +155,4 @@ services:
   journal:
     - "Engineering Applications of Artificial Intelligence (EAAI), 2025-2026"
     - "IEEE Internet of Things Journal (IEEE IoT-J), 2026"
-    - "Ad Hoc Networks  (Ad Hoc Netw), 2025"
-
-
-
-
+    - "Ad Hoc Networks (Ad Hoc Netw), 2025"

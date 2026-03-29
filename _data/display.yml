@@ -8,14 +8,14 @@ homepage:
   show_q_a: true
   num_news: 5
 
-# Feel free to replace the footer text if you would like to, but I will greatly appreciate it 
+# Feel free to replace the footer text if you would like to, but I will greatly appreciate it
 # if you keep the link to the template so that more people can benefit from it. Thanks!
 footer_text: >-
-  Built with 
+  Built with
   <a href="https://github.com/rekkles2/rekkles2.github.io" target="_blank">
     <i class="fab fa-github"></i> My Homepage
   </a>
-  •
+  &middot;
   <a href="https://github.com/luost26/academic-homepage" target="_blank">
     <i class="fab fa-github"></i> Original Template
   </a>
