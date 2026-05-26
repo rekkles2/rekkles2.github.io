@@ -76,7 +76,7 @@ portrait_caption: >-
 
 education:
 - name: "Tianjin Normal University"
-  logo: "/assets/images/badges/tjnu.png"
+  logo: "/assets/images/badges/tjnu.svg"
   lab:
     name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
     url: none
@@ -87,8 +87,8 @@ education:
   date: "Sep. 2022 - Jul. 2026"
 
 experience:
-- name: "University of Electronic Science and Technology of China"
-  logo: /assets/images/badges/UESTC.png
+- name: "UESTC"
+  logo: /assets/images/badges/UESTC.svg
   position: "Research Assistant"
   advisor:
     - name: "Prof. Chaoning Zhang"
@@ -103,8 +103,8 @@ experience:
     url: https://rekkles2.github.io/JoyVoice
   date: "Aug. 2025 - Present"
 
-- name: "Tianjin Normal University"
-  logo: /assets/images/badges/tjnu.png
+- name: "TJNU"
+  logo: /assets/images/badges/tjnu.svg
   position: "Research Intern"
   lab:
     name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
