@@ -8,7 +8,7 @@
         <ul class="list-unstyled">
           {% for item in site.data.profile.education %}
           <li class="d-flex mb-4 align-items-start education-entry">
-            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg education-logo" loading="lazy" style="filter: brightness(0.9);">
+            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg education-logo" loading="lazy">
             <div class="flex-grow-1">
               <div class="d-flex justify-content-between align-items-start flex-wrap">
                 <div>
@@ -140,10 +140,17 @@
 
   .education-logo {
     flex-shrink: 0;
+    width: 4rem !important;
+    height: 4rem !important;
+    min-width: 4rem;
+    max-width: 4rem;
+    min-height: 4rem;
+    max-height: 4rem;
     padding: 0;
     background: transparent;
     box-shadow: none;
     filter: none !important;
+    object-fit: contain;
   }
 
   .education-date-pill {

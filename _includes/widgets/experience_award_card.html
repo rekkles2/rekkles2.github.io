@@ -12,7 +12,7 @@
                             <ul class="list-unstyled">
                                 {% for item in site.data.profile.experience %}
                                 <li class="d-flex mb-4 align-items-start experience-entry">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg entry-logo" loading="lazy" style="filter: brightness(0.9);">
+                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg entry-logo" loading="lazy">
                                     <div class="flex-grow-1 d-flex flex-column justify-content-between">
                                         <div class="d-flex w-100">
                                             <div class="flex-grow-1 min-w-0 pr-3">
@@ -166,10 +166,17 @@
 
     .entry-logo {
         flex-shrink: 0;
+        width: 4rem !important;
+        height: 4rem !important;
+        min-width: 4rem;
+        max-width: 4rem;
+        min-height: 4rem;
+        max-height: 4rem;
         padding: 0;
         background: transparent;
         box-shadow: none;
         filter: none !important;
+        object-fit: contain;
     }
 
     .entry-date-pill {
@@ -205,12 +212,12 @@
     }
 
     /* 增强logo的视觉效果 */
-    .card-body img {
+    .experience-entry .entry-logo {
         transition: all 180ms ease;
     }
 
-    .card-body img:hover {
-        transform: scale(1.05);
+    .experience-entry .entry-logo:hover {
+        transform: scale(1.03);
     }
 
     /* 统一所有卡片标题样式 */

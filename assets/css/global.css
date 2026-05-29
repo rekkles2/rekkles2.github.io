@@ -540,7 +540,7 @@ h1,h2,h3,h4,h5,h6,
 .profile-name,
 .paper-title{
   font-family:"Raleway","Noto Sans SC",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  letter-spacing:-.015em;
+  letter-spacing:0;
 }
 
 .site-navbar{
@@ -570,7 +570,7 @@ h1,h2,h3,h4,h5,h6,
   color:#17212b!important;
   font-family:"Raleway","Noto Sans SC",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   font-weight:700;
-  letter-spacing:-.02em;
+  letter-spacing:0;
   gap:.35rem;
   padding:0;
   line-height:1;
