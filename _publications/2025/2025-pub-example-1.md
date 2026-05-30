@@ -12,7 +12,7 @@ pub_date:       "2025"
 [//]: # (semantic_scholar_id: 204e3073870fae3d05bcbc2f6a8e263d9b72e776  # use this to retrieve citation count)
 abstract: >-
   Gaze-Guided Learning; Shortcut Bias Mitigation; Cross-modal Gaze–Vision Fusion
-cover:          /assets/images/etc/gaze.png
+cover:          /assets/images/paper/gaze.png
 authors:
   - Jiahang Li
   - Shibo Xue

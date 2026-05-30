@@ -12,7 +12,7 @@ pub_date:       "2025"
 [//]: # (semantic_scholar_id: 204e3073870fae3d05bcbc2f6a8e263d9b72e776  # use this to retrieve citation count)
 abstract: >-
    Viewpoint-robust learning; Few-shot learning;  Fine-grained image classification
-cover:          /assets/images/etc/VRAS.svg
+cover:          /assets/images/paper/VRAS.jpeg
 authors:
   - Jiawen Jiang
   - Jiahang Li

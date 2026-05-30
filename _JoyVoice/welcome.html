@@ -1,19 +1,17 @@
 {% assign info = site.data.joyvoice.info %}
 {% if info %}
-<div class="container">
+<div class="container joyvoice-page-shell">
 
-  <!-- 顶部名片 -->
-  <div class="card border-0 shadow-sm bg-white rounded-xl mb-4 position-relative">
+  <div class="card border-0 shadow-sm bg-white rounded-xl mb-4 position-relative joyvoice-hero-card">
     <button id="joyvoice-lang-toggle"
             class="btn btn-sm d-flex align-items-center shadow-sm position-absolute top-0 end-0 m-3"
             type="button" aria-label="Toggle language" aria-pressed="false">
       <i class="bi bi-translate me-1" aria-hidden="true"></i>
-      <span id="lang-toggle-text" class="joyvoice-lang-text">[English/中文]</span>
+      <span id="lang-toggle-text" class="joyvoice-lang-text">English</span>
     </button>
 
-    <div class="card-body p-4 p-lg-5">
-      <div class="row align-items-center g-5">
-        <!-- 左：Logo -->
+    <div class="card-body p-4 p-lg-5 joyvoice-hero-body">
+      <div class="row align-items-center g-5 joyvoice-hero-row">
         <div class="col-lg-5 mb-4 mb-lg-0">
           <div class="joyvoice-logo-container">
             <div class="joyvoice-logo-wrapper">
@@ -23,13 +21,12 @@
           </div>
         </div>
 
-        <!-- 右：标题与简介 -->
         <div class="col-lg-7">
           <h1 class="joyvoice-hero-title mb-2">
             <span class="joyvoice-title-text joyvoice-lang" data-lang="zh">{{ info.studio.name }}</span>
             <span class="d-none joyvoice-lang" data-lang="en">
               <span class="jv-title-colored" aria-label="{{ info.studio.name_en }}">
-                <span class="jv-letter jv-g1">J</span><span class="jv-letter jv-g2">o</span><span class="jv-letter jv-g3">y</span><span class="jv-letter jv-g4">V</span><span class="jv-letter jv-g5">o</span><span class="jv-letter jv-g6">i</span><span class="jv-letter jv-g7">c</span><span class="jv-letter jv-g8">e</span><span class="jv-space">&nbsp;</span><span class="jv-letter jv-g9">S</span><span class="jv-letter jv-g10">t</span><span class="jv-letter jv-g11">u</span><span class="jv-letter jv-g12">d</span><span class="jv-letter jv-g13">i</span><span class="jv-letter jv-g14">o</span>
+                <span class="jv-letter">J</span><span class="jv-letter">o</span><span class="jv-letter">y</span><span class="jv-letter">V</span><span class="jv-letter">o</span><span class="jv-letter">i</span><span class="jv-letter">c</span><span class="jv-letter">e</span><span class="jv-space">&nbsp;</span><span class="jv-letter">S</span><span class="jv-letter">t</span><span class="jv-letter">u</span><span class="jv-letter">d</span><span class="jv-letter">i</span><span class="jv-letter">o</span>
               </span>
             </span>
           </h1>
@@ -48,17 +45,13 @@
             {% endfor %}
           </div>
 
-          <!-- 高亮信息（健壮解析 + 多行值 + 左列齐头对齐） -->
           <div class="joyvoice-highlight-grid joyvoice-highlight-grid--2col">
             {% for h in info.studio.highlights %}
               {% assign zh_lines = h.value_lines %}
               {% if zh_lines == nil %}
                 {% assign zh_raw = h.value %}
                 {% if zh_raw %}
-                  {% if zh_raw contains '[' and zh_raw contains ']' %}
-                    {% assign zh_tmp = zh_raw | remove: '[' | remove: ']' | replace: '"', '' %}
-                    {% assign zh_lines = zh_tmp | split: ',' %}
-                  {% elsif zh_raw contains '<br/>' %}
+                  {% if zh_raw contains '<br/>' %}
                     {% assign zh_lines = zh_raw | split: '<br/>' %}
                   {% else %}
                     {% assign zh_lines = zh_raw | split: '||__single__||' %}
@@ -70,10 +63,7 @@
               {% if en_lines == nil %}
                 {% assign en_raw = h.value_en %}
                 {% if en_raw %}
-                  {% if en_raw contains '[' and en_raw contains ']' %}
-                    {% assign en_tmp = en_raw | remove: '[' | remove: ']' | replace: '"', '' %}
-                    {% assign en_lines = en_tmp | split: ',' %}
-                  {% elsif en_raw contains '<br/>' %}
+                  {% if en_raw contains '<br/>' %}
                     {% assign en_lines = en_raw | split: '<br/>' %}
                   {% else %}
                     {% assign en_lines = en_raw | split: '||__single__||' %}
@@ -109,8 +99,7 @@
 
       <div class="joyvoice-divider my-4"></div>
 
-      <!-- 目标（编号胶囊） -->
-      <section>
+      <section class="joyvoice-info-section">
         <h2 class="joyvoice-section-h">
           <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ info.goals.title }}</span>
           <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ info.goals.title_en }}</span>
@@ -127,8 +116,7 @@
         </ol>
       </section>
 
-      <!-- 团队 -->
-      <section class="mt-4">
+      <section class="joyvoice-info-section mt-4">
         <h2 class="joyvoice-section-h">
           <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ info.team.title }}</span>
           <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ info.team.title_en }}</span>
@@ -143,7 +131,6 @@
           <div class="joyvoice-team-name d-none joyvoice-lang" data-lang="en">{{ info.team.founders_en }}</div>
         </div>
 
-        <!-- ===================== 核心团队（角色换行版） ===================== -->
         <div class="joyvoice-team-group mt-3">
           <h3 class="joyvoice-group-h joyvoice-lang" data-lang="zh">核心团队</h3>
           <h3 class="joyvoice-group-h d-none joyvoice-lang" data-lang="en">Core Team</h3>
@@ -154,13 +141,11 @@
             {% assign visual_roles_zh = "美宣,题字,美工,画师,字幕" | split: "," %}
 
             <div class="jv-core-team">
-
-              <!-- ❈ 剧组 ❈ -->
               <div class="jv-team-subgroup" data-jv-group="drama">
                 <div class="jv-team-subgroup-title">
                   <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-camera-reels"></i></span>
-                  <span class="joyvoice-lang" data-lang="zh">❈ 剧组 ❈</span>
-                  <span class="d-none joyvoice-lang" data-lang="en">❈ Drama Crew ❈</span>
+                  <span class="joyvoice-lang" data-lang="zh">Drama Crew</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">Drama Crew</span>
                 </div>
 
                 <div class="joyvoice-lang" data-lang="zh">
@@ -173,9 +158,7 @@
                         <div class="jv-team-role">{{ role }}：</div>
                         <div class="jv-team-names">
                           {% assign name_list = names | split: '、' %}
-                          {% for nm in name_list %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
@@ -193,9 +176,7 @@
                         <div class="jv-team-role">{{ role_en }}:</div>
                         <div class="jv-team-names">
                           {% assign name_list_en = names_en | split: ',' %}
-                          {% for nm in name_list_en %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list_en %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
@@ -203,12 +184,11 @@
                 </div>
               </div>
 
-              <!-- ❈ 歌组 ❈ -->
               <div class="jv-team-subgroup" data-jv-group="music">
                 <div class="jv-team-subgroup-title">
                   <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-music-note-beamed"></i></span>
-                  <span class="joyvoice-lang" data-lang="zh">❈ 歌组 ❈</span>
-                  <span class="d-none joyvoice-lang" data-lang="en">❈ Music Crew ❈</span>
+                  <span class="joyvoice-lang" data-lang="zh">Music Crew</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">Music Crew</span>
                 </div>
 
                 <div class="joyvoice-lang" data-lang="zh">
@@ -221,9 +201,7 @@
                         <div class="jv-team-role">{{ role }}：</div>
                         <div class="jv-team-names">
                           {% assign name_list = names | split: '、' %}
-                          {% for nm in name_list %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
@@ -241,9 +219,7 @@
                         <div class="jv-team-role">{{ role_en }}:</div>
                         <div class="jv-team-names">
                           {% assign name_list_en = names_en | split: ',' %}
-                          {% for nm in name_list_en %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list_en %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
@@ -251,12 +227,11 @@
                 </div>
               </div>
 
-              <!-- ❈ 美宣组 ❈ -->
               <div class="jv-team-subgroup" data-jv-group="visual">
                 <div class="jv-team-subgroup-title">
                   <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-palette"></i></span>
-                  <span class="joyvoice-lang" data-lang="zh">❈ 美宣组 ❈</span>
-                  <span class="d-none joyvoice-lang" data-lang="en">❈ Visual/Promo Crew ❈</span>
+                  <span class="joyvoice-lang" data-lang="zh">Visual/Promo Crew</span>
+                  <span class="d-none joyvoice-lang" data-lang="en">Visual/Promo Crew</span>
                 </div>
 
                 <div class="joyvoice-lang" data-lang="zh">
@@ -269,9 +244,7 @@
                         <div class="jv-team-role">{{ role }}：</div>
                         <div class="jv-team-names">
                           {% assign name_list = names | split: '、' %}
-                          {% for nm in name_list %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
@@ -289,29 +262,23 @@
                         <div class="jv-team-role">{{ role_en }}:</div>
                         <div class="jv-team-names">
                           {% assign name_list_en = names_en | split: ',' %}
-                          {% for nm in name_list_en %}
-                            <span class="jv-name-pill">{{ nm | strip }}</span>
-                          {% endfor %}
+                          {% for nm in name_list_en %}<span class="jv-name-pill">{{ nm | strip }}</span>{% endfor %}
                         </div>
                       </div>
                     {% endif %}
                   {% endfor %}
                 </div>
               </div>
-
             </div>
           {% endif %}
         </div>
-        <!-- ===================== /核心团队 ===================== -->
-
       </section>
     </div>
   </div>
 
-  <!-- ===== 原创广播剧 ===== -->
   {% assign drama_section = info.portfolio.drama %}
   {% if drama_section and drama_section.projects %}
-  <section aria-label="Portfolio - Drama">
+  <section aria-label="Portfolio - Drama" class="joyvoice-portfolio-section">
     <h2 class="joyvoice-section-h">
       <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ drama_section.title }}</span>
       <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ drama_section.title_en }}</span>
@@ -322,7 +289,7 @@
 
     <div class="row g-4">
       {% for project in drama_section.projects %}
-      <div class="col-12 mb-5">
+      <div class="col-12 mb-4">
         <article class="joyvoice-showcase-card" aria-labelledby="drama-{{ forloop.index }}-title">
           <div class="row g-0 align-items-start">
             <div class="col-lg-5">
@@ -348,8 +315,9 @@
                     </div>
                   </section>
                 {% else %}
+                  {% assign single_cover = project.cover | default: project.covers.first %}
                   <div class="joyvoice-cover-single">
-                    <img src="{{ project.cover | default: project.covers | relative_url }}"
+                    <img src="{{ single_cover | relative_url }}"
                          alt="{{ project.title }}" loading="lazy" decoding="async" class="joyvoice-cover-img">
                   </div>
                 {% endif %}
@@ -369,7 +337,7 @@
             </div>
 
             <div class="col-lg-7">
-              <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
+              <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column joyvoice-showcase-body">
                 <div>
                   <h3 id="drama-{{ forloop.index }}-title" class="joyvoice-showcase-title mb-1">
                     <span class="joyvoice-lang" data-lang="zh">{{ project.title }}</span>
@@ -392,7 +360,7 @@
 
                   {% if project.details_s or project.details or project.details_en_s or project.details_en %}
                   <div class="joyvoice-project-details mb-3">
-                    <h4 class="joyvoice-block-h joyvoice-lang" data-lang="zh">剧集介绍</h4>
+                    <h4 class="joyvoice-block-h joyvoice-lang" data-lang="zh">剧情介绍</h4>
                     <h4 class="joyvoice-block-h d-none joyvoice-lang" data-lang="en">Synopsis</h4>
                     <p class="joyvoice-section-text mb-0">
                       {% if project.details_s %}
@@ -408,7 +376,7 @@
                   {% endif %}
 
                   <div class="joyvoice-meta small text-muted mb-3">
-                    <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }} 次</span>
+                    <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }}</span>
                     <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
                   </div>
 
@@ -449,7 +417,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </article>
       </div>
@@ -458,10 +425,9 @@
   </section>
   {% endif %}
 
-  <!-- ===== 原创音乐 ===== -->
   {% assign music_section = info.portfolio.music %}
   {% if music_section and music_section.projects %}
-  <section aria-label="Portfolio - Music">
+  <section aria-label="Portfolio - Music" class="joyvoice-portfolio-section">
     <h2 class="joyvoice-section-h">
       <span class="joyvoice-gradient-text joyvoice-lang" data-lang="zh">{{ music_section.title }}</span>
       <span class="joyvoice-gradient-text d-none joyvoice-lang" data-lang="en">{{ music_section.title_en }}</span>
@@ -472,80 +438,75 @@
 
     <div class="row g-4">
       {% for project in music_section.projects %}
-      <div class="col-12 mb-5">
-        <article class="joyvoice-showcase-card">
-          <div class="row g-0">
-            <div class="col-12">
-              <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
-                <div>
-                  <h3 class="joyvoice-showcase-title mb-1">
-                    <span class="joyvoice-lang" data-lang="zh">{{ project.title }}</span>
-                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.title_en }}</span>
-                  </h3>
+      <div class="col-12 mb-4">
+        <article class="joyvoice-showcase-card joyvoice-music-card">
+          <div class="card-body p-4 p-lg-5 h-100 d-flex flex-column">
+            <div>
+              <h3 class="joyvoice-showcase-title mb-1">
+                <span class="joyvoice-lang" data-lang="zh">{{ project.title }}</span>
+                <span class="joyvoice-lang d-none" data-lang="en">{{ project.title_en }}</span>
+              </h3>
 
-                  {% if project.tagline %}
-                  <p class="joyvoice-showcase-tagline mb-2">
-                    <span class="joyvoice-lang" data-lang="zh">{{ project.tagline }}</span>
-                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.tagline_en }}</span>
-                  </p>
-                  {% endif %}
+              {% if project.tagline %}
+              <p class="joyvoice-showcase-tagline mb-2">
+                <span class="joyvoice-lang" data-lang="zh">{{ project.tagline }}</span>
+                <span class="joyvoice-lang d-none" data-lang="en">{{ project.tagline_en }}</span>
+              </p>
+              {% endif %}
 
-                  {% if project.summary %}
-                  <p class="joyvoice-section-text mb-3">
-                    <span class="joyvoice-lang" data-lang="zh">{{ project.summary }}</span>
-                    <span class="joyvoice-lang d-none" data-lang="en">{{ project.summary_en }}</span>
-                  </p>
-                  {% endif %}
+              {% if project.summary %}
+              <p class="joyvoice-section-text mb-3">
+                <span class="joyvoice-lang" data-lang="zh">{{ project.summary }}</span>
+                <span class="joyvoice-lang d-none" data-lang="en">{{ project.summary_en }}</span>
+              </p>
+              {% endif %}
 
-                  <div class="joyvoice-meta small text-muted mb-3">
-                    <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }} 次</span>
-                    <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
-                  </div>
-
-                  {% if project.staff %}
-                  <div class="joyvoice-project-staff mb-3">
-                    <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">制作团队</h5>
-                    <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Production Team</h5>
-                    <p class="joyvoice-section-text mb-0">
-                      <span class="joyvoice-lang" data-lang="zh">{{ project.staff }}</span>
-                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.staff_en }}</span>
-                    </p>
-                  </div>
-                  {% endif %}
-
-                  {% if project.video_embed %}
-                  <div class="joyvoice-project-video mb-3">
-                    {{ project.video_embed }}
-                  </div>
-                  {% endif %}
-                </div>
-
-                <div class="mt-auto">
-                  {% if project.links %}
-                  <div class="joyvoice-project-links d-flex flex-wrap gap-2 mt-3">
-                    {% for link in project.links %}
-                    <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
-                      <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
-                      <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
-                      <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
-                    </a>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
-
-                  {% if project.tags %}
-                  <div class="joyvoice-project-tags d-flex flex-wrap gap-1 mt-3">
-                    {% for tag in project.tags %}
-                    <span class="badge">
-                      <span class="joyvoice-lang" data-lang="zh">{{ tag }}</span>
-                      <span class="joyvoice-lang d-none" data-lang="en">{{ project.tags_en[forloop.index0] }}</span>
-                    </span>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
-                </div>
-
+              <div class="joyvoice-meta small text-muted mb-3">
+                <span class="joyvoice-lang" data-lang="zh">发布日期：{{ project.release_date }} · 截至 {{ project.plays_as_of }} 播放量：{{ project.plays }}</span>
+                <span class="joyvoice-lang d-none" data-lang="en">Release: {{ project.release_date_en | default: project.release_date }} · Plays as of {{ project.plays_as_of }}: {{ project.plays }}</span>
               </div>
+
+              {% if project.staff %}
+              <div class="joyvoice-project-staff mb-3">
+                <h5 class="joyvoice-sub-h joyvoice-lang" data-lang="zh">制作团队</h5>
+                <h5 class="joyvoice-sub-h d-none joyvoice-lang" data-lang="en">Production Team</h5>
+                <p class="joyvoice-section-text mb-0">
+                  <span class="joyvoice-lang" data-lang="zh">{{ project.staff }}</span>
+                  <span class="joyvoice-lang d-none" data-lang="en">{{ project.staff_en }}</span>
+                </p>
+              </div>
+              {% endif %}
+
+              {% if project.video_embed %}
+              <div class="joyvoice-project-video mb-3">
+                {{ project.video_embed }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="mt-auto">
+              {% if project.links %}
+              <div class="joyvoice-project-links d-flex flex-wrap gap-2 mt-3">
+                {% for link in project.links %}
+                <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
+                  <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                  <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
+                  <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
+                </a>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              {% if project.tags %}
+              <div class="joyvoice-project-tags d-flex flex-wrap gap-1 mt-3">
+                {% for tag in project.tags %}
+                <span class="badge">
+                  <span class="joyvoice-lang" data-lang="zh">{{ tag }}</span>
+                  <span class="joyvoice-lang d-none" data-lang="en">{{ project.tags_en[forloop.index0] }}</span>
+                </span>
+                {% endfor %}
+              </div>
+              {% endif %}
             </div>
           </div>
         </article>
@@ -554,19 +515,17 @@
     </div>
   </section>
   {% endif %}
-
 </div>
 {% endif %}
 
-<!-- 语言切换 + 轮播 -->
 <script>
 if (!window.joyvoiceBootLoaded) {
   window.joyvoiceBootLoaded = true;
 
   function setLanguage(lang) {
     const other = (lang === 'zh') ? 'en' : 'zh';
-    document.querySelectorAll('.joyvoice-lang[data-lang="'+lang+'"]').forEach(el=>el.classList.remove('d-none'));
-    document.querySelectorAll('.joyvoice-lang[data-lang="'+other+'"]').forEach(el=>el.classList.add('d-none'));
+    document.querySelectorAll('.joyvoice-lang[data-lang="' + lang + '"]').forEach(el => el.classList.remove('d-none'));
+    document.querySelectorAll('.joyvoice-lang[data-lang="' + other + '"]').forEach(el => el.classList.add('d-none'));
     localStorage.setItem('joyvoice-lang', lang);
     document.body.classList.toggle('joyvoice-lang-en', lang === 'en');
     document.body.classList.toggle('joyvoice-lang-zh', lang === 'zh');
@@ -576,196 +535,76 @@ if (!window.joyvoiceBootLoaded) {
     if (btn) btn.setAttribute('aria-pressed', (lang === 'en').toString());
   }
 
-  function initCarousels(){
+  function initCarousels() {
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('.joyvoice-carousel').forEach((root)=>{
+    document.querySelectorAll('.joyvoice-carousel').forEach(root => {
       const viewport = root.querySelector('.joyvoice-carousel-viewport');
       const slides = Array.from(root.querySelectorAll('.joyvoice-slide'));
       const dots = Array.from(root.querySelectorAll('.joyvoice-dot'));
       const prev = root.querySelector('.joyvoice-prev');
       const next = root.querySelector('.joyvoice-next');
-      let index = 0, timer = null;
+      let index = 0;
+      let timer = null;
 
-      const update = ()=>{
-        const x = -index * 100;
-        viewport.style.transform = 'translateX(' + x + '%)';
-        dots.forEach((d,k)=>{ d.classList.toggle('is-active',k===index); d.setAttribute('aria-selected',k===index?'true':'false'); });
+      const update = () => {
+        viewport.style.transform = 'translateX(' + (-index * 100) + '%)';
+        dots.forEach((dot, k) => {
+          dot.classList.toggle('is-active', k === index);
+          dot.setAttribute('aria-selected', k === index ? 'true' : 'false');
+        });
       };
-      const go = (dir)=>{ index=(index+dir+slides.length)%slides.length; update(); };
+      const go = dir => {
+        index = (index + dir + slides.length) % slides.length;
+        update();
+      };
+      const stop = () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      };
+      const start = () => {
+        if (!reduceMotion && !timer && slides.length > 1) timer = setInterval(() => go(1), 5000);
+      };
 
-      const start=()=>{ if (reduceMotion) return; if(!timer) timer=setInterval(()=>go(1),5000); };
-      const stop =()=>{ if(timer){clearInterval(timer); timer=null;} };
-
-      prev && prev.addEventListener('click',()=>{ go(-1); start(); });
-      next && next.addEventListener('click',()=>{ go(1); start(); });
-      dots.forEach((d,k)=>d.addEventListener('click',()=>{ index=k; update(); start(); }));
+      prev && prev.addEventListener('click', () => { stop(); go(-1); start(); });
+      next && next.addEventListener('click', () => { stop(); go(1); start(); });
+      dots.forEach((dot, k) => dot.addEventListener('click', () => { stop(); index = k; update(); start(); }));
 
       root.addEventListener('mouseenter', stop);
       root.addEventListener('mouseleave', start);
-      root.setAttribute('tabindex','0');
-      root.addEventListener('keydown',(e)=>{ if(e.key==='ArrowLeft'){go(-1);start();} if(e.key==='ArrowRight'){go(1);start();} });
+      root.setAttribute('tabindex', '0');
+      root.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') { stop(); go(-1); start(); }
+        if (event.key === 'ArrowRight') { stop(); go(1); start(); }
+      });
 
-      let x0=null;
-      viewport.addEventListener('touchstart',(e)=>{ x0=e.touches[0].clientX; stop(); },{passive:true});
-      viewport.addEventListener('touchend',(e)=>{ if(x0==null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) go(dx>0?-1:1); x0=null; start(); },{passive:true});
+      let x0 = null;
+      viewport.addEventListener('touchstart', event => { x0 = event.touches[0].clientX; stop(); }, { passive: true });
+      viewport.addEventListener('touchend', event => {
+        if (x0 == null) return;
+        const dx = event.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) go(dx > 0 ? -1 : 1);
+        x0 = null;
+        start();
+      }, { passive: true });
 
-      update(); start();
+      update();
+      start();
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
+  function bootJoyVoice() {
     setLanguage(localStorage.getItem('joyvoice-lang') || 'zh');
-    const toggle=document.getElementById('joyvoice-lang-toggle');
-    if (toggle) toggle.addEventListener('click',()=> setLanguage( (localStorage.getItem('joyvoice-lang')==='zh') ? 'en' : 'zh' ));
+    const toggle = document.getElementById('joyvoice-lang-toggle');
+    if (toggle) toggle.addEventListener('click', () => setLanguage((localStorage.getItem('joyvoice-lang') === 'zh') ? 'en' : 'zh'));
     initCarousels();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootJoyVoice);
+  } else {
+    bootJoyVoice();
+  }
 }
 </script>
-
-<!-- 核心团队：浅色 + “角色换行”排版 -->
-<style>
-.jv-core-team{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:16px;
-  margin-top:12px;
-  align-items:stretch;
-}
-
-.jv-team-subgroup{
-  color-scheme: light;
-  --jv-ink: rgba(17,24,39,.92);
-  --jv-ink-2: rgba(17,24,39,.70);
-  --jv-border: rgba(17,24,39,.10);
-
-  position:relative;
-  border:1px solid var(--jv-border);
-  border-radius:18px;
-  padding:14px 16px 16px;
-  background:
-    radial-gradient(680px 140px at 18px 18px, rgba(var(--jv-accent-rgb, 219,232,253), .26), transparent 62%),
-    linear-gradient(180deg, rgba(255,255,255,1), rgba(248,250,252,1));
-  box-shadow:0 12px 30px rgba(17,24,39,.08);
-  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-}
-
-.jv-team-subgroup:hover{
-  transform: translateY(-2px);
-  box-shadow:0 16px 38px rgba(17,24,39,.10);
-  border-color: rgba(17,24,39,.14);
-}
-
-@media (prefers-reduced-motion: reduce){
-  .jv-team-subgroup{ transition:none; }
-  .jv-team-subgroup:hover{ transform:none; }
-}
-
-/* Accent bar */
-.jv-team-subgroup::before{
-  content:"";
-  position:absolute;
-  left:14px;
-  top:14px;
-  bottom:14px;
-  width:4px;
-  border-radius:999px;
-  background: linear-gradient(180deg,
-    rgba(var(--jv-accent-rgb, 219,232,253), 1),
-    rgba(var(--jv-accent-rgb, 219,232,253), .55)
-  );
-}
-
-/* Group accents */
-.jv-team-subgroup[data-jv-group="drama"]{ --jv-accent-rgb:219,232,253; } /* #DBE8FD */
-.jv-team-subgroup[data-jv-group="music"]{ --jv-accent-rgb:250,216,173; } /* #FAD8AD */
-.jv-team-subgroup[data-jv-group="visual"]{ --jv-accent-rgb:207,206,227; } /* #CFCEE3 */
-
-/* Title */
-.jv-team-subgroup-title{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  margin:0 0 12px 10px;
-  padding:8px 12px 8px 10px;
-  border-radius:999px;
-  background: rgba(17,24,39,.04);
-  border: 1px solid rgba(17,24,39,.08);
-  color: var(--jv-ink);
-  font-weight: 850;
-  letter-spacing: .02em;
-}
-
-.jv-team-subgroup-icon{
-  width:28px;
-  height:28px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background: rgba(var(--jv-accent-rgb, 219,232,253), .32);
-  border: 1px solid rgba(var(--jv-accent-rgb, 219,232,253), .55);
-  box-shadow: 0 10px 20px rgba(17,24,39,.06);
-}
-.jv-team-subgroup-icon .bi{
-  font-size: 1.02rem;
-  color: rgba(17,24,39,.72);
-}
-
-/* IMPORTANT: role newline layout */
-.jv-team-line{
-  margin-left:10px;              /* align after accent bar */
-  padding:10px 0;
-  line-height:1.55;
-}
-
-.jv-team-line + .jv-team-line{
-  border-top:1px dashed rgba(17,24,39,.10);
-}
-
-/* role label on its own line */
-.jv-team-role{
-  display:inline-flex;
-  align-items:center;
-  justify-content:flex-start;
-  width: fit-content;
-  max-width: 100%;
-  color: var(--jv-ink-2);
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 12px;
-  background: rgba(17,24,39,.03);
-  border: 1px solid rgba(17,24,39,.06);
-  white-space: nowrap;
-  margin-bottom:8px;             /* this forces the “换行” visual rhythm */
-}
-
-/* names on the next line */
-.jv-team-names{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  align-content:flex-start;
-  justify-content:flex-start;
-}
-
-/* name pill */
-.jv-name-pill{
-  display:inline-flex;
-  align-items:center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: rgba(var(--jv-accent-rgb, 219,232,253), .14);
-  border: 1px solid rgba(var(--jv-accent-rgb, 219,232,253), .36);
-  color: var(--jv-ink);
-  font-size: .92em;
-  white-space: nowrap;
-}
-
-/* keyboard focus */
-.jv-team-subgroup a:focus-visible,
-.jv-team-subgroup button:focus-visible{
-  outline:3px solid rgba(var(--jv-accent-rgb, 219,232,253), .60);
-  outline-offset:3px;
-  border-radius:12px;
-}
-</style>
