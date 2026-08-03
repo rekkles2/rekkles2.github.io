@@ -11,7 +11,7 @@ pub_date:       "2025"
 
 [//]: # (semantic_scholar_id: 204e3073870fae3d05bcbc2f6a8e263d9b72e776  # use this to retrieve citation count)
 abstract: >-
-  Weakly-supervised; Video anomaly detection; Federated learning; Mixture of local-to-global experts
+  Weakly-supervised; Video anomaly detection; Federated; Mixture of local-to-global experts
 cover:          /assets/images/paper/MOE.png 
 authors:
   - Yong Su#
