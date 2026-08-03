@@ -3,7 +3,7 @@ secondary_name: ""
 navbar_name: "Jiahang Li"
 
 positions:
-- name: B.Eng. in Intelligent Science and Technology
+  - name: Incoming Ph.D. Student in Artificial Intelligence
 
 email: "lijiahang041119[At]gmail.com"
 cv_link: https://www.overleaf.com/read/vwhdpzssvcmr#e69ffc
@@ -19,51 +19,99 @@ orcid: 0009-0002-3403-5589
 short_bio_text_justify: true
 short_bio: >-
   <p>
-    Hi, I'm Jiahang. I'm a fourth-year undergraduate at Tianjin Normal University,
-    advised by Lect. Yong Su at the Tianjin Key Laboratory of Wireless Mobile
-    Communications and Power Transmission. My recent work has focused on robust
-    and privacy-preserving video anomaly detection for distributed intelligent
-    surveillance systems, especially under weak supervision and heterogeneous
-    scene conditions.
+    Hi, I am Jiahang. I am an incoming Ph.D. student in Artificial Intelligence
+    at Korea University, advised by
+    <a href="http://pr.korea.ac.kr/sub2_1.php?code=LSW"
+       target="_blank"
+       rel="noopener">
+      Prof. Seong-Whan Lee
+    </a>,
+    and a member of the
+    <a href="http://pr.korea.ac.kr/index.php"
+       target="_blank"
+       rel="noopener">
+      PR&amp;ML Lab
+    </a>.
+    Previously, I was a research intern at the University of Electronic Science
+    and Technology of China (UESTC), advised by
+    <a href="https://scholar.google.com/citations?user=lvhxhyQAAAAJ&amp;hl=zh-CN&amp;oi=ao"
+       target="_blank"
+       rel="noopener">
+      Prof. Chaoning Zhang
+    </a>.
   </p>
 
   <p>
-    I'm also the co-founder of
-      <a href="https://rekkles2.github.io/JoyVoice" target="_blank" rel="noopener"
-         style="
-           text-decoration:none;
-           background-image: linear-gradient(90deg,#2D7DFB,#5EA1FF,#6F7CFF 50%,#FFC38D 75%,#F57C00);
-           background-repeat: no-repeat;
-           background-position: 0 100%;
-           background-size: 100% 2px;
-           padding-bottom: 2px;
-           transition: background-size .18s ease;
-         "
-         onmouseover="this.style.backgroundSize='100% 3px'"
-         onmouseout="this.style.backgroundSize='100% 2px'">
-        <strong style="font-weight:700;">
-          <span style="background:linear-gradient(90deg,#2D7DFB,#5EA1FF,#6F7CFF);
-                       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
-            JoyVoice
-          </span>
-          <span> </span>
-          <span style="background:linear-gradient(90deg,#FFC38D,#F57C00);
-                       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">
-            Studio
-          </span>
-        </strong>
-      </a>
-    (<em>noncommercial creative studio</em>) producing
-    voice dubbing, original audio dramas, and original songs.
-    I aim to leverage my experience in
-    <span style="color:#8BC48A; font-weight:500;">voice dubbing</span> and
-    <span style="color:#F7BFC3; font-weight:500;">sound design</span>
-    to strengthen multimodal understanding and content creation.
+    My research interests include
+    <strong>multimodal foundation models</strong>,
+    spanning representation learning and generative modeling for content creation.
+    I am particularly interested in developing
+    <strong>domain-specialist agents</strong>
+    that enhance productivity, well-being, and creativity.
   </p>
 
   <p>
-    I'm always excited to discuss new ideas and potential collaborations - feel free to reach out if you'd like to discuss ideas or potential collaborations!
+    I am also the co-founder of
+    <a href="https://rekkles2.github.io/JoyVoice"
+       target="_blank"
+       rel="noopener"
+       style="
+         text-decoration: none;
+         background-image: linear-gradient(
+           90deg,
+           #2D7DFB,
+           #5EA1FF,
+           #6F7CFF 50%,
+           #FFC38D 75%,
+           #F57C00
+         );
+         background-repeat: no-repeat;
+         background-position: 0 100%;
+         background-size: 100% 2px;
+         padding-bottom: 2px;
+         transition: background-size .18s ease;
+       "
+       onmouseover="this.style.backgroundSize='100% 3px'"
+       onmouseout="this.style.backgroundSize='100% 2px'">
+      <strong style="font-weight: 700;">
+        <span style="
+          background: linear-gradient(90deg, #2D7DFB, #5EA1FF, #6F7CFF);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        ">
+          JoyVoice
+        </span>
+        <span> </span>
+        <span style="
+          background: linear-gradient(90deg, #FFC38D, #F57C00);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        ">
+          Studio
+        </span>
+      </strong>
+    </a>
+    (<em>noncommercial creative studio</em>), which produces voice dubbing,
+    original audio dramas, and original songs. I aim to draw on my experience in
+    <span style="color: #8BC48A; font-weight: 500;">
+      voice dubbing
+    </span>
+    and
+    <span style="color: #F7BFC3; font-weight: 500;">
+      sound design
+    </span>
+    to strengthen multimodal understanding and advance human–AI collaboration
+    in content creation.
   </p>
+
+  <p>
+    I am always open to discussing new research ideas and potential
+    collaborations. Please feel free to reach out.
+  </p>
+
+
 
 quote: >-
   Stay Hungry. Stay Foolish.
@@ -73,17 +121,28 @@ portrait_url: /assets/images/photos/picture.jpg
 portrait_caption: >-
   Photographed at my home for the Flower Monthly event.
 
+
 education:
-- name: "Tianjin Normal University"
-  logo: "/assets/images/badges/tjnu.svg"
-  lab:
-    name: "@Tianjin Key Laboratory of Wireless Mobile Communications and Power Transmission"
-    url: none
-  position: >-
-    B.Eng. in Intelligent Science and Technology <br/>
-  advisor:
-    - name: "Lect. Yong Su"
-  date: "Sep. 2022 - Jul. 2026"
+  - name: "Korea University"
+    logo: "/assets/images/badges/KU.svg"
+    lab:
+      name: "@Pattern Recognition & Machine Learning Lab"
+      url: "http://pr.korea.ac.kr/index.php"
+    position: >-
+      Incoming Ph.D. Student in Artificial Intelligence <br/>
+    advisor:
+      - name: "Prof. Seong-Whan Lee"
+        url: "http://pr.korea.ac.kr/sub2_1.php?code=LSW"
+    date: "Sep. 2026 - Present"
+
+  - name: "Tianjin Normal University"
+    logo: "/assets/images/badges/tjnu.svg"
+    position: >-
+      B.Eng. in Intelligent Science and Technology <br/>
+    date: "Sep. 2022 - Jul. 2026"
+
+
+
 
 experience:
 - name: "UESTC"
