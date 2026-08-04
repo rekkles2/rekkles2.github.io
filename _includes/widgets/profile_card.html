@@ -1,330 +1,137 @@
-<div class="row" style="margin-bottom: 1rem;">
-    <div class="col">
-        <div class="card border-0 shadow-sm bg-white rounded-3 overflow-hidden">
-            <div class="card-body p-5">
-                <!-- Main Flow Layout: image placed before text so text can wrap around it on md+ -->
-                <div class="profile-grid">
-                    {% if site.data.profile.portrait_url %}
-                    <div class="profile-grid-image d-none d-md-block" aria-hidden="false">
-                        <div class="profile-grid-image-inner">
-                            <img src="{{ site.data.profile.portrait_url | relative_url }}"
-                                 class="img-fluid rounded-3 profile-portrait"
-                                 alt="{{ site.data.profile.portrait_caption }}"
-                                 title="{{ site.data.profile.portrait_caption }}">
-                        </div>
-                    </div>
-                    {% endif %}
+<section class="profile-card" aria-labelledby="profile-name">
+  <div class="profile-hero-grid">
+    <div class="profile-copy">
+      <h1 id="profile-name" class="profile-name">
+        {{ site.data.profile.primary_name }}
+        {% if site.data.profile.secondary_name %}
+        <span class="profile-secondary-name">{{ site.data.profile.secondary_name }}</span>
+        {% endif %}
+      </h1>
 
-                    <!-- Left column for text content -->
-                    <div class="profile-grid-text">
-                        <div class="d-flex flex-column flex-md-row align-items-start mb-4">
-                            <h1 class="h2 profile-name mb-0 me-md-4">
-                                {{ site.data.profile.primary_name }}
-                                <span class="text-muted fw-normal fs-5 profile-secondary-name">{{ site.data.profile.secondary_name }}</span>
-                            </h1>
-                            {% if site.data.profile.portrait_url %}
-                            <div class="mt-3 mt-md-0 d-md-none w-100">
-                                <div class="d-flex justify-content-end">
-                                    <img src="{{ site.data.profile.portrait_url | relative_url }}" class="rounded-circle border border-2" style="height: 65px; width: 65px; object-fit: cover;" alt="Portrait">
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="text-profile-position mb-3">
-                            {% for position in site.data.profile.positions %}
-                            <div class="d-flex align-items-center mb-2">
-                                {% if position.logo -%}
-                                <img src="{{ position.logo | relative_url }}" alt="Logo" class="me-2 position-logo" style="height: 24px; width: 24px; object-fit: contain;">
-                                {%- endif %}
-                                <span class="fw-medium position-name">{{ position.name }}</span>
-                            </div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="text-profile-bio mb-4" {% if site.data.profile.short_bio_text_justify %}style="text-align: justify;"{% endif %}>
-                            {{ site.data.profile.short_bio }}
-                        </div>
-
-                        <!-- Quote section -->
-                        {% if site.data.profile.quote %}
-                          {% assign quote_parts = site.data.profile.quote | split: "--" %}
-                          <div class="quote-container mt-4">
-                            <blockquote class="custom-quote">
-                              <p class="quote-text">{{ quote_parts[0] | strip }}</p>
-                              {% if quote_parts[1] %}
-                                <footer class="quote-author">-- {{ quote_parts[1] | strip }}</footer>
-                              {% endif %}
-                            </blockquote>
-                          </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <!-- End Main Flow Layout -->
-
-                <hr class="my-4">
-                <div class="row">
-                    <div class="col">
-                        <div class="d-flex flex-wrap" style="gap: 0.75rem;">
-                            <!-- Optimized Buttons Start -->
-                            <div class="profile-btn btn-email">
-                                <i class="fas fa-at"></i>
-                                <span class="email-text user-select-all">{{ site.data.profile.email }}</span>
-                            </div>
-
-                            {% if site.data.profile.cv_link %}
-                            <a class="profile-btn btn-cv" target="_blank" href="{{ site.data.profile.cv_link | relative_url }}">
-                                <i class="fas fa-file-alt"></i>
-                                <span>CV</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.gscholar %}
-                                {%- if site.data.profile.gscholar contains 'scholar.google' -%}
-                                    {%- assign gscholar_url = site.data.profile.gscholar -%}
-                                {%- else -%}
-                                    {%- assign gscholar_url = 'https://scholar.google.com/citations?user=' | append: site.data.profile.gscholar -%}
-                                {%- endif -%}
-                            <a class="profile-btn btn-gscholar" target="_blank" href="{{ gscholar_url }}">
-                                <svg class="gscholar-icon-svg" role="img" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#4285F4">
-                                    <title>Google Scholar</title>
-                                    <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                                </svg>
-                                <span>Google Scholar</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.github %}
-                            <a class="profile-btn btn-github" target="_blank" href="https://github.com/{{ site.data.profile.github }}">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.twitter %}
-                            <a class="profile-btn btn-twitter" target="_blank" href="https://twitter.com/{{ site.data.profile.twitter }}">
-                                <i class="fab fa-twitter"></i>
-                                <span>Twitter</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.linkedin %}
-                            <a class="profile-btn btn-linkedin" target="_blank" href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.orcid %}
-                            <a class="profile-btn btn-orcid" target="_blank" href="https://orcid.org/{{ site.data.profile.orcid }}">
-                                <i class="fab fa-orcid"></i>
-                                <span>ORCID</span>
-                            </a>
-                            {% endif %}
-
-                            {% if site.data.profile.wechat_qrcode %}
-                            <a class="profile-btn btn-wechat" data-toggle="modal" data-target="#modal-wechat">
-                                <i class="fab fa-weixin"></i>
-                                <span>WeChat</span>
-                            </a>
-                            {% endif %}
-                            <!-- Optimized Buttons End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+      {% if site.data.profile.positions %}
+      <div class="profile-positions" aria-label="Current positions">
+        {% for position in site.data.profile.positions %}
+        <div class="profile-position">
+          {% if position.logo %}
+          <img src="{{ position.logo | relative_url }}" alt="" class="profile-position-logo" loading="lazy" decoding="async">
+          {% endif %}
+          <span>{{ position.name }}</span>
         </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="profile-bio"{% if site.data.profile.short_bio_text_justify %} data-justify="true"{% endif %}>
+        {{ site.data.profile.short_bio }}
+      </div>
+
+      {% if site.data.profile.quote %}
+        {% assign quote_parts = site.data.profile.quote | split: "--" %}
+      <blockquote class="profile-quote">
+        <p>{{ quote_parts[0] | strip }}</p>
+        {% if quote_parts[1] %}<footer>— {{ quote_parts[1] | strip }}</footer>{% endif %}
+      </blockquote>
+      {% endif %}
     </div>
-</div>
 
-<!-- Visual & Layout Styles (微调与优化) -->
-<style>
-  :root{
-    --accent: #2f57c8;
-    --muted: #64748b;
-    --card-bg: #ffffff;
-    --btn-bg: rgba(248, 250, 255, 0.96);
-    --text-color: #0f1724; /* slightly darker for contrast */
-    --soft-text: #334155;
-    --shadow-1: 0 8px 18px rgba(15, 23, 42, 0.06);
-  }
+    {% if site.data.profile.portrait_url %}
+    <figure class="profile-media">
+      <img src="{{ site.data.profile.portrait_url | relative_url }}"
+           alt="{{ site.data.profile.portrait_caption | default: site.data.profile.primary_name }}"
+           title="{{ site.data.profile.portrait_caption }}"
+           class="profile-portrait" decoding="async">
+    </figure>
+    {% endif %}
+  </div>
 
-  /* Typography improvements */
-  .profile-name { line-height: 1.0; letter-spacing: -0.6px; color: var(--text-color); }
-  .profile-secondary-name { display: block; margin-top: .125rem; color: #6b7280; font-weight: 500; }
-  .text-profile-bio { color: var(--soft-text); font-size: 1.02rem; line-height: 1.5; -webkit-font-smoothing:antialiased; }
-  .position-name { color: var(--soft-text); }
+  <div class="profile-actions" aria-label="Contact and academic profiles">
+    {% if site.data.profile.email %}
+    <a class="profile-action profile-action--email" href="mailto:{{ site.data.profile.email }}">
+      <i class="fas fa-envelope" aria-hidden="true"></i>
+      <span class="profile-action-label">{{ site.data.profile.email }}</span>
+    </a>
+    {% endif %}
 
-  /* Quote styling (subtle refinement) */
-  .custom-quote {
-    border-left: 3px solid var(--accent);
-    padding-left: 1rem;
-    margin: 1.25rem 0;
-    font-style: italic;
-    color: #374151;
-    background: linear-gradient(180deg, rgba(47,87,200,0.045), transparent 55%);
-    border-radius: 10px;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-  }
-  .quote-text { margin: 0 0 0.35rem 0; line-height:1.4; color: #25405a; }
-  .quote-author { font-style: normal; color: var(--muted); font-weight: 500; font-size: .95rem; }
+    {% if site.data.profile.cv_link %}
+    <a class="profile-action profile-action--cv" target="_blank" rel="noopener noreferrer" href="{{ site.data.profile.cv_link | relative_url }}">
+      <i class="fas fa-file-pdf" aria-hidden="true"></i>
+      <span>CV</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  /* Buttons: consistent sizing and nicer hover */
-  .profile-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: .55rem;
-    padding: 0.5rem 0.92rem;
-    background-color: var(--btn-bg);
-    color: var(--soft-text);
-    border: 1px solid rgba(47,87,200,0.08);
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.92rem;
-    text-decoration: none;
-    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
-    cursor: pointer;
-    white-space: nowrap;
-  }
+    {% if site.data.profile.gscholar %}
+      {% if site.data.profile.gscholar contains 'scholar.google' %}
+        {% assign gscholar_url = site.data.profile.gscholar %}
+      {% else %}
+        {% assign gscholar_url = 'https://scholar.google.com/citations?user=' | append: site.data.profile.gscholar %}
+      {% endif %}
+    <a class="profile-action profile-action--scholar" target="_blank" rel="noopener noreferrer" href="{{ gscholar_url }}">
+      <i class="ai ai-google-scholar" aria-hidden="true"></i>
+      <span>Google Scholar</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  .profile-btn:hover,
-  .profile-btn:focus {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-1);
-    color: var(--soft-text);
-    background-color: rgba(239, 244, 255, 0.96);
-    border-color: rgba(47,87,200,0.14);
-  }
+    {% if site.data.profile.github %}
+    <a class="profile-action profile-action--github" target="_blank" rel="noopener noreferrer" href="https://github.com/{{ site.data.profile.github }}">
+      <i class="fab fa-github" aria-hidden="true"></i>
+      <span>GitHub</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  .profile-btn > i,
-  .profile-btn > svg {
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-    max-width: 18px;
-    font-size: 18px;
-    opacity: 0.95;
-    transition: color .18s ease, transform .18s ease;
-    flex: 0 0 18px;
-  }
+    {% if site.data.profile.twitter %}
+    <a class="profile-action profile-action--x" target="_blank" rel="noopener noreferrer" href="https://twitter.com/{{ site.data.profile.twitter }}">
+      <i class="fab fa-x-twitter" aria-hidden="true"></i>
+      <span>X</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  .gscholar-icon-svg {
-    display: block;
-    width: 18px !important;
-    height: 18px !important;
-    min-width: 18px !important;
-    max-width: 18px !important;
-    min-height: 18px !important;
-    max-height: 18px !important;
-    overflow: hidden;
-  }
+    {% if site.data.profile.linkedin %}
+    <a class="profile-action profile-action--linkedin" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/{{ site.data.profile.linkedin }}">
+      <i class="fab fa-linkedin" aria-hidden="true"></i>
+      <span>LinkedIn</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  /* Individual accents stay subtle and icon-led */
-  .btn-email:hover, .btn-cv:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(79,70,229,0.16); }
-  .btn-email > i, .btn-cv > i { color: #4f46e5; }
-  .btn-email:hover > i, .btn-cv:hover > i { color: #4f46e5; }
+    {% if site.data.profile.orcid %}
+    <a class="profile-action profile-action--orcid" target="_blank" rel="noopener noreferrer" href="https://orcid.org/{{ site.data.profile.orcid }}">
+      <i class="fab fa-orcid" aria-hidden="true"></i>
+      <span>ORCID</span>
+      <i class="fas fa-arrow-up-right-from-square profile-action-external" aria-hidden="true"></i>
+    </a>
+    {% endif %}
 
-  .btn-gscholar { background-color: rgba(248, 250, 255, 0.96); color: #4285F4; }
-  .btn-gscholar:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(66,133,244,0.18); }
-  .btn-gscholar > svg { fill: #4285F4; }
-  .btn-gscholar:hover > svg { fill: #4285F4; }
-
-  .btn-github:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(36,41,46,0.16); }
-  .btn-github > i { color: #24292e; }
-  .btn-github:hover > i { color: #24292e; }
-
-  .btn-twitter:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(29,161,242,0.16); }
-  .btn-twitter > i { color: #1DA1F2; }
-  .btn-twitter:hover > i { color: #1DA1F2; }
-
-  .btn-linkedin:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(10,102,194,0.16); }
-  .btn-linkedin > i { color: #0A66C2; }
-  .btn-linkedin:hover > i { color: #0A66C2; }
-
-  .btn-orcid:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(166,206,57,0.2); }
-  .btn-orcid > i { color: #A6CE39; }
-  .btn-orcid:hover > i { color: #7ea823; }
-
-  .btn-wechat:hover { background-color: rgba(239, 244, 255, 0.96); border-color: rgba(7,193,96,0.16); }
-  .btn-wechat > i { color: #07C160; }
-  .btn-wechat:hover > i { color: #07C160; }
-
-  /* Layout: mobile-first then desktop float-based wrap for md+ */
-  .profile-grid { position: relative; }
-
-  @media (min-width: 768px) {
-    /* float the image to the right so text wraps and can fill any empty space under the image */
-    .profile-grid-image {
-      float: right;
-      width: clamp(150px, 25%, 260px); /* responsive width: min 150, ideal 25%, max 260 */
-      max-width: 260px;
-      margin-left: 2rem; /* larger gap for breathing room */
-      margin-bottom: 1rem;
-      border-radius: 12px;
-      overflow: hidden;
-      /* Make text wrap follow the rounded shape (where supported) */
-      -webkit-shape-outside: inset(0 round 12px);
-      shape-outside: inset(0 round 12px);
-      /* small subtle lift */
-      filter: drop-shadow(0 6px 18px rgba(12, 14, 20, 0.04));
-    }
-
-    /* Inner wrapper ensures consistent height/width for shape-outside behavior */
-    .profile-grid-image-inner { display:block; width:100%; height:100%; }
-
-    .profile-portrait {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: 300px;    /* a slightly larger comfortable max */
-      object-fit: cover;
-      border-radius: 12px;
-      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease;
-      box-shadow: 0 10px 30px rgba(12,14,20,0.06);
-      will-change: transform;
-      backface-visibility: hidden;
-    }
-    .profile-portrait:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 18px 40px rgba(12,14,20,0.08);
-    }
-
-    /* clear fix to ensure card layout contains the float */
-    .profile-grid::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
-    /* ensure hr and following elements sit below floats */
-    .profile-grid + hr { clear: both; }
-
-    /* tighten spacing so text flows nicely next to the image */
-    .profile-grid-text .mb-4 { margin-bottom: 0 !important; }
-  }
-
-  /* Small accessibility & niceties */
-  .position-logo { opacity: 0.95; }
-  .email-text { word-break: break-all; line-height: 1.45; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
-</style>
+    {% if site.data.profile.wechat_qrcode %}
+    <button class="profile-action profile-action--wechat" type="button" data-toggle="modal" data-target="#modal-wechat" aria-haspopup="dialog">
+      <i class="fab fa-weixin" aria-hidden="true"></i>
+      <span>WeChat</span>
+    </button>
+    {% endif %}
+  </div>
+</section>
 
 {% if site.data.profile.wechat_qrcode %}
-<div class="modal fade" id="modal-wechat" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content rounded-3">
-            <div class="modal-body p-0 text-center">
-                <img src="{{ site.data.profile.wechat_qrcode | relative_url }}" class="img-fluid rounded-3" alt="WeChat QR code">
-            </div>
-            {% if site.data.profile.wechat_prompt %}
-            <div class="modal-body p-3 bg-light rounded-bottom-3">
-                <p class="mb-0 small text-center">{{ site.data.profile.wechat_prompt }}</p>
-            </div>
-            {% endif %}
-            <div class="modal-footer bg-light border-0">
-                <button type="button" class="btn btn-primary rounded-pill px-4" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+<div class="modal fade" id="modal-wechat" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="wechat-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+    <div class="modal-content profile-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="wechat-modal-title">WeChat</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="{{ site.data.profile.wechat_qrcode | relative_url }}" class="img-fluid" alt="WeChat QR code">
+        {% if site.data.profile.wechat_prompt %}<p class="profile-modal-prompt">{{ site.data.profile.wechat_prompt }}</p>{% endif %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 {% endif %}

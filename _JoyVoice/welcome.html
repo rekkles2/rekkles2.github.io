@@ -6,7 +6,7 @@
     <button id="joyvoice-lang-toggle"
             class="btn btn-sm d-flex align-items-center shadow-sm position-absolute top-0 end-0 m-3"
             type="button" aria-label="Toggle language" aria-pressed="false">
-      <i class="bi bi-translate me-1" aria-hidden="true"></i>
+      <i class="fas fa-language" aria-hidden="true"></i>
       <span id="lang-toggle-text" class="joyvoice-lang-text">English</span>
     </button>
 
@@ -16,7 +16,7 @@
           <div class="joyvoice-logo-container">
             <div class="joyvoice-logo-wrapper">
               <img src="{{ info.studio.logo | relative_url }}" alt="{{ info.studio.name }}"
-                   class="joyvoice-logo" loading="lazy" decoding="async">
+                   class="joyvoice-logo" loading="eager" fetchpriority="high" decoding="async">
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@
             <div class="jv-core-team">
               <div class="jv-team-subgroup" data-jv-group="drama">
                 <div class="jv-team-subgroup-title">
-                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-camera-reels"></i></span>
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="fas fa-masks-theater"></i></span>
                   <span class="joyvoice-lang" data-lang="zh">Drama Crew</span>
                   <span class="d-none joyvoice-lang" data-lang="en">Drama Crew</span>
                 </div>
@@ -186,7 +186,7 @@
 
               <div class="jv-team-subgroup" data-jv-group="music">
                 <div class="jv-team-subgroup-title">
-                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-music-note-beamed"></i></span>
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="fas fa-music"></i></span>
                   <span class="joyvoice-lang" data-lang="zh">Music Crew</span>
                   <span class="d-none joyvoice-lang" data-lang="en">Music Crew</span>
                 </div>
@@ -229,7 +229,7 @@
 
               <div class="jv-team-subgroup" data-jv-group="visual">
                 <div class="jv-team-subgroup-title">
-                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="bi bi-palette"></i></span>
+                  <span class="jv-team-subgroup-icon" aria-hidden="true"><i class="fas fa-palette"></i></span>
                   <span class="joyvoice-lang" data-lang="zh">Visual/Promo Crew</span>
                   <span class="d-none joyvoice-lang" data-lang="en">Visual/Promo Crew</span>
                 </div>
@@ -298,19 +298,28 @@
                 {% if has_covers and project.covers.size > 1 %}
                   <section class="joyvoice-carousel" role="region" aria-roledescription="carousel"
                            aria-label="{{ project.title }}" data-autoplay="true">
-                    <div class="joyvoice-carousel-viewport">
+                    <div class="joyvoice-carousel-viewport" id="joyvoice-carousel-{{ forloop.index }}-track">
                       {% for img in project.covers %}
-                      <div class="joyvoice-slide">
+                      <div class="joyvoice-slide" aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
                         <img class="joyvoice-cover-img" src="{{ img | relative_url }}"
                              alt="{{ project.title }} cover {{ forloop.index }}" loading="lazy" decoding="async">
                       </div>
                       {% endfor %}
                     </div>
-                    <button class="joyvoice-prev" type="button" aria-label="Previous slide"></button>
-                    <button class="joyvoice-next" type="button" aria-label="Next slide"></button>
-                    <div class="joyvoice-dots" role="tablist" aria-label="Select slide">
+                    <button class="joyvoice-prev" type="button" aria-label="Previous slide" aria-controls="joyvoice-carousel-{{ forloop.index }}-track">
+                      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button class="joyvoice-next" type="button" aria-label="Next slide" aria-controls="joyvoice-carousel-{{ forloop.index }}-track">
+                      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                    <button class="joyvoice-carousel-toggle" type="button" aria-label="Pause autoplay" aria-pressed="false">
+                      <i class="fas fa-pause" aria-hidden="true"></i>
+                    </button>
+                    <div class="joyvoice-dots" aria-label="Select slide">
                       {% for img in project.covers %}
-                      <button class="joyvoice-dot{% if forloop.first %} is-active{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+                      <button class="joyvoice-dot{% if forloop.first %} is-active{% endif %}" type="button"
+                              aria-label="Go to slide {{ forloop.index }} of {{ project.covers.size }}"
+                              {% if forloop.first %}aria-current="true"{% endif %}></button>
                       {% endfor %}
                     </div>
                   </section>
@@ -326,8 +335,13 @@
               {% if project.pv_links %}
               <div class="jv-under-cover-buttons">
                 {% for link in project.pv_links %}
-                  <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
-                    <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                  {% assign jv_icon = 'fas fa-arrow-up-right-from-square' %}
+                  {% assign jv_action = 'external' %}
+                  {% if link.icon contains 'headphones' %}{% assign jv_icon = 'fas fa-headphones' %}{% assign jv_action = 'listen' %}{% endif %}
+                  {% if link.icon contains 'youtube' %}{% assign jv_icon = 'fas fa-play' %}{% assign jv_action = 'video' %}{% endif %}
+                  {% if link.icon contains 'music' %}{% assign jv_icon = 'fas fa-music' %}{% assign jv_action = 'music' %}{% endif %}
+                  <a href="{{ link.url }}" class="btn jv-btn-cta jv-btn-cta--{{ jv_action }}" target="_blank" rel="noopener noreferrer">
+                    <span class="jv-icon-chip" aria-hidden="true"><i class="{{ jv_icon }}"></i></span>
                     <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
                     <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
                   </a>
@@ -362,16 +376,18 @@
                   <div class="joyvoice-project-details mb-3">
                     <h4 class="joyvoice-block-h joyvoice-lang" data-lang="zh">剧情介绍</h4>
                     <h4 class="joyvoice-block-h d-none joyvoice-lang" data-lang="en">Synopsis</h4>
-                    <p class="joyvoice-section-text mb-0">
-                      {% if project.details_s %}
-                        <span class="joyvoice-lang jv-details" data-lang="zh"
-                              data-full="{{ project.details | escape }}">{{ project.details_s }}</span>
-                      {% endif %}
-                      {% if project.details_en_s %}
-                        <span class="joyvoice-lang d-none jv-details" data-lang="en"
-                              data-full="{{ project.details_en | escape }}">{{ project.details_en_s }}</span>
-                      {% endif %}
-                    </p>
+                    {% if project.details_s %}
+                    <details class="joyvoice-lang jv-details" data-lang="zh">
+                      <summary>{{ project.details_s }}</summary>
+                      <div class="jv-details-body">{{ project.details }}</div>
+                    </details>
+                    {% endif %}
+                    {% if project.details_en_s %}
+                    <details class="joyvoice-lang d-none jv-details" data-lang="en">
+                      <summary>{{ project.details_en_s }}</summary>
+                      <div class="jv-details-body">{{ project.details_en }}</div>
+                    </details>
+                    {% endif %}
                   </div>
                   {% endif %}
 
@@ -488,8 +504,13 @@
               {% if project.links %}
               <div class="joyvoice-project-links d-flex flex-wrap gap-2 mt-3">
                 {% for link in project.links %}
-                <a href="{{ link.url }}" class="btn jv-btn-cta" target="_blank" rel="noopener">
-                  <span class="jv-icon-chip" aria-hidden="true"><i class="{{ link.icon }}"></i></span>
+                  {% assign jv_icon = 'fas fa-arrow-up-right-from-square' %}
+                  {% assign jv_action = 'external' %}
+                  {% if link.icon contains 'headphones' %}{% assign jv_icon = 'fas fa-headphones' %}{% assign jv_action = 'listen' %}{% endif %}
+                  {% if link.icon contains 'youtube' %}{% assign jv_icon = 'fas fa-play' %}{% assign jv_action = 'video' %}{% endif %}
+                  {% if link.icon contains 'music' %}{% assign jv_icon = 'fas fa-music' %}{% assign jv_action = 'music' %}{% endif %}
+                <a href="{{ link.url }}" class="btn jv-btn-cta jv-btn-cta--{{ jv_action }}" target="_blank" rel="noopener noreferrer">
+                  <span class="jv-icon-chip" aria-hidden="true"><i class="{{ jv_icon }}"></i></span>
                   <span class="joyvoice-lang" data-lang="zh">{{ link.title }}</span>
                   <span class="joyvoice-lang d-none" data-lang="en">{{ link.title_en }}</span>
                 </a>
@@ -517,94 +538,3 @@
   {% endif %}
 </div>
 {% endif %}
-
-<script>
-if (!window.joyvoiceBootLoaded) {
-  window.joyvoiceBootLoaded = true;
-
-  function setLanguage(lang) {
-    const other = (lang === 'zh') ? 'en' : 'zh';
-    document.querySelectorAll('.joyvoice-lang[data-lang="' + lang + '"]').forEach(el => el.classList.remove('d-none'));
-    document.querySelectorAll('.joyvoice-lang[data-lang="' + other + '"]').forEach(el => el.classList.add('d-none'));
-    localStorage.setItem('joyvoice-lang', lang);
-    document.body.classList.toggle('joyvoice-lang-en', lang === 'en');
-    document.body.classList.toggle('joyvoice-lang-zh', lang === 'zh');
-    const btnTxt = document.getElementById('lang-toggle-text');
-    if (btnTxt) btnTxt.textContent = (lang === 'zh') ? 'English' : '中文';
-    const btn = document.getElementById('joyvoice-lang-toggle');
-    if (btn) btn.setAttribute('aria-pressed', (lang === 'en').toString());
-  }
-
-  function initCarousels() {
-    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('.joyvoice-carousel').forEach(root => {
-      const viewport = root.querySelector('.joyvoice-carousel-viewport');
-      const slides = Array.from(root.querySelectorAll('.joyvoice-slide'));
-      const dots = Array.from(root.querySelectorAll('.joyvoice-dot'));
-      const prev = root.querySelector('.joyvoice-prev');
-      const next = root.querySelector('.joyvoice-next');
-      let index = 0;
-      let timer = null;
-
-      const update = () => {
-        viewport.style.transform = 'translateX(' + (-index * 100) + '%)';
-        dots.forEach((dot, k) => {
-          dot.classList.toggle('is-active', k === index);
-          dot.setAttribute('aria-selected', k === index ? 'true' : 'false');
-        });
-      };
-      const go = dir => {
-        index = (index + dir + slides.length) % slides.length;
-        update();
-      };
-      const stop = () => {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      };
-      const start = () => {
-        if (!reduceMotion && !timer && slides.length > 1) timer = setInterval(() => go(1), 5000);
-      };
-
-      prev && prev.addEventListener('click', () => { stop(); go(-1); start(); });
-      next && next.addEventListener('click', () => { stop(); go(1); start(); });
-      dots.forEach((dot, k) => dot.addEventListener('click', () => { stop(); index = k; update(); start(); }));
-
-      root.addEventListener('mouseenter', stop);
-      root.addEventListener('mouseleave', start);
-      root.setAttribute('tabindex', '0');
-      root.addEventListener('keydown', event => {
-        if (event.key === 'ArrowLeft') { stop(); go(-1); start(); }
-        if (event.key === 'ArrowRight') { stop(); go(1); start(); }
-      });
-
-      let x0 = null;
-      viewport.addEventListener('touchstart', event => { x0 = event.touches[0].clientX; stop(); }, { passive: true });
-      viewport.addEventListener('touchend', event => {
-        if (x0 == null) return;
-        const dx = event.changedTouches[0].clientX - x0;
-        if (Math.abs(dx) > 40) go(dx > 0 ? -1 : 1);
-        x0 = null;
-        start();
-      }, { passive: true });
-
-      update();
-      start();
-    });
-  }
-
-  function bootJoyVoice() {
-    setLanguage(localStorage.getItem('joyvoice-lang') || 'zh');
-    const toggle = document.getElementById('joyvoice-lang-toggle');
-    if (toggle) toggle.addEventListener('click', () => setLanguage((localStorage.getItem('joyvoice-lang') === 'zh') ? 'en' : 'zh'));
-    initCarousels();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bootJoyVoice);
-  } else {
-    bootJoyVoice();
-  }
-}
-</script>

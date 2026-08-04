@@ -2,15 +2,15 @@
     <div class="col">
         <div class="card border-0 shadow-sm bg-white rounded-xl">
             <div class="card-body p-4">
-                <h6 class="mb-4 font-weight-semibold text-primary-700 d-flex align-items-center education-heading">
+                <h2 class="mb-4 font-weight-semibold text-primary-700 d-flex align-items-center education-heading">
                     Academic Services
-                </h6>
+                </h2>
 
                 <!-- Conference Reviewer 部分 -->
                 <div class="mb-5">
-                    <h6 class="mb-3 font-weight-bold text-gray-900 service-group-title">
+                    <h3 class="mb-3 font-weight-bold text-gray-900 service-group-title">
                         Conference Reviewer
-                    </h6>
+                    </h3>
                     <div class="row g-3">
                         {% for item in site.data.profile.services.conference %}
                         <div class="col-md-6">
@@ -22,9 +22,9 @@
 
                 <!-- Journal Reviewer 部分 -->
                 <div>
-                    <h6 class="mb-3 font-weight-bold text-gray-900 service-group-title">
+                    <h3 class="mb-3 font-weight-bold text-gray-900 service-group-title">
                         Journal Reviewer
-                    </h6>
+                    </h3>
                     <div class="row g-3">
                         {% for item in site.data.profile.services.journal %}
                         <div class="col-md-6">
@@ -37,23 +37,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .service-group-title {
-        display: inline-flex;
-        align-items: center;
-        min-height: 34px;
-        padding: 0 0.9rem;
-        border-radius: 999px;
-        background: rgba(239,244,255,0.86);
-        border: 1px solid rgba(47,87,200,0.08);
-    }
-
-    .service-item-pill {
-        padding: 0.9rem 1rem;
-        border-radius: 16px;
-        background: linear-gradient(180deg, rgba(248,250,255,0.98), rgba(244,247,252,0.94));
-        border: 1px solid rgba(47,87,200,0.06);
-        box-shadow: 0 4px 12px rgba(15,23,42,0.035);
-    }
-</style>

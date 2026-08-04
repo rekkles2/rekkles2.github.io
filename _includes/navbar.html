@@ -1,26 +1,37 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top shadow-sm site-navbar">
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
-        <a class="navbar-brand d-flex align-items-center site-navbar-brand" href="{{ '/' | relative_url }}">
-            <img
-                src="{{ '/assets/images/covers/joyvoice_logo.svg' | relative_url }}"
-                alt="Microphone Icon"
-                class="site-navbar-logo"
-                width="123"
-                height="40">
-            <strong>{{site.data.profile.navbar_name}}</strong>
-        </a>
-        <button class="navbar-toggler" style="font-size: 1em; padding: 0.5em;" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-map"></i> Menu
-        </button>
+<nav class="navbar navbar-expand-sm navbar-light fixed-top site-navbar" aria-label="Primary navigation">
+  <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
+    <a class="navbar-brand site-navbar-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.data.profile.navbar_name }} home">
+      <img
+        src="{{ '/assets/images/covers/joyvoice_logo.svg' | relative_url }}"
+        alt=""
+        class="site-navbar-logo"
+        width="123"
+        height="40">
+      <span class="site-navbar-name">{{ site.data.profile.navbar_name }}</span>
+    </a>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                {% for item in site.data.navigation.pages %}
-                <li class="nav-item {% if item.name == page.navbar_title %}active{% endif %}">
-                    <a class="nav-link site-nav-link" href="{{ item.url | relative_url }}">{{ item.name }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+    <button class="navbar-toggler site-navbar-toggle" type="button"
+            data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Open navigation menu">
+      <span class="site-navbar-toggle-icon" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="site-navbar-toggle-label">Menu</span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        {% for item in site.data.navigation.pages %}
+        {% assign is_current = false %}
+        {% if item.name == page.navbar_title %}{% assign is_current = true %}{% endif %}
+        <li class="nav-item{% if is_current %} active{% endif %}">
+          <a class="nav-link site-nav-link" href="{{ item.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>
+            {{ item.name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
+  </div>
 </nav>

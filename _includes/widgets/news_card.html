@@ -1,191 +1,62 @@
-<div class="row mt-3">
-  <div class="col-12">
-    <div class="card border-0 shadow-sm bg-white rounded-xl">
-      <div class="card-body p-4">
-        <h6 class="mb-4 news-heading">
-          News
-        </h6>
+{% assign news_by_year = site.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
+<section class="content-section news-section" aria-labelledby="news-title">
+  <header class="section-header news-section-header">
+    <h2 id="news-title" class="section-title">News</h2>
+  </header>
 
-        <div class="scrollable-news-list" style="max-height: 400px; overflow-y: auto;">
-          {% assign news_by_year = site.news | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" -%}
-          <ul class="list-unstyled mb-0 news-top-list" style="padding-left: 0; margin-left: 0;">
-            {% for year in news_by_year %}
-            <li class="mb-4">
-              <h6 class="text-muted border-bottom pb-2">{{ year.name }}</h6>
+  <div class="news-groups news-scroll" tabindex="0" role="region" aria-label="Scrollable news archive">
+    {% for year in news_by_year %}
+    <section class="news-year" aria-labelledby="news-year-{{ year.name }}">
+      <h3 id="news-year-{{ year.name }}" class="news-year-title">{{ year.name }}</h3>
+      <ol class="news-list">
+        {% for item in year.items %}
+          {% assign news_href = item.link %}
+          {% if news_href == nil or news_href == '' %}
+            {% if item.talk_ref %}
+              {% assign news_href = '#' | append: item.talk_ref %}
+            {% elsif item.talk_refs %}
+              {% assign first_ref = item.talk_refs[0] %}
+              {% assign news_href = '#' | append: first_ref %}
+            {% endif %}
+          {% endif %}
+        <li class="news-item{% if item.featured %} news-item--featured{% endif %}">
+          <article class="news-entry">
+            <time class="news-date" datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %d" }}</time>
+            <div class="news-entry-content">
+              <div class="news-entry-copy">
+                {% if news_href %}
+                <a href="{{ news_href }}" class="news-primary-link">
+                  <span>{{ item.title }}</span>
+                  {% if news_href contains 'http' %}<i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>{% endif %}
+                </a>
+                {% else %}
+                <span class="news-primary-text">{{ item.title }}</span>
+                {% endif %}
 
-              <ul class="list-unstyled mb-0">
-                {% for item in year.items %}
-                  {%- comment -%}
-                    determine target href: keep item.link if present, otherwise fallback to talk_ref / first of talk_refs
-                  {%- endcomment -%}
-                  {% assign news_href = item.link %}
-                  {% if news_href == nil or news_href == "" %}
-                    {% if item.talk_ref %}
-                      {% assign news_href = "#" | append: item.talk_ref %}
-                    {% elsif item.talk_refs %}
-                      {% assign first_ref = item.talk_refs[0] %}
-                      {% assign news_href = "#" | append: first_ref %}
-                    {% endif %}
-                  {% endif %}
+                {% if item.more and item.more != 'none' and item.link_target and item.link_target != 'none' %}
+                <span aria-hidden="true"> · </span>
+                <a href="{{ item.link_target }}" class="news-more-link">{{ item.more }}</a>
+                {% endif %}
+              </div>
 
-                  {%- comment -%}
-                    Render: <li><a ...>...</a></li> when news_href exists.
-                    Otherwise render non-clickable <li><div ...></div></li>.
-                    This ensures the UL's direct children are LI (语义正确)。
-                  {%- endcomment -%}
-
-                  {% if news_href %}
-                  <li class="mb-2">
-                    <a href="{{ news_href }}" class="news-link d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 text-decoration-none text-dark" >
-                      <span class="text-gray-500 text-sm text-nowrap date-col" aria-hidden="true">{{ item.date | date: "%b %d" }}</span>
-
-                      <span class="flex-grow-1 font-weight-medium news-title-container">
-                        {{ item.title }}
-                        {% if item.more and item.more != "none" and item.link_target and item.link_target != "none" %}
-                          . <a href="{{ item.link_target }}" class="talk-link">{{ item.more }}</a>
-                        {% endif %}
-                      </span>
-
-                      {% comment %} talk badges (if present) {% endcomment %}
-                      {% if item.talk_refs %}
-                        {% for ref in item.talk_refs %}
-                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
-                            <a href="#{{ ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ ref }}</a>
-                          </span>
-                        {% endfor %}
-                      {% elsif item.talk_ref %}
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
-                          <a href="#{{ item.talk_ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ item.talk_ref }}</a>
-                        </span>
-                      {% endif %}
-
-                      {% if item.featured %}
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ms-2 featured-badge">Featured</span>
-                      {% endif %}
-                    </a>
-                  </li>
-                  {% else %}
-                  <li class="mb-2">
-                    <div class="d-flex align-items-center py-2 px-3 hover-bg-gray rounded transition-colors duration-150 news-static">
-                      <span class="text-gray-500 text-sm text-nowrap date-col" aria-hidden="true">{{ item.date | date: "%b %d" }}</span>
-
-                      <span class="flex-grow-1 font-weight-medium news-title-container">
-                        {{ item.title }}
-                        {% if item.more and item.more != "none" and item.link_target and item.link_target != "none" %}
-                          . <a href="{{ item.link_target }}" class="talk-link">{{ item.more }}</a>
-                        {% endif %}
-                      </span>
-
-                      {% if item.talk_refs %}
-                        {% for ref in item.talk_refs %}
-                          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
-                            <a href="#{{ ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ ref }}</a>
-                          </span>
-                        {% endfor %}
-                      {% elsif item.talk_ref %}
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium badge-talk ms-2">
-                          <a href="#{{ item.talk_ref }}" class="text-primary-700 text-decoration-underline" style="text-decoration-thickness:1px;">{{ item.talk_ref }}</a>
-                        </span>
-                      {% endif %}
-
-                      {% if item.featured %}
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700 ms-2 featured-badge">Featured</span>
-                      {% endif %}
-                    </div>
-                  </li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
+              {% if item.talk_refs or item.talk_ref or item.featured %}
+              <div class="news-badges" aria-label="News labels">
+                {% if item.talk_refs %}
+                  {% for ref in item.talk_refs %}
+                <a href="#{{ ref }}" class="news-badge">{{ ref }}</a>
+                  {% endfor %}
+                {% elsif item.talk_ref %}
+                <a href="#{{ item.talk_ref }}" class="news-badge">{{ item.talk_ref }}</a>
+                {% endif %}
+                {% if item.featured %}<span class="news-badge news-badge--featured">Featured</span>{% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </article>
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endfor %}
   </div>
-</div>
-
-<style>
-/* 保持原有滚动条样式 */
-.scrollable-news-list::-webkit-scrollbar { width: 8px; }
-.scrollable-news-list::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 4px; }
-.scrollable-news-list::-webkit-scrollbar-track { background: #f3f4f6; }
-.hover-bg-gray:hover { background-color: rgba(239, 244, 255, 0.92); }
-
-/* 强制语义/布局一致：让链接行占满整行（整行可点），并保障日期列固定宽度，标题列占剩余宽度 */
-.news-link,
-.news-static {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  color: inherit;
-  text-decoration: none;
-  border-radius: 14px;
-  border: 1px solid rgba(47,87,200,0.06);
-  background: linear-gradient(180deg, rgba(248,250,255,0.96), rgba(244,247,252,0.92));
-  box-shadow: 0 3px 10px rgba(15,23,42,0.035);
-  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
-}
-
-/* 固定日期列宽，确保标题首字母对齐 */
-.date-col {
-  flex: 0 0 60px;  /* 固定宽度列 */
-  min-width: 60px;
-  margin-right: 12px;
-  text-align: left;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 28px;
-  padding: 0 .48rem;
-  border-radius: 999px;
-  background: rgba(239,244,255,0.9);
-  border: 1px solid rgba(47,87,200,0.08);
-  color: #607089 !important;
-  font-weight: 600;
-}
-
-/* 标题列占剩余空间，自动换行 */
-.news-title-container {
-  flex: 1 1 auto;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  line-height: 1.4;
-}
-
-/* talk-badge / featured-badge 间距和样式保持（不影响对齐） */
-.badge-talk a { color: var(--primary, #0369a1); text-decoration: none; }
-.badge-talk,
-.featured-badge {
-  margin-left: 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(47,87,200,0.08);
-  box-shadow: 0 2px 6px rgba(15,23,42,0.04);
-}
-
-.news-link:hover,
-.news-static:hover {
-  border-color: rgba(47,87,200,0.12);
-  box-shadow: 0 8px 18px rgba(15,23,42,0.05);
-  transform: translateY(-1px);
-}
-
-/* 若需要更强的对齐保障——给外层 UL 去掉默认缩进（多数 bootstrap 已处理，但做一次保险） */
-.news-top-list,
-.news-top-list ul { padding-left: 0; margin-left: 0; list-style: none; }
-
-/* 保持你原来定义的最小高度（如需要） */
-.news-item { min-height: 40px; }
-
-/* Match the publication section heading style */
-.news-heading {
-  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.3;
-  letter-spacing: -0.025em;
-  color: #1e293b;
-  padding: 0;
-  margin-bottom: 1.25rem;
-}
-</style>
+</section>

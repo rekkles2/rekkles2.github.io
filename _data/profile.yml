@@ -10,9 +10,9 @@ cv_link: https://www.overleaf.com/read/vwhdpzssvcmr#e69ffc
 gscholar: BqDQDlIAAAAJ&hl
 github: rekkles2
 #twitter: your_twitter_id
-wechat_qrcode: /assets/images/badges/wechat.png
-wechat_prompt: >-
-  Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
+#wechat_qrcode: /assets/images/badges/wechat.png
+#wechat_prompt: >-
+#  Please tell me your <strong>name</strong> and <strong>affiliation</strong> (current or past) when adding my wechat. Thanks!
 linkedin: 22-JHLI
 orcid: 0009-0002-3403-5589
 
@@ -151,7 +151,7 @@ experience:
   advisor:
     - name: "Prof. Chaoning Zhang"
       url: "https://scholar.google.com/citations?user=lvhxhyQAAAAJ&hl=en"
-  date: "Feb. 2026 - Jul. 2026"
+  date: "Feb. 2026 - Aug. 2026"
 
 - name: "JoyVoice Studio"
   logo: /assets/images/badges/joyvoice_logo.svg

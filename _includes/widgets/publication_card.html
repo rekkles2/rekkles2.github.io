@@ -1,13 +1,67 @@
 {% assign publications = include.publications %}
-<div class="my-3 p-0 bg-white shadow-sm rounded-xl">
-    <h6 class="border-bottom border-gray p-3 mb-0">
-        {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-star"></i> Selected Recent Publications{% endif %}
-        <a href="{{ 'publications' | relative_url }}" style="white-space: nowrap;">(view all <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -0.25em; margin-left: 0.25em;" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>)</a>
-    </h6>
+{% assign publication_count = publications | size %}
+<section class="content-section publication-section"
+         aria-labelledby="selected-publications-title"
+         data-publication-filter data-filter-url="false" data-filter-compact data-max-terms="5">
+  <header class="section-header publication-section-header">
+    <div>
+      <p class="section-kicker">Research highlights</p>
+      <h2 id="selected-publications-title" class="section-title">
+        {% if include.title %}{{ include.title }}{% else %}Selected Publications{% endif %}
+      </h2>
+    </div>
+    <a href="{{ '/publications' | relative_url }}" class="section-link">
+      <span>View all</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </header>
+
+  <div class="publication-filter publication-filter--compact" data-publication-filter-ui hidden>
+    <details class="publication-filter-disclosure" data-filter-disclosure>
+      <summary class="publication-filter-summary">
+        <span class="publication-filter-summary-kicker">Index</span>
+        <span class="publication-filter-summary-value" data-filter-summary-label>All</span>
+        <span class="publication-filter-summary-count" data-filter-summary-count>{{ publication_count }}</span>
+        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+      </summary>
+      <div class="publication-filter-panel" data-filter-nav aria-label="Filter selected publications by Index Term">
+        <div class="publication-filter-chips" data-filter-chip-list></div>
+        <div class="publication-filter-panel-actions">
+          <button class="publication-filter-chip publication-filter-all is-active" type="button"
+                  data-filter-term data-term-key="" aria-pressed="true">All</button>
+          <button class="publication-filter-more publication-filter-more--compact" type="button"
+                  data-filter-more aria-expanded="false" hidden>
+            <span data-filter-more-label></span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <button class="publication-filter-clear publication-filter-clear--compact" type="button"
+                  data-filter-clear hidden aria-label="Clear Index Term filter">
+            <i class="fas fa-xmark" aria-hidden="true"></i>
+            <span>Clear filter</span>
+          </button>
+        </div>
+      </div>
+    </details>
+    <span class="sr-only" data-filter-status aria-live="polite" aria-atomic="true">{{ publication_count }} publications shown</span>
+  </div>
+
+  <div class="publication-list" data-publication-list>
     {% for item in publications limit:include.limit %}
-        {% include widgets/publication_item.html item=item first=false last=false %}
+      {% include widgets/publication_item.html item=item first=false last=false %}
     {% endfor %}
-    <h6 class="d-block p-3 mt-0 text-right">
-        <a href="{{ 'publications' | relative_url }}" style="white-space: nowrap;">All publications <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -0.25em; margin-left: 0.25em;" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-    </h6>
-</div>
+  </div>
+
+  <div class="publication-empty" data-filter-empty hidden>
+    <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+    <h3>No matching publications</h3>
+    <p>Clear the current Index Term to restore the selected publications.</p>
+    <button type="button" data-filter-clear>Clear filter</button>
+  </div>
+
+  <footer class="publication-section-footer">
+    <a href="{{ '/publications' | relative_url }}" class="section-link">
+      <span>All publications</span>
+      <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </footer>
+</section>

@@ -1,7 +1,14 @@
 ---
 layout: default
-title : Homepage
+title: Home
 navbar_title: Home
+body_class: page-home
+disable_legacy_global_css: true
+extra_css:
+  - /assets/css/publications.css
+extra_js:
+  - /assets/js/publications.js
+  - /assets/js/background_animation.js
 ---
 {% include widgets/profile_card.html %}
 
@@ -36,8 +43,4 @@ navbar_title: Home
 
 {% if site.data.display.homepage.show_service %}
     {% include widgets/service_card.html %}
-
-
-    <!-- Start Background Animation -->
-    <script src="{{ '/assets/js/background_animation.js' | relative_url }}"></script>
 {% endif %}
