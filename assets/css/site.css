@@ -45,11 +45,11 @@
   --font-display: "Inter", "Noto Sans SC", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
   --background-animation-color: 47, 87, 200;
   --background-animation-accent: 1, 206, 205;
-  --background-animation-opacity: 0.46;
-  --background-animation-count: 34;
+  --background-animation-opacity: 0.54;
+  --background-animation-count: 46;
   --background-animation-speed: 0.14;
   --background-animation-distance: 11500;
-  --background-animation-mouse-distance: 36000;
+  --background-animation-mouse-distance: 57600;
   color-scheme: light;
 }
 
@@ -57,7 +57,7 @@ body.page-home {
   --site-text-secondary: #3b4f66;
   --site-text-muted: #5d7087;
   --site-focus: #0369a1;
-  --background-animation-opacity: 0.5;
+  --background-animation-opacity: 0.58;
 }
 
 html {
