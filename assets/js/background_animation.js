@@ -17,7 +17,7 @@
   var frameId = 0;
   var resizeFrame = 0;
   var running = false;
-  var mouse = { x: null, y: null, max: 16000 };
+  var mouse = { x: null, y: null, targetX: null, targetY: null, max: 16000, presence: 0 };
   var settings = {};
 
   function readCssVar(name, fallback) {
@@ -33,16 +33,17 @@
 
   function getSettings() {
     var reduced = Boolean(reducedMotion && reducedMotion.matches);
-    var baseCount = Math.max(24, Math.round(numberValue(readCssVar("--background-animation-count", "76"), 76)));
+    var baseCount = Math.max(14, Math.round(numberValue(readCssVar("--background-animation-count", "24"), 24)));
     var areaRatio = Math.min(1.25, Math.max(0.62, (window.innerWidth * window.innerHeight) / (1440 * 900)));
 
     return {
       reduced: reduced,
-      color: readCssVar("--background-animation-color", "86, 108, 255"),
+      color: readCssVar("--background-animation-color", "47, 87, 200"),
+      accent: readCssVar("--background-animation-accent", "1, 206, 205"),
       opacity: reduced
         ? Math.min(numberValue(readCssVar("--background-animation-opacity", "0.42"), 0.42), 0.18)
         : numberValue(readCssVar("--background-animation-opacity", "0.42"), 0.42),
-      count: reduced ? Math.max(22, Math.round(baseCount * 0.34)) : Math.min(108, Math.round(baseCount * areaRatio)),
+      count: reduced ? Math.max(10, Math.round(baseCount * 0.34)) : Math.min(40, Math.round(baseCount * areaRatio)),
       speed: reduced ? 0 : numberValue(readCssVar("--background-animation-speed", "0.20"), 0.20),
       maxDistance: numberValue(readCssVar("--background-animation-distance", "6800"), 6800),
       mouseDistance: numberValue(readCssVar("--background-animation-mouse-distance", "16000"), 16000)
@@ -56,7 +57,9 @@
         x: Math.random() * width,
         y: Math.random() * height,
         xa: (Math.random() * 2 - 1) * settings.speed,
-        ya: (Math.random() * 2 - 1) * settings.speed
+        ya: (Math.random() * 2 - 1) * settings.speed,
+        size: 0.75 + Math.random() * 0.95,
+        accent: Math.random() < 0.28
       });
     }
   }
@@ -79,7 +82,36 @@
 
   function drawFrame(advance) {
     context.clearRect(0, 0, width, height);
-    context.fillStyle = "rgba(" + settings.color + ",0.78)";
+
+    if (advance) {
+      if (mouse.targetX !== null && mouse.targetY !== null) {
+        if (mouse.x === null || mouse.y === null) {
+          mouse.x = mouse.targetX;
+          mouse.y = mouse.targetY;
+        }
+        mouse.x += (mouse.targetX - mouse.x) * 0.12;
+        mouse.y += (mouse.targetY - mouse.y) * 0.12;
+        mouse.presence += (1 - mouse.presence) * 0.08;
+      } else {
+        mouse.presence *= 0.9;
+        if (mouse.presence < 0.01) {
+          mouse.x = null;
+          mouse.y = null;
+          mouse.presence = 0;
+        }
+      }
+    }
+
+    if (mouse.x !== null && mouse.y !== null && mouse.presence > 0) {
+      var haloRadius = Math.sqrt(mouse.max) * 1.05;
+      var halo = context.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, haloRadius);
+      halo.addColorStop(0, "rgba(" + settings.accent + "," + (0.12 * mouse.presence) + ")");
+      halo.addColorStop(1, "rgba(" + settings.accent + ",0)");
+      context.fillStyle = halo;
+      context.beginPath();
+      context.arc(mouse.x, mouse.y, haloRadius, 0, Math.PI * 2);
+      context.fill();
+    }
 
     for (var index = 0; index < particles.length; index += 1) {
       var particle = particles[index];
@@ -91,8 +123,9 @@
         if (particle.y > height || particle.y < 0) particle.ya *= -1;
       }
 
+      context.fillStyle = "rgba(" + (particle.accent ? settings.accent : settings.color) + "," + (particle.accent ? "0.92" : "0.82") + ")";
       context.beginPath();
-      context.arc(particle.x, particle.y, 0.85, 0, Math.PI * 2);
+      context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       context.fill();
 
       for (var next = index + 1; next < particles.length; next += 1) {
@@ -105,27 +138,41 @@
           var intensity = (settings.maxDistance - distance) / settings.maxDistance;
           context.beginPath();
           context.lineWidth = 0.18 + intensity * 0.85;
-          context.strokeStyle = "rgba(" + settings.color + "," + (0.04 + intensity * 0.34) + ")";
+          var lineColor = particle.accent || other.accent ? settings.accent : settings.color;
+          context.strokeStyle = "rgba(" + lineColor + "," + (0.07 + intensity * 0.42) + ")";
           context.moveTo(particle.x, particle.y);
           context.lineTo(other.x, other.y);
           context.stroke();
         }
       }
 
-      if (mouse.x !== null && mouse.y !== null) {
+      if (mouse.x !== null && mouse.y !== null && mouse.presence > 0) {
         var mouseX = particle.x - mouse.x;
         var mouseY = particle.y - mouse.y;
         var mouseDistance = mouseX * mouseX + mouseY * mouseY;
         if (mouseDistance < mouse.max) {
           var mouseIntensity = (mouse.max - mouseDistance) / mouse.max;
+          if (advance && mouseDistance > 1) {
+            var mouseLength = Math.sqrt(mouseDistance);
+            var repulsion = mouseIntensity * 0.28 * mouse.presence;
+            particle.x += (mouseX / mouseLength) * repulsion;
+            particle.y += (mouseY / mouseLength) * repulsion;
+          }
           context.beginPath();
           context.lineWidth = 0.22 + mouseIntensity;
-          context.strokeStyle = "rgba(" + settings.color + "," + (0.06 + mouseIntensity * 0.42) + ")";
+          context.strokeStyle = "rgba(" + settings.accent + "," + ((0.08 + mouseIntensity * 0.56) * mouse.presence) + ")";
           context.moveTo(particle.x, particle.y);
           context.lineTo(mouse.x, mouse.y);
           context.stroke();
         }
       }
+    }
+
+    if (mouse.x !== null && mouse.y !== null && mouse.presence > 0) {
+      context.fillStyle = "rgba(" + settings.accent + "," + (0.5 * mouse.presence) + ")";
+      context.beginPath();
+      context.arc(mouse.x, mouse.y, 1.8, 0, Math.PI * 2);
+      context.fill();
     }
   }
 
@@ -178,13 +225,13 @@
 
   window.addEventListener("pointermove", function (event) {
     if (finePointer && !finePointer.matches) return;
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+    mouse.targetX = event.clientX;
+    mouse.targetY = event.clientY;
   }, { passive: true });
 
   document.addEventListener("pointerleave", function () {
-    mouse.x = null;
-    mouse.y = null;
+    mouse.targetX = null;
+    mouse.targetY = null;
   }, { passive: true });
 
   document.addEventListener("visibilitychange", function () {

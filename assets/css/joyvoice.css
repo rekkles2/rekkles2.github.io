@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 body.page-joyvoice {
+  --elevation-rgb: 8, 45, 77;
   --jv-navy-950: #031a31;
   --jv-navy-900: #082d4d;
   --jv-blue-700: #245f8f;
@@ -442,10 +443,10 @@ body.page-joyvoice .joyvoice-carousel {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--jv-border);
-  border-radius: 16px;
+  border-radius: var(--site-radius-card, 16px);
   aspect-ratio: 1 / 1;
   background: var(--jv-navy-950);
-  box-shadow: 0 15px 30px rgba(3, 26, 49, 0.11);
+  box-shadow: var(--site-shadow-medium);
 }
 
 body.page-joyvoice .joyvoice-carousel-viewport {
@@ -727,8 +728,9 @@ body.page-joyvoice .joyvoice-carousel-toggle:focus-visible,
 body.page-joyvoice .joyvoice-dot:focus-visible,
 body.page-joyvoice .jv-btn-cta:focus-visible,
 body.page-joyvoice .jv-details summary:focus-visible {
-  outline: 3px solid rgba(31, 111, 168, 0.34);
+  outline: 3px solid var(--jv-blue-700);
   outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.88);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -871,15 +873,15 @@ body.page-joyvoice {
   --jv-navy-950: #082d4d;
   --jv-navy-900: #0e3d63;
   --jv-blue-700: #0369a1;
-  --jv-blue-600: #0ea5e9;
+  --jv-blue-600: #01cecd;
   --jv-blue-200: #bae6fd;
   --jv-blue-100: #e0f2fe;
   --jv-surface-soft: #f7fbff;
   --jv-text: #25364a;
   --jv-muted: #60738a;
   --jv-border: rgba(47, 87, 200, 0.11);
-  --jv-shadow: 0 12px 30px rgba(47, 87, 200, 0.07);
-  --jv-shadow-hover: 0 18px 40px rgba(47, 87, 200, 0.11);
+  --jv-shadow: var(--site-shadow-medium, 0 12px 30px rgba(8, 45, 77, 0.075));
+  --jv-shadow-hover: var(--site-shadow-high, 0 18px 40px rgba(8, 45, 77, 0.11));
   background:
     radial-gradient(760px 360px at 12% 0%, rgba(14, 165, 233, 0.10), transparent 68%),
     radial-gradient(680px 360px at 88% 6%, rgba(47, 87, 200, 0.08), transparent 66%),
@@ -897,7 +899,7 @@ body.page-joyvoice .joyvoice-showcase-card {
 body.page-joyvoice .joyvoice-title-text,
 body.page-joyvoice .joyvoice-gradient-text,
 body.page-joyvoice .jv-letter {
-  background: linear-gradient(105deg, #082d4d 0%, #0369a1 44%, #0ea5e9 70%, #2f57c8 100%) !important;
+  background: linear-gradient(105deg, #082d4d 0%, #0369a1 44%, #01cecd 70%, #2f57c8 100%) !important;
   background-clip: text !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
@@ -924,7 +926,7 @@ body.page-joyvoice #joyvoice-lang-toggle i {
 body.page-joyvoice .joyvoice-logo-wrapper {
   border-color: rgba(14, 165, 233, 0.16);
   background: linear-gradient(145deg, #ffffff, #eef8ff);
-  box-shadow: 0 16px 34px rgba(47, 87, 200, 0.10);
+  box-shadow: var(--site-shadow-medium);
 }
 
 body.page-joyvoice .joyvoice-highlight-grid {
@@ -937,7 +939,7 @@ body.page-joyvoice .joyvoice-highlight-item {
   border: 1px solid rgba(47, 87, 200, 0.09);
   border-radius: 14px;
   background: linear-gradient(180deg, #ffffff, #f7faff);
-  box-shadow: 0 5px 14px rgba(47, 87, 200, 0.045);
+  box-shadow: var(--site-shadow-xs);
 }
 
 body.page-joyvoice .joyvoice-highlight-item + .joyvoice-highlight-item {
@@ -946,7 +948,7 @@ body.page-joyvoice .joyvoice-highlight-item + .joyvoice-highlight-item {
 
 body.page-joyvoice .joyvoice-divider {
   height: 3px;
-  background: linear-gradient(90deg, #2f57c8, #0ea5e9 58%, #bae6fd);
+  background: linear-gradient(90deg, #2f57c8, #01cecd 58%, #bae6fd);
 }
 
 body.page-joyvoice .joyvoice-ol-capsule li,
@@ -954,7 +956,7 @@ body.page-joyvoice .joyvoice-team-group,
 body.page-joyvoice .jv-team-subgroup {
   border-color: rgba(47, 87, 200, 0.10);
   background: linear-gradient(180deg, #ffffff, #f6f9ff);
-  box-shadow: 0 6px 16px rgba(47, 87, 200, 0.045);
+  box-shadow: var(--site-shadow-xs);
 }
 
 body.page-joyvoice .joyvoice-ol-capsule li {
@@ -963,7 +965,7 @@ body.page-joyvoice .joyvoice-ol-capsule li {
 
 body.page-joyvoice .joyvoice-ol-capsule .jv-cap-idx {
   border-radius: 999px;
-  background: linear-gradient(135deg, #2f57c8, #0ea5e9);
+  background: linear-gradient(135deg, #2f57c8, #01cecd);
   box-shadow: 0 6px 14px rgba(47, 87, 200, 0.16);
 }
 
@@ -1000,7 +1002,7 @@ body.page-joyvoice .jv-btn-cta {
   border-color: var(--jv-action-border);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 5px 14px rgba(47, 87, 200, 0.06);
+  box-shadow: var(--site-shadow-xs);
   color: #34465b !important;
 }
 
@@ -1041,8 +1043,8 @@ body.page-joyvoice .joyvoice-carousel-toggle {
     border-color: var(--jv-action-border);
     background: var(--jv-action-soft);
     color: var(--jv-action-color) !important;
-    box-shadow: 0 9px 20px rgba(47, 87, 200, 0.09);
-    transform: none;
+    box-shadow: var(--site-shadow-low);
+    transform: translateY(-1px);
   }
 
   body.page-joyvoice .jv-btn-cta:hover .jv-icon-chip {

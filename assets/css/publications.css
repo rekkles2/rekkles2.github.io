@@ -4,7 +4,7 @@
   --publication-navy: var(--site-primary-strong, #1f3f99);
   --publication-primary: var(--site-primary, #2f57c8);
   --publication-blue: var(--site-blue, #0369a1);
-  --publication-sky: var(--site-sky, #0ea5e9);
+  --publication-sky: var(--site-sky, #01cecd);
   --publication-blue-soft: var(--site-blue-soft, #eef4ff);
   --publication-cyan-soft: var(--site-cyan-soft, #f0f9ff);
   --publication-surface: rgba(255, 255, 255, 0.84);
@@ -19,6 +19,11 @@
   --publication-radius: var(--site-radius-lg, 18px);
   --publication-ease: var(--motion-ease, cubic-bezier(0.16, 1, 0.3, 1));
   --publication-font: var(--font-ui, "Inter", "Noto Sans SC", "Segoe UI", sans-serif);
+  --publication-shadow-xs: var(--site-shadow-xs, 0 2px 8px rgba(47, 87, 200, 0.04));
+  --publication-shadow-sm: var(--site-shadow-low, 0 8px 22px rgba(47, 87, 200, 0.055));
+  --publication-shadow-md: var(--site-shadow-medium, 0 12px 30px rgba(47, 87, 200, 0.075));
+  --publication-shadow-lg: var(--site-shadow-high, 0 18px 40px rgba(47, 87, 200, 0.11));
+  --publication-focus: var(--site-blue, #0369a1);
 }
 
 .publication-section,
@@ -32,7 +37,7 @@
   border: 1px solid var(--publication-border);
   border-radius: var(--publication-radius);
   background: var(--publication-surface);
-  box-shadow: 0 12px 30px rgba(18, 43, 67, 0.055);
+  box-shadow: var(--publication-shadow-md);
   backdrop-filter: saturate(1.03) blur(10px);
   -webkit-backdrop-filter: saturate(1.03) blur(10px);
 }
@@ -90,7 +95,7 @@
   border: 1px solid rgba(47, 87, 200, 0.13);
   border-radius: 999px;
   background: rgba(239, 244, 255, 0.84);
-  box-shadow: 0 3px 10px rgba(47, 87, 200, 0.04);
+  box-shadow: var(--publication-shadow-xs);
   color: var(--publication-navy);
   font-size: 0.88rem;
   font-weight: 700;
@@ -119,7 +124,7 @@
   border: 1px solid var(--publication-border);
   border-radius: 11px;
   background: rgba(246, 249, 252, 0.82);
-  box-shadow: 0 4px 12px rgba(47, 87, 200, 0.035);
+  box-shadow: var(--publication-shadow-xs);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -377,7 +382,7 @@
   border: 1px solid rgba(47, 87, 200, 0.10);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 8px 22px rgba(47, 87, 200, 0.045);
+  box-shadow: var(--publication-shadow-xs);
   transition: transform 220ms var(--publication-ease), border-color 220ms var(--publication-ease), box-shadow 220ms var(--publication-ease);
 }
 
@@ -401,8 +406,9 @@
   border: 1px solid rgba(47, 87, 200, 0.12);
   border-radius: 13px;
   background: #f8fbff;
-  box-shadow: 0 4px 12px rgba(47, 87, 200, 0.045);
+  box-shadow: 0 2px 8px rgba(47, 87, 200, 0.03);
   transition: border-color 220ms var(--publication-ease), box-shadow 320ms var(--publication-ease);
+  perspective: 1000px;
 }
 
 .publication-media img,
@@ -418,6 +424,7 @@
   position: relative;
   z-index: 1;
   border-radius: 12px;
+  transform-style: preserve-3d;
   transform-origin: left center;
   transition: transform 320ms var(--publication-ease), box-shadow 320ms var(--publication-ease);
 }
@@ -504,10 +511,10 @@
 }
 
 .publication-term {
-  padding: 0.27rem 0.56rem;
+  padding: 0.22rem 0.5rem;
   border: 1px solid rgba(18, 59, 99, 0.1);
   border-radius: 999px;
-  background: var(--publication-blue-soft);
+  background: rgba(238, 244, 255, 0.68);
   color: #405a70;
   font-size: 0.7rem;
   font-weight: 600;
@@ -535,7 +542,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.94);
   color: #34465b;
-  box-shadow: 0 3px 9px rgba(47, 87, 200, 0.035);
+  box-shadow: var(--publication-shadow-xs);
   font-size: 0.77rem;
   font-weight: 600;
   text-decoration: none;
@@ -753,7 +760,7 @@
   border: 1px solid var(--publication-border);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 8px 22px rgba(18, 43, 67, 0.045);
+  box-shadow: var(--publication-shadow-sm);
 }
 
 .publications-year-nav-label {
@@ -810,6 +817,8 @@
 }
 
 .publication-year-header {
+  position: relative;
+  z-index: 0;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -841,7 +850,7 @@
   .section-link:hover {
     border-color: rgba(47, 87, 200, 0.22);
     background: var(--publication-blue-soft);
-    box-shadow: 0 8px 18px rgba(47, 87, 200, 0.07);
+    box-shadow: var(--publication-shadow-sm);
     color: var(--publication-navy);
     text-decoration: none;
     transform: translateY(-1px);
@@ -872,15 +881,15 @@
   }
 
   .publication-card:hover {
-    z-index: 12;
+    z-index: 40;
     border-color: rgba(47, 87, 200, 0.20);
-    box-shadow: 0 16px 34px rgba(47, 87, 200, 0.085);
+    box-shadow: var(--publication-shadow-md);
   }
 
   .publication-media img:hover {
-    z-index: 8;
-    box-shadow: 0 12px 28px rgba(30, 64, 175, 0.13);
-    transform: translateZ(0) scale(1.035);
+    z-index: 20;
+    box-shadow: 0 24px 54px rgba(18, 43, 67, 0.24);
+    transform: translate3d(0, -2px, 56px) scale(1.8);
   }
 
   .publication-action:hover {
@@ -888,7 +897,7 @@
     background: var(--pub-action-soft);
     color: var(--pub-action-color);
     text-decoration: none;
-    box-shadow: 0 8px 18px rgba(47, 87, 200, 0.075);
+    box-shadow: var(--publication-shadow-sm);
   }
 
   .publication-action:hover .publication-action-icon {
@@ -924,7 +933,7 @@
 .publications-year-link:focus-visible,
 .publication-empty button:focus-visible,
 .publication-year-header h2:focus-visible {
-  outline: 3px solid rgba(36, 95, 143, 0.28);
+  outline: 3px solid var(--publication-focus);
   outline-offset: 3px;
 }
 
@@ -944,6 +953,8 @@
     top: var(--navbar-height, 64px);
     z-index: 12;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 0.48rem 0.58rem;
     border-radius: 12px;
   }
@@ -959,6 +970,8 @@
   }
 
   .publications-year-links {
+    min-width: 0;
+    max-width: 100%;
     flex-direction: row;
     gap: 0.42rem;
     overflow-x: auto;
@@ -1088,6 +1101,10 @@
 
   .publication-action {
     width: 100%;
+    min-width: 0;
+    padding-inline: 0.55rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .page-home .publication-actions {

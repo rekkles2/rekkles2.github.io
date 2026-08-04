@@ -205,7 +205,7 @@ services:
   conference:
     - "British Machine Vision Conference (BMVC), 2025"
     - "Annual Meeting of the Cognitive Science Society (CogSci), 2025"
-    - "IEEE International Joint Conference on Neural Networks (IJCNN), 2025"
+    - "IEEE IJCNN, 2025"
     - "PUT@ICML, 2025"
     - "WCUA@ICML 2025"
     - "SVU@ICCV 2025"

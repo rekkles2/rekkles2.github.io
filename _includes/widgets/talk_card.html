@@ -67,7 +67,7 @@
 
                                     {% if has_video %}
                                     <div class="{{ col_class }}">
-                                        <div class="position-relative overflow-hidden rounded-xl border-0 shadow-md bg-black">
+                                        <div class="position-relative overflow-hidden rounded-xl border-0 shadow-md bg-black talk-media-card">
                                             <div class="relative" style="height: 300px; border-radius: 0.75rem; overflow: hidden;">
                                                 {% if talk.video contains 'bilibili.com' %}
                                                     {% assign video_parts = talk.video | split: '?' %}
@@ -155,7 +155,7 @@
 
                                     {% if has_slides %}
                                     <div class="{{ col_class }}">
-                                        <div class="position-relative overflow-hidden rounded-xl border-0 shadow-md bg-black">
+                                        <div class="position-relative overflow-hidden rounded-xl border-0 shadow-md bg-black talk-media-card">
                                             <div class="relative" style="height: 300px; border-radius: 0.75rem; overflow: hidden;">
                                                 <iframe class="w-100 h-100"
                                                         src="{{ talk.slides | replace: '/edit?', '/preview?' }}"
