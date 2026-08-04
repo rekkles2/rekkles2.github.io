@@ -454,7 +454,7 @@ body.prompt-page {
 }
 
 .profile-bio {
-  max-width: 78ch;
+  max-width: 90ch;
   margin-top: 0.85rem;
   color: var(--site-text-secondary);
   font-size: 0.92rem;
