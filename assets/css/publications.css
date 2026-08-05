@@ -442,6 +442,11 @@
   line-height: 1.34;
 }
 
+.publication-title cite {
+  font: inherit;
+  font-style: italic;
+}
+
 .publication-authors {
   margin-bottom: 0.38rem;
   color: #445a6f;

@@ -2,100 +2,93 @@
   <div class="col-12">
     <div class="card border-0 shadow-sm bg-white rounded-xl">
       <div class="card-body p-4">
-        <h2 class="mb-4 font-weight-semibold text-primary-700 d-flex align-items-center education-heading">
-          Education
-        </h2>
-        <ul class="list-unstyled">
+        <h2 class="education-heading">Education</h2>
+
+        <ul class="list-unstyled education-list">
           {% for item in site.data.profile.education %}
-          <li class="d-flex mb-4 align-items-start education-entry">
-            <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg education-logo" loading="lazy">
-            <div class="flex-grow-1">
-              <div class="d-flex justify-content-between align-items-start flex-wrap">
-                <div>
-                  {% comment %} 学校名称 {% endcomment %}
-                  <h3 class="mt-0 mb-1 font-weight-bold education-entry-title">
-                    {% if item.url %}
-                      <a href="{{ item.url | strip }}" class="education-link">{{ item.name }}</a>
-                    {% else %}
-                      {{ item.name }}
-                    {% endif %}
-                  </h3>
+          <li class="education-entry">
+            <div class="entry-logo-shell education-logo-shell" aria-hidden="true">
+              <img src="{{ item.logo | relative_url }}"
+                   alt=""
+                   class="education-logo"
+                   loading="lazy"
+                   decoding="async">
+            </div>
 
-                  {% comment %} 实验室信息 - 修复了注释和空值问题 {% endcomment %}
-                  {% if item.lab %}
-                    {% comment %} 处理lab可能是对象或字符串的情况 {% endcomment %}
-                    {% if item.lab.name %}
-                      {% assign lab_name = item.lab.name %}
-                      {% assign lab_url = item.lab.url | default: "" %}
-                    {% else %}
-                      {% assign lab_name = item.lab %}
-                      {% assign lab_url = "" %}
-                    {% endif %}
+            <div class="education-entry-body">
+              <div class="education-entry-copy">
+                <h3 class="education-entry-title">
+                  {% if item.url %}
+                    <a href="{{ item.url | strip }}" class="education-link">{{ item.name }}</a>
+                  {% else %}
+                    {{ item.name }}
+                  {% endif %}
+                </h3>
 
-                    {% if lab_name != empty and lab_name != "none" %}
-                      <div class="text-gray-700 mb-1">
-                        {% if lab_url != empty and lab_url != "none" and lab_url != empty %}
-                          <a href="{{ lab_url | strip }}" class="education-link">{{ lab_name | strip }}</a>
-                        {% else %}
-                          {{ lab_name | strip }}
-                        {% endif %}
-                      </div>
-                    {% endif %}
+                {% if item.lab %}
+                  {% if item.lab.name %}
+                    {% assign lab_name = item.lab.name %}
+                    {% assign lab_url = item.lab.url | default: "" %}
+                  {% else %}
+                    {% assign lab_name = item.lab %}
+                    {% assign lab_url = "" %}
                   {% endif %}
 
-                  {% comment %} 职位信息 {% endcomment %}
-                  {% assign position_lines = item.position | split: '<br/>' %}
-                  <div class="text-gray-700 mt-1 font-weight-medium">
-                    {% for line in position_lines %}
-                      {{ line | strip }}
-                      {% if forloop.last == false %}
-                        <br/>
-                      {% endif %}
-                    {% endfor %}
-                  </div>
-
-                  {% comment %} 导师信息 - 修复了额外逗号的问题 {% endcomment %}
-                  {% if item.advisor and item.advisor.size > 0 %}
-                    <div class="text-gray-700 mt-1">
-                      Advisor:
-                      {% comment %} 检查是否是数组格式的advisor {% endcomment %}
-                      {% if item.advisor[0].name %}
-                        {% for advisor in item.advisor %}
-                          {% if forloop.first == false %}, {% endif %}
-                          {% if advisor.url and advisor.url != "none" and advisor.url != empty %}
-                            <a href="{{ advisor.url | strip }}" class="education-link">{{ advisor.name }}</a>
-                          {% else %}
-                            {{ advisor.name }}
-                          {% endif %}
-                        {% endfor %}
+                  {% if lab_name != empty and lab_name != "none" %}
+                    <div class="entry-lab education-lab">
+                      {% if lab_url != empty and lab_url != "none" %}
+                        <a href="{{ lab_url | strip }}" class="education-link">{{ lab_name | strip }}</a>
                       {% else %}
-                        {% comment %} 处理交替name/url的格式 {% endcomment %}
-                        {% assign is_name = true %}
-                        {% assign advisors = "" | split: '' %}
-                        {% for advisor in item.advisor %}
-                          {% if is_name and advisor.name %}
-                            {% assign current_name = advisor.name %}
-                            {% assign is_name = false %}
-                          {% elsif advisor.url and advisor.url != "none" and advisor.url != empty %}
-                            {% assign advisor_html = '<a href="' | append: advisor.url | strip | append: '" class="education-link">' | append: current_name | append: '</a>' %}
-                            {% assign advisors = advisors | push: advisor_html %}
-                            {% assign is_name = true %}
-                          {% endif %}
-                        {% endfor %}
-
-                        {% comment %} 正确显示所有导师，只在中间添加逗号 {% endcomment %}
-                        {% for i in (0..advisors.size) %}
-                          {% if i < advisors.size %}
-                            {{ advisors[i] }}
-                            {% if i < advisors.size | minus: 1 %}, {% endif %}
-                          {% endif %}
-                        {% endfor %}
+                        {{ lab_name | strip }}
                       {% endif %}
                     </div>
                   {% endif %}
+                {% endif %}
+
+                {% assign position_lines = item.position | split: '<br/>' %}
+                <div class="entry-role education-role">
+                  {% for line in position_lines %}
+                    {{ line | strip }}{% unless forloop.last %}<br>{% endunless %}
+                  {% endfor %}
                 </div>
-                <div class="text-gray-500 text-sm text-nowrap ml-3 mt-0 education-date-pill">{{ item.date }}</div>
+
+                {% if item.advisor and item.advisor.size > 0 %}
+                  <div class="entry-advisor education-advisor">
+                    <span class="entry-label">Advisor:</span>
+                    {% if item.advisor[0].name %}
+                      {% for advisor in item.advisor %}
+                        {% unless forloop.first %}, {% endunless %}
+                        {% if advisor.url and advisor.url != "none" and advisor.url != empty %}
+                          <a href="{{ advisor.url | strip }}" class="education-link">{{ advisor.name }}</a>
+                        {% else %}
+                          {{ advisor.name }}
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+                      {% assign is_name = true %}
+                      {% assign advisors = "" | split: '' %}
+                      {% for advisor in item.advisor %}
+                        {% if is_name and advisor.name %}
+                          {% assign current_name = advisor.name %}
+                          {% assign is_name = false %}
+                        {% elsif advisor.url and advisor.url != "none" and advisor.url != empty %}
+                          {% assign advisor_html = '<a href="' | append: advisor.url | strip | append: '" class="education-link">' | append: current_name | append: '</a>' %}
+                          {% assign advisors = advisors | push: advisor_html %}
+                          {% assign is_name = true %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {% for i in (0..advisors.size) %}
+                        {% if i < advisors.size %}
+                          {{ advisors[i] }}{% if i < advisors.size | minus: 1 %}, {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                {% endif %}
               </div>
+
+              <div class="education-date-pill">{{ item.date }}</div>
             </div>
           </li>
           {% endfor %}

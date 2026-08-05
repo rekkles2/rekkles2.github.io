@@ -1038,7 +1038,103 @@ body.page-joyvoice .joyvoice-carousel-toggle {
   background: rgba(8, 45, 77, 0.76);
 }
 
+/* Detail refinement: clearer internal hierarchy without changing section layout. */
+body.page-joyvoice {
+  --jv-accent: #0ba5b8;
+  --jv-accent-soft: #eaf9fb;
+}
+
+body.page-joyvoice .joyvoice-section-h {
+  letter-spacing: -0.015em;
+}
+
+body.page-joyvoice .joyvoice-team-desc {
+  max-width: 88ch;
+}
+
+body.page-joyvoice .joyvoice-highlight-item {
+  grid-template-columns: minmax(7rem, auto) minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.78rem 0.9rem;
+}
+
+body.page-joyvoice .joyvoice-ol-capsule li {
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 16px;
+  transition: border-color 180ms var(--jv-ease), box-shadow 180ms var(--jv-ease), background-color 180ms var(--jv-ease);
+}
+
+body.page-joyvoice .joyvoice-ol-capsule .jv-cap-text {
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+body.page-joyvoice .joyvoice-team-group {
+  padding: 1.05rem;
+  border-radius: 16px;
+}
+
+body.page-joyvoice .joyvoice-team-name {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+body.page-joyvoice .jv-core-team {
+  gap: 0.95rem;
+  align-items: start;
+}
+
+body.page-joyvoice .jv-team-subgroup {
+  padding: 1rem 0.95rem;
+  border-radius: 15px;
+  transition: border-color 180ms var(--jv-ease), box-shadow 180ms var(--jv-ease), background-color 180ms var(--jv-ease);
+}
+
+body.page-joyvoice .jv-team-subgroup-title {
+  margin-bottom: 0.82rem;
+}
+
+body.page-joyvoice .jv-team-line {
+  padding: 0.58rem 0;
+}
+
+body.page-joyvoice .jv-team-role {
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+body.page-joyvoice .jv-name-pill {
+  min-height: 28px;
+  padding: 0.23rem 0.55rem;
+  background: var(--jv-accent-soft);
+  color: #31566a;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 767.98px) {
+  body.page-joyvoice .joyvoice-highlight-item {
+    grid-template-columns: 1fr;
+    gap: 0.28rem;
+    padding: 0.78rem 0.82rem;
+  }
+
+  body.page-joyvoice .joyvoice-ol-capsule li,
+  body.page-joyvoice .joyvoice-team-group,
+  body.page-joyvoice .jv-team-subgroup {
+    padding: 0.9rem;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
+  body.page-joyvoice .joyvoice-ol-capsule li:hover,
+  body.page-joyvoice .jv-team-subgroup:hover {
+    border-color: rgba(11, 165, 184, 0.22);
+    background: linear-gradient(180deg, #ffffff, #f3fbfc);
+    box-shadow: 0 10px 24px rgba(8, 45, 77, 0.065);
+  }
+
   body.page-joyvoice .jv-btn-cta:hover {
     border-color: var(--jv-action-border);
     background: var(--jv-action-soft);
@@ -1066,6 +1162,8 @@ body.page-joyvoice .joyvoice-carousel-toggle {
   body.page-joyvoice .joyvoice-next,
   body.page-joyvoice .joyvoice-carousel-toggle,
   body.page-joyvoice .joyvoice-dot::before,
+  body.page-joyvoice .joyvoice-ol-capsule li,
+  body.page-joyvoice .jv-team-subgroup,
   body.page-joyvoice .jv-btn-cta {
     transition: none;
   }

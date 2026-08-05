@@ -1,130 +1,124 @@
 <div class="row mt-3">
-    <div class="col">
-        <div class="card border-0 shadow-sm bg-white rounded-xl">
-            <div class="card-body p-4">
-                <div class="row">
-                    <!-- Experience 部分 -->
-                    <div class="col-md-6">
-                        <div class="mx-2 my-1">
-                            <h2 class="mb-4 section-heading">
-                                Experience
-                            </h2>
-                            <ul class="list-unstyled">
-                                {% for item in site.data.profile.experience %}
-                                <li class="d-flex mb-4 align-items-start experience-entry">
-                                    <img src="{{ item.logo | relative_url }}" alt="{{ item.name }}" class="w-16 h-16 object-contain mr-4 rounded-lg entry-logo" loading="lazy">
-                                    <div class="flex-grow-1 d-flex flex-column justify-content-between">
-                                        <div class="d-flex w-100">
-                                            <div class="flex-grow-1 min-w-0 pr-3">
-                                                <h3 class="mt-0 mb-1 font-weight-bold text-gray-800 experience-entry-title">
-                                                    {% if item.url %}
-                                                        <a href="{{ item.url | strip }}" class="experience-link">{{ item.name }}</a>
-                                                    {% else %}
-                                                        {{ item.name }}
-                                                    {% endif %}
-                                                </h3>
+  <div class="col">
+    <div class="card border-0 shadow-sm bg-white rounded-xl">
+      <div class="card-body p-4">
+        <div class="row experience-award-grid">
+          <div class="col-md-6">
+            <section class="experience-award-section" aria-labelledby="experience-heading">
+              <h2 id="experience-heading" class="section-heading">Experience</h2>
 
-                                                <!-- 位置和实验室信息合并为单一容器 -->
-                                                <div class="text-gray-700 font-weight-medium mt-1" style="word-break: break-word; overflow-wrap: break-word; max-width: 100%; white-space: normal;">
-                                                    {{ item.position }}
-                                                    {% if item.lab %}
-                                                        {% if item.lab.name %}
-                                                            {% assign lab_name = item.lab.name %}
-                                                            {% assign lab_url = item.lab.url | default: "" %}
-                                                        {% else %}
-                                                            {% assign lab_name = item.lab %}
-                                                            {% assign lab_url = "" %}
-                                                        {% endif %}
+              <ul class="list-unstyled entry-list experience-list">
+                {% for item in site.data.profile.experience %}
+                <li class="experience-entry">
+                  <div class="entry-logo-shell experience-logo-shell" aria-hidden="true">
+                    <img src="{{ item.logo | relative_url }}"
+                         alt=""
+                         class="entry-logo"
+                         loading="lazy"
+                         decoding="async">
+                  </div>
 
-                                                        {% if lab_name != empty and lab_name != "none" %}
-                                                            {% if lab_url != empty and lab_url != "none" %}
-                                                                <a href="{{ lab_url | strip }}" class="experience-link">{{ lab_name | strip }}</a>
-                                                            {% else %}
-                                                                {{ lab_name | strip }}
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endif %}
-                                                </div>
+                  <div class="experience-entry-body">
+                    <div class="experience-entry-copy">
+                      <h3 class="experience-entry-title">
+                        {% if item.url %}
+                          <a href="{{ item.url | strip }}" class="experience-link">{{ item.name }}</a>
+                        {% else %}
+                          {{ item.name }}
+                        {% endif %}
+                      </h3>
 
-                                                <!-- 导师信息 -->
-                                                {% if item.advisor and item.advisor.size > 0 %}
-                                                    <div class="text-gray-500 mt-1">
-                                                        Advisor:
-                                                        {% if item.advisor[0].name %}
-                                                            {% for advisor in item.advisor %}
-                                                                {% if forloop.first == false %}, {% endif %}
-                                                                {% if advisor.url and advisor.url != "none" and advisor.url != empty %}
-                                                                    <a href="{{ advisor.url | strip }}" class="experience-link">{{ advisor.name }}</a>
-                                                                {% else %}
-                                                                    {{ advisor.name }}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        {% else %}
-                                                            {% assign is_name = true %}
-                                                            {% assign advisors = "" | split: '' %}
-                                                            {% for advisor in item.advisor %}
-                                                                {% if is_name and advisor.name %}
-                                                                    {% assign current_name = advisor.name %}
-                                                                    {% assign is_name = false %}
-                                                                {% elsif advisor.url and advisor.url != "none" and advisor.url != empty %}
-                                                                    {% assign advisor_html = '<a href="' | append: advisor.url | strip | append: '" class="experience-link">' | append: current_name | append: '</a>' %}
-                                                                    {% assign advisors = advisors | push: advisor_html %}
-                                                                    {% assign is_name = true %}
-                                                                {% endif %}
-                                                            {% endfor %}
+                      <div class="experience-affiliation-row">
+                        <span class="entry-role experience-role">{{ item.position }}</span>
 
-                                                            {% for i in (0..advisors.size) %}
-                                                                {% if i < advisors.size %}
-                                                                    {{ advisors[i] }}
-                                                                    {% if i < advisors.size | minus: 1 %}, {% endif %}
-                                                                {% endif %}
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                            <div class="text-gray-500 text-sm text-nowrap align-self-start entry-date-pill" style="flex-shrink: 0;">
-                                                <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
+                        {% if item.lab %}
+                          {% if item.lab.name %}
+                            {% assign lab_name = item.lab.name %}
+                            {% assign lab_url = item.lab.url | default: "" %}
+                          {% else %}
+                            {% assign lab_name = item.lab %}
+                            {% assign lab_url = "" %}
+                          {% endif %}
+
+                          {% if lab_name != empty and lab_name != "none" %}
+                            <span class="entry-lab experience-lab">
+                              {% if lab_url != empty and lab_url != "none" %}
+                                <a href="{{ lab_url | strip }}" class="experience-link">{{ lab_name | strip }}</a>
+                              {% else %}
+                                {{ lab_name | strip }}
+                              {% endif %}
+                            </span>
+                          {% endif %}
+                        {% endif %}
+                      </div>
+
+                      {% if item.advisor and item.advisor.size > 0 %}
+                        <div class="entry-advisor experience-advisor">
+                          <span class="entry-label">Advisor:</span>
+                          {% if item.advisor[0].name %}
+                            {% for advisor in item.advisor %}
+                              {% unless forloop.first %}, {% endunless %}
+                              {% if advisor.url and advisor.url != "none" and advisor.url != empty %}
+                                <a href="{{ advisor.url | strip }}" class="experience-link">{{ advisor.name }}</a>
+                              {% else %}
+                                {{ advisor.name }}
+                              {% endif %}
+                            {% endfor %}
+                          {% else %}
+                            {% assign is_name = true %}
+                            {% assign advisors = "" | split: '' %}
+                            {% for advisor in item.advisor %}
+                              {% if is_name and advisor.name %}
+                                {% assign current_name = advisor.name %}
+                                {% assign is_name = false %}
+                              {% elsif advisor.url and advisor.url != "none" and advisor.url != empty %}
+                                {% assign advisor_html = '<a href="' | append: advisor.url | strip | append: '" class="experience-link">' | append: current_name | append: '</a>' %}
+                                {% assign advisors = advisors | push: advisor_html %}
+                                {% assign is_name = true %}
+                              {% endif %}
+                            {% endfor %}
+
+                            {% for i in (0..advisors.size) %}
+                              {% if i < advisors.size %}
+                                {{ advisors[i] }}{% if i < advisors.size | minus: 1 %}, {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
                         </div>
+                      {% endif %}
                     </div>
 
-                    <!-- Honors & Awards 部分 -->
-                    <div class="col-md-6">
-                        <div class="mx-2 my-1">
-                            <h2 class="mb-4 section-heading">
-                                Honors & Awards
-                            </h2>
-                            <ul class="list-unstyled">
-                                {% for item in site.data.profile.awards %}
-                                <li class="d-flex mb-4 align-items-start award-entry">
-                                    <div class="flex-grow-1 min-w-0">
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap w-100">
-                                            <div class="font-weight-medium text-gray-900 min-w-0 award-title"
-                                                 style="flex: 1 1 0%; max-width: calc(100% - 9rem); word-break: break-word;">
-                                                {{ item.name }}
-                                            </div>
-                                            <div class="text-gray-500 text-sm text-nowrap mr-auto ml-4 entry-date-pill"
-                                                 style="flex-shrink: 0; white-space: nowrap;">
-                                                <span style="letter-spacing: 0.1px;">{{ item.date }}</span>
-                                            </div>
-                                        </div>
-                                        {% if item.description %}
-                                        <div class="text-gray-600 mt-1" style="font-size: 0.92rem; line-height: 1.5;">{{ item.description }}</div>
-                                        {% endif %}
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                    <div class="entry-date-pill">{{ item.date }}</div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </section>
+          </div>
+
+          <div class="col-md-6">
+            <section class="experience-award-section awards-section" aria-labelledby="awards-heading">
+              <h2 id="awards-heading" class="section-heading">Honors &amp; Awards</h2>
+
+              <ul class="list-unstyled entry-list award-list">
+                {% for item in site.data.profile.awards %}
+                <li class="award-entry">
+                  <div class="award-entry-body">
+                    <div class="award-entry-copy">
+                      <div class="award-title">{{ item.name }}</div>
+                      {% if item.description %}
+                      <div class="award-description">{{ item.description }}</div>
+                      {% endif %}
                     </div>
-                </div>
-            </div>
+                    <div class="entry-date-pill">{{ item.date }}</div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </section>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
