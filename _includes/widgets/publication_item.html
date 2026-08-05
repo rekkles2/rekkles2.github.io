@@ -27,7 +27,10 @@
         </div>
         <div class="publication-venue">
           {{ item.pub_pre }}
-          <strong><i>{{ item.pub }}</i></strong>
+          {% assign publication_venue_name = item.pub | default: '' | strip %}
+          {% if publication_venue_name != '' %}
+          <span class="publication-venue-name">{{ publication_venue_name }}</span>
+          {% endif %}
           {{ item.pub_post }}
           {{ item.pub_date }}
           {{ item.pub_last }}

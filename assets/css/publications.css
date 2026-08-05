@@ -487,9 +487,11 @@
   line-height: 1.55;
 }
 
-.publication-venue strong,
-.publication-venue i {
+.publication-venue-name {
   color: #30475d;
+  font-style: italic;
+  font-weight: 700;
+  font-synthesis: style;
 }
 
 .publication-terms {
