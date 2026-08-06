@@ -947,7 +947,23 @@ body.prompt-page {
   box-shadow: 0 4px 12px rgba(47, 87, 200, 0.045);
 }
 
-.page-home .education-logo,
+.page-home .education-logo-shell {
+  padding: 0.42rem;
+}
+
+.page-home .education-logo {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  object-fit: contain;
+  filter: saturate(0.96) contrast(1.02);
+}
+
 .page-home .entry-logo {
   display: block;
   width: 100% !important;
@@ -1457,7 +1473,10 @@ body.page-home .skip-link:focus-visible {
     border-radius: 11px;
   }
 
-  .page-home .education-logo,
+  .page-home .education-logo-shell {
+    padding: 0.34rem;
+  }
+
   .page-home .entry-logo {
     padding: 0.34rem;
   }

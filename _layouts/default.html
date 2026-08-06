@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
       {% endfor %}
     {% endif %}
+    <link rel="stylesheet" href="{{ '/assets/css/playful_pointer.css' | relative_url }}">
 </head>
 
 <body class="bg-light{% if page.body_class %} {{ page.body_class }}{% endif %}" {{ page.body_attr }}>
@@ -45,6 +46,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>
     <script src="{{ '/assets/js/common.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/playful_pointer.js' | relative_url }}"
+            data-lulu-src="{{ '/assets/images/etc/lulu/1.png' | relative_url }}"
+            data-nailong-base="{{ '/assets/images/etc/nailong/' | relative_url }}"></script>
     <script src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/semantic_scholar_citation_count.js' | relative_url }}"></script>
 </body>

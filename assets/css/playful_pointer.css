@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+.lulu-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483646;
+  width: clamp(50px, 4.2vw, 64px);
+  height: clamp(50px, 4.2vw, 64px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translate3d(-120px, -120px, 0) translate(-50%, -50%);
+  transform-origin: center;
+  transition: opacity 120ms ease-out;
+  will-change: transform, opacity;
+}
+
+.lulu-cursor.is-visible {
+  opacity: 1;
+}
+
+.lulu-cursor img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(-14deg);
+  transform-origin: 50% 52%;
+}
+
+.nailong-click-sprite {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483645;
+  width: var(--nailong-size, 72px);
+  pointer-events: none;
+  user-select: none;
+  transform: translate(-50%, -78%);
+}
+
+.nailong-click-sprite img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transform-origin: 50% 78%;
+  animation: nailong-rise-and-fade var(--nailong-duration, 1100ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.nailong-click-sprite.is-reduced-motion img {
+  opacity: 1;
+  animation: none;
+  transition: opacity 160ms linear;
+}
+
+.nailong-click-sprite.is-reduced-motion.is-fading img {
+  opacity: 0;
+}
+
+@keyframes nailong-rise-and-fade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.72) rotate(var(--nailong-start-rotation, 0deg));
+  }
+
+  16% {
+    opacity: 1;
+    transform: translate3d(0, -4px, 0) scale(1.04) rotate(0deg);
+  }
+
+  72% {
+    opacity: 0.94;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--nailong-drift-x, 0), var(--nailong-rise-y, -140px), 0)
+      scale(var(--nailong-end-scale, 1)) rotate(var(--nailong-end-rotation, 0deg));
+  }
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  html.has-lulu-cursor,
+  html.has-lulu-cursor body,
+  html.has-lulu-cursor body * {
+    cursor: none !important;
+  }
+}
+
+@media (any-hover: none) and (any-pointer: coarse) {
+  .lulu-cursor {
+    display: none;
+  }
+}
