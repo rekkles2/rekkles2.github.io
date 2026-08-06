@@ -1,0 +1,213 @@
+name: Build and deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  id-token: write
+  pages: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Verify GitHub Pages source
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { data: pages } = await github.request(
+              'GET /repos/{owner}/{repo}/pages',
+              {
+                ...context.repo,
+                headers: {
+                  'X-GitHub-Api-Version': '2026-03-10'
+                }
+              }
+            );
+
+            if (pages.build_type !== 'workflow') {
+              core.setFailed(
+                'Set Settings > Pages > Build and deployment > Source to "GitHub Actions", then rerun this workflow.'
+              );
+            }
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: false
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          bundle lock --add-platform x86_64-linux
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Build site
+        shell: bash
+        env:
+          JEKYLL_ENV: production
+          TZ: UTC
+        run: bundle exec jekyll build --trace
+
+      - name: Prepare Pages artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar \
+            --dereference \
+            --hard-dereference \
+            --directory _site \
+            -cvf "${RUNNER_TEMP}/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
+      - name: Upload Pages artifact
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/github-script@v8
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+        with:
+          script: |
+            const artifactId = Number(process.env.ARTIFACT_ID);
+            if (!Number.isSafeInteger(artifactId) || artifactId <= 0) {
+              throw new Error(`Invalid Pages artifact ID: ${process.env.ARTIFACT_ID}`);
+            }
+
+            const oidcToken = await core.getIDToken();
+            const { data: deployment } = await github.request(
+              'POST /repos/{owner}/{repo}/pages/deployments',
+              {
+                ...context.repo,
+                artifact_id: artifactId,
+                pages_build_version: context.sha,
+                oidc_token: oidcToken,
+                headers: {
+                  'X-GitHub-Api-Version': '2026-03-10'
+                }
+              }
+            );
+
+            const deploymentId =
+              deployment.id ??
+              deployment.status_url?.split('/').filter(Boolean).at(-1) ??
+              context.sha;
+
+            let pageUrl = deployment.page_url || `https://${context.repo.owner}.github.io/`;
+            if (!/^https?:\/\//i.test(pageUrl)) {
+              pageUrl = `https://${pageUrl}`;
+            }
+            core.setOutput('page_url', pageUrl);
+            core.info(`Created Pages deployment ${deploymentId}.`);
+
+            const terminalFailures = new Set([
+              'deployment_failed',
+              'deployment_content_failed',
+              'deployment_cancelled',
+              'deployment_lost',
+              'failed',
+              'failure',
+              'cancelled',
+              'canceled'
+            ]);
+            const deadline = Date.now() + 610_000;
+            let transientErrors = 0;
+
+            while (Date.now() < deadline) {
+              await new Promise((resolve) => setTimeout(resolve, 5_000));
+
+              try {
+                const { data: state } = await github.request(
+                  'GET /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}',
+                  {
+                    ...context.repo,
+                    pages_deployment_id: deploymentId,
+                    headers: {
+                      'X-GitHub-Api-Version': '2026-03-10'
+                    }
+                  }
+                );
+
+                transientErrors = 0;
+                const status = state.status || 'unknown_status';
+                core.info(`Pages deployment status: ${status}`);
+
+                if (status === 'succeed' || status === 'succeeded' || status === 'success') {
+                  return;
+                }
+
+                if (terminalFailures.has(status)) {
+                  const terminalError = new Error(
+                    `GitHub Pages deployment ${deploymentId} ended with status: ${status}`
+                  );
+                  terminalError.isTerminalPagesStatus = true;
+                  throw terminalError;
+                }
+              } catch (error) {
+                const retryableStatusCodes = new Set([404, 408, 409, 425, 429]);
+                const statusCode = error?.status;
+                if (
+                  error?.isTerminalPagesStatus ||
+                  (statusCode && statusCode < 500 && !retryableStatusCodes.has(statusCode))
+                ) {
+                  throw error;
+                }
+
+                transientErrors += 1;
+                core.warning(`Unable to read Pages deployment status: ${error.message}`);
+                if (transientErrors >= 10) {
+                  throw new Error('Unable to read the Pages deployment status after 10 attempts.');
+                }
+              }
+            }
+
+            try {
+              await github.request(
+                'POST /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}/cancel',
+                {
+                  ...context.repo,
+                  pages_deployment_id: deploymentId,
+                  headers: {
+                    'X-GitHub-Api-Version': '2026-03-10'
+                  }
+                }
+              );
+            } catch (error) {
+              core.warning(`Unable to cancel timed-out deployment: ${error.message}`);
+            }
+
+            throw new Error(
+              'GitHub Pages did not finish the deployment within its 10-minute platform limit.'
+            );
