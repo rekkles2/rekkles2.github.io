@@ -3,7 +3,7 @@ secondary_name: ""
 navbar_name: "Jiahang Li"
 
 positions:
-  - name: Incoming Ph.D. Student in Artificial Intelligence
+  - name: First-year Ph.D. Student in Artificial Intelligence
 
 email: "lijiahang041119[At]gmail.com"
 cv_link: https://www.overleaf.com/read/vwhdpzssvcmr#e69ffc
@@ -19,7 +19,7 @@ orcid: 0009-0002-3403-5589
 short_bio_text_justify: true
 short_bio: >-
   <p>
-    Hi, I am Jiahang. I am an incoming Ph.D. student in Artificial Intelligence
+    Hi, I am Jiahang. I am a first-year Ph.D. student in Artificial Intelligence
     at Korea University, advised by
     <a href="http://pr.korea.ac.kr/sub2_1.php?code=LSW"
        target="_blank"
@@ -129,7 +129,7 @@ education:
       name: "@Pattern Recognition & Machine Learning Lab"
       url: "http://pr.korea.ac.kr/index.php"
     position: >-
-      Incoming Ph.D. Student in Artificial Intelligence <br/>
+      First-year Ph.D. Student in Artificial Intelligence <br/>
     advisor:
       - name: "Prof. Seong-Whan Lee"
         url: "http://pr.korea.ac.kr/sub2_1.php?code=LSW"
